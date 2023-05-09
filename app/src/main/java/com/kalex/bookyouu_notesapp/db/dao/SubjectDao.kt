@@ -17,5 +17,5 @@ interface SubjectDao {
     suspend fun deleteSubject(subject: Subject)
 
     @Query("SELECT * FROM subject")
-    suspend fun getSubjects(): Flow<List<Subject>>
+    fun getSubjects(): Flow<List<Subject>>
 }

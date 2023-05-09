@@ -8,12 +8,13 @@ import com.kalex.bookyouu_notesapp.db.dao.SubjectDao
 import com.kalex.bookyouu_notesapp.db.data.Note
 import com.kalex.bookyouu_notesapp.db.data.Subject
 import com.kalex.bookyouu_notesapp.db.typeConvertes.DateTypeConverter
+import com.kalex.bookyouu_notesapp.db.typeConvertes.DayOfWeekTypeConverter
 
 @Database(
     entities = [Subject::class, Note::class],
     version = 1
 )
-@TypeConverters(DateTypeConverter::class)
+@TypeConverters(DateTypeConverter::class, DayOfWeekTypeConverter::class)
 abstract class BookYouuDataBase : RoomDatabase() {
     abstract val subjectDao: SubjectDao
     abstract val noteDao: NoteDao

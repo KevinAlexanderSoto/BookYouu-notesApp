@@ -15,7 +15,7 @@ data class Subject(
     @ColumnInfo(name = "classroom")
     val classroom: String,
     @ColumnInfo(name = "subject_day")
-    val subjectDay: DayOfWeek,
+    val subjectDay: MutableList<DayOfWeek>,
     @ColumnInfo(name = "credits")
     val credits: Int
 )

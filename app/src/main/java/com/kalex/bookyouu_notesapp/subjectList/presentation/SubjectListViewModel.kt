@@ -23,20 +23,17 @@ class SubjectListViewModel @Inject constructor(
 
     fun getSubjectList() {
         _getSubjectState.update {
-            it.apply {
-                isLoading = true
-            }
+            it.copy(isLoading = true)
         }
         viewModelScope.launch(dispatcher) {
             subjectRepository.getSubjectList().collectLatest { subjects ->
                 _getSubjectState.update {
-                    it.apply {
-                        isLoading = false
-                        this.response = subjects
-                    }
+                    it.copy(
+                        isLoading = false,
+                        response = subjects.ifEmpty { null },
+                    )
                 }
             }
         }
     }
 }
-

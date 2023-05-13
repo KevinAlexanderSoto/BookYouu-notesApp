@@ -11,14 +11,14 @@ sealed class BottomNavigationScreens(
 ) {
     object Subject : BottomNavigationScreens(
         Route.SUBJECT_LIST,
-        R.drawable.ic_launcher_background,
-        androidx.compose.ui.R.string.navigation_menu,
+        R.drawable.baseline_library_books_24,
+        R.string.subject_bottom_label,
     )
 
     object Average : BottomNavigationScreens(
         Route.AVERAGE_MAIN,
-        R.drawable.ic_launcher_background,
-        androidx.compose.ui.R.string.navigation_menu,
+        R.drawable.baseline_calculate_24,
+        R.string.average_bottom_label,
     )
 
     companion object {

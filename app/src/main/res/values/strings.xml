@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">BookYouU-notesApp</string>
+    <!-- BOTTOM MENU SECTION -->
+    <string name="subject_bottom_label">Subjects</string>
+    <string name="average_bottom_label">Average</string>
+    <!--SUBJECT SECTION-->
+    <string name="subjectList_no_subjectsFount_text">Upss… You do not have subjects, add one to start</string>
+    <string name="subjectList_no_subjectsFount_ButtonText">Add</string>
 </resources>

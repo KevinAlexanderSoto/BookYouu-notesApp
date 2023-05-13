@@ -13,6 +13,5 @@ fun NavGraphBuilder.averageNav(rootNavController: NavHostController) {
         startDestination = Route.AVERAGE_MAIN,
     ) {
         composable(route = Route.AVERAGE_MAIN) { Greeting("Average") }
-
     }
 }

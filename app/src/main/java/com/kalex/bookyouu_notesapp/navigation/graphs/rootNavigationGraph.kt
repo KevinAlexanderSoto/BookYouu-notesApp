@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.navigation
+package com.kalex.bookyouu_notesapp.navigation.graphs
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -9,14 +9,14 @@ import androidx.navigation.compose.NavHost
 fun RootNavigationGraph(
     rootNavController: NavHostController,
     modifier: Modifier,
-    startDestination: String
+    startDestination: String,
 ) {
     NavHost(
         navController = rootNavController,
         startDestination = startDestination,
-        modifier = modifier
-    ){
+        modifier = modifier,
+    ) {
         subjectNav(rootNavController)
+        averageNav(rootNavController)
     }
 }
-

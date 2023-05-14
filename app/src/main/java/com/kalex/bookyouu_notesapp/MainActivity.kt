@@ -9,13 +9,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
-import com.kalex.bookyouu_notesapp.navigation.BottomNavigationBar
+import com.kalex.bookyouu_notesapp.navigation.bottomBar.BottomNavigationBar
 import com.kalex.bookyouu_notesapp.navigation.Route
+import com.kalex.bookyouu_notesapp.navigation.topBar.TopNavigationBar
 import com.kalex.bookyouu_notesapp.navigation.graphs.RootNavigationGraph
 import com.kalex.bookyouu_notesapp.subjectList.presentation.SubjectListViewModel
 import com.kalex.bookyouu_notesapp.ui.theme.BookYouUnotesAppTheme
@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 Scaffold(
                     bottomBar = { BottomNavigationBar(navController) },
+                    topBar = { TopNavigationBar(navController) },
                 ) { paddingValues ->
                     RootNavigationGraph(
                         navController,

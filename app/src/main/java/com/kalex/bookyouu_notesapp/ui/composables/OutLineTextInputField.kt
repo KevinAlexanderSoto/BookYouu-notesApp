@@ -11,10 +11,12 @@ import androidx.compose.runtime.setValue
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OutLineTextInputField(
+fun BYOutLineTextInputField(
     label: String,
+    onTextChange: (String) -> Unit,
 ) {
     var text by remember { mutableStateOf("") }
+    onTextChange(text)
     OutlinedTextField(
         value = text,
         label = { Text(text = label) },

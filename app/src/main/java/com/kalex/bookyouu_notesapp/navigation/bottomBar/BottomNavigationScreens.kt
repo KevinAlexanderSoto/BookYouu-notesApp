@@ -1,8 +1,9 @@
-package com.kalex.bookyouu_notesapp.navigation
+package com.kalex.bookyouu_notesapp.navigation.bottomBar
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.kalex.bookyouu_notesapp.R
+import com.kalex.bookyouu_notesapp.navigation.Route
 
 sealed class BottomNavigationScreens(
     val route: String,

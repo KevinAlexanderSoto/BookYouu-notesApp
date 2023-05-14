@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.navigation
+package com.kalex.bookyouu_notesapp.navigation.bottomBar
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -16,15 +16,20 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 fun BottomNavigationBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    NavigationBar() {
-        if (BottomNavigationScreens.bottomNavItems.any { it.route == currentDestination?.route }) {
+    if (BottomNavigationScreens.bottomNavItems.any { it.route == currentDestination?.route }) {
+        NavigationBar() {
             BottomNavigationScreens.bottomNavItems.forEach { item ->
                 val selected = currentDestination?.hierarchy?.any { it.route == item.route } == true
                 NavigationBarItem(
                     selected = selected,
                     onClick = { navController.navigate(item.route) },
                     label = { Text(text = stringResource(item.label)) },
-                    icon = { Icon(painterResource(id = item.bottomIconRes), contentDescription = "") },
+                    icon = {
+                        Icon(
+                            painterResource(id = item.bottomIconRes),
+                            contentDescription = "",
+                        )
+                    },
                 )
             }
         }

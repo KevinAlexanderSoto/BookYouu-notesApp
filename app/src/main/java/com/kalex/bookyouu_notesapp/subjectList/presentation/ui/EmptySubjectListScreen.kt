@@ -1,6 +1,8 @@
 package com.kalex.bookyouu_notesapp.subjectList.presentation.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -23,7 +25,8 @@ fun EmptySubjectScreen(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(8.dp),
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.padding(8.dp).fillMaxSize(),
     ) {
         Icon(
             Icons.Default.Notifications,

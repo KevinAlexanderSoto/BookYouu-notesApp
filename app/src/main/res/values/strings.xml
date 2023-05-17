@@ -6,4 +6,7 @@
     <!--SUBJECT SECTION-->
     <string name="subjectList_no_subjectsFount_text">Upss… You do not have subjects, add one to start</string>
     <string name="subjectList_no_subjectsFount_ButtonText">Add</string>
+    <string name="subject_form_subjectName_label">Subject name</string>
+    <string name="subject_form_classRoom_label">Classroom</string>
+    <string name="subject_form_credits_label">Credits</string>
 </resources>

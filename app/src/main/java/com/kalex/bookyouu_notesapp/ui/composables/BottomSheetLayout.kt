@@ -2,18 +2,16 @@ package com.kalex.bookyouu_notesapp.ui.composables
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.BottomSheetScaffold
-import androidx.compose.material3.BottomSheetScaffoldState
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material.BottomSheetScaffold
+import androidx.compose.material.BottomSheetScaffoldState
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BottomSheetLayout(
     scaffoldState: BottomSheetScaffoldState,
@@ -26,7 +24,7 @@ fun BottomSheetLayout(
 ) {
     val scope = rememberCoroutineScope()
     hideBottomSheet {
-        scope.launch { scaffoldState.bottomSheetState.hide() }.invokeOnCompletion {
+        scope.launch { scaffoldState.bottomSheetState.collapse() }.invokeOnCompletion {
             onBottomSheetHide()
         }
     }
@@ -39,8 +37,7 @@ fun BottomSheetLayout(
 
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
-        sheetPeekHeight = 128.dp,
-        sheetSwipeEnabled = true,
+        sheetPeekHeight = 0.dp,
         sheetContent = { sheetContent.invoke() },
     ) { innerPadding ->
         Column(Modifier.padding(innerPadding)) {

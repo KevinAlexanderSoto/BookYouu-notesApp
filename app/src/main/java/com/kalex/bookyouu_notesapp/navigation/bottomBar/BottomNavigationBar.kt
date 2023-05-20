@@ -2,6 +2,7 @@ package com.kalex.bookyouu_notesapp.navigation.bottomBar
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -36,6 +37,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                         Icon(
                             painterResource(id = item.bottomIconRes),
                             contentDescription = "",
+                            modifier = Modifier.size(24.dp)
                         )
                     },
                 )

@@ -36,6 +36,7 @@ fun BYRoundedCheckView(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
+            .padding(bottom = 4.dp)
             .toggleable(value = isChecked.value, role = Role.Checkbox) {
                 isChecked.value = it
                 isRoundedChecked(isChecked.value)

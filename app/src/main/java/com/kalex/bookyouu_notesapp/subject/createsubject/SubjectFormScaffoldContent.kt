@@ -39,7 +39,9 @@ fun ScaffoldContent(
                 autoCorrect = true,
                 keyboardType = KeyboardType.Text,
             ),
-            onTextChange = {},
+            onTextChange = {
+                informationViewModel.setSubjectName(it)
+            },
         )
         BYTextInput.OutLinedTextField(
             label = R.string.subject_form_classRoom_label,
@@ -47,27 +49,33 @@ fun ScaffoldContent(
                 autoCorrect = true,
                 keyboardType = KeyboardType.Text,
             ),
-            onTextChange = {},
+            onTextChange = {
+                informationViewModel.setClassRoomName(it)
+            },
         )
         BYTextInput.OutLinedTextField(
             label = R.string.subject_form_credits_label,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
             ),
-            onTextChange = {},
+            onTextChange = {
+                if (it.isNotEmpty()) informationViewModel.setCredits(it.toInt()) else informationViewModel.setCredits(0)
+            },
         )
         BYTextInput.OutLinedButtonTextField(
-            label = R.string.subject_form_credits_label, //TODO : add days label
+            label = R.string.subject_form_credits_label, // TODO : add days label
             updateTextValue = { dayList },
             onClick = { onShowSheet() },
 
         )
 
-        Button(onClick = {
-            // TODO: Create subject
-        }) {
-            Text(text = "Create Subject")
+        Button(
+            onClick = {
+                // TODO: Create subject
+            },
+            enabled = informationViewModel.isAllFieldsValid(),
+        ) {
+            Text(text = "Create Subject") // TODO : add Strings
         }
-        // Add check for 7 days
     }
 }

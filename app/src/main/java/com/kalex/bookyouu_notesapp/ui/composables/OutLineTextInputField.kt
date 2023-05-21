@@ -46,11 +46,11 @@ object BYTextInput {
     fun OutLinedButtonTextField(
         @StringRes label: Int,
         onClick: () -> Unit,
-        updateTextValue:()->String
+        updateTextValue: () -> String,
     ) {
         var text by remember { mutableStateOf("") }
         text = updateTextValue()
-            OutlinedTextField(
+        OutlinedTextField(
             value = text,
             onValueChange = {
                 text = it

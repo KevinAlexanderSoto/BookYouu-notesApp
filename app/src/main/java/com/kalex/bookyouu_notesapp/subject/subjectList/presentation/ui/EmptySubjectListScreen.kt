@@ -6,10 +6,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -30,14 +26,17 @@ fun EmptySubjectScreen(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
-        modifier = Modifier.padding(24.dp).fillMaxSize(),
+        modifier = Modifier.padding(20.dp).fillMaxSize(),
     ) {
         Icon(
             painterResource(R.drawable.octagon_help_svgrepo_com),
             contentDescription = "No subject Icon",
             modifier = Modifier.size(80.dp),
         )
-        Text(text = stringResource(R.string.subjectList_no_subjectsFount_text), fontSize = 20.sp)
+        Text(
+            text = stringResource(R.string.subjectList_no_subjectsFount_text),
+            fontSize = 20.sp
+        )
         Button(
             onClick = { onCreateSubjectClick.invoke() },
             contentPadding = PaddingValues(20.dp, 10.dp),

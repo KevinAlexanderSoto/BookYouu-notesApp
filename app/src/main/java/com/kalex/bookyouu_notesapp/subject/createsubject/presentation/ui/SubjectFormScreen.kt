@@ -1,6 +1,5 @@
 package com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.material.BottomSheetState
 import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.ExperimentalMaterialApi
@@ -43,7 +42,7 @@ fun SubjectForm(
         scope = scope,
         scaffoldState = scaffoldState,
         scaffoldContent = {
-            if(showLoadingProgressBar) {
+            if (showLoadingProgressBar) {
                 BYLoadingIndicator()
             }
             ScaffoldContent(

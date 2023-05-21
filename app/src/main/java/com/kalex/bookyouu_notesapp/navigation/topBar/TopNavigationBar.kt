@@ -24,7 +24,7 @@ fun TopNavigationBar(navController: NavHostController) {
         TopAppBar(
             title = { Text(text = topBarTitle) },
             navigationIcon = {
-                if (topBarTitle == "") {
+                if (topBarTitle !== "") {
                     IconButton(
                         onClick = { navController.popBackStack() },
                     ) {

@@ -1,13 +1,14 @@
 package com.kalex.bookyouu_notesapp.subject.createsubject
 
 import com.kalex.bookyouu_notesapp.R
-import com.kalex.bookyouu_notesapp.subject.createsubject.DaysOfWeek.FRIDAY
-import com.kalex.bookyouu_notesapp.subject.createsubject.DaysOfWeek.MONDAY
-import com.kalex.bookyouu_notesapp.subject.createsubject.DaysOfWeek.SATURDAY
-import com.kalex.bookyouu_notesapp.subject.createsubject.DaysOfWeek.SUNDAY
-import com.kalex.bookyouu_notesapp.subject.createsubject.DaysOfWeek.THURSDAY
-import com.kalex.bookyouu_notesapp.subject.createsubject.DaysOfWeek.TUESDAY
-import com.kalex.bookyouu_notesapp.subject.createsubject.DaysOfWeek.WEDNESDAY
+import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek
+import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek.FRIDAY
+import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek.MONDAY
+import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek.SATURDAY
+import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek.SUNDAY
+import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek.THURSDAY
+import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek.TUESDAY
+import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek.WEDNESDAY
 
 object DayOfWeekStringFactory {
     fun getDayStringResource(day: DaysOfWeek) =

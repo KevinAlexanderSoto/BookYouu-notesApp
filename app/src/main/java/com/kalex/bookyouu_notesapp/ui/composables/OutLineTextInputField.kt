@@ -45,10 +45,12 @@ object BYTextInput {
     @Composable
     fun OutLinedButtonTextField(
         @StringRes label: Int,
-        onClick: () -> String,
+        onClick: () -> Unit,
+        updateTextValue:()->String
     ) {
         var text by remember { mutableStateOf("") }
-        OutlinedTextField(
+        text = updateTextValue()
+            OutlinedTextField(
             value = text,
             onValueChange = {
                 text = it
@@ -56,7 +58,7 @@ object BYTextInput {
             label = { Text(text = stringResource(label)) },
             singleLine = true,
             enabled = false,
-            modifier = Modifier.fillMaxWidth(0.9f).clickable { text = onClick() },
+            modifier = Modifier.fillMaxWidth(0.9f).clickable { onClick() },
             shape = RoundedCornerShape(15.dp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 disabledTextColor = MaterialTheme.colorScheme.onSurface,

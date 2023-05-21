@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.subjectList
+package com.kalex.bookyouu_notesapp.subject.subjectList
 
 import com.kalex.bookyouu_notesapp.db.data.Subject
 

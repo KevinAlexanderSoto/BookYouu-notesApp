@@ -5,8 +5,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.kalex.bookyouu_notesapp.navigation.Route
-import com.kalex.bookyouu_notesapp.subjectList.presentation.ui.SubjectForm
-import com.kalex.bookyouu_notesapp.subjectList.presentation.ui.SubjectMainScreen
+import com.kalex.bookyouu_notesapp.subject.createsubject.SubjectForm
+import com.kalex.bookyouu_notesapp.subject.SubjectMainScreen
 
 fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
     navigation(

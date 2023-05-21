@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.subjectList.presentation.ui
+package com.kalex.bookyouu_notesapp.subject.subjectList.presentation.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

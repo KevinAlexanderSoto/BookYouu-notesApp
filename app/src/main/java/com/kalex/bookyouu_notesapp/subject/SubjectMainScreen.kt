@@ -1,9 +1,10 @@
-package com.kalex.bookyouu_notesapp.subjectList.presentation.ui
+package com.kalex.bookyouu_notesapp.subject
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.kalex.bookyouu_notesapp.subjectList.presentation.SubjectListViewModel
+import com.kalex.bookyouu_notesapp.subject.subjectList.presentation.SubjectListViewModel
+import com.kalex.bookyouu_notesapp.subject.subjectList.presentation.ui.EmptySubjectScreen
 import com.kalex.bookyouu_notesapp.ui.composables.BYLoadingIndicator
 
 @Composable

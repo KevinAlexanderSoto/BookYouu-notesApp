@@ -1,8 +1,8 @@
 package com.kalex.bookyouu_notesapp.di
 
 import com.kalex.bookyouu_notesapp.db.dao.SubjectDao
-import com.kalex.bookyouu_notesapp.subjectList.domain.SubjectRepository
-import com.kalex.bookyouu_notesapp.subjectList.domain.SubjectRepositoryImpl
+import com.kalex.bookyouu_notesapp.subject.subjectList.domain.SubjectRepository
+import com.kalex.bookyouu_notesapp.subject.subjectList.domain.SubjectRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

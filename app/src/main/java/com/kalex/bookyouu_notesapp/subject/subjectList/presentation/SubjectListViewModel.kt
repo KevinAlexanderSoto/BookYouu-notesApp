@@ -1,9 +1,9 @@
-package com.kalex.bookyouu_notesapp.subjectList.presentation
+package com.kalex.bookyouu_notesapp.subject.subjectList.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kalex.bookyouu_notesapp.subjectList.GetSubjectState
-import com.kalex.bookyouu_notesapp.subjectList.domain.SubjectRepository
+import com.kalex.bookyouu_notesapp.subject.subjectList.GetSubjectState
+import com.kalex.bookyouu_notesapp.subject.subjectList.domain.SubjectRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow

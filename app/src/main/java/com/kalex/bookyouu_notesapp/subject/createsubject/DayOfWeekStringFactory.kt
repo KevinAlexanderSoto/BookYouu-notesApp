@@ -1,17 +1,17 @@
 package com.kalex.bookyouu_notesapp.subject.createsubject
 
 import com.kalex.bookyouu_notesapp.R
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek.FRIDAY
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek.MONDAY
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek.SATURDAY
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek.SUNDAY
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek.THURSDAY
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek.TUESDAY
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.DaysOfWeek.WEDNESDAY
+import java.time.DayOfWeek
+import java.time.DayOfWeek.FRIDAY
+import java.time.DayOfWeek.MONDAY
+import java.time.DayOfWeek.SATURDAY
+import java.time.DayOfWeek.SUNDAY
+import java.time.DayOfWeek.THURSDAY
+import java.time.DayOfWeek.TUESDAY
+import java.time.DayOfWeek.WEDNESDAY
 
 object DayOfWeekStringFactory {
-    fun getDayStringResource(day: DaysOfWeek) =
+    fun getDayStringResource(day: DayOfWeek) =
         when (day) {
             MONDAY -> R.string.subject_form_monday
             TUESDAY -> R.string.subject_form_tuesday

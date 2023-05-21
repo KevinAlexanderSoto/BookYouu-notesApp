@@ -18,12 +18,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.kalex.bookyouu_notesapp.subject.createsubject.DayOfWeekStringFactory
 import com.kalex.bookyouu_notesapp.ui.composables.BYRoundedCheckView
+import java.time.DayOfWeek
 
 @Composable
 fun SheetContent(
     onHideClick: () -> Unit,
-    onOptionSelected: (DaysOfWeek) -> Unit,
-    onOptionNotSelected: (DaysOfWeek) -> Unit,
+    onOptionSelected: (DayOfWeek) -> Unit,
+    onOptionNotSelected: (DayOfWeek) -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -49,15 +50,15 @@ fun SheetContent(
             columns = GridCells.Adaptive(128.dp),
             contentPadding = PaddingValues(20.dp, 40.dp),
             content = {
-                items(DaysOfWeek.values().size) {
+                items(DayOfWeek.values().size) {
                     BYRoundedCheckView(
-                        text = DayOfWeekStringFactory.getDayStringResource(DaysOfWeek.values()[it]),
+                        text = DayOfWeekStringFactory.getDayStringResource(DayOfWeek.values()[it]),
                         isRoundedChecked = { isCheck ->
                             if (isCheck) {
-                                onOptionSelected(DaysOfWeek.values()[it])
+                                onOptionSelected(DayOfWeek.values()[it])
                             } else {
                                 onOptionNotSelected(
-                                    DaysOfWeek.values()[it],
+                                    DayOfWeek.values()[it],
                                 )
                             }
                         },
@@ -68,12 +69,3 @@ fun SheetContent(
     }
 }
 
-enum class DaysOfWeek {
-    MONDAY,
-    TUESDAY,
-    WEDNESDAY,
-    THURSDAY,
-    FRIDAY,
-    SATURDAY,
-    SUNDAY,
-}

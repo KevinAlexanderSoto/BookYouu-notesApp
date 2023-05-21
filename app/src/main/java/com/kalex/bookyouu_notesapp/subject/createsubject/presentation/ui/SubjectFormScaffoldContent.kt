@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.subject.createsubject
+package com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,12 +16,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.SubjectFormInformationViewModel
+import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.SubjectFormViewModel
 import com.kalex.bookyouu_notesapp.ui.composables.BYTextInput
 
 @Composable
 fun ScaffoldContent(
     onShowSheet: () -> Unit,
     informationViewModel: SubjectFormInformationViewModel = hiltViewModel(),
+    formViewModel: SubjectFormViewModel = hiltViewModel(),
 ) {
     val dayList = informationViewModel.getListOfStringSelectedDays().map {
         stringResource(id = it)
@@ -72,7 +74,8 @@ fun ScaffoldContent(
 
         Button(
             onClick = {
-                // TODO: Create subject
+                val payload = informationViewModel.createSubjectObject()
+                formViewModel.createSubject(payload)
             },
             enabled = informationViewModel.isAllFieldsValid(),
         ) {

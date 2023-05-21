@@ -1,13 +1,14 @@
 package com.kalex.bookyouu_notesapp.navigation.bottomBar
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -23,9 +24,10 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 fun BottomNavigationBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    if (BottomNavigationScreens.bottomNavItems.any { it.route == currentDestination?.route }) {
+    AnimatedVisibility(BottomNavigationScreens.bottomNavItems.any { it.route == currentDestination?.route }) {
         NavigationBar(
-            modifier = Modifier.height(70.dp).fillMaxWidth().clip(RoundedCornerShape(15.dp, 15.dp, 0.dp, 0.dp)),
+            modifier = Modifier.height(70.dp).fillMaxWidth()
+                .clip(RoundedCornerShape(15.dp, 15.dp, 0.dp, 0.dp)),
         ) {
             BottomNavigationScreens.bottomNavItems.forEach { item ->
                 val selected = currentDestination?.hierarchy?.any { it.route == item.route } == true
@@ -37,7 +39,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                         Icon(
                             painterResource(id = item.bottomIconRes),
                             contentDescription = "",
-                            modifier = Modifier.size(24.dp)
+                            modifier = Modifier.size(24.dp),
                         )
                     },
                 )

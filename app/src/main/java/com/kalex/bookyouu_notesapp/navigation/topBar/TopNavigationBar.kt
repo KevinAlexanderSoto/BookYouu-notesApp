@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp.navigation.topBar
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -18,7 +19,7 @@ import com.kalex.bookyouu_notesapp.navigation.bottomBar.BottomNavigationScreens
 fun TopNavigationBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    if (!BottomNavigationScreens.bottomNavItems.any { it.route == currentDestination?.route }) {
+    AnimatedVisibility(visible = !BottomNavigationScreens.bottomNavItems.any { it.route == currentDestination?.route }) {
         TopAppBar(
             title = { Text(text = TopBarTitleFactory().getTopBarTitle(currentDestination?.route)) },
             navigationIcon = {

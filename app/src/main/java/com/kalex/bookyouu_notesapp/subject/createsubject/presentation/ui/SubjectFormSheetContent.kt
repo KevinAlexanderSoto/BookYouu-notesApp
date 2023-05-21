@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.subject.createsubject
+package com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues

@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.subject.subjectList.domain
+package com.kalex.bookyouu_notesapp.subject.domain
 
 import com.kalex.bookyouu_notesapp.db.data.Subject
 import kotlinx.coroutines.flow.Flow

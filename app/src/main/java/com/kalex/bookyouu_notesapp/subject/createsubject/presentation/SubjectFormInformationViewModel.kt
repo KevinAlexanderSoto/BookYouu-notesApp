@@ -1,8 +1,9 @@
-package com.kalex.bookyouu_notesapp.subject.createsubject
+package com.kalex.bookyouu_notesapp.subject.createsubject.presentation
 
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.kalex.bookyouu_notesapp.subject.createsubject.DayOfWeekStringFactory
 
 class SubjectFormInformationViewModel : ViewModel() {
     private val mapOfDays = mutableStateMapOf<DaysOfWeek, Boolean>()

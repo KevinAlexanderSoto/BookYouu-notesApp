@@ -15,15 +15,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.kalex.bookyouu_notesapp.R
+import com.kalex.bookyouu_notesapp.db.data.Subject
 import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.SubjectFormInformationViewModel
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.SubjectFormViewModel
 import com.kalex.bookyouu_notesapp.ui.composables.BYTextInput
 
 @Composable
 fun ScaffoldContent(
     onShowSheet: () -> Unit,
+    onCreateSubjectClick: (Subject) -> Unit,
     informationViewModel: SubjectFormInformationViewModel = hiltViewModel(),
-    formViewModel: SubjectFormViewModel = hiltViewModel(),
 ) {
     val dayList = informationViewModel.getListOfStringSelectedDays().map {
         stringResource(id = it)
@@ -62,7 +62,13 @@ fun ScaffoldContent(
                 keyboardType = KeyboardType.Number,
             ),
             onTextChange = {
-                if (it.isNotEmpty()) informationViewModel.setCredits(it.toInt()) else informationViewModel.setCredits(0)
+                if (it.isNotEmpty()) {
+                    informationViewModel.setCredits(it.toInt())
+                } else {
+                    informationViewModel.setCredits(
+                        0,
+                    )
+                }
             },
         )
         BYTextInput.OutLinedButtonTextField(
@@ -75,7 +81,7 @@ fun ScaffoldContent(
         Button(
             onClick = {
                 val payload = informationViewModel.createSubjectObject()
-                formViewModel.createSubject(payload)
+                onCreateSubjectClick(payload)
             },
             enabled = informationViewModel.isAllFieldsValid(),
         ) {

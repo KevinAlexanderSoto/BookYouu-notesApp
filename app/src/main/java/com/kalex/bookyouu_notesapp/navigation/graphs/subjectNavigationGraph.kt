@@ -4,9 +4,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.kalex.bookyouu_notesapp.Greeting
 import com.kalex.bookyouu_notesapp.navigation.Route
-import com.kalex.bookyouu_notesapp.subject.createsubject.SubjectForm
 import com.kalex.bookyouu_notesapp.subject.SubjectMainScreen
+import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.SubjectForm
 
 fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
     navigation(
@@ -20,7 +21,16 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
                 )
             })
         }
-        composable(route = Route.SUBJECT_FORM) { SubjectForm() }
-        composable(route = Route.SUBJECT_DETAIL) {}
+        composable(route = Route.SUBJECT_FORM) {
+            SubjectForm(
+                onNavigateToConfirmationScreen = {
+                    rootNavController.navigate(
+                        Route.SUBJECT_FORM_SUCCESS_SCREEN,
+                    )
+                },
+            )
+        }
+        composable(route = Route.SUBJECT_FORM_SUCCESS_SCREEN) {}
+        composable(route = Route.SUBJECT_DETAIL) { Greeting("Average") }
     }
 }

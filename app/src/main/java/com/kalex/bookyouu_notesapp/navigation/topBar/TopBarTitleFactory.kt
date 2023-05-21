@@ -7,7 +7,7 @@ class TopBarTitleFactory {
     fun getTopBarTitle(route: String?) =
         when (route) {
             Route.SUBJECT_FORM -> {
-                "Crear Subject"
+                "Crear Subject" //TODO: Add strings resource
             }
 
             else -> {

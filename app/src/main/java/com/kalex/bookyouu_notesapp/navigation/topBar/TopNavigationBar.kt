@@ -20,16 +20,19 @@ fun TopNavigationBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     AnimatedVisibility(visible = !BottomNavigationScreens.bottomNavItems.any { it.route == currentDestination?.route }) {
+        val topBarTitle = TopBarTitleFactory().getTopBarTitle(currentDestination?.route)
         TopAppBar(
-            title = { Text(text = TopBarTitleFactory().getTopBarTitle(currentDestination?.route)) },
+            title = { Text(text = topBarTitle) },
             navigationIcon = {
-                IconButton(
-                    onClick = { navController.popBackStack() },
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "go back",
-                    )
+                if (topBarTitle == "") {
+                    IconButton(
+                        onClick = { navController.popBackStack() },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "go back",
+                        )
+                    }
                 }
             },
         )

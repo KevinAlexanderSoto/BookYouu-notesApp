@@ -1,5 +1,6 @@
-package com.kalex.bookyouu_notesapp.subject.createsubject
+package com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.material.BottomSheetState
 import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.ExperimentalMaterialApi
@@ -8,29 +9,58 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.kalex.bookyouu_notesapp.subject.createsubject.ViewModelState
 import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.SubjectFormInformationViewModel
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.ScaffoldContent
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.SheetContent
+import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.SubjectFormViewModel
 import com.kalex.bookyouu_notesapp.ui.composables.BYBottomSheetLayout
+import com.kalex.bookyouu_notesapp.ui.composables.BYLoadingIndicator
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SubjectForm(
+    onNavigateToConfirmationScreen: () -> Unit,
     informationViewModel: SubjectFormInformationViewModel = hiltViewModel(),
+    formViewModel: SubjectFormViewModel = hiltViewModel(),
 ) {
+    val scope = rememberCoroutineScope()
+
     var showSheet by remember { mutableStateOf(false) }
     var hideSheet by remember { mutableStateOf(false) }
+    var showLoadingProgressBar by remember { mutableStateOf(false) }
     val scaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = BottomSheetState(
             initialValue = BottomSheetValue.Collapsed,
         ),
     )
     BYBottomSheetLayout(
+        scope = scope,
         scaffoldState = scaffoldState,
         scaffoldContent = {
-            ScaffoldContent(onShowSheet = { showSheet = true })
+            if(showLoadingProgressBar) {
+                BYLoadingIndicator()
+            }
+            ScaffoldContent(
+                onShowSheet = { showSheet = true },
+                onCreateSubjectClick = {
+                    formViewModel.createSubject(it)
+                    handleCreationState(
+                        formViewModel.createSubjectState,
+                        scope,
+                        onLoading = { showLoadingProgressBar = true },
+                        onError = {
+                            // TODO:AHOW GENERERIC ERROR
+                        },
+                        onSuccess = { onNavigateToConfirmationScreen() },
+                    )
+                },
+            )
         },
         sheetContent = {
             SheetContent(
@@ -50,4 +80,22 @@ fun SubjectForm(
         hideBottomSheet = { if (hideSheet) it.invoke() },
         onBottomSheetShow = { showSheet = false },
     )
+}
+
+fun handleCreationState(
+    collectAsState: StateFlow<ViewModelState<Boolean>>,
+    scope: CoroutineScope,
+    onLoading: () -> Unit,
+    onSuccess: () -> Unit,
+    onError: () -> Unit,
+) {
+    scope.launch {
+        collectAsState.collectLatest {
+            when (it) {
+                is ViewModelState.Error -> onError()
+                is ViewModelState.Loading -> onLoading()
+                is ViewModelState.Success -> onSuccess()
+            }
+        }
+    }
 }

@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -22,8 +23,8 @@ fun BYBottomSheetLayout(
     hideBottomSheet: (() -> Unit) -> Unit,
     onBottomSheetHide: () -> Unit,
     onBottomSheetShow: () -> Unit,
+    scope: CoroutineScope
 ) {
-    val scope = rememberCoroutineScope()
     hideBottomSheet {
         scope.launch { scaffoldState.bottomSheetState.collapse() }.invokeOnCompletion {
             onBottomSheetHide()

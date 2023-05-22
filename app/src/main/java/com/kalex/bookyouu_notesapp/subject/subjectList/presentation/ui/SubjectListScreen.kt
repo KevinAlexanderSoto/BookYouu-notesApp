@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -31,6 +32,21 @@ fun SubjectListScreen(
                 .padding(top = 20.dp)
                 .fillMaxWidth(),
         ) {
+            /*IconButton(
+                onClick = {
+                          // TODO: add delete subject action, new feature, pending to add
+                },
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+                    .padding(start = 20.dp),
+
+            ) {
+                Icon(
+                    painterResource(id = R.drawable.remove_24px),
+                    contentDescription = "add new",
+                    tint = Color.Black,
+                )
+            }*/
             Text(
                 text = "Tus clases",
                 modifier = Modifier.align(Alignment.Center),

@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun SubjectItem(
@@ -28,7 +29,7 @@ fun SubjectItem(
 ) {
     Box(
         modifier = Modifier
-            .padding(24.dp, 18.dp)
+            .padding(24.dp, 16.dp)
             .fillMaxWidth()
             .height(78.dp)
             .clickable { onSubjectItemClick.invoke() },
@@ -40,15 +41,17 @@ fun SubjectItem(
         ) {
             Text(
                 text = title,
-                modifier = Modifier.padding(2.dp),
+                modifier = Modifier.padding(2.dp, 4.dp),
                 fontWeight = FontWeight.Bold,
                 maxLines = 1,
+                fontSize = 16.sp,
                 overflow = TextOverflow.Ellipsis,
             )
             Text(
                 text = subTitle,
                 modifier = Modifier.padding(2.dp),
                 maxLines = 1,
+                fontSize = 14.sp,
                 overflow = TextOverflow.Ellipsis,
             )
         }

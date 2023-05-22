@@ -21,15 +21,15 @@ fun SubjectMainScreen(
                 onCreateSubjectClick = { onAddNewSubject.invoke() },
             )
         }
+
         is ViewModelState.Error -> TODO()
         is ViewModelState.Loading -> BYLoadingIndicator()
         is ViewModelState.Success -> {
             SubjectListScreen(
                 response.data,
                 onSubjectClickAction = {
-
-
-                }
+                },
+                onAddSubjectClickAction = { onAddNewSubject.invoke() },
             )
         }
     }

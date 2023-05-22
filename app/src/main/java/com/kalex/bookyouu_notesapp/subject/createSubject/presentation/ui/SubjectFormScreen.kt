@@ -94,6 +94,7 @@ fun handleCreationState(
                 is ViewModelState.Error -> onError()
                 is ViewModelState.Loading -> onLoading()
                 is ViewModelState.Success -> onSuccess()
+                else -> {onError()}
             }
         }
     }

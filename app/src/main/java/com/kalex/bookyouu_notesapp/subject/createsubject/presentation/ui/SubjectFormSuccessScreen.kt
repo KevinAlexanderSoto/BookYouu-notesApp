@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.subject.subjectList.presentation.ui
+package com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -19,35 +20,30 @@ import androidx.compose.ui.unit.sp
 import com.kalex.bookyouu_notesapp.R
 
 @Composable
-fun EmptySubjectScreen(
-    onCreateSubjectClick: () -> Unit,
+fun BYSuccessScreen(
+    onNavigateToSubjectListScreen: () -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
-        modifier = Modifier.padding(20.dp).fillMaxSize(),
+        modifier = Modifier.padding(24.dp).fillMaxSize(),
     ) {
         Icon(
-            painterResource(R.drawable.circle_help_svgrepo_com),
+            painterResource(R.drawable.circle_check_svgrepo_com),
             contentDescription = "No subject Icon",
             modifier = Modifier.size(80.dp),
+            tint = Color.Green,
         )
-        Text(
-            text = stringResource(R.string.subjectList_no_subjectsFount_text),
-            fontSize = 20.sp,
-        )
+        Text(text = stringResource(R.string.success_screen_text), fontSize = 20.sp)
         Button(
-            onClick = { onCreateSubjectClick.invoke() },
+            onClick = { onNavigateToSubjectListScreen() },
             contentPadding = PaddingValues(20.dp, 10.dp),
 
         ) {
-            Icon(
-                painterResource(R.drawable.file_add_svgrepo_com),
-                contentDescription = "Add button",
-                modifier = Modifier.size(22.dp),
+            Text(
+                text = stringResource(R.string.success_screen_buttom_text),
+                modifier = Modifier.padding(8.dp, 2.dp),
             )
-            Text(text = stringResource(R.string.subjectList_no_subjectsFount_ButtonText), modifier = Modifier.padding(8.dp, 2.dp))
         }
     }
 }
-

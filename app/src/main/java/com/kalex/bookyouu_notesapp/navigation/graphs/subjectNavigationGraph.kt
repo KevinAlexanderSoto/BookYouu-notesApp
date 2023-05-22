@@ -7,6 +7,7 @@ import androidx.navigation.navigation
 import com.kalex.bookyouu_notesapp.Greeting
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.subject.SubjectMainScreen
+import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.BYSuccessScreen
 import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.SubjectForm
 
 fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
@@ -30,7 +31,13 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
                 },
             )
         }
-        composable(route = Route.SUBJECT_FORM_SUCCESS_SCREEN) {}
-        composable(route = Route.SUBJECT_DETAIL) { Greeting("Average") }
+        composable(route = Route.SUBJECT_FORM_SUCCESS_SCREEN) { BYSuccessScreen(
+            onNavigateToSubjectListScreen = {
+                rootNavController.navigate(
+                    Route.SUBJECT_LIST
+                )
+            }
+        ) }
+        composable(route = Route.SUBJECT_DETAIL) { }
     }
 }

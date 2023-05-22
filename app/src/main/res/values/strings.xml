@@ -16,4 +16,6 @@
     <string name="subject_form_friday">Friday</string>
     <string name="subject_form_saturday">Saturday</string>
     <string name="subject_form_sunday">Sunday</string>
+    <string name="success_screen_text">Created successfully</string>
+    <string name="success_screen_buttom_text">Continue</string>
 </resources>

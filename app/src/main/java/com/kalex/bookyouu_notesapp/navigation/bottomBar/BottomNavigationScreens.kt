@@ -1,8 +1,9 @@
-package com.kalex.bookyouu_notesapp.navigation
+package com.kalex.bookyouu_notesapp.navigation.bottomBar
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.kalex.bookyouu_notesapp.R
+import com.kalex.bookyouu_notesapp.navigation.Route
 
 sealed class BottomNavigationScreens(
     val route: String,
@@ -11,13 +12,13 @@ sealed class BottomNavigationScreens(
 ) {
     object Subject : BottomNavigationScreens(
         Route.SUBJECT_LIST,
-        R.drawable.baseline_library_books_24,
+        R.drawable.book_svgrepo_com,
         R.string.subject_bottom_label,
     )
 
     object Average : BottomNavigationScreens(
         Route.AVERAGE_MAIN,
-        R.drawable.baseline_calculate_24,
+        R.drawable.archive_svgrepo_com,
         R.string.average_bottom_label,
     )
 

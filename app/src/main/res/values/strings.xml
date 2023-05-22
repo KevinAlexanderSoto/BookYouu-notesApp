@@ -6,4 +6,16 @@
     <!--SUBJECT SECTION-->
     <string name="subjectList_no_subjectsFount_text">Upss… You do not have subjects, add one to start</string>
     <string name="subjectList_no_subjectsFount_ButtonText">Add</string>
+    <string name="subject_form_subjectName_label">Subject name</string>
+    <string name="subject_form_classRoom_label">Classroom</string>
+    <string name="subject_form_credits_label">Credits</string>
+    <string name="subject_form_monday">Monday</string>
+    <string name="subject_form_tuesday">Tuesday</string>
+    <string name="subject_form_wednesday">wednesday</string>
+    <string name="subject_form_thursday">thursday</string>
+    <string name="subject_form_friday">Friday</string>
+    <string name="subject_form_saturday">Saturday</string>
+    <string name="subject_form_sunday">Sunday</string>
+    <string name="success_screen_text">Created successfully</string>
+    <string name="success_screen_buttom_text">Continue</string>
 </resources>

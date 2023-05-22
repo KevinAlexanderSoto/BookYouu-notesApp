@@ -7,5 +7,17 @@
     <!--SUBJECT SECTION-->
     <string name="subjectList_no_subjectsFount_text">Upss… No has agregado materias, a;ade una para comenzar</string>
     <string name="subjectList_no_subjectsFount_ButtonText">Agregar</string>
+    <string name="subject_form_subjectName_label">Materia</string>
+    <string name="subject_form_classRoom_label">Salon</string>
+    <string name="subject_form_credits_label">Creditos</string>
+    <string name="subject_form_monday">Monday</string>
+    <string name="subject_form_tuesday">Tuesday</string>
+    <string name="subject_form_wednesday">wednesday</string>
+    <string name="subject_form_thursday">thursday</string>
+    <string name="subject_form_friday">Friday</string>
+    <string name="subject_form_saturday">Saturday</string>
+    <string name="subject_form_sunday">Sunday</string>
+    <string name="success_screen_text">Created successfully</string>
+    <string name="success_screen_buttom_text">Continue</string>
 
 </resources>

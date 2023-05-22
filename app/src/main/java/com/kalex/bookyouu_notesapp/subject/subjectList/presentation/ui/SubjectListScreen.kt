@@ -1,7 +1,12 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package com.kalex.bookyouu_notesapp.subject.subjectList.presentation.ui
 
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -63,21 +68,23 @@ fun SubjectListScreen(
             }
         }
         LazyColumn {
-            items(subjectList.size) {
-                with(subjectList[it]) {
-                    SubjectItem(
-                        title = subjectName,
-                        subTitle = subjectDay.map { dayOfWeek ->
-                            stringResource(
-                                id = DayOfWeekStringFactory.getDayStringResource(
-                                    dayOfWeek,
-                                ),
-                            )
-                        }.toString().removePrefix("[").removeSuffix("]"),
-                        classRoom = classroom,
-                        onSubjectItemClick = {
-                        },
-                    )
+            items(subjectList.size, key = { subjectList[it].subjectId }) {
+                Row(modifier = Modifier.animateItemPlacement(tween(durationMillis = 250))) {
+                    with(subjectList[it]) {
+                        SubjectItem(
+                            title = subjectName,
+                            subTitle = subjectDay.map { dayOfWeek ->
+                                stringResource(
+                                    id = DayOfWeekStringFactory.getDayStringResource(
+                                        dayOfWeek,
+                                    ),
+                                )
+                            }.toString().removePrefix("[").removeSuffix("]"),
+                            classRoom = classroom,
+                            onSubjectItemClick = {
+                            },
+                        )
+                    }
                 }
             }
         }

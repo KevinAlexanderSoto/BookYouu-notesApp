@@ -2,7 +2,8 @@ package com.kalex.bookyouu_notesapp.subject.subjectList.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kalex.bookyouu_notesapp.subject.subjectList.GetSubjectState
+import com.kalex.bookyouu_notesapp.db.data.Subject
+import com.kalex.bookyouu_notesapp.subject.createSubject.ViewModelState
 import com.kalex.bookyouu_notesapp.subject.domain.SubjectRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -18,20 +19,27 @@ class SubjectListViewModel @Inject constructor(
     private val subjectRepository: SubjectRepository,
     private val dispatcher: CoroutineDispatcher,
 ) : ViewModel() {
-    private val _getSubjectState = MutableStateFlow(GetSubjectState())
+    private val _getSubjectState =
+        MutableStateFlow<ViewModelState<List<Subject>>>(ViewModelState.Loading(true))
     val getSubjectState = _getSubjectState.asStateFlow()
 
     fun getSubjectList() {
-        _getSubjectState.update {
-            it.copy(isLoading = true)
-        }
         viewModelScope.launch(dispatcher) {
-            subjectRepository.getSubjectList().collectLatest { subjects ->
+            try {
+                subjectRepository.getSubjectList().collectLatest { subjects ->
+                    if (subjects.isEmpty()) {
+                        _getSubjectState.update {
+                            ViewModelState.Empty()
+                        }
+                    } else {
+                        _getSubjectState.update {
+                            ViewModelState.Success(subjects)
+                        }
+                    }
+                }
+            } catch (e: Exception) {
                 _getSubjectState.update {
-                    it.copy(
-                        isLoading = false,
-                        response = subjects.ifEmpty { null },
-                    )
+                    ViewModelState.Error(e)
                 }
             }
         }

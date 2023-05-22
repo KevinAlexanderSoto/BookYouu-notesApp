@@ -13,9 +13,11 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kalex.bookyouu_notesapp.db.data.Subject
+import com.kalex.bookyouu_notesapp.subject.createSubject.DayOfWeekStringFactory
 
 @Composable
 fun SubjectListScreen(
@@ -25,7 +27,9 @@ fun SubjectListScreen(
 ) {
     Column() {
         Box(
-            Modifier.padding(top = 20.dp).fillMaxWidth(),
+            Modifier
+                .padding(top = 20.dp)
+                .fillMaxWidth(),
         ) {
             Text(
                 text = "Tus clases",
@@ -34,7 +38,9 @@ fun SubjectListScreen(
             )
             IconButton(
                 onClick = { onAddSubjectClickAction() },
-                modifier = Modifier.align(Alignment.CenterEnd).padding(end = 20.dp),
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .padding(end = 20.dp),
 
             ) {
                 Icon(Icons.Default.Add, contentDescription = "add new")
@@ -45,7 +51,13 @@ fun SubjectListScreen(
                 with(subjectList[it]) {
                     SubjectItem(
                         title = subjectName,
-                        subTitle = subjectDay.toString(),
+                        subTitle = subjectDay.map { dayOfWeek ->
+                            stringResource(
+                                id = DayOfWeekStringFactory.getDayStringResource(
+                                    dayOfWeek,
+                                ),
+                            )
+                        }.toString().removePrefix("[").removeSuffix("]"),
                         classRoom = classroom,
                         onSubjectItemClick = {
                         },

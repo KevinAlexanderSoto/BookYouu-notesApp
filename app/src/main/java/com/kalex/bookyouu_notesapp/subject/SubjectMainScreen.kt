@@ -28,6 +28,7 @@ fun SubjectMainScreen(
             SubjectListScreen(
                 response.data,
                 onSubjectClickAction = {
+                    // todo: navigate to detail
                 },
                 onAddSubjectClickAction = { onAddNewSubject.invoke() },
             )

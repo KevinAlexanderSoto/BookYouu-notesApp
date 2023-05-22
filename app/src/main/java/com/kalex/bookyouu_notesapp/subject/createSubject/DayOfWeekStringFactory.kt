@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.subject.createsubject
+package com.kalex.bookyouu_notesapp.subject.createSubject
 
 import com.kalex.bookyouu_notesapp.R
 import java.time.DayOfWeek

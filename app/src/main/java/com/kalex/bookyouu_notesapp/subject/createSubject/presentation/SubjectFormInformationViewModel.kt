@@ -1,10 +1,10 @@
-package com.kalex.bookyouu_notesapp.subject.createsubject.presentation
+package com.kalex.bookyouu_notesapp.subject.createSubject.presentation
 
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.kalex.bookyouu_notesapp.db.data.Subject
-import com.kalex.bookyouu_notesapp.subject.createsubject.DayOfWeekStringFactory
+import com.kalex.bookyouu_notesapp.subject.createSubject.DayOfWeekStringFactory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.DayOfWeek
 import javax.inject.Inject

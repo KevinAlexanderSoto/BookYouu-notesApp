@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.subject.createsubject
+package com.kalex.bookyouu_notesapp.subject.createSubject
 
 sealed class ViewModelState<T> {
     data class Success<T>(val data: T) : ViewModelState<T>()

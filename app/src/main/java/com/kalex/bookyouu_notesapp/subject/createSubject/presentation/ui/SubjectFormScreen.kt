@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui
+package com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui
 
 import androidx.compose.material.BottomSheetState
 import androidx.compose.material.BottomSheetValue
@@ -11,9 +11,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.kalex.bookyouu_notesapp.subject.createsubject.ViewModelState
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.SubjectFormInformationViewModel
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.SubjectFormViewModel
+import com.kalex.bookyouu_notesapp.subject.createSubject.ViewModelState
+import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormInformationViewModel
+import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormViewModel
 import com.kalex.bookyouu_notesapp.ui.composables.BYBottomSheetLayout
 import com.kalex.bookyouu_notesapp.ui.composables.BYLoadingIndicator
 import kotlinx.coroutines.CoroutineScope

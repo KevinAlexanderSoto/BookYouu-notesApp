@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui
+package com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,7 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.kalex.bookyouu_notesapp.subject.createsubject.DayOfWeekStringFactory
+import com.kalex.bookyouu_notesapp.subject.createSubject.DayOfWeekStringFactory
 import com.kalex.bookyouu_notesapp.ui.composables.BYRoundedCheckView
 import java.time.DayOfWeek
 

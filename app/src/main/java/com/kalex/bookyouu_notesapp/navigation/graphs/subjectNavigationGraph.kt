@@ -4,11 +4,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.kalex.bookyouu_notesapp.Greeting
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.subject.SubjectMainScreen
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.BYSuccessScreen
-import com.kalex.bookyouu_notesapp.subject.createsubject.presentation.ui.SubjectForm
+import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui.BYSuccessScreen
+import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui.SubjectForm
 
 fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
     navigation(

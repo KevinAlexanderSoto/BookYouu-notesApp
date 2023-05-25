@@ -29,9 +29,6 @@ fun SubjectForm(
     formViewModel: SubjectFormViewModel = hiltViewModel(),
 ) {
     val scope = rememberCoroutineScope()
-
-    var showSheet by remember { mutableStateOf(false) }
-    var hideSheet by remember { mutableStateOf(false) }
     var showLoadingProgressBar by remember { mutableStateOf(false) }
     val scaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = BottomSheetState(
@@ -39,14 +36,13 @@ fun SubjectForm(
         ),
     )
     BYBottomSheetLayout(
-        scope = scope,
         scaffoldState = scaffoldState,
         scaffoldContent = {
             if (showLoadingProgressBar) {
                 BYLoadingIndicator()
             }
             ScaffoldContent(
-                onShowSheet = { showSheet = true },
+                onShowSheet = { scope.launch { scaffoldState.bottomSheetState.expand() } },
                 onCreateSubjectClick = {
                     formViewModel.createSubject(it)
                     handleCreationState(
@@ -63,9 +59,7 @@ fun SubjectForm(
         },
         sheetContent = {
             SheetContent(
-                onHideClick = {
-                    hideSheet = true
-                },
+                onHideClick = { scope.launch { scaffoldState.bottomSheetState.collapse() } },
                 onOptionSelected = {
                     informationViewModel.addDayOfWeek(it)
                 },
@@ -74,10 +68,6 @@ fun SubjectForm(
                 },
             )
         },
-        showBottomSheet = { if (showSheet) it() },
-        onBottomSheetHide = { hideSheet = false },
-        hideBottomSheet = { if (hideSheet) it.invoke() },
-        onBottomSheetShow = { showSheet = false },
     )
 }
 
@@ -94,7 +84,9 @@ fun handleCreationState(
                 is ViewModelState.Error -> onError()
                 is ViewModelState.Loading -> onLoading()
                 is ViewModelState.Success -> onSuccess()
-                else -> {onError()}
+                else -> {
+                    onError()
+                }
             }
         }
     }

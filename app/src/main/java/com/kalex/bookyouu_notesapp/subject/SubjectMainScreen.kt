@@ -3,8 +3,10 @@ package com.kalex.bookyouu_notesapp.subject
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.kalex.bookyouu_notesapp.subject.createSubject.ViewModelState
 import com.kalex.bookyouu_notesapp.subject.subjectList.presentation.SubjectListViewModel
 import com.kalex.bookyouu_notesapp.subject.subjectList.presentation.ui.EmptySubjectScreen
+import com.kalex.bookyouu_notesapp.subject.subjectList.presentation.ui.SubjectListScreen
 import com.kalex.bookyouu_notesapp.ui.composables.BYLoadingIndicator
 
 @Composable
@@ -13,13 +15,23 @@ fun SubjectMainScreen(
     subjectViewModel: SubjectListViewModel = hiltViewModel(),
 ) {
     subjectViewModel.getSubjectList()
-    val state = subjectViewModel.getSubjectState.collectAsState()
-    if (state.value.isLoading) {
-        BYLoadingIndicator()
-    }
-    if (!state.value.isLoading && state.value.response == null) {
-        EmptySubjectScreen(
-            onCreateSubjectClick = { onAddNewSubject.invoke() },
-        )
+    when (val response = subjectViewModel.getSubjectState.collectAsState().value) {
+        is ViewModelState.Empty -> {
+            EmptySubjectScreen(
+                onCreateSubjectClick = { onAddNewSubject.invoke() },
+            )
+        }
+
+        is ViewModelState.Error -> TODO()
+        is ViewModelState.Loading -> BYLoadingIndicator()
+        is ViewModelState.Success -> {
+            SubjectListScreen(
+                response.data,
+                onSubjectClickAction = {
+                    // todo: navigate to detail
+                },
+                onAddSubjectClickAction = { onAddNewSubject.invoke() },
+            )
+        }
     }
 }

@@ -1,24 +1,27 @@
 package com.kalex.bookyouu_notesapp.subject
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.subject.createSubject.ViewModelState
 import com.kalex.bookyouu_notesapp.subject.subjectList.presentation.SubjectListViewModel
-import com.kalex.bookyouu_notesapp.subject.subjectList.presentation.ui.EmptySubjectScreen
 import com.kalex.bookyouu_notesapp.subject.subjectList.presentation.ui.SubjectListScreen
 import com.kalex.bookyouu_notesapp.ui.composables.BYLoadingIndicator
+import com.kalex.bookyouu_notesapp.ui.composables.EmptyScreen
 
 @Composable
 fun SubjectMainScreen(
     onAddNewSubject: () -> Unit,
+    onSubjectClickAction: (String) -> Unit,
     subjectViewModel: SubjectListViewModel = hiltViewModel(),
 ) {
     subjectViewModel.getSubjectList()
-    when (val response = subjectViewModel.getSubjectState.collectAsState().value) {
+    when (val response = subjectViewModel.getSubjectState.collectAsStateWithLifecycle().value) {
         is ViewModelState.Empty -> {
-            EmptySubjectScreen(
-                onCreateSubjectClick = { onAddNewSubject.invoke() },
+            EmptyScreen(
+                onAddItemClick = { onAddNewSubject.invoke() },
+                rationaleText = R.string.subjectList_no_subjectsFount_text,
             )
         }
 
@@ -28,7 +31,7 @@ fun SubjectMainScreen(
             SubjectListScreen(
                 response.data,
                 onSubjectClickAction = {
-                    // todo: navigate to detail
+                    onSubjectClickAction(it.toString())
                 },
                 onAddSubjectClickAction = { onAddNewSubject.invoke() },
             )

@@ -17,6 +17,7 @@ fun RootNavigationGraph(
         modifier = modifier,
     ) {
         subjectNav(rootNavController)
+        recordsNav(rootNavController)
         averageNav(rootNavController)
     }
 }

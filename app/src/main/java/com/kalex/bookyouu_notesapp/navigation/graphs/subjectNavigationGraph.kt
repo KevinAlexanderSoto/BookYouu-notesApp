@@ -15,11 +15,18 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
         startDestination = Route.SUBJECT_LIST,
     ) {
         composable(route = Route.SUBJECT_LIST) {
-            SubjectMainScreen(onAddNewSubject = {
-                rootNavController.navigate(
-                    Route.SUBJECT_FORM,
-                )
-            })
+            SubjectMainScreen(
+                onAddNewSubject = {
+                    rootNavController.navigate(
+                        Route.SUBJECT_FORM,
+                    )
+                },
+                onSubjectClickAction = {
+                    rootNavController.navigate(
+                        route = Route.RECORDS_MAIN_ROUTE + "/${it}",
+                    )
+                },
+            )
         }
         composable(route = Route.SUBJECT_FORM) {
             SubjectForm(
@@ -30,13 +37,14 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
                 },
             )
         }
-        composable(route = Route.SUBJECT_FORM_SUCCESS_SCREEN) { BYSuccessScreen(
-            onNavigateToSubjectListScreen = {
-                rootNavController.navigate(
-                    Route.SUBJECT_LIST
-                )
-            }
-        ) }
-        composable(route = Route.SUBJECT_DETAIL) { }
+        composable(route = Route.SUBJECT_FORM_SUCCESS_SCREEN) {
+            BYSuccessScreen(
+                onNavigateToSubjectListScreen = {
+                    rootNavController.navigate(
+                        Route.SUBJECT_LIST,
+                    )
+                },
+            )
+        }
     }
 }

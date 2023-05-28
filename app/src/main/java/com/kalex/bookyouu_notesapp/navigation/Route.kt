@@ -9,4 +9,7 @@ object Route {
     const val SUBJECT_DETAIL = "subject_detail"
     const val AVERAGE = "average_graph"
     const val AVERAGE_MAIN = "average_main"
+    const val RECORDS_PARAM_ROUTE = "record_graph/{subjectID}"
+    const val RECORDS_MAIN_ROUTE = "record_graph"
+    const val RECORDS_LIST = "record_list"
 }

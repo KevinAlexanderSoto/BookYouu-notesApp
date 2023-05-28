@@ -82,6 +82,7 @@ fun SubjectListScreen(
                             }.toString().removePrefix("[").removeSuffix("]"),
                             classRoom = classroom,
                             onSubjectItemClick = {
+                                onSubjectClickAction(subjectId)
                             },
                         )
                     }

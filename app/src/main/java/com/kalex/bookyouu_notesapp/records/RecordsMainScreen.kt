@@ -6,8 +6,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.records.presentation.RecordsViewModel
 import com.kalex.bookyouu_notesapp.subject.createSubject.ViewModelState
-import com.kalex.bookyouu_notesapp.ui.composables.BYLoadingIndicator
-import com.kalex.bookyouu_notesapp.ui.composables.EmptyScreen
+import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
+import com.kalex.bookyouu_notesapp.common.composables.EmptyScreen
 
 @Composable
 fun RecordsMainScreen(
@@ -20,7 +20,7 @@ fun RecordsMainScreen(
         is ViewModelState.Empty -> {
             EmptyScreen(
                 onAddItemClick = { onAddNewRecord.invoke() },
-                rationaleText = R.string.subjectList_no_subjectsFount_text,
+                rationaleText = R.string.subjectList_no_subjectsFount_text, // TODO: Add strings resources
             )
         }
 
@@ -37,4 +37,3 @@ fun RecordsMainScreen(
         }
     }
 }
-

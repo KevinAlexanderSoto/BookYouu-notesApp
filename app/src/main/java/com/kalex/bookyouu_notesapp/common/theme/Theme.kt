@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.ui.theme
+package com.kalex.bookyouu_notesapp.common.theme
 
 import android.app.Activity
 import android.os.Build

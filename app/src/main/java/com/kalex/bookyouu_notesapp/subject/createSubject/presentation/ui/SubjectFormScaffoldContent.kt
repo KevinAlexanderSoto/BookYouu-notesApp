@@ -17,7 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.db.data.Subject
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormInformationViewModel
-import com.kalex.bookyouu_notesapp.ui.composables.BYTextInput
+import com.kalex.bookyouu_notesapp.common.composables.BYTextInput
 
 @Composable
 fun ScaffoldContent(

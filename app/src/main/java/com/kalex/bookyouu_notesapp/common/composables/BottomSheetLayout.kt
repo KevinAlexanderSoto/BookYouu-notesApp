@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.ui.composables
+package com.kalex.bookyouu_notesapp.common.composables
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding

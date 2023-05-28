@@ -17,7 +17,7 @@ import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.navigation.topBar.TopNavigationBar
 import com.kalex.bookyouu_notesapp.navigation.graphs.RootNavigationGraph
 import com.kalex.bookyouu_notesapp.subject.subjectList.presentation.SubjectListViewModel
-import com.kalex.bookyouu_notesapp.ui.theme.BookYouUnotesAppTheme
+import com.kalex.bookyouu_notesapp.common.theme.BookYouUnotesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

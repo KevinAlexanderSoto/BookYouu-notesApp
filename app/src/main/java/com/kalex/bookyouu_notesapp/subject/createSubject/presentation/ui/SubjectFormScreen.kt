@@ -14,8 +14,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.kalex.bookyouu_notesapp.subject.createSubject.ViewModelState
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormInformationViewModel
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormViewModel
-import com.kalex.bookyouu_notesapp.ui.composables.BYBottomSheetLayout
-import com.kalex.bookyouu_notesapp.ui.composables.BYLoadingIndicator
+import com.kalex.bookyouu_notesapp.common.composables.BYBottomSheetLayout
+import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest

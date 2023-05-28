@@ -1,5 +1,6 @@
-package com.kalex.bookyouu_notesapp.subject.subjectList.presentation.ui
+package com.kalex.bookyouu_notesapp.ui.composables
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,8 +20,9 @@ import androidx.compose.ui.unit.sp
 import com.kalex.bookyouu_notesapp.R
 
 @Composable
-fun EmptySubjectScreen(
-    onCreateSubjectClick: () -> Unit,
+fun EmptyScreen(
+    onAddItemClick: () -> Unit,
+    @StringRes rationaleText: Int
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -33,14 +35,14 @@ fun EmptySubjectScreen(
             modifier = Modifier.size(80.dp),
         )
         Text(
-            text = stringResource(R.string.subjectList_no_subjectsFount_text),
+            text = stringResource(rationaleText),
             fontSize = 20.sp,
         )
         Button(
-            onClick = { onCreateSubjectClick.invoke() },
+            onClick = { onAddItemClick.invoke() },
             contentPadding = PaddingValues(20.dp, 10.dp),
 
-        ) {
+            ) {
             Icon(
                 painterResource(R.drawable.file_add_svgrepo_com),
                 contentDescription = "Add button",
@@ -50,4 +52,3 @@ fun EmptySubjectScreen(
         }
     }
 }
-

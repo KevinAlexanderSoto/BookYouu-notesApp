@@ -36,5 +36,7 @@ fun SubjectMainScreen(
                 onAddSubjectClickAction = { onAddNewSubject.invoke() },
             )
         }
+
+        else -> {}
     }
 }

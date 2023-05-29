@@ -61,27 +61,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-@Composable
-fun Greeting(
-    name: String,
-    modifier: Modifier = Modifier,
-    subjectViewModel: SubjectListViewModel = hiltViewModel(),
-) {
-    subjectViewModel.getSubjectList()
-    val state = subjectViewModel.getSubjectState.collectAsState()
-    state.value
-    // Handle states, and put this on a separated composable
-    Text(
-        text = "Hello $name!",
-        modifier = modifier,
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BookYouUnotesAppTheme {
-        Greeting("Android")
-    }
-}

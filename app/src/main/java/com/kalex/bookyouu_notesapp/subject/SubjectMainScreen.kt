@@ -1,14 +1,15 @@
 package com.kalex.bookyouu_notesapp.subject
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kalex.bookyouu_notesapp.R
+import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
+import com.kalex.bookyouu_notesapp.common.composables.EmptyScreen
 import com.kalex.bookyouu_notesapp.subject.createSubject.ViewModelState
 import com.kalex.bookyouu_notesapp.subject.subjectList.presentation.SubjectListViewModel
 import com.kalex.bookyouu_notesapp.subject.subjectList.presentation.ui.SubjectListScreen
-import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
-import com.kalex.bookyouu_notesapp.common.composables.EmptyScreen
 
 @Composable
 fun SubjectMainScreen(
@@ -16,7 +17,10 @@ fun SubjectMainScreen(
     onSubjectClickAction: (String) -> Unit,
     subjectViewModel: SubjectListViewModel = hiltViewModel(),
 ) {
-    subjectViewModel.getSubjectList()
+    LaunchedEffect(Unit) {
+        subjectViewModel.getSubjectList()
+    }
+
     when (val response = subjectViewModel.getSubjectState.collectAsStateWithLifecycle().value) {
         is ViewModelState.Empty -> {
             EmptyScreen(
@@ -36,5 +40,7 @@ fun SubjectMainScreen(
                 onAddSubjectClickAction = { onAddNewSubject.invoke() },
             )
         }
+
+        else -> {}
     }
 }

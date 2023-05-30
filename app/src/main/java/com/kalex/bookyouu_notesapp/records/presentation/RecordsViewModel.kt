@@ -28,7 +28,7 @@ class RecordsViewModel @Inject constructor(
         get() = _getRecordsState.asStateFlow()
 
     fun getRecordsList(subjectId: String) {
-        viewModelScope.launch(dispatcher){
+        viewModelScope.launch(dispatcher) {
             try {
                 _getRecordsState.update { ViewModelState.Loading(true) }
                 notesRepositoryImpl.getNotesByDate(subjectId).collectLatest { list ->

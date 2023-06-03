@@ -10,6 +10,7 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.records.RecordsMainScreen
+import com.kalex.bookyouu_notesapp.records.createRecord.presentation.RecordCapture
 
 fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
     navigation(
@@ -32,9 +33,17 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
             RecordsMainScreen(
                 subjectId = subjectID,
                 onAddNewRecord = {
-                    // TODO: Add this action
+                    rootNavController.navigate(Route.RECORDS_CAPTURE)
                 },
             )
+        }
+        composable(
+            route = Route.RECORDS_CAPTURE,
+        ) { entry ->
+            val parentEntry =
+                remember(entry) { rootNavController.getBackStackEntry(Route.RECORDS_PARAM_ROUTE) }
+            val subjectID = parentEntry.arguments?.getString("subjectID") ?: "0" // TODO:
+            RecordCapture()
         }
     }
 }

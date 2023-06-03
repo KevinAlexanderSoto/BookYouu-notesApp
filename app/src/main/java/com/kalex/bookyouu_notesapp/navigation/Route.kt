@@ -12,4 +12,5 @@ object Route {
     const val RECORDS_PARAM_ROUTE = "record_graph/{subjectID}"
     const val RECORDS_MAIN_ROUTE = "record_graph"
     const val RECORDS_LIST = "record_list"
+    const val RECORDS_CAPTURE = "record_capture"
 }

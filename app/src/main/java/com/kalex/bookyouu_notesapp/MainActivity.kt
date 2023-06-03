@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
                         }
                     },
                     topBar = {
-                        AnimatedVisibility(visible = !BottomNavigationScreens.bottomNavItems.any { it.route == currentDestination?.route }) {
+                        AnimatedVisibility(!bottomNavigationScreens.any { it.route == currentDestination?.route }) {
                             TopNavigationBar(
                                 navController,
                                 topBarTitle.getTopBarTitle(currentDestination?.route),

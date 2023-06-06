@@ -23,7 +23,7 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
                 },
                 onSubjectClickAction = {
                     rootNavController.navigate(
-                        route = Route.RECORDS_MAIN_ROUTE + "/${it}",
+                        route = Route.RECORDS_MAIN_ROUTE + "/$it",
                     )
                 },
             )

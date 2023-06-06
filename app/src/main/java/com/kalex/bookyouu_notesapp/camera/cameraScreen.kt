@@ -1,20 +1,20 @@
-package com.kalex.sp_aplication.camara
+package com.kalex.bookyouu_notesapp.camera
 
 import android.Manifest
+import android.net.Uri
 import android.util.Log
-import android.util.Size
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY
 import androidx.camera.core.ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG
 import androidx.camera.core.Preview
 import androidx.camera.core.UseCase
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -26,62 +26,40 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.kalex.bookyouu_notesapp.camera.CameraPreview
+import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.permission.RequireCameraPermission
 import kotlinx.coroutines.launch
-import java.io.File
 
 @ExperimentalPermissionsApi
 @Composable
 @androidx.annotation.OptIn(androidx.camera.core.ExperimentalZeroShutterLag::class)
 fun CameraScreen(
-    modifier: Modifier = Modifier,
     cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA,
-    onImageFile: (File) -> Unit = { },
+    onImageFile: (Uri?) -> Unit = { },
 ) {
-    val context = LocalContext.current
     RequireCameraPermission(
-        permission = Manifest.permission.CAMERA,
+        permission = listOf(Manifest.permission.CAMERA),
     ) {
-        Box(modifier = modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            val context = LocalContext.current
             val lifecycleOwner = LocalLifecycleOwner.current
             val coroutineScope = rememberCoroutineScope()
             var previewUseCase by remember { mutableStateOf<UseCase>(Preview.Builder().build()) }
+            val appName = context.resources.getString(R.string.app_name)
+
             val imageCaptureUseCase by remember {
                 mutableStateOf(
                     ImageCapture.Builder()
-                        .setTargetResolution(Size(480, 640)) // para la resolucion
-                        .setCaptureMode(CAPTURE_MODE_ZERO_SHUTTER_LAG)
+                        .setCaptureMode(CAPTURE_MODE_MAXIMIZE_QUALITY)
                         .build(),
+                )
+            }
 
-                )
-            }
-            Box {
-                CameraPreview(
-                    modifier = Modifier.fillMaxSize(),
-                    onUseCase = {
-                        previewUseCase = it
-                    },
-                )
-                Button(
-                    shape = RoundedCornerShape(70.dp),
-                    modifier = Modifier
-                        .wrapContentSize()
-                        .padding(16.dp)
-                        .align(Alignment.BottomCenter),
-                    onClick = {
-                        coroutineScope.launch {
-                            imageCaptureUseCase.takePicture(context.executor).let { it ->
-                                onImageFile(it)
-                            }
-                        }
-                    },
-                ) {
-                    Text("Capturar")
-                }
-            }
             LaunchedEffect(previewUseCase) {
                 val cameraProvider = context.getCameraProvider()
                 try {
@@ -94,9 +72,40 @@ fun CameraScreen(
                         imageCaptureUseCase,
                     )
                 } catch (ex: Exception) {
-                    Log.e("CameraCapture", "Failed to bind camera use cases", ex)
+                    Log.e("CameraCapture", "Failed to bind camera use cases", ex) //TODO: Add error message
                 }
             }
+            CameraPreview(
+                onUseCase = {
+                    previewUseCase = it
+                },
+            )
+
+            IconButton(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .size(100.dp)
+                    .align(Alignment.CenterHorizontally),
+                onClick = {
+                    coroutineScope.launch {
+                        imageCaptureUseCase.takePicture(
+                            context.executor,
+                            appName = appName,
+                            context.contentResolver,
+                        ).let { fileCaptured ->
+                            onImageFile(fileCaptured)
+                        }
+                    }
+                },
+                content = {
+                    Icon(
+                        painterResource(id = R.drawable.camera_lens_svgrepo_com),
+                        contentDescription = "Take picture",
+                        modifier = Modifier
+                            .size(100.dp),
+                    )
+                },
+            )
         }
     }
 }

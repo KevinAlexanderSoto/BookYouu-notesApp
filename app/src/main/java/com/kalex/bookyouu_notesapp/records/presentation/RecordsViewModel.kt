@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp.records.presentation
 
+import android.os.Build
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kalex.bookyouu_notesapp.db.data.Note
@@ -7,7 +8,6 @@ import com.kalex.bookyouu_notesapp.records.data.NotesRepository
 import com.kalex.bookyouu_notesapp.subject.createSubject.ViewModelState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,8 +19,22 @@ import javax.inject.Inject
 @HiltViewModel
 class RecordsViewModel @Inject constructor(
     private val notesRepositoryImpl: NotesRepository,
-    private val dispatcher: CoroutineDispatcher
+    private val dispatcher: CoroutineDispatcher,
 ) : ViewModel() {
+    private val REQUIRED_PERMISSIONS =
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            listOf(
+                android.Manifest.permission.CAMERA,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+
+            )
+        } else {
+            listOf(
+                android.Manifest.permission.CAMERA,
+            )
+        }
+    val permissionsList: List<String>
+        get() = REQUIRED_PERMISSIONS
 
     private val _getRecordsState =
         MutableStateFlow<ViewModelState<List<Note>>>(ViewModelState.Loading(true))

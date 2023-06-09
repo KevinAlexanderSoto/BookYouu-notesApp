@@ -1,12 +1,10 @@
 package com.kalex.bookyouu_notesapp.camera
 
-import android.Manifest
 import android.net.Uri
 import android.util.Log
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY
-import androidx.camera.core.ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG
 import androidx.camera.core.Preview
 import androidx.camera.core.UseCase
 import androidx.compose.foundation.layout.Column
@@ -28,9 +26,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.R
-import com.kalex.bookyouu_notesapp.permission.RequireCameraPermission
+import com.kalex.bookyouu_notesapp.records.presentation.RecordsViewModel
 import kotlinx.coroutines.launch
 
 @ExperimentalPermissionsApi
@@ -40,72 +39,72 @@ fun CameraScreen(
     cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA,
     onImageFile: (Uri?) -> Unit = { },
 ) {
-    RequireCameraPermission(
-        permission = listOf(Manifest.permission.CAMERA),
+    Column(
+        modifier = Modifier.fillMaxSize(),
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            val context = LocalContext.current
-            val lifecycleOwner = LocalLifecycleOwner.current
-            val coroutineScope = rememberCoroutineScope()
-            var previewUseCase by remember { mutableStateOf<UseCase>(Preview.Builder().build()) }
-            val appName = context.resources.getString(R.string.app_name)
+        val context = LocalContext.current
+        val lifecycleOwner = LocalLifecycleOwner.current
+        val coroutineScope = rememberCoroutineScope()
+        var previewUseCase by remember { mutableStateOf<UseCase>(Preview.Builder().build()) }
+        val appName = context.resources.getString(R.string.app_name)
 
-            val imageCaptureUseCase by remember {
-                mutableStateOf(
-                    ImageCapture.Builder()
-                        .setCaptureMode(CAPTURE_MODE_MAXIMIZE_QUALITY)
-                        .build(),
-                )
-            }
-
-            LaunchedEffect(previewUseCase) {
-                val cameraProvider = context.getCameraProvider()
-                try {
-                    // Must unbind the use-cases before rebinding them.
-                    cameraProvider.unbindAll()
-                    cameraProvider.bindToLifecycle(
-                        lifecycleOwner,
-                        cameraSelector,
-                        previewUseCase,
-                        imageCaptureUseCase,
-                    )
-                } catch (ex: Exception) {
-                    Log.e("CameraCapture", "Failed to bind camera use cases", ex) //TODO: Add error message
-                }
-            }
-            CameraPreview(
-                onUseCase = {
-                    previewUseCase = it
-                },
-            )
-
-            IconButton(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .size(100.dp)
-                    .align(Alignment.CenterHorizontally),
-                onClick = {
-                    coroutineScope.launch {
-                        imageCaptureUseCase.takePicture(
-                            context.executor,
-                            appName = appName,
-                            context.contentResolver,
-                        ).let { fileCaptured ->
-                            onImageFile(fileCaptured)
-                        }
-                    }
-                },
-                content = {
-                    Icon(
-                        painterResource(id = R.drawable.camera_lens_svgrepo_com),
-                        contentDescription = "Take picture",
-                        modifier = Modifier
-                            .size(100.dp),
-                    )
-                },
+        val imageCaptureUseCase by remember {
+            mutableStateOf(
+                ImageCapture.Builder()
+                    .setCaptureMode(CAPTURE_MODE_MAXIMIZE_QUALITY)
+                    .build(),
             )
         }
+
+        LaunchedEffect(previewUseCase) {
+            val cameraProvider = context.getCameraProvider()
+            try {
+                // Must unbind the use-cases before rebinding them.
+                cameraProvider.unbindAll()
+                cameraProvider.bindToLifecycle(
+                    lifecycleOwner,
+                    cameraSelector,
+                    previewUseCase,
+                    imageCaptureUseCase,
+                )
+            } catch (ex: Exception) {
+                Log.e(
+                    "CameraCapture",
+                    "Failed to bind camera use cases",
+                    ex,
+                ) // TODO: Add error message
+            }
+        }
+        CameraPreview(
+            onUseCase = {
+                previewUseCase = it
+            },
+        )
+
+        IconButton(
+            modifier = Modifier
+                .padding(16.dp)
+                .size(100.dp)
+                .align(Alignment.CenterHorizontally),
+            onClick = {
+                coroutineScope.launch {
+                    imageCaptureUseCase.takePicture(
+                        context.executor,
+                        appName = appName,
+                        context.contentResolver,
+                    ).let { fileCaptured ->
+                        onImageFile(fileCaptured)
+                    }
+                }
+            },
+            content = {
+                Icon(
+                    painterResource(id = R.drawable.camera_lens_svgrepo_com),
+                    contentDescription = "Take picture",
+                    modifier = Modifier
+                        .size(100.dp),
+                )
+            },
+        )
     }
 }

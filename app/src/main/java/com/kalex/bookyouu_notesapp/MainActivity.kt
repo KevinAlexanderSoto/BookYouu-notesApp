@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,13 +21,13 @@ import com.kalex.bookyouu_notesapp.navigation.graphs.RootNavigationGraph
 import com.kalex.bookyouu_notesapp.navigation.topBar.TopBarTitleFactory
 import com.kalex.bookyouu_notesapp.navigation.topBar.TopNavigationBar
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.File
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalLayoutApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         val topBarTitle = TopBarTitleFactory()
         val bottomNavigationScreens = BottomNavigationScreens.bottomNavItems
         setContent {

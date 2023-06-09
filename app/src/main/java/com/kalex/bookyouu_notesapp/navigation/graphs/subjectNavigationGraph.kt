@@ -4,6 +4,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.kalex.bookyouu_notesapp.common.composables.ScaffoldBottomBar
+import com.kalex.bookyouu_notesapp.common.composables.ScaffoldTopBar
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.subject.SubjectMainScreen
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui.BYSuccessScreen
@@ -15,24 +17,39 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
         startDestination = Route.SUBJECT_LIST,
     ) {
         composable(route = Route.SUBJECT_LIST) {
-            SubjectMainScreen(
-                onAddNewSubject = {
-                    rootNavController.navigate(
-                        Route.SUBJECT_FORM,
-                    )
+            ScaffoldBottomBar(
+                currentDestination = rootNavController.currentBackStackEntry?.destination,
+                onBottomNavigationClick = {
+                    rootNavController.navigate(it)
                 },
-                onSubjectClickAction = {
-                    rootNavController.navigate(
-                        route = Route.RECORDS_MAIN_ROUTE + "/$it",
+                content = {
+                    SubjectMainScreen(
+                        onAddNewSubject = {
+                            rootNavController.navigate(
+                                Route.SUBJECT_FORM,
+                            )
+                        },
+                        onSubjectClickAction = {
+                            rootNavController.navigate(
+                                route = Route.RECORDS_MAIN_ROUTE + "/$it",
+                            )
+                        },
                     )
                 },
             )
         }
         composable(route = Route.SUBJECT_FORM) {
-            SubjectForm(
-                onNavigateToConfirmationScreen = {
-                    rootNavController.navigate(
-                        Route.SUBJECT_FORM_SUCCESS_SCREEN,
+            ScaffoldTopBar(
+                currentDestination = rootNavController.currentBackStackEntry?.destination,
+                onBackNavigationClick = { rootNavController.popBackStack() },
+                content = {
+                    SubjectForm(
+                        paddingValues = it,
+                        onNavigateToConfirmationScreen = {
+                            rootNavController.navigate(
+                                Route.SUBJECT_FORM_SUCCESS_SCREEN,
+                            )
+                        },
                     )
                 },
             )

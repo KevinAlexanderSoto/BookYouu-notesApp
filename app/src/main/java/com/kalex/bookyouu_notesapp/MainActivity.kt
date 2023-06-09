@@ -33,35 +33,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             BookYouUnotesAppTheme {
                 val navController = rememberNavController()
-                val navBackStackEntry by navController.currentBackStackEntryAsState()
-                val currentDestination = navBackStackEntry?.destination
-                Scaffold(
-                    bottomBar = {
-                        AnimatedVisibility(bottomNavigationScreens.any { it.route == currentDestination?.route }) {
-                            BottomNavigationBar(
-                                navController,
-                                bottomNavigationScreens,
-                                currentDestination,
-                            )
-                        }
-                    },
-                    topBar = {
-                        AnimatedVisibility(!bottomNavigationScreens.any { it.route == currentDestination?.route }) {
-                            TopNavigationBar(
-                                navController,
-                                topBarTitle.getTopBarTitle(currentDestination?.route),
-                            )
-                        }
-                    },
-                ) { paddingValues ->
+                /*val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentDestination = navBackStackEntry?.destination*/
                     RootNavigationGraph(
                         navController,
-                        Modifier.padding(paddingValues).consumeWindowInsets(paddingValues),
                         startDestination = Route.SUBJECT,
                     )
-                }
             }
         }
     }
-
 }

@@ -1,14 +1,6 @@
 package com.kalex.bookyouu_notesapp.permission
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
@@ -20,37 +12,38 @@ fun RequireCameraPermission(
     content: @Composable () -> Unit = { },
 ) {
     val multiplePermissionsState = rememberMultiplePermissionsState(permissions = permission)
-    val context = LocalContext.current
-
     if (multiplePermissionsState.allPermissionsGranted) {
         content()
     } else {
-        /*       RationaleDialog(
-                   contentText = "Necesito acceso a la camara para tomar la foto", // todo: add strings resources
-                   titleText = "Permisos", // todo: add strings resources
-                   buttonText = "deacuerdo", // todo: add strings resources
-                   onRequestPermission = { multiplePermissionsState.launchMultiplePermissionRequest() },
-               )
+        RationaleDialog(
+            contentText = getTextToShowGivenPermissions(
+                multiplePermissionsState.revokedPermissions,
+                multiplePermissionsState.shouldShowRationale,
+            ), // todo: add strings resources
+            titleText = "Permisos", // todo: add strings resources
+            buttonText = "deacuerdo", // todo: add strings resources
+            onRequestPermission = { multiplePermissionsState.launchMultiplePermissionRequest() },
+        )
+        /*
+                  PermissionNotAvailable(
+                      context = context,
+                      contentText = "Ve a la configuracion y activa la camara", // todo: add strings resources
+                      titleText = "Permisos", // todo: add strings resources
+                      buttonText = "deacuerdo", // todo: add strings resources
+                  )*/
 
-           PermissionNotAvailable(
-               context = context,
-               contentText = "Ve a la configuracion y activa la camara", // todo: add strings resources
-               titleText = "Permisos", // todo: add strings resources
-               buttonText = "deacuerdo", // todo: add strings resources
-           )*/
-
-        Column {
-            Text(
-                getTextToShowGivenPermissions(
-                    multiplePermissionsState.revokedPermissions,
-                    multiplePermissionsState.shouldShowRationale,
-                ),
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = { multiplePermissionsState.launchMultiplePermissionRequest() }) {
-                Text("Request permissions")
-            }
-        }
+        /* Column {
+             Text(
+                 getTextToShowGivenPermissions(
+                     multiplePermissionsState.revokedPermissions,
+                     multiplePermissionsState.shouldShowRationale,
+                 ),
+             )
+             Spacer(modifier = Modifier.height(8.dp))
+             Button(onClick = { multiplePermissionsState.launchMultiplePermissionRequest() }) {
+                 Text("Request permissions")
+             }
+         }*/
     }
 }
 

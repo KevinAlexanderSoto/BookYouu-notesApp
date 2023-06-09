@@ -8,13 +8,11 @@ import androidx.navigation.compose.NavHost
 @Composable
 fun RootNavigationGraph(
     rootNavController: NavHostController,
-    modifier: Modifier,
     startDestination: String,
 ) {
     NavHost(
         navController = rootNavController,
         startDestination = startDestination,
-        modifier = modifier,
     ) {
         subjectNav(rootNavController)
         recordsNav(rootNavController)

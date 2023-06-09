@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.BottomSheetState
 import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.ExperimentalMaterialApi
@@ -24,6 +25,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SubjectForm(
+    paddingValues: PaddingValues,
     onNavigateToConfirmationScreen: () -> Unit,
     informationViewModel: SubjectFormInformationViewModel = hiltViewModel(),
     formViewModel: SubjectFormViewModel = hiltViewModel(),
@@ -42,6 +44,7 @@ fun SubjectForm(
                 BYLoadingIndicator()
             }
             ScaffoldContent(
+                paddingValues = paddingValues,
                 onShowSheet = { scope.launch { scaffoldState.bottomSheetState.expand() } },
                 onCreateSubjectClick = {
                     formViewModel.createSubject(it)

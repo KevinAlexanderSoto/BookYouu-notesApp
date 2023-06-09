@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp.records
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -15,6 +16,7 @@ import com.kalex.bookyouu_notesapp.subject.createSubject.ViewModelState
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun RecordsMainScreen(
+    paddingValues: PaddingValues,
     subjectId: String,
     onAddNewRecord: () -> Unit,
     recordsViewModel: RecordsViewModel = hiltViewModel(),

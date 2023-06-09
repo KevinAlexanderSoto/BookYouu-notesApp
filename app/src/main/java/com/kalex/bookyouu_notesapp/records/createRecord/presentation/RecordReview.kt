@@ -11,7 +11,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -49,19 +53,25 @@ fun RecordReview(
             maxLine = 3,
         ) {
         }
-
+        Text(text = "Save")
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.fillMaxWidth(0.9f),
         ) {
-            Button(onClick = {
-                // TODO: Implement this whit a viewModel
-                context.contentResolver.delete(captureUri, null, null)
+            FloatingActionButton(onClick = {
+                context.contentResolver.delete(
+                    captureUri,
+                    null,
+                    null,
+                )
             }) {
-                Text(text = "Delete img")
+                Icon(Icons.Default.Close, contentDescription = "no")
             }
-            Button(onClick = { /*TODO*/ }) {
-                Text(text = "add")
+
+            FloatingActionButton(onClick = {
+                //Todo: Save Uri in the DB
+            }) {
+                Icon(Icons.Default.Check, contentDescription = "no")
             }
         }
     }

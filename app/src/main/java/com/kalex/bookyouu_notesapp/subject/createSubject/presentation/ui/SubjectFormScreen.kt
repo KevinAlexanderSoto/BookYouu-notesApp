@@ -12,7 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.kalex.bookyouu_notesapp.subject.createSubject.ViewModelState
+import com.kalex.bookyouu_notesapp.common.ViewModelState
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormInformationViewModel
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormViewModel
 import com.kalex.bookyouu_notesapp.common.composables.BYBottomSheetLayout

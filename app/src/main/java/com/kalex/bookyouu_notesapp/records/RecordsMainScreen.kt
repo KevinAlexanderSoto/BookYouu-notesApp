@@ -11,7 +11,7 @@ import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
 import com.kalex.bookyouu_notesapp.common.composables.EmptyScreen
 import com.kalex.bookyouu_notesapp.permission.RequireCameraPermission
 import com.kalex.bookyouu_notesapp.records.presentation.RecordsViewModel
-import com.kalex.bookyouu_notesapp.subject.createSubject.ViewModelState
+import com.kalex.bookyouu_notesapp.common.ViewModelState
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable

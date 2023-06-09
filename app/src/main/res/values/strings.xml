@@ -18,4 +18,5 @@
     <string name="subject_form_sunday">Sunday</string>
     <string name="success_screen_text">Created successfully</string>
     <string name="success_screen_buttom_text">Continue</string>
+    <string name="record_confirmation_description_label">Description(optional)</string>
 </resources>

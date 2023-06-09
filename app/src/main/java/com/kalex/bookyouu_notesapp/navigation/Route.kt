@@ -13,4 +13,6 @@ object Route {
     const val RECORDS_MAIN_ROUTE = "record_graph"
     const val RECORDS_LIST = "record_list"
     const val RECORDS_CAPTURE = "record_capture"
+    const val RECORDS_PARAM_REVIEW = "record_review/{photoUri}"
+    const val RECORDS_MAIN_REVIEW = "record_review"
 }

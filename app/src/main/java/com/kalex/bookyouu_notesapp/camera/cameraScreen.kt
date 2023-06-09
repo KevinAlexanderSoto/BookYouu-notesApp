@@ -40,7 +40,7 @@ fun CameraScreen(
     onImageFile: (Uri?) -> Unit = { },
 ) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().padding(top = 20.dp),
     ) {
         val context = LocalContext.current
         val lifecycleOwner = LocalLifecycleOwner.current

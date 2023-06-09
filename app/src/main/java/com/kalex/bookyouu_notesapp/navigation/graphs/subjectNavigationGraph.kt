@@ -44,6 +44,7 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
                 onBackNavigationClick = { rootNavController.popBackStack() },
                 content = {
                     SubjectForm(
+                        paddingValues = it,
                         onNavigateToConfirmationScreen = {
                             rootNavController.navigate(
                                 Route.SUBJECT_FORM_SUCCESS_SCREEN,

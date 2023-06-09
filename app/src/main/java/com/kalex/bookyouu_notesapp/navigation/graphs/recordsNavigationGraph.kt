@@ -41,6 +41,7 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
                 onBackNavigationClick = { rootNavController.popBackStack() },
                 content = {
                     RecordsMainScreen(
+                        paddingValues = it,
                         subjectId = subjectID,
                         onAddNewRecord = {
                             rootNavController.navigate(Route.RECORDS_CAPTURE)

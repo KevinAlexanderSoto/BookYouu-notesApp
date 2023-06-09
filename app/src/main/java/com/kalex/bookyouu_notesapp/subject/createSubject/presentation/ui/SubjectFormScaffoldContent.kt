@@ -2,6 +2,7 @@ package com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -21,6 +22,7 @@ import com.kalex.bookyouu_notesapp.common.composables.BYTextInput
 
 @Composable
 fun ScaffoldContent(
+    paddingValues: PaddingValues,
     onShowSheet: () -> Unit,
     onCreateSubjectClick: (Subject) -> Unit,
     informationViewModel: SubjectFormInformationViewModel = hiltViewModel(),
@@ -32,7 +34,7 @@ fun ScaffoldContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(20.dp),
         modifier = Modifier
-            .padding(8.dp)
+            .padding(paddingValues)
             .fillMaxSize(),
     ) {
         Text(text = "Please fill all the information") // TODO: add styles and strings

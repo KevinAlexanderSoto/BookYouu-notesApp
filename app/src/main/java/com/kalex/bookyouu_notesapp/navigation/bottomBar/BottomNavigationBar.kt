@@ -21,7 +21,7 @@ import androidx.navigation.NavHostController
 
 @Composable
 fun BottomNavigationBar(
-    navController: NavHostController,
+    onNavigationClick: (String) -> Unit,
     bottomNavigationItems: List<BottomNavigationScreens>,
     currentDestination: NavDestination?,
 ) {
@@ -37,7 +37,7 @@ fun BottomNavigationBar(
             NavigationBarItem(
                 alwaysShowLabel = false,
                 selected = selected,
-                onClick = { navController.navigate(item.route) },
+                onClick = { onNavigationClick(item.route) },
                 label = { Text(text = stringResource(item.label)) },
                 icon = {
                     Icon(

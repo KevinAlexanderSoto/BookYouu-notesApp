@@ -17,23 +17,34 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
 object BYTextInput {
     @Composable
     fun OutLinedTextField(
         @StringRes label: Int,
-        keyboardOptions: KeyboardOptions,
+        keyboardOptions: KeyboardOptions = KeyboardOptions(
+            autoCorrect = true,
+            keyboardType = KeyboardType.Text,
+            imeAction = ImeAction.Done,
+        ),
+        isSingleLine: Boolean = true,
+        maxLine: Int = 1,
         onTextChange: (String) -> Unit,
     ) {
         var text by remember { mutableStateOf("") }
         onTextChange(text)
         OutlinedTextField(
             value = text,
-            singleLine = true,
+            singleLine = isSingleLine,
+            maxLines = maxLine,
             label = { Text(text = stringResource(label)) },
             onValueChange = {
-                text = it
+                if (it.length < 120) {
+                    text = it
+                }
             },
             keyboardOptions = keyboardOptions,
             modifier = Modifier.fillMaxWidth(0.9f),

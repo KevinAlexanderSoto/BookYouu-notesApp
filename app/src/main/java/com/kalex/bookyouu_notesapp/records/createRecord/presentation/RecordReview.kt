@@ -117,7 +117,10 @@ fun RecordReview(
                         collectAsState = recordsViewModel.saveRecordsState,
                         scope = scope,
                         onLoading = { loadingState.value = true },
-                        onSuccess = { onCaptureSaved() },
+                        onSuccess = {
+                            onCaptureSaved()
+                            loadingState.value = false
+                        },
                         onError = { // todo: implemnent error
                         },
                     )

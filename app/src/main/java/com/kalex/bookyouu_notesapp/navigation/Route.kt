@@ -11,7 +11,7 @@ object Route {
     const val AVERAGE_MAIN = "average_main"
     const val RECORDS_PARAM_ROUTE = "record_graph/{subjectID}"
     const val RECORDS_MAIN_ROUTE = "record_graph"
-    const val RECORDS_LIST = "record_list"
+    const val RECORDS_MAIN_SCREEN = "record_main"
     const val RECORDS_CAPTURE = "record_capture"
     const val RECORDS_PARAM_REVIEW = "record_review/{photoUri}"
     const val RECORDS_MAIN_REVIEW = "record_review"

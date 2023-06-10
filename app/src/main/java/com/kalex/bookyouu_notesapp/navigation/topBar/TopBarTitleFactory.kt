@@ -9,7 +9,7 @@ class TopBarTitleFactory {
             Route.SUBJECT_FORM -> {
                 "Crear Subject" //TODO: Add strings resource
             }
-            Route.RECORDS_LIST -> {
+            Route.RECORDS_MAIN_SCREEN -> {
                 "Lista de registros"
             }
             else -> {

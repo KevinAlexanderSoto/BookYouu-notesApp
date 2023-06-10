@@ -9,18 +9,20 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.navArgument
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.camera.CameraScreen
+import com.kalex.bookyouu_notesapp.common.composables.ScaffoldFloatingButtonAndTopBar
 import com.kalex.bookyouu_notesapp.common.composables.ScaffoldTopBar
 import com.kalex.bookyouu_notesapp.common.decodeUri
 import com.kalex.bookyouu_notesapp.common.encodeUri
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.records.RecordsMainScreen
 import com.kalex.bookyouu_notesapp.records.createRecord.presentation.RecordReview
+import com.kalex.bookyouu_notesapp.records.recordList.RecordsList
 
 @OptIn(ExperimentalPermissionsApi::class)
 fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
     navigation(
         route = Route.RECORDS_PARAM_ROUTE,
-        startDestination = Route.RECORDS_LIST,
+        startDestination = Route.RECORDS_MAIN_SCREEN,
         arguments = listOf(
             navArgument("subjectID") {
                 defaultValue = 0
@@ -30,18 +32,18 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
         ),
     ) {
         composable(
-            route = Route.RECORDS_LIST,
+            route = Route.RECORDS_MAIN_SCREEN,
         ) { entry ->
             val parentEntry =
                 remember(entry) { rootNavController.getBackStackEntry(Route.RECORDS_PARAM_ROUTE) }
             val subjectID = parentEntry.arguments?.getInt("subjectID") ?: 0
 
-            ScaffoldTopBar(
+            ScaffoldFloatingButtonAndTopBar(
                 currentDestination = rootNavController.currentBackStackEntry?.destination,
                 onBackNavigationClick = { rootNavController.popBackStack() },
+                onFloatingActionClick = { rootNavController.navigate(Route.RECORDS_CAPTURE) },
                 content = {
                     RecordsMainScreen(
-                        paddingValues = it,
                         subjectId = subjectID,
                         onAddNewRecord = {
                             rootNavController.navigate(Route.RECORDS_CAPTURE)
@@ -82,7 +84,12 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
             RecordReview(
                 subjectId = subjectID,
                 captureUri = photoUri!!,
-                onCaptureSaved = { rootNavController.popBackStack(Route.RECORDS_LIST, false) },
+                onCaptureSaved = {
+                    rootNavController.popBackStack(
+                        Route.RECORDS_MAIN_SCREEN,
+                        false,
+                    )
+                },
                 onReCapture = { rootNavController.popBackStack() },
             )
         }

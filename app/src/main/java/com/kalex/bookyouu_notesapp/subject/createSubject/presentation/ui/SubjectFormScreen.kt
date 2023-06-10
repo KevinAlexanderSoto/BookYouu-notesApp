@@ -53,7 +53,7 @@ fun SubjectForm(
                         scope,
                         onLoading = { showLoadingProgressBar = true },
                         onError = {
-                            // TODO:AHOW GENERERIC ERROR
+                            // TODO:SHOW GENERERIC ERROR
                         },
                         onSuccess = { onNavigateToConfirmationScreen() },
                     )

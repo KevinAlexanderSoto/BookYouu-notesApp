@@ -11,6 +11,7 @@ import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
 import com.kalex.bookyouu_notesapp.common.composables.EmptyScreen
 import com.kalex.bookyouu_notesapp.permission.RequireCameraPermission
 import com.kalex.bookyouu_notesapp.common.ViewModelState
+import com.kalex.bookyouu_notesapp.records.recordList.RecordsList
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -37,10 +38,7 @@ fun RecordsMainScreen(
 
             is ViewModelState.Error -> TODO()
             is ViewModelState.Loading -> BYLoadingIndicator()
-            is ViewModelState.Success -> {
-                TODO()
-            }
-
+            is ViewModelState.Success -> { RecordsList() }
             else -> {
                 TODO()
             }

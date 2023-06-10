@@ -82,9 +82,9 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
             RecordReview(
                 subjectId = subjectID,
                 captureUri = photoUri!!,
-            ) {
-                rootNavController.popBackStack()
-            }
+                onCaptureSaved = { rootNavController.popBackStack(Route.RECORDS_LIST, false) },
+                onReCapture = { rootNavController.popBackStack() },
+            )
         }
     }
 }

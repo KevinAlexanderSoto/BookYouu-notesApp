@@ -44,6 +44,7 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
                 onFloatingActionClick = { rootNavController.navigate(Route.RECORDS_CAPTURE) },
                 content = {
                     RecordsMainScreen(
+                        paddingValues = it,
                         subjectId = subjectID,
                         onAddNewRecord = {
                             rootNavController.navigate(Route.RECORDS_CAPTURE)

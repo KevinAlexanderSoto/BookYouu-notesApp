@@ -20,7 +20,6 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -35,7 +34,6 @@ import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.common.ViewModelState
 import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
 import com.kalex.bookyouu_notesapp.common.composables.BYTextInput
-import com.kalex.bookyouu_notesapp.common.encodeUri
 import com.kalex.bookyouu_notesapp.records.RecordsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
@@ -106,11 +104,10 @@ fun RecordReview(
                 }) {
                     Icon(Icons.Default.Close, contentDescription = "negative")
                 }
-
                 FloatingActionButton(onClick = {
                     recordsViewModel.createRecord(
                         subjectId = subjectId ?: 0,
-                        imgUrl = captureUri.toString().encodeUri(),
+                        imgUrl = captureUri.toString(),
                         noteDescription = description.value,
                     )
                     handleCreationState(

@@ -10,13 +10,11 @@ import androidx.navigation.navArgument
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.camera.CameraScreen
 import com.kalex.bookyouu_notesapp.common.composables.ScaffoldFloatingButtonAndTopBar
-import com.kalex.bookyouu_notesapp.common.composables.ScaffoldTopBar
 import com.kalex.bookyouu_notesapp.common.decodeUri
 import com.kalex.bookyouu_notesapp.common.encodeUri
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.records.RecordsMainScreen
-import com.kalex.bookyouu_notesapp.records.createRecord.presentation.RecordReview
-import com.kalex.bookyouu_notesapp.records.recordList.RecordsList
+import com.kalex.bookyouu_notesapp.records.createRecord.RecordReview
 
 @OptIn(ExperimentalPermissionsApi::class)
 fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
@@ -49,6 +47,12 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
                         onAddNewRecord = {
                             rootNavController.navigate(Route.RECORDS_CAPTURE)
                         },
+                        onRecordDetail = {noteID ->
+                            rootNavController.navigate(Route.RECORDS_DETAIL_MAIN_ROUTE + "/${noteID}")
+                        },
+                        onDeleteRecord = {
+
+                        }
                     )
                 },
             )
@@ -62,6 +66,24 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
                     rootNavController.navigate(Route.RECORDS_MAIN_REVIEW + "/$encoded")
                 }
             }
+        }
+
+        composable(
+            route = Route.RECORDS_DETAIL_PARAM_SCREEN,
+            arguments = listOf(
+                navArgument("noteID") {
+                    defaultValue = 0
+                    nullable = false
+                    type = NavType.IntType
+                },
+            ),
+        ){backStackEntry ->
+            val recordsEntry =
+                remember(backStackEntry) { rootNavController.getBackStackEntry(Route.RECORDS_DETAIL_PARAM_SCREEN) }
+            val noteID = recordsEntry.arguments?.let {
+                it.getInt("noteID")
+            }
+
         }
 
         composable(

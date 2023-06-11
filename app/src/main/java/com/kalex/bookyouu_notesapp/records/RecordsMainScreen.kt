@@ -19,6 +19,8 @@ fun RecordsMainScreen(
     paddingValues: PaddingValues,
     subjectId: Int,
     onAddNewRecord: () -> Unit,
+    onRecordDetail: (id: Int) -> Unit,
+    onDeleteRecord: (id: Int) -> Unit,
     recordsViewModel: RecordsViewModel = hiltViewModel(),
 ) {
     RequireCameraPermission(
@@ -39,7 +41,16 @@ fun RecordsMainScreen(
             is ViewModelState.Error -> TODO()
             is ViewModelState.Loading -> BYLoadingIndicator()
             is ViewModelState.Success -> {
-                RecordsList(response.data, paddingValues)
+                RecordsList(
+                    response.data,
+                    paddingValues,
+                    onRecordClick = {
+                        onRecordDetail(it)
+                    },
+                    onDeleteRecord = {
+                        onDeleteRecord(it)
+                    },
+                )
             }
 
             else -> {

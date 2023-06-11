@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.records.createRecord.presentation
+package com.kalex.bookyouu_notesapp.records.createRecord
 
 import android.net.Uri
 import androidx.compose.foundation.Image

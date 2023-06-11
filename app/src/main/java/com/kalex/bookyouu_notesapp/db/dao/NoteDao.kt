@@ -12,7 +12,7 @@ interface NoteDao {
     @Upsert
     suspend fun upsertNote(note: Note)
 
-    @Query("SELECT * FROM note WHERE subject_id == :id ORDER BY note_date")
+    @Query("SELECT * FROM note WHERE subject_id == :id ORDER BY note_date DESC")
     fun getNotesOrderByDate(id: Int): Flow<List<Note>>
 
     @Delete

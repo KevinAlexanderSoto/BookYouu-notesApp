@@ -100,4 +100,23 @@ class RecordsViewModel @Inject constructor(
             }
         }
     }
+
+
+
+    private val _deleteRecordsState =
+        MutableStateFlow<ViewModelState<Unit>>(ViewModelState.Loading(true))
+    val deleteRecordsState: StateFlow<ViewModelState<Unit>>
+        get() = _deleteRecordsState.asStateFlow()
+
+    fun deleteRecord(note: Note) {
+        viewModelScope.launch(dispatcher) {
+            try {
+                _deleteRecordsState.update { ViewModelState.Loading(true) }
+                notesRepositoryImpl.deleteNote(note)
+                _deleteRecordsState.update { ViewModelState.Success(Unit) }
+            } catch (e: Exception) {
+                _deleteRecordsState.update { ViewModelState.Error(e) }
+            }
+        }
+    }
 }

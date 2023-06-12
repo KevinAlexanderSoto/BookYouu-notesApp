@@ -3,6 +3,7 @@ package com.kalex.bookyouu_notesapp.records
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -10,6 +11,8 @@ import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.common.ViewModelState
 import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
 import com.kalex.bookyouu_notesapp.common.composables.EmptyScreen
+import com.kalex.bookyouu_notesapp.common.handleViewModelState
+import com.kalex.bookyouu_notesapp.db.data.Note
 import com.kalex.bookyouu_notesapp.permission.RequireCameraPermission
 import com.kalex.bookyouu_notesapp.records.recordList.RecordsList
 
@@ -20,12 +23,12 @@ fun RecordsMainScreen(
     subjectId: Int,
     onAddNewRecord: () -> Unit,
     onRecordDetail: (id: Int) -> Unit,
-    onDeleteRecord: (id: Int) -> Unit,
     recordsViewModel: RecordsViewModel = hiltViewModel(),
 ) {
     RequireCameraPermission(
         permission = recordsViewModel.permissionsList,
     ) {
+        val scope = rememberCoroutineScope()
         LaunchedEffect(Unit) {
             recordsViewModel.getRecordsList(subjectId)
         }
@@ -47,8 +50,18 @@ fun RecordsMainScreen(
                     onRecordClick = {
                         onRecordDetail(it)
                     },
-                    onDeleteRecord = {
-                        onDeleteRecord(it)
+                    onDeleteRecord = { note: Note ->
+                        recordsViewModel.deleteRecord(note)
+                        handleViewModelState(
+                            collectAsState = recordsViewModel.deleteRecordsState,
+                            scope = scope,
+                            onEmpty = {},
+                            onLoading = { },
+                            onSuccess = { },
+                            onError = {
+                                TODO()
+                            },
+                        )
                     },
                 )
             }

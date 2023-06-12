@@ -14,6 +14,10 @@ class NotesRepositoryImpl @Inject constructor(private val notesDao: NoteDao) : N
         notesDao.upsertNote(note)
     }
 
+    override suspend fun deleteNote(note: Note) {
+        notesDao.deleteNote(note)
+    }
+
     override suspend fun getNoteById(recordId: Int): Flow<Note> {
         return notesDao.getNoteById(recordId)
     }

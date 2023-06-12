@@ -52,8 +52,6 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
                         onRecordDetail = { noteID ->
                             rootNavController.navigate(Route.RECORDS_DETAIL_MAIN_ROUTE + "/$noteID")
                         },
-                        onDeleteRecord = {
-                        },
                     )
                 },
             )

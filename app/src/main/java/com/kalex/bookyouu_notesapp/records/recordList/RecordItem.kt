@@ -1,6 +1,7 @@
 package com.kalex.bookyouu_notesapp.records.recordList
 
 import android.net.Uri
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
@@ -16,11 +17,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,6 +44,32 @@ fun RecordItem(
     onRecordClick: () -> Unit,
     onDeleteRecord: () -> Unit,
 ) {
+    var showDeleteDialog by remember { mutableStateOf(false) }
+    AnimatedVisibility(visible = showDeleteDialog) {
+        AlertDialog(
+            title = { Text(text = "Eliminar nota?") },
+            text = {
+                Text(
+                    text = "Eliminar nota?",
+                )
+            },
+            onDismissRequest = { showDeleteDialog = false },
+            confirmButton = {
+                TextButton(onClick = {
+                    onDeleteRecord()
+                    showDeleteDialog = false
+                }) {
+                    Text(text = "confirmButtonText")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDeleteDialog = false }) {
+                    Text(text = "cancelButtonText")
+                }
+            },
+        )
+    }
+
     ElevatedCard(
         elevation = CardDefaults.elevatedCardElevation(),
         shape = RoundedCornerShape(16.dp),
@@ -54,7 +83,7 @@ fun RecordItem(
         Box(modifier = Modifier.fillMaxSize()) {
             IconButton(
                 modifier = Modifier.align(Alignment.TopStart),
-                onClick = { onDeleteRecord() },
+                onClick = { showDeleteDialog = true },
             ) {
                 Icon(Icons.Default.Delete, contentDescription = "delete")
             }

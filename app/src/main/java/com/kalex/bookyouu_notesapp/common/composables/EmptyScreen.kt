@@ -48,7 +48,7 @@ fun EmptyScreen(
                 contentDescription = "Add button",
                 modifier = Modifier.size(22.dp),
             )
-            Text(text = stringResource(R.string.subjectList_no_subjectsFount_ButtonText), modifier = Modifier.padding(8.dp, 2.dp))
+            Text(text = stringResource(R.string.subject_list_no_subjectsFount_ButtonText), modifier = Modifier.padding(8.dp, 2.dp))
         }
     }
 }

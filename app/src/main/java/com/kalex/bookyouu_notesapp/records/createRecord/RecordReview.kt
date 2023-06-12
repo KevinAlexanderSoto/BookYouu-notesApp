@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -86,7 +87,7 @@ fun RecordReview(
             ) {
                 description.value = it
             }
-            Text(text = "Save the note", textAlign = TextAlign.Center)
+            Text(text = stringResource(id = R.string.record_confirmation_buttons_title), textAlign = TextAlign.Center)
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 modifier = Modifier
@@ -104,7 +105,7 @@ fun RecordReview(
                         onReCapture()
                     }
                 }) {
-                    Icon(Icons.Default.Close, contentDescription = "negative")
+                    Icon(Icons.Default.Close, contentDescription = "do not capture")
                 }
                 FloatingActionButton(onClick = {
                     recordsViewModel.createRecord(
@@ -121,10 +122,10 @@ fun RecordReview(
                             loadingState.value = false
                         },
                         onError = {},
-                        onEmpty = {}
+                        onEmpty = {},
                     )
                 }) {
-                    Icon(Icons.Default.Check, contentDescription = "positive")
+                    Icon(Icons.Default.Check, contentDescription = "capture")
                 }
             }
         }

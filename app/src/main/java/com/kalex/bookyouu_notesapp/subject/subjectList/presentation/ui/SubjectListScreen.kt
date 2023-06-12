@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.db.data.Subject
 import com.kalex.bookyouu_notesapp.subject.createSubject.DayOfWeekStringFactory
 
@@ -37,7 +38,9 @@ fun SubjectListScreen(
                 .padding(top = 20.dp)
                 .fillMaxWidth(),
         ) {
-            /*IconButton(
+            // TODO: future feature
+            /*
+            IconButton(
                 onClick = {
                           // TODO: add delete subject action, new feature, pending to add
                 },
@@ -53,7 +56,7 @@ fun SubjectListScreen(
                 )
             }*/
             Text(
-                text = "Tus clases",
+                text = stringResource(id = R.string.subject_list_title),
                 modifier = Modifier.align(Alignment.Center),
                 fontSize = 24.sp,
             )

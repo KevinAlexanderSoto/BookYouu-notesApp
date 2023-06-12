@@ -1,5 +1,8 @@
 package com.kalex.bookyouu_notesapp.records
 
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,20 +31,27 @@ fun RecordsMainScreen(
     onRecordDetail: (id: Int) -> Unit,
     recordsViewModel: RecordsViewModel = hiltViewModel(),
 ) {
+    val context = LocalContext.current
+
     RequireCameraPermission(
         permission = recordsViewModel.permissionsList,
+        onPermissionDenied = {
+            context.startActivity(
+                Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                    data = Uri.fromParts("package", context.packageName, null)
+                },
+            )
+        },
     ) {
         val scope = rememberCoroutineScope()
-        val context = LocalContext.current
         LaunchedEffect(Unit) {
             recordsViewModel.getRecordsList(subjectId)
         }
-
         when (val response = recordsViewModel.getRecordsState.collectAsStateWithLifecycle().value) {
             is ViewModelState.Empty -> {
                 EmptyScreen(
                     onAddItemClick = { onAddNewRecord.invoke() },
-                    rationaleText = R.string.subjectList_no_subjectsFount_text, // TODO: Add strings resources
+                    rationaleText = R.string.records_list_no_recordsFount_text,
                 )
             }
 

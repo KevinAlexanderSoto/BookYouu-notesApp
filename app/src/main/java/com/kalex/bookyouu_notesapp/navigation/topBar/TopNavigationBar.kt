@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp.navigation.topBar
 
+import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -8,15 +9,15 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopNavigationBar(onBackNavigation: () -> Unit, topBarTitle: String) {
+fun TopNavigationBar(onBackNavigation: () -> Unit, @StringRes topBarTitle: Int) {
     TopAppBar(
-        title = { Text(text = topBarTitle) },
+        title = { Text(text = stringResource(topBarTitle)) },
         navigationIcon = {
-            if (topBarTitle !== "") {
+            if (stringResource(topBarTitle) !== "") {
                 IconButton(
                     onClick = { onBackNavigation() },
                 ) {

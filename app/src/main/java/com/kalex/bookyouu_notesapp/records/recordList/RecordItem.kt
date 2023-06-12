@@ -104,6 +104,7 @@ fun RecordItem(
             text = recordDescription,
             textAlign = TextAlign.Center,
             modifier = Modifier
+                .align(Alignment.CenterHorizontally)
                 .padding(16.dp, 10.dp)
                 .animateContentSize(
                     animationSpec = spring(

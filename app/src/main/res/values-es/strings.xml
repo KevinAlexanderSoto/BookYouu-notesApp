@@ -5,20 +5,42 @@
     <string name="subject_bottom_label">Materias</string>
     <string name="average_bottom_label">Promedio</string>
     <!--SUBJECT SECTION-->
-    <string name="subjectList_no_subjectsFount_text">Upss… No has agregado materias, a;ade una para comenzar</string>
-    <string name="subjectList_no_subjectsFount_ButtonText">Agregar</string>
+    <string name="subject_list_title">Tus clases</string>
+    <string name="subject_list_no_subjectsFount_text">Upss… No has agregado materias, añade una para comenzar</string>
+    <string name="subject_list_no_subjectsFount_ButtonText">Agregar</string>
+    <string name="subject_form_title">Ingresa la información</string>
     <string name="subject_form_subjectName_label">Materia</string>
-    <string name="subject_form_classRoom_label">Salon</string>
-    <string name="subject_form_credits_label">Creditos</string>
-    <string name="subject_form_monday">Monday</string>
-    <string name="subject_form_tuesday">Tuesday</string>
-    <string name="subject_form_wednesday">wednesday</string>
-    <string name="subject_form_thursday">thursday</string>
-    <string name="subject_form_friday">Friday</string>
-    <string name="subject_form_saturday">Saturday</string>
-    <string name="subject_form_sunday">Sunday</string>
-    <string name="success_screen_text">Created successfully</string>
-    <string name="success_screen_buttom_text">Continue</string>
-    <string name="record_confirmation_description_label">Description(optional)</string>
+    <string name="subject_form_classRoom_label">Salón(opcional)</string>
+    <string name="subject_form_credits_label">Créditos</string>
+    <string name="subject_form_day_label">Días</string>
+    <string name="subject_form_sheet_title">Selecciona los días de esta clase</string>
+    <string name="subject_form_button_text">Crear</string>
+    <string name="subject_form_monday">Lunes</string>
+    <string name="subject_form_tuesday">Martes</string>
+    <string name="subject_form_wednesday">Miércoles</string>
+    <string name="subject_form_thursday">Juevas</string>
+    <string name="subject_form_friday">Viernes</string>
+    <string name="subject_form_saturday">Sábado</string>
+    <string name="subject_form_sunday">Domingo</string>
+
+    <string name="success_screen_text">Creada con exíto</string>
+    <string name="success_screen_buttom_text">Continuar</string>
+    <!-- RECORD SECTION -->
+    <string name="record_confirmation_description_label">Descripción(opcional)</string>
+    <string name="records_list_no_recordsFount_text">No tienes registros en esta clase</string>
+    <string name="record_confirmation_buttons_title">Guardar el apunte de la clase</string>
+
+    <!-- TOP BAR SECTION -->
+    <string name="subject_form_topBar_title">Crear materia</string>
+    <string name="record_mainScreen_topBar_title">Registros</string>
+    <string name="record_detailScreen_topBar_title">Detalle</string>
+    <!-- PERMISSION SECTION -->
+    <string name="permission_rationale_content_text">Acepta los permisos y podremos continuar :)</string>
+    <string name="permission_rationale_title_text">Solicitud de permisos</string>
+    <string name="permission_rationale_button_text">Ok</string>
+    <string name="permission_notAvailable_title_text">Permisos denegados</string>
+    <string name="permission_notAvailable_content_text">Por favor agrega los permisos para poder usar la app</string>
+    <string name="permission_notAvailable_button_text">Aceptar</string>
+    <string name="empty_topBar_title" />
 
 </resources>

@@ -12,6 +12,9 @@ class TopBarTitleFactory {
             Route.RECORDS_MAIN_SCREEN -> {
                 "Lista de registros"
             }
+            Route.RECORDS_DETAIL_PARAM_SCREEN -> {
+                "Details"
+            }
             else -> {
                 ""
             }

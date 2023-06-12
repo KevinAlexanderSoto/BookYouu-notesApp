@@ -70,12 +70,6 @@ fun RecordItem(
                     )
                     .clickable { onRecordClick() },
             )
-            IconButton(
-                modifier = Modifier.align(Alignment.TopEnd),
-                onClick = { onRecordClick() },
-            ) {
-                Icon(Icons.Default.DateRange, contentDescription = "view")
-            }
         }
         Text(
             text = recordDescription,

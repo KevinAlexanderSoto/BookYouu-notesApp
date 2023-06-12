@@ -1,7 +1,6 @@
 package com.kalex.bookyouu_notesapp.records.createRecord
 
 import android.net.Uri
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,15 +31,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import coil.compose.rememberAsyncImagePainter
 import com.kalex.bookyouu_notesapp.R
-import com.kalex.bookyouu_notesapp.common.ViewModelState
 import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
 import com.kalex.bookyouu_notesapp.common.composables.BYTextInput
+import com.kalex.bookyouu_notesapp.common.handleViewModelState
 import com.kalex.bookyouu_notesapp.records.RecordsViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @Composable
@@ -73,8 +68,8 @@ fun RecordReview(
                     .padding(8.dp)
                     .wrapContentSize(),
             ) {
-                Image(
-                    painter = rememberAsyncImagePainter(captureUri),
+                AsyncImage(
+                    model = captureUri,
                     contentDescription = null,
                     modifier = Modifier
                         .padding(4.dp)
@@ -117,7 +112,7 @@ fun RecordReview(
                         imgUrl = captureUri.toString(),
                         noteDescription = description.value,
                     )
-                    handleCreationState(
+                    handleViewModelState(
                         collectAsState = recordsViewModel.saveRecordsState,
                         scope = scope,
                         onLoading = { loadingState.value = true },
@@ -125,32 +120,11 @@ fun RecordReview(
                             onCaptureSaved()
                             loadingState.value = false
                         },
-                        onError = { // todo: implemnent error
-                        },
+                        onError = {},
+                        onEmpty = {}
                     )
                 }) {
                     Icon(Icons.Default.Check, contentDescription = "positive")
-                }
-            }
-        }
-    }
-}
-
-fun handleCreationState(
-    collectAsState: StateFlow<ViewModelState<Unit>>,
-    scope: CoroutineScope,
-    onLoading: () -> Unit,
-    onSuccess: () -> Unit,
-    onError: () -> Unit,
-) {
-    scope.launch {
-        collectAsState.collectLatest {
-            when (it) {
-                is ViewModelState.Error -> onError()
-                is ViewModelState.Loading -> onLoading()
-                is ViewModelState.Success -> onSuccess()
-                else -> {
-                    onError()
                 }
             }
         }

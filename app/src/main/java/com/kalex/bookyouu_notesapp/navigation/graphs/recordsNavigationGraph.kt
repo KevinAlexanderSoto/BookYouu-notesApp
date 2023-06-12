@@ -47,12 +47,11 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
                         onAddNewRecord = {
                             rootNavController.navigate(Route.RECORDS_CAPTURE)
                         },
-                        onRecordDetail = {noteID ->
-                            rootNavController.navigate(Route.RECORDS_DETAIL_MAIN_ROUTE + "/${noteID}")
+                        onRecordDetail = { noteID ->
+                            rootNavController.navigate(Route.RECORDS_DETAIL_MAIN_ROUTE + "/$noteID")
                         },
                         onDeleteRecord = {
-
-                        }
+                        },
                     )
                 },
             )
@@ -77,13 +76,12 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
                     type = NavType.IntType
                 },
             ),
-        ){backStackEntry ->
+        ) { backStackEntry ->
             val recordsEntry =
                 remember(backStackEntry) { rootNavController.getBackStackEntry(Route.RECORDS_DETAIL_PARAM_SCREEN) }
             val noteID = recordsEntry.arguments?.let {
                 it.getInt("noteID")
             }
-
         }
 
         composable(

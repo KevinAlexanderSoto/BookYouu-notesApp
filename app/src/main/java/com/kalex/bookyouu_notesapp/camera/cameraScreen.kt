@@ -7,10 +7,13 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY
 import androidx.camera.core.Preview
 import androidx.camera.core.UseCase
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -78,6 +81,7 @@ fun CameraScreen(
         BYLoadingIndicator()
     } else {
         Column(
+            verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(top = 20.dp),
@@ -88,11 +92,12 @@ fun CameraScreen(
                 },
             )
 
-            IconButton(
+            FloatingActionButton(
                 modifier = Modifier
-                    .padding(16.dp)
-                    .size(100.dp)
-                    .align(Alignment.CenterHorizontally),
+                    .padding(8.dp)
+                    .align(Alignment.CenterHorizontally)
+                    .wrapContentSize()
+                ,
                 onClick = {
                     loadingState.value = true
                     coroutineScope.launch {
@@ -111,7 +116,8 @@ fun CameraScreen(
                         painterResource(id = R.drawable.camera_lens_svgrepo_com),
                         contentDescription = "Take picture",
                         modifier = Modifier
-                            .size(100.dp),
+                            .size(74.dp)
+                        ,
                     )
                 },
             )

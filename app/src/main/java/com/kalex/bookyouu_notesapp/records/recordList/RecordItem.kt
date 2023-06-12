@@ -28,8 +28,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 
 @Composable
@@ -56,13 +58,16 @@ fun RecordItem(
             ) {
                 Icon(Icons.Default.Delete, contentDescription = "delete")
             }
-            Image(
-                painter = rememberAsyncImagePainter(recordUri),
+            AsyncImage(
+                model = recordUri,
                 contentDescription = null,
                 modifier = Modifier
                     .align(Alignment.Center)
                     .padding(8.dp)
                     .height(280.dp)
+                    .clip(
+                        RoundedCornerShape(14.dp),
+                    )
                     .clickable { onRecordClick() },
             )
             IconButton(

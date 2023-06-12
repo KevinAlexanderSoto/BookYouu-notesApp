@@ -1,6 +1,10 @@
 package com.kalex.bookyouu_notesapp.common.composables
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -47,6 +51,33 @@ fun ScaffoldTopBar(
                 },
                 topBarTitle = topBarTitleFactory.getTopBarTitle(currentDestination?.route),
             )
+        },
+    ) { paddingValues ->
+        content(paddingValues)
+    }
+}
+
+@Composable
+fun ScaffoldFloatingButtonAndTopBar(
+    currentDestination: NavDestination?,
+    onBackNavigationClick: () -> Unit,
+    onFloatingActionClick: () -> Unit,
+    content: @Composable (padding: PaddingValues) -> Unit,
+) {
+    val topBarTitleFactory = remember { TopBarTitleFactory() }
+    Scaffold(
+        topBar = {
+            TopNavigationBar(
+                onBackNavigation = {
+                    onBackNavigationClick()
+                },
+                topBarTitle = topBarTitleFactory.getTopBarTitle(currentDestination?.route),
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = { onFloatingActionClick() }) {
+                Icon(Icons.Default.Add, contentDescription = "add")
+            }
         },
     ) { paddingValues ->
         content(paddingValues)

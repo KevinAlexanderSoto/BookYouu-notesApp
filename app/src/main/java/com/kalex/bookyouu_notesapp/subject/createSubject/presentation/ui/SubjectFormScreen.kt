@@ -12,14 +12,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.kalex.bookyouu_notesapp.subject.createSubject.ViewModelState
-import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormInformationViewModel
-import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormViewModel
 import com.kalex.bookyouu_notesapp.common.composables.BYBottomSheetLayout
 import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
+import com.kalex.bookyouu_notesapp.common.handleViewModelState
+import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormInformationViewModel
+import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -48,14 +45,16 @@ fun SubjectForm(
                 onShowSheet = { scope.launch { scaffoldState.bottomSheetState.expand() } },
                 onCreateSubjectClick = {
                     formViewModel.createSubject(it)
-                    handleCreationState(
+                    handleViewModelState(
                         formViewModel.createSubjectState,
                         scope,
                         onLoading = { showLoadingProgressBar = true },
                         onError = {
-                            // TODO:AHOW GENERERIC ERROR
+                            // TODO:SHOW GENERERIC ERROR
                         },
                         onSuccess = { onNavigateToConfirmationScreen() },
+                        onEmpty = {
+                        },
                     )
                 },
             )
@@ -72,25 +71,4 @@ fun SubjectForm(
             )
         },
     )
-}
-
-fun handleCreationState(
-    collectAsState: StateFlow<ViewModelState<Boolean>>,
-    scope: CoroutineScope,
-    onLoading: () -> Unit,
-    onSuccess: () -> Unit,
-    onError: () -> Unit,
-) {
-    scope.launch {
-        collectAsState.collectLatest {
-            when (it) {
-                is ViewModelState.Error -> onError()
-                is ViewModelState.Loading -> onLoading()
-                is ViewModelState.Success -> onSuccess()
-                else -> {
-                    onError()
-                }
-            }
-        }
-    }
 }

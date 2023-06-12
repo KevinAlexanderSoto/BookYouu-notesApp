@@ -3,27 +3,36 @@ package com.kalex.bookyouu_notesapp.records
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.R
+import com.kalex.bookyouu_notesapp.common.ViewModelState
 import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
 import com.kalex.bookyouu_notesapp.common.composables.EmptyScreen
+import com.kalex.bookyouu_notesapp.common.decodeUri
+import com.kalex.bookyouu_notesapp.common.handleViewModelState
+import com.kalex.bookyouu_notesapp.db.data.Note
 import com.kalex.bookyouu_notesapp.permission.RequireCameraPermission
-import com.kalex.bookyouu_notesapp.records.presentation.RecordsViewModel
-import com.kalex.bookyouu_notesapp.subject.createSubject.ViewModelState
+import com.kalex.bookyouu_notesapp.records.recordList.RecordsList
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun RecordsMainScreen(
     paddingValues: PaddingValues,
-    subjectId: String,
+    subjectId: Int,
     onAddNewRecord: () -> Unit,
+    onRecordDetail: (id: Int) -> Unit,
     recordsViewModel: RecordsViewModel = hiltViewModel(),
 ) {
     RequireCameraPermission(
         permission = recordsViewModel.permissionsList,
     ) {
+        val scope = rememberCoroutineScope()
+        val context = LocalContext.current
         LaunchedEffect(Unit) {
             recordsViewModel.getRecordsList(subjectId)
         }
@@ -39,7 +48,33 @@ fun RecordsMainScreen(
             is ViewModelState.Error -> TODO()
             is ViewModelState.Loading -> BYLoadingIndicator()
             is ViewModelState.Success -> {
-                TODO()
+                RecordsList(
+                    response.data,
+                    paddingValues,
+                    onRecordClick = {
+                        onRecordDetail(it)
+                    },
+                    onDeleteRecord = { note: Note ->
+                        recordsViewModel.deleteRecord(note)
+                        scope.launch {
+                            context.contentResolver.delete(
+                                note.imgUrl.decodeUri(),
+                                null,
+                                null,
+                            )
+                        }
+                        handleViewModelState(
+                            collectAsState = recordsViewModel.deleteRecordsState,
+                            scope = scope,
+                            onEmpty = {},
+                            onLoading = { },
+                            onSuccess = { },
+                            onError = {
+                                TODO()
+                            },
+                        )
+                    },
+                )
             }
 
             else -> {

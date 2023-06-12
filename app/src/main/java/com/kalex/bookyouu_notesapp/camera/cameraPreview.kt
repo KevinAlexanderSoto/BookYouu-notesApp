@@ -21,7 +21,7 @@ fun CameraPreview(
     onUseCase: (UseCase) -> Unit = { },
 ) {
     AndroidView(
-        modifier = Modifier.fillMaxHeight(0.9f).fillMaxWidth().clip(RoundedCornerShape(8.dp, 8.dp, 8.dp, 8.dp)),
+        modifier = Modifier.fillMaxHeight(0.85f).fillMaxWidth().clip(RoundedCornerShape(8.dp, 8.dp, 8.dp, 8.dp)),
         factory = { context ->
             val previewView = PreviewView(context).apply {
                 this.scaleType = scaleType

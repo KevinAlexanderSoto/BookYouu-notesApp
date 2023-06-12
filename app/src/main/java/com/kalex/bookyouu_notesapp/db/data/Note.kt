@@ -9,7 +9,7 @@ import java.util.Date
 data class Note(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "note_id")
-    val noteId: Int,
+    val noteId: Int = 0,
     @ColumnInfo(name = "subject_id")
     val subjectId: Int,
     @ColumnInfo(name = "img_url")

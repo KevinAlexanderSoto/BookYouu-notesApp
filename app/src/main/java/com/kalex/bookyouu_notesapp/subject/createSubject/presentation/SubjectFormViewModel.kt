@@ -3,7 +3,7 @@ package com.kalex.bookyouu_notesapp.subject.createSubject.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kalex.bookyouu_notesapp.db.data.Subject
-import com.kalex.bookyouu_notesapp.subject.createSubject.ViewModelState
+import com.kalex.bookyouu_notesapp.common.ViewModelState
 import com.kalex.bookyouu_notesapp.subject.data.SubjectRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

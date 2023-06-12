@@ -13,4 +13,8 @@ class NotesRepositoryImpl @Inject constructor(private val notesDao: NoteDao) : N
     override suspend fun createNotes(note: Note) {
         notesDao.upsertNote(note)
     }
+
+    override suspend fun getNoteById(recordId: Int): Flow<Note> {
+        return notesDao.getNoteById(recordId)
+    }
 }

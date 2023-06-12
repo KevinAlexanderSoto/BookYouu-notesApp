@@ -15,6 +15,9 @@ interface NoteDao {
     @Query("SELECT * FROM note WHERE subject_id == :id ORDER BY note_date DESC")
     fun getNotesOrderByDate(id: Int): Flow<List<Note>>
 
+    @Query("SELECT * FROM note WHERE note_id == :id ")
+    fun getNoteById(id: Int): Flow<Note>
+
     @Delete
     suspend fun deleteNote(note: Note)
 }

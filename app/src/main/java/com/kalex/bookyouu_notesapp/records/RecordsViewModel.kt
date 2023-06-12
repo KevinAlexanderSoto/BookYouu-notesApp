@@ -42,11 +42,6 @@ class RecordsViewModel @Inject constructor(
     val getRecordsState: StateFlow<ViewModelState<List<Note>>>
         get() = _getRecordsState.asStateFlow()
 
-    private val _saveRecordsState =
-        MutableStateFlow<ViewModelState<Unit>>(ViewModelState.Loading(true))
-    val saveRecordsState: StateFlow<ViewModelState<Unit>>
-        get() = _saveRecordsState.asStateFlow()
-
     fun getRecordsList(subjectId: Int) {
         viewModelScope.launch(dispatcher) {
             try {
@@ -64,16 +59,44 @@ class RecordsViewModel @Inject constructor(
         }
     }
 
+    private val _saveRecordsState =
+        MutableStateFlow<ViewModelState<Unit>>(ViewModelState.Loading(true))
+    val saveRecordsState: StateFlow<ViewModelState<Unit>>
+        get() = _saveRecordsState.asStateFlow()
+
     fun createRecord(subjectId: Int, imgUrl: String, noteDescription: String) {
         viewModelScope.launch(dispatcher) {
             try {
                 _saveRecordsState.update { ViewModelState.Loading(true) }
                 notesRepositoryImpl.createNotes(
-                    Note(subjectId = subjectId, imgUrl = imgUrl, noteDate = Date(), noteDescription = noteDescription),
+                    Note(
+                        subjectId = subjectId,
+                        imgUrl = imgUrl,
+                        noteDate = Date(),
+                        noteDescription = noteDescription,
+                    ),
                 )
                 _saveRecordsState.update { ViewModelState.Success(Unit) }
             } catch (e: Exception) {
                 _saveRecordsState.update { ViewModelState.Error(e) }
+            }
+        }
+    }
+
+    private val _getRecordState =
+        MutableStateFlow<ViewModelState<Note>>(ViewModelState.Loading(true))
+    val getRecordState: StateFlow<ViewModelState<Note>>
+        get() = _getRecordState.asStateFlow()
+
+    fun getRecordById(recordId: Int) {
+        viewModelScope.launch(dispatcher) {
+            try {
+                _getRecordState.update { ViewModelState.Loading(true) }
+                notesRepositoryImpl.getNoteById(recordId).collectLatest { note: Note ->
+                    _getRecordState.update { ViewModelState.Success(note) }
+                }
+            } catch (e: Exception) {
+                _getRecordState.update { ViewModelState.Error(e) }
             }
         }
     }

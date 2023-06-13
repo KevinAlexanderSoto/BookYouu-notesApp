@@ -25,6 +25,7 @@ fun BYBottomSheetLayout(
         sheetContent = { sheetContent.invoke() },
         sheetShape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp),
         sheetBackgroundColor = MaterialTheme.colorScheme.secondaryContainer,
+        backgroundColor = MaterialTheme.colorScheme.background,
     ) { innerPadding ->
         Column(Modifier.padding(innerPadding)) {
             scaffoldContent()

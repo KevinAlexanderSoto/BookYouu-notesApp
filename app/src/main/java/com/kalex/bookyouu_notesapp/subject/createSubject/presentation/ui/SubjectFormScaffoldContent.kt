@@ -16,9 +16,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.kalex.bookyouu_notesapp.R
+import com.kalex.bookyouu_notesapp.common.composables.BYTextInput
 import com.kalex.bookyouu_notesapp.db.data.Subject
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormInformationViewModel
-import com.kalex.bookyouu_notesapp.common.composables.BYTextInput
 
 @Composable
 fun ScaffoldContent(
@@ -37,7 +37,7 @@ fun ScaffoldContent(
             .padding(paddingValues)
             .fillMaxSize(),
     ) {
-        Text(text = "Please fill all the information") // TODO: add styles and strings
+        Text(text = stringResource(id = R.string.subject_form_title))
         BYTextInput.OutLinedTextField(
             label = R.string.subject_form_subjectName_label,
             keyboardOptions = KeyboardOptions(
@@ -74,7 +74,7 @@ fun ScaffoldContent(
             },
         )
         BYTextInput.OutLinedButtonTextField(
-            label = R.string.subject_form_credits_label, // TODO : add days label
+            label = R.string.subject_form_day_label,
             updateTextValue = { dayList },
             onClick = { onShowSheet() },
 
@@ -87,7 +87,7 @@ fun ScaffoldContent(
             },
             enabled = informationViewModel.isAllFieldsValid(),
         ) {
-            Text(text = "Create Subject") // TODO : add Strings
+            Text(text = stringResource(id = R.string.subject_form_button_text)) // TODO : add Strings
         }
     }
 }

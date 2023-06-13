@@ -26,7 +26,7 @@ fun SubjectMainScreen(
         onEmpty = {
             EmptyScreen(
                 onAddItemClick = { onAddNewSubject.invoke() },
-                rationaleText = R.string.subjectList_no_subjectsFount_text,
+                rationaleText = R.string.subject_list_no_subjectsFount_text,
             )
         },
         onLoading = { BYLoadingIndicator() },

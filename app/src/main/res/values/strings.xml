@@ -4,19 +4,39 @@
     <string name="subject_bottom_label">Subjects</string>
     <string name="average_bottom_label">Average</string>
     <!--SUBJECT SECTION-->
-    <string name="subjectList_no_subjectsFount_text">Upss… You do not have subjects, add one to start</string>
-    <string name="subjectList_no_subjectsFount_ButtonText">Add</string>
+    <string name="subject_list_no_subjectsFount_text">Upss… You do not have subjects, add one to start</string>
+    <string name="subject_list_no_subjectsFount_ButtonText">Add</string>
     <string name="subject_form_subjectName_label">Subject name</string>
-    <string name="subject_form_classRoom_label">Classroom</string>
+    <string name="subject_form_classRoom_label">Classroom(optional)</string>
     <string name="subject_form_credits_label">Credits</string>
+    <string name="subject_form_day_label">Days</string>
     <string name="subject_form_monday">Monday</string>
     <string name="subject_form_tuesday">Tuesday</string>
-    <string name="subject_form_wednesday">wednesday</string>
-    <string name="subject_form_thursday">thursday</string>
+    <string name="subject_form_wednesday">Wednesday</string>
+    <string name="subject_form_thursday">Thursday</string>
     <string name="subject_form_friday">Friday</string>
     <string name="subject_form_saturday">Saturday</string>
     <string name="subject_form_sunday">Sunday</string>
     <string name="success_screen_text">Created successfully</string>
     <string name="success_screen_buttom_text">Continue</string>
     <string name="record_confirmation_description_label">Description(optional)</string>
+    <!-- TOP BAR SECTION -->
+    <string name="subject_form_topBar_title">Create Subject</string>
+    <string name="record_mainScreen_topBar_title">Records</string>
+    <string name="record_detailScreen_topBar_title">Record detail</string>
+    <!-- PERMISSION SECTION -->
+    <string name="permission_rationale_content_text"> Accept the permission to continue :)</string>
+    <string name="permission_rationale_title_text">Permission request</string>
+    <string name="permission_rationale_button_text">OK</string>
+    <string name="permission_notAvailable_title_text">Permission have been denied</string>
+    <string name="permission_notAvailable_content_text">Please, add the permission to use the App</string>
+    <string name="permission_notAvailable_button_text">OK</string>
+    <string name="subject_list_title">Your subjects</string>
+    <string name="subject_form_button_text">Create</string>
+    <string name="empty_topBar_title" />
+    <string name="subject_form_title">fill all the fields</string>
+    <string name="subject_form_sheet_title">Select the days of your classes</string>
+    <string name="records_list_no_recordsFount_text">You do not have records, in this subject</string>
+    <string name="record_confirmation_buttons_title">Save the class note</string>
+
 </resources>

@@ -15,9 +15,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.kalex.bookyouu_notesapp.subject.createSubject.DayOfWeekStringFactory
+import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.common.composables.BYRoundedCheckView
+import com.kalex.bookyouu_notesapp.subject.createSubject.DayOfWeekStringFactory
 import java.time.DayOfWeek
 
 @Composable
@@ -36,8 +38,8 @@ fun SheetContent(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                "Select the days of class",//TODO: add strings resources
-                modifier = Modifier.weight(1f)
+                stringResource(id = R.string.subject_form_sheet_title),
+                modifier = Modifier.weight(1f),
             )
             IconButton(onClick = { onHideClick.invoke() }) {
                 Icon(
@@ -68,4 +70,3 @@ fun SheetContent(
         )
     }
 }
-

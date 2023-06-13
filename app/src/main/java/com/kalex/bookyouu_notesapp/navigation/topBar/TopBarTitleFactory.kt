@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp.navigation.topBar
 
+import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.navigation.Route
 
 class TopBarTitleFactory {
@@ -7,16 +8,14 @@ class TopBarTitleFactory {
     fun getTopBarTitle(route: String?) =
         when (route) {
             Route.SUBJECT_FORM -> {
-                "Crear Subject" //TODO: Add strings resource
+                R.string.subject_form_topBar_title
             }
             Route.RECORDS_MAIN_SCREEN -> {
-                "Lista de registros"
+                R.string.record_mainScreen_topBar_title
             }
             Route.RECORDS_DETAIL_PARAM_SCREEN -> {
-                "Details"
+                R.string.record_detailScreen_topBar_title
             }
-            else -> {
-                ""
-            }
+            else -> { R.string.empty_topBar_title }
         }
 }

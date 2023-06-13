@@ -27,12 +27,12 @@ fun RecordMainDetail(
         onEmpty = {
             EmptyScreen(
                 onAddItemClick = { },
-                rationaleText = R.string.subjectList_no_subjectsFount_text,
+                rationaleText = R.string.records_list_no_recordsFount_text,
             )
         },
         onLoading = { BYLoadingIndicator() },
         onSuccess = { response: Note ->
-            RecordDetail(response.imgUrl, response.noteDate,paddingValues)
+            RecordDetail(response.imgUrl, response.noteDate, paddingValues)
         },
         onError = {
             TODO()

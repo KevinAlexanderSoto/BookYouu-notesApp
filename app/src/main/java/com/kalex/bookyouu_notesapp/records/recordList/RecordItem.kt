@@ -32,10 +32,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
+import com.kalex.bookyouu_notesapp.R
 
 @Composable
 fun RecordItem(
@@ -47,10 +49,10 @@ fun RecordItem(
     var showDeleteDialog by remember { mutableStateOf(false) }
     AnimatedVisibility(visible = showDeleteDialog) {
         AlertDialog(
-            title = { Text(text = "Eliminar nota?") },
+            title = { Text(text = stringResource(id = R.string.record_delete_title)) },
             text = {
                 Text(
-                    text = "Eliminar nota?",
+                    text = stringResource(id = R.string.record_delete_text),
                 )
             },
             onDismissRequest = { showDeleteDialog = false },
@@ -59,12 +61,12 @@ fun RecordItem(
                     onDeleteRecord()
                     showDeleteDialog = false
                 }) {
-                    Text(text = "confirmButtonText")
+                    Text(text = stringResource(id = R.string.record_confirm_button_text))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDeleteDialog = false }) {
-                    Text(text = "cancelButtonText")
+                    Text(text = stringResource(id = R.string.record_cancel_button_text))
                 }
             },
         )

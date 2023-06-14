@@ -29,6 +29,11 @@
     <string name="record_confirmation_description_label">Descripción(opcional)</string>
     <string name="records_list_no_recordsFount_text">No tienes registros en esta clase</string>
     <string name="record_confirmation_buttons_title">Guardar el apunte de la clase</string>
+    <string name="record_delete_title">¿Eliminar registro?</string>
+    <string name="record_delete_text">¿Deseas eliminar este registo? Se eliminara también de la Galeria</string>
+    <string name="record_confirm_button_text">Eliminar</string>
+    <string name="record_cancel_button_text">Mantener</string>
+
 
     <!-- TOP BAR SECTION -->
     <string name="subject_form_topBar_title">Crear materia</string>
@@ -39,11 +44,11 @@
     <string name="permission_rationale_title_text">Solicitud de permisos</string>
     <string name="permission_rationale_button_text">Ok</string>
     <string name="permission_notAvailable_title_text">Permisos denegados</string>
-    <string name="permission_notAvailable_content_text">Por favor agrega los permisos para poder usar la app</string>
+    <string name="permission_notAvailable_content_text">Por favor agrega los permisos para poder usar la App</string>
     <string name="permission_notAvailable_button_text">Aceptar</string>
     <string name="empty_topBar_title" />
 
-    <string name="average_item_ratings_label">Ingrese calificacion</string>
+    <string name="average_item_ratings_label">Ingrese calificación</string>
     <string name="average_item_percentage_label">%</string>
     <string name="average_percentage_average_text">Tienes el  %1$s porciento en  %2$s.</string>
     <string name="average_percentage_error_text">Ups… porcentajes mayor a 100</string>

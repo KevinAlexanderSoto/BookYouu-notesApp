@@ -39,4 +39,13 @@
     <string name="records_list_no_recordsFount_text">You do not have records, in this subject</string>
     <string name="record_confirmation_buttons_title">Save the class note</string>
 
+    <string name="average_item_ratings_label">Enter the rating</string>
+    <string name="average_item_percentage_label">%</string>
+    <string name="average_percentage_average_text">You have the %1$s percentage in %1$s .</string>
+    <string name="average_percentage_error_text">Ups… percentage greater than 100%</string>
+    <string name="average_confirmButton_text">OK</string>
+    <string name="average_dialog_title">Result</string>
+    <string name="average_calculate_button_text">Calculate</string>
+    <string name="average_title">Average</string>
+
 </resources>

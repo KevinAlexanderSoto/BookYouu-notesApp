@@ -4,6 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.kalex.bookyouu_notesapp.average.AverageList
 import com.kalex.bookyouu_notesapp.common.composables.ScaffoldBottomBar
 import com.kalex.bookyouu_notesapp.navigation.Route
 
@@ -18,7 +19,8 @@ fun NavGraphBuilder.averageNav(rootNavController: NavHostController) {
                 onBottomNavigationClick = {
                     rootNavController.navigate(it)
                 },
-                content = {
+                content = { padding ->
+                    AverageList(padding)
                 },
             )
         }

@@ -43,4 +43,13 @@
     <string name="permission_notAvailable_button_text">Aceptar</string>
     <string name="empty_topBar_title" />
 
+    <string name="average_item_ratings_label">Ingrese calificacion</string>
+    <string name="average_item_percentage_label">%</string>
+    <string name="average_percentage_average_text">Tienes el  %1$s porciento en  %2$s.</string>
+    <string name="average_percentage_error_text">Ups… porcentajes mayor a 100</string>
+    <string name="average_confirmButton_text">OK</string>
+    <string name="average_dialog_title">Resultado</string>
+    <string name="average_calculate_button_text">Calcular</string>
+    <string name="average_title">Promedio</string>
+
 </resources>

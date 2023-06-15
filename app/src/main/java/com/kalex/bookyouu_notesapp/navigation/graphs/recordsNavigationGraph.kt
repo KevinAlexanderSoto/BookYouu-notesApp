@@ -1,11 +1,14 @@
 package com.kalex.bookyouu_notesapp.navigation.graphs
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.remember
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
+import com.google.accompanist.navigation.animation.composable
+import com.google.accompanist.navigation.animation.navigation
 import androidx.navigation.navArgument
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.camera.CameraScreen
@@ -18,7 +21,7 @@ import com.kalex.bookyouu_notesapp.records.RecordsMainScreen
 import com.kalex.bookyouu_notesapp.records.createRecord.RecordReview
 import com.kalex.bookyouu_notesapp.records.recordsDetails.RecordMainDetail
 
-@OptIn(ExperimentalPermissionsApi::class)
+@OptIn(ExperimentalPermissionsApi::class, ExperimentalAnimationApi::class)
 fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
     navigation(
         route = Route.RECORDS_PARAM_ROUTE,
@@ -33,6 +36,18 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
     ) {
         composable(
             route = Route.RECORDS_MAIN_SCREEN,
+            enterTransition = {
+                slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))
+            },
+            popEnterTransition = {
+                slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))
+            },
+            popExitTransition = {
+                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))
+            },
         ) { entry ->
             val parentEntry =
                 remember(entry) { rootNavController.getBackStackEntry(Route.RECORDS_PARAM_ROUTE) }
@@ -76,6 +91,18 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
                     type = NavType.IntType
                 },
             ),
+            enterTransition = {
+                slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))
+            },
+            popEnterTransition = {
+                slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))
+            },
+            popExitTransition = {
+                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))
+            },
         ) { backStackEntry ->
             val recordsEntry =
                 remember(backStackEntry) { rootNavController.getBackStackEntry(Route.RECORDS_DETAIL_PARAM_SCREEN) }
@@ -97,6 +124,18 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
                     type = NavType.StringType
                 },
             ),
+            enterTransition = {
+                slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))
+            },
+            popEnterTransition = {
+                slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))
+            },
+            popExitTransition = {
+                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))
+            },
         ) { entry ->
             val parentEntry =
                 remember(entry) { rootNavController.getBackStackEntry(Route.RECORDS_PARAM_ROUTE) }

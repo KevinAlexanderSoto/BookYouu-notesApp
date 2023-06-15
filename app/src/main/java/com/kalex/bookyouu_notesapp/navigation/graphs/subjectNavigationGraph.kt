@@ -2,6 +2,7 @@ package com.kalex.bookyouu_notesapp.navigation.graphs
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -49,6 +50,9 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
                     AnimatedContentTransitionScope.SlideDirection.Left,
                     animationSpec = tween(700),
                 )
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = snap())
             },
             popEnterTransition = {
                 slideIntoContainer(

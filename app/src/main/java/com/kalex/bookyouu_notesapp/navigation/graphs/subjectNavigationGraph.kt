@@ -1,9 +1,12 @@
 package com.kalex.bookyouu_notesapp.navigation.graphs
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.composable
-import androidx.navigation.navigation
+import com.google.accompanist.navigation.animation.composable
+import com.google.accompanist.navigation.animation.navigation
 import com.kalex.bookyouu_notesapp.common.composables.ScaffoldBottomBar
 import com.kalex.bookyouu_notesapp.common.composables.ScaffoldTopBar
 import com.kalex.bookyouu_notesapp.navigation.Route
@@ -11,6 +14,7 @@ import com.kalex.bookyouu_notesapp.subject.SubjectMainScreen
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui.BYSuccessScreen
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui.SubjectForm
 
+@OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
     navigation(
         route = Route.SUBJECT,
@@ -38,7 +42,27 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
                 },
             )
         }
-        composable(route = Route.SUBJECT_FORM) {
+        composable(
+            route = Route.SUBJECT_FORM,
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700),
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
+                )
+            },
+        ) {
             ScaffoldTopBar(
                 currentDestination = rootNavController.currentBackStackEntry?.destination,
                 onBackNavigationClick = { rootNavController.popBackStack() },

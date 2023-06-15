@@ -18,7 +18,7 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
     ) {
         composable(route = Route.SUBJECT_LIST) {
             ScaffoldBottomBar(
-                currentDestination = rootNavController.currentBackStackEntry?.destination,
+                currentDestination = Route.SUBJECT_LIST,
                 onBottomNavigationClick = {
                     rootNavController.navigate(it)
                 },

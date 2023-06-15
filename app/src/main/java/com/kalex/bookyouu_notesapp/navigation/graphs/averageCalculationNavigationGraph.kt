@@ -15,7 +15,7 @@ fun NavGraphBuilder.averageNav(rootNavController: NavHostController) {
     ) {
         composable(route = Route.AVERAGE_MAIN) {
             ScaffoldBottomBar(
-                currentDestination = rootNavController.currentBackStackEntry?.destination,
+                currentDestination = Route.AVERAGE_MAIN,
                 onBottomNavigationClick = {
                     rootNavController.navigate(it)
                 },

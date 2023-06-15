@@ -23,7 +23,7 @@ import androidx.navigation.NavHostController
 fun BottomNavigationBar(
     onNavigationClick: (String) -> Unit,
     bottomNavigationItems: List<BottomNavigationScreens>,
-    currentDestination: NavDestination?,
+    currentDestination: String,
 ) {
     NavigationBar(
         modifier = Modifier
@@ -33,7 +33,7 @@ fun BottomNavigationBar(
 
     ) {
         bottomNavigationItems.forEach { item ->
-            val selected = currentDestination?.hierarchy?.any { it.route == item.route } == true
+            val selected = currentDestination == item.route
             NavigationBarItem(
                 alwaysShowLabel = false,
                 selected = selected,

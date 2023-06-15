@@ -16,7 +16,7 @@ import com.kalex.bookyouu_notesapp.navigation.topBar.TopNavigationBar
 
 @Composable
 fun ScaffoldBottomBar(
-    currentDestination: NavDestination?,
+    currentDestination: String,
     onBottomNavigationClick: (String) -> Unit,
     content: @Composable (padding: PaddingValues) -> Unit,
 ) {

@@ -19,7 +19,6 @@
     <string name="subject_form_sunday">Sunday</string>
     <string name="success_screen_text">Created successfully</string>
     <string name="success_screen_buttom_text">Continue</string>
-    <string name="record_confirmation_description_label">Description(optional)</string>
     <!-- TOP BAR SECTION -->
     <string name="subject_form_topBar_title">Create Subject</string>
     <string name="record_mainScreen_topBar_title">Records</string>
@@ -36,7 +35,22 @@
     <string name="empty_topBar_title" />
     <string name="subject_form_title">fill all the fields</string>
     <string name="subject_form_sheet_title">Select the days of your classes</string>
+    <!-- RECORD SECTION -->
     <string name="records_list_no_recordsFount_text">You do not have records, in this subject</string>
     <string name="record_confirmation_buttons_title">Save the class note</string>
+    <string name="record_confirmation_description_label">Description(optional)</string>
+    <string name="record_delete_title">Delete record?</string>
+    <string name="record_delete_text">Do you what to delete this record? It will be deleted from the Gallery</string>
+    <string name="record_confirm_button_text">Delete</string>
+    <string name="record_cancel_button_text">Keep it</string>
+
+    <string name="average_item_ratings_label">Enter the rating</string>
+    <string name="average_item_percentage_label">%</string>
+    <string name="average_percentage_average_text">You have the %1$s percentage in %2$s .</string>
+    <string name="average_percentage_error_text">Ups… percentage greater than 100%</string>
+    <string name="average_confirmButton_text">OK</string>
+    <string name="average_dialog_title">Result</string>
+    <string name="average_calculate_button_text">Calculate</string>
+    <string name="average_title">Average</string>
 
 </resources>

@@ -23,7 +23,7 @@ class RecordsViewModel @Inject constructor(
     private val dispatcher: CoroutineDispatcher,
 ) : ViewModel() {
     private val REQUIRED_PERMISSIONS =
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
             listOf(
                 android.Manifest.permission.CAMERA,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE,

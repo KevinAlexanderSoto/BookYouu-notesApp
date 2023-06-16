@@ -31,6 +31,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kalex.bookyouu_notesapp.R
+import java.math.RoundingMode
+import kotlin.math.roundToInt
 
 @Composable
 fun AverageList(
@@ -92,10 +94,10 @@ fun AverageList(
         var showAverageResult by remember { mutableStateOf(false) }
         AnimatedVisibility(visible = showAverageResult) {
             val average =
-                averageViewModel.averageState.collectAsStateWithLifecycle().value.average.toString()
+                averageViewModel.averageState.collectAsStateWithLifecycle().value.average
             val percentage =
                 averageViewModel.averageState.collectAsStateWithLifecycle().value.percentage.toString()
-            val args = listOf(percentage, average).toTypedArray()
+            val args = listOf(percentage, (Math.round(average * 1000.0) / 1000.0).toString()).toTypedArray()
 
             AlertDialog(
                 title = { Text(text = stringResource(id = R.string.average_dialog_title)) },

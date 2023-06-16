@@ -96,8 +96,8 @@ fun AverageList(
             val average =
                 averageViewModel.averageState.collectAsStateWithLifecycle().value.average
             val percentage =
-                averageViewModel.averageState.collectAsStateWithLifecycle().value.percentage.toString()
-            val args = listOf(percentage, (Math.round(average * 1000.0) / 1000.0).toString()).toTypedArray()
+                averageViewModel.averageState.collectAsStateWithLifecycle().value.percentage
+            val args = listOf((Math.round(percentage * 1000.0) / 1000.0).toString(), (Math.round(average * 1000.0) / 1000.0).toString()).toTypedArray()
 
             AlertDialog(
                 title = { Text(text = stringResource(id = R.string.average_dialog_title)) },

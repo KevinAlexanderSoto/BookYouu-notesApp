@@ -34,7 +34,7 @@ android {
             debuggable false
         }
         release {
-            //TODO: add base line profile
+            debuggable false
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

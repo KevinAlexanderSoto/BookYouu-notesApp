@@ -32,6 +32,7 @@ object BYTextInput {
         ),
         isSingleLine: Boolean = true,
         maxLine: Int = 1,
+        isError: Boolean = false,
         onTextChange: (String) -> Unit,
     ) {
         var text by remember { mutableStateOf("") }
@@ -40,6 +41,7 @@ object BYTextInput {
             value = text,
             singleLine = isSingleLine,
             maxLines = maxLine,
+            isError =isError,
             label = { Text(text = stringResource(label)) },
             onValueChange = {
                 if (it.length < 120) {

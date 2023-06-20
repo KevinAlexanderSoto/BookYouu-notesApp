@@ -86,9 +86,7 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
         composable(route = Route.SUBJECT_FORM_SUCCESS_SCREEN) {
             BYSuccessScreen(
                 onNavigateToSubjectListScreen = {
-                    rootNavController.navigate(
-                        Route.SUBJECT_LIST,
-                    )
+                    rootNavController.popBackStack(Route.SUBJECT_LIST, false)
                 },
             )
         }

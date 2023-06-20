@@ -25,6 +25,7 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
             ScaffoldBottomBar(
                 currentDestination = Route.SUBJECT_LIST,
                 onBottomNavigationClick = {
+                    rootNavController.popBackStack()
                     rootNavController.navigate(it)
                 },
                 content = {

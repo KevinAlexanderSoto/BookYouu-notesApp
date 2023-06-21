@@ -11,11 +11,12 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -43,6 +44,8 @@ fun ScaffoldContent(
             .padding(paddingValues)
             .fillMaxSize(),
     ) {
+        val localFocusManager: FocusManager = LocalFocusManager.current
+
         Text(text = stringResource(id = R.string.subject_form_title))
         BYTextInput.OutLinedTextField(
             label = R.string.subject_form_subjectName_label,
@@ -53,6 +56,9 @@ fun ScaffoldContent(
             onTextChange = {
                 informationViewModel.setSubjectName(it)
             },
+            onAction = {
+                localFocusManager.moveFocus(FocusDirection.Down)
+            },
         )
         BYTextInput.OutLinedTextField(
             label = R.string.subject_form_classRoom_label,
@@ -62,6 +68,9 @@ fun ScaffoldContent(
             ),
             onTextChange = {
                 informationViewModel.setClassRoomName(it)
+            },
+            onAction = {
+                localFocusManager.moveFocus(FocusDirection.Down)
             },
         )
         BYTextInput.OutLinedTextField(
@@ -79,11 +88,17 @@ fun ScaffoldContent(
                     informationViewModel.setCredits(it.toInt())
                 }
             },
+            onAction = {
+                localFocusManager.clearFocus()
+            },
         )
         BYTextInput.OutLinedButtonTextField(
             label = R.string.subject_form_day_label,
             updateTextValue = { dayList },
-            onClick = { onShowSheet() },
+            onClick = {
+                localFocusManager.clearFocus()
+                onShowSheet()
+            },
 
         )
 

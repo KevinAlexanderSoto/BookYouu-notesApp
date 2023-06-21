@@ -36,7 +36,7 @@
     <string name="subject_form_title">fill all the fields</string>
     <string name="subject_form_sheet_title">Select the days of your classes</string>
     <!-- RECORD SECTION -->
-    <string name="records_list_no_recordsFount_text">You do not have records, in this subject</string>
+    <string name="records_list_no_recordsFount_text">You do not have records in this subject</string>
     <string name="record_confirmation_buttons_title">Save the class note</string>
     <string name="record_confirmation_description_label">Description(optional)</string>
     <string name="record_delete_title">Delete record?</string>

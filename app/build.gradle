@@ -71,6 +71,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.1"
     implementation 'androidx.activity:activity-compose:1.7.2'
 
+    //Paging
+    implementation "androidx.paging:paging-compose:3.2.0-rc01"
+
     //COMPOSE SECTION
     def nav_version = "2.6.0"
     implementation("androidx.navigation:navigation-compose:$nav_version")

@@ -94,7 +94,7 @@ fun RecordsMainScreen(
                 RecordItem(
                     noteList.value[it].imgUrl.decodeUri(),
                     recordDescription = noteList.value[it].noteDescription,
-                    onRecordClick = { onRecordDetail(it) },
+                    onRecordClick = { onRecordDetail(noteList.value[it].noteId) },
                     onDeleteRecord = {
                         recordsViewModel.deleteRecord(noteList.value[it])
                         scope.launch {

@@ -56,5 +56,6 @@
     <string name="average_dialog_title">Resultado</string>
     <string name="average_calculate_button_text">Calcular</string>
     <string name="average_title">Promedio</string>
+    <string name="record_list_end_text">No hay más elementos.</string>
 
 </resources>

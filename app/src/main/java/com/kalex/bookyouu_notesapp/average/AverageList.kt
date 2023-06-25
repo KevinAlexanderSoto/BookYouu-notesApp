@@ -14,6 +14,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -31,6 +32,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kalex.bookyouu_notesapp.R
+import java.math.RoundingMode
+import kotlin.math.roundToInt
 
 @Composable
 fun AverageList(
@@ -71,7 +74,7 @@ fun AverageList(
                 Icon(
                     painterResource(id = R.drawable.remove_24px),
                     contentDescription = "add new",
-                    tint = Color.Black,
+                    tint = MaterialTheme.colorScheme.onBackground,
                 )
             }
             Text(
@@ -92,10 +95,10 @@ fun AverageList(
         var showAverageResult by remember { mutableStateOf(false) }
         AnimatedVisibility(visible = showAverageResult) {
             val average =
-                averageViewModel.averageState.collectAsStateWithLifecycle().value.average.toString()
+                averageViewModel.averageState.collectAsStateWithLifecycle().value.average
             val percentage =
-                averageViewModel.averageState.collectAsStateWithLifecycle().value.percentage.toString()
-            val args = listOf(percentage, average).toTypedArray()
+                averageViewModel.averageState.collectAsStateWithLifecycle().value.percentage
+            val args = listOf((Math.round(percentage * 1000.0) / 1000.0).toString(), (Math.round(average * 1000.0) / 1000.0).toString()).toTypedArray()
 
             AlertDialog(
                 title = { Text(text = stringResource(id = R.string.average_dialog_title)) },

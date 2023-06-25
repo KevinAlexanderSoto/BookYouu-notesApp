@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -32,6 +33,8 @@ object BYTextInput {
         ),
         isSingleLine: Boolean = true,
         maxLine: Int = 1,
+        isError: Boolean = false,
+        onAction: () -> Unit = {},
         onTextChange: (String) -> Unit,
     ) {
         var text by remember { mutableStateOf("") }
@@ -40,12 +43,16 @@ object BYTextInput {
             value = text,
             singleLine = isSingleLine,
             maxLines = maxLine,
+            isError = isError,
             label = { Text(text = stringResource(label)) },
             onValueChange = {
                 if (it.length < 120) {
                     text = it
                 }
             },
+            keyboardActions = KeyboardActions(onDone = {
+                onAction()
+            }),
             keyboardOptions = keyboardOptions,
             modifier = Modifier.fillMaxWidth(0.9f),
             shape = RoundedCornerShape(15.dp),
@@ -69,7 +76,9 @@ object BYTextInput {
             label = { Text(text = stringResource(label)) },
             singleLine = true,
             enabled = false,
-            modifier = Modifier.fillMaxWidth(0.9f).clickable { onClick() },
+            modifier = Modifier
+                .fillMaxWidth(0.9f)
+                .clickable { onClick() },
             shape = RoundedCornerShape(15.dp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 disabledTextColor = MaterialTheme.colorScheme.onSurface,

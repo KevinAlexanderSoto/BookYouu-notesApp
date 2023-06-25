@@ -22,6 +22,7 @@ fun NavGraphBuilder.averageNav(rootNavController: NavHostController) {
             ScaffoldBottomBar(
                 currentDestination = Route.AVERAGE_MAIN,
                 onBottomNavigationClick = {
+                    rootNavController.popBackStack()
                     rootNavController.navigate(it)
                 },
                 content = { padding ->

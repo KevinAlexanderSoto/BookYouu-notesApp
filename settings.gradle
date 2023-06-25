@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "BookYouU-notesApp"
 include ':app'
+include ':macrobenchmark'
+include ':benchmark'

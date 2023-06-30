@@ -3,6 +3,7 @@ package com.kalex.bookyouu_notesapp.common.composables
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -102,7 +103,10 @@ fun ScaffoldFloatingButtonAndTopBar(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { onFloatingActionClick() }) {
+            FloatingActionButton(
+                modifier = Modifier.padding(0.dp, 14.dp),
+                onClick = { onFloatingActionClick() },
+            ) {
                 Icon(Icons.Default.Add, contentDescription = "add")
             }
         },

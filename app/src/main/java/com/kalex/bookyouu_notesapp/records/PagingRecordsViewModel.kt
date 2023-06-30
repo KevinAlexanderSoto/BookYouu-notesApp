@@ -9,7 +9,6 @@ import com.kalex.bookyouu_notesapp.db.data.Note
 import com.kalex.bookyouu_notesapp.records.data.NotesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,26 +28,26 @@ class PagingRecordsViewModel @Inject constructor(
         get() = _notesList.asStateFlow()
 
     private val _pagingState =
-        MutableStateFlow<ListState>(ListState.LOADING)
-    val pagingState: StateFlow<ListState>
+        MutableStateFlow<PaginationState>(PaginationState.LOADING)
+    val pagingState: StateFlow<PaginationState>
         get() = _pagingState.asStateFlow()
 
-    private var page = 0
+    private var page = INITIAL_PAGE
     var canPaginate by mutableStateOf(false)
 
     fun getNotes(subjectID: Int) {
-        if (page == 0 || (page != 0 && canPaginate) && _pagingState.value == ListState.IDLE) {
-            _pagingState.update { if (page == 0) ListState.LOADING else ListState.PAGINATING }
+        if (page == INITIAL_PAGE || (canPaginate) && _pagingState.value == PaginationState.REQUEST_INACTIVE) {
+            _pagingState.update { if (page == INITIAL_PAGE) PaginationState.LOADING else PaginationState.PAGINATING }
         }
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher) {
             try {
-                val result = notesRepositoryImpl.getPagingNotesByDate(subjectID, 5, page * 5)
+                val result = notesRepositoryImpl.getPagingNotesByDate(subjectID, PAGE_SIZE, page * PAGE_SIZE)
 
-                canPaginate = result.size == 5
+                canPaginate = result.size == PAGE_SIZE
 
-                if (page == 0) {
+                if (page == INITIAL_PAGE) {
                     if (result.isEmpty()) {
-                        _pagingState.update { ListState.EMPTY }
+                        _pagingState.update { PaginationState.EMPTY }
                         return@launch
                     }
                     _notesList.value.clear()
@@ -57,30 +56,35 @@ class PagingRecordsViewModel @Inject constructor(
                     _notesList.value.addAll(result)
                 }
 
-                _pagingState.update { ListState.IDLE }
+                _pagingState.update { PaginationState.REQUEST_INACTIVE }
 
                 if (canPaginate) {
                     page++
                 }
 
                 if (!canPaginate) {
-                    _pagingState.update { ListState.PAGINATION_EXHAUST }
+                    _pagingState.update { PaginationState.PAGINATION_EXHAUST }
                 }
             } catch (e: Exception) {
-                _pagingState.update { if (page == 0) ListState.ERROR else ListState.PAGINATION_EXHAUST }
+                _pagingState.update { if (page == INITIAL_PAGE) PaginationState.ERROR else PaginationState.PAGINATION_EXHAUST }
             }
         }
     }
 
     fun clearPaging() {
-        page = 0
-        _pagingState.update { ListState.IDLE }
+        page = INITIAL_PAGE
+        _pagingState.update { PaginationState.LOADING }
         canPaginate = false
+    }
+
+    companion object {
+        const val PAGE_SIZE = 5
+        const val INITIAL_PAGE = 0
     }
 }
 
-enum class ListState {
-    IDLE,
+enum class PaginationState {
+    REQUEST_INACTIVE,
     LOADING,
     PAGINATING,
     ERROR,

@@ -12,7 +12,6 @@ class NotesRepositoryImpl @Inject constructor(private val notesDao: NoteDao) : N
     }
 
     override suspend fun getPagingNotesByDate(subjectID: Int, limit: Int, offset: Int): List<Note> {
-        delay(1000L)
         return notesDao.getPagingNotesOrderByDate(subjectID, limit, offset)
     }
 

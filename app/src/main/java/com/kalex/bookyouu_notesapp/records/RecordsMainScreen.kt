@@ -43,7 +43,6 @@ fun RecordsMainScreen(
     pagingRecordsViewModel: PagingRecordsViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
     RequireCameraPermission(
         permission = recordsViewModel.permissionsList,
         onPermissionDenied = {
@@ -61,13 +60,11 @@ fun RecordsMainScreen(
         val pagingState = pagingRecordsViewModel.pagingState.collectAsStateWithLifecycle()
 
         LaunchedEffect(key1 = Unit) {
-            coroutineScope.launch {
-                pagingRecordsViewModel.clearPaging()
-                pagingRecordsViewModel.getNotes(subjectId)
-                lazyColumnListState.scrollToItem(0, 0)
-            }
+            pagingRecordsViewModel.clearPaging()
+            pagingRecordsViewModel.getNotes(subjectId)
+            lazyColumnListState.scrollToItem(0, 0)
         }
-        val shouldStartPaginate = remember {
+        val shouldPaginate = remember {
             derivedStateOf {
                 pagingRecordsViewModel.canPaginate && (
                     lazyColumnListState.layoutInfo.visibleItemsInfo.lastOrNull()?.index
@@ -76,8 +73,8 @@ fun RecordsMainScreen(
             }
         }
 
-        LaunchedEffect(key1 = shouldStartPaginate.value) {
-            if (shouldStartPaginate.value && pagingState.value == ListState.IDLE) {
+        LaunchedEffect(key1 = shouldPaginate.value) {
+            if (shouldPaginate.value && pagingState.value == PaginationState.REQUEST_INACTIVE) {
                 pagingRecordsViewModel.getNotes(subjectId)
             }
         }
@@ -97,7 +94,7 @@ fun RecordsMainScreen(
                     onRecordClick = { onRecordDetail(noteList.value[it].noteId) },
                     onDeleteRecord = {
                         recordsViewModel.deleteRecord(noteList.value[it])
-                        scope.launch {
+                        coroutineScope.launch {
                             context.contentResolver.delete(
                                 noteList.value[it].imgUrl.decodeUri(),
                                 null,
@@ -108,7 +105,7 @@ fun RecordsMainScreen(
                         }
                         handleViewModelState(
                             collectAsState = recordsViewModel.deleteRecordsState,
-                            scope = scope,
+                            scope = coroutineScope,
                             onEmpty = {},
                             onLoading = { },
                             onSuccess = {
@@ -121,23 +118,23 @@ fun RecordsMainScreen(
                 )
             }
             when (pagingState.value) {
-                ListState.IDLE -> {
+                PaginationState.REQUEST_INACTIVE -> {
                 }
 
-                ListState.LOADING -> {
+                PaginationState.LOADING -> {
                     item {
                         BYLoadingIndicator()
                     }
                 }
 
-                ListState.PAGINATING -> {
+                PaginationState.PAGINATING -> {
                     item {
                         BYLoadingIndicator()
                     }
                 }
 
-                ListState.ERROR -> TODO()
-                ListState.PAGINATION_EXHAUST -> {
+                PaginationState.ERROR -> TODO()
+                PaginationState.PAGINATION_EXHAUST -> {
                     item {
                         Column(
                             modifier = Modifier.fillMaxHeight().padding(8.dp),
@@ -146,7 +143,8 @@ fun RecordsMainScreen(
                         }
                     }
                 }
-                ListState.EMPTY -> {
+
+                PaginationState.EMPTY -> {
                     item {
                         EmptyScreen(
                             onAddItemClick = { onAddNewRecord.invoke() },

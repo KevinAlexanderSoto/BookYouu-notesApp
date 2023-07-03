@@ -8,7 +8,7 @@
     <string name="subject_list_no_subjectsFount_ButtonText">Add</string>
     <string name="subject_form_subjectName_label">Subject name</string>
     <string name="subject_form_classRoom_label">Classroom(optional)</string>
-    <string name="subject_form_credits_label">Credits</string>
+    <string name="subject_form_credits_label">Credits(optional)</string>
     <string name="subject_form_day_label">Days</string>
     <string name="subject_form_monday">Monday</string>
     <string name="subject_form_tuesday">Tuesday</string>

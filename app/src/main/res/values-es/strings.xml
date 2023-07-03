@@ -11,7 +11,7 @@
     <string name="subject_form_title">Ingresa la información</string>
     <string name="subject_form_subjectName_label">Materia</string>
     <string name="subject_form_classRoom_label">Salón(opcional)</string>
-    <string name="subject_form_credits_label">Créditos</string>
+    <string name="subject_form_credits_label">Créditos(opcional)</string>
     <string name="subject_form_day_label">Días</string>
     <string name="subject_form_sheet_title">Selecciona los días de esta clase</string>
     <string name="subject_form_button_text">Crear</string>

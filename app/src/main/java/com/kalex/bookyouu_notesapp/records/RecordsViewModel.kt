@@ -27,10 +27,17 @@ class RecordsViewModel @Inject constructor(
             listOf(
                 android.Manifest.permission.CAMERA,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            )
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            listOf(
+                android.Manifest.permission.CAMERA,
+                android.Manifest.permission.READ_MEDIA_IMAGES,
             )
         } else {
             listOf(
                 android.Manifest.permission.CAMERA,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE,
             )
         }
     val permissionsList: List<String>
@@ -99,8 +106,6 @@ class RecordsViewModel @Inject constructor(
             }
         }
     }
-
-
 
     private val _deleteRecordsState =
         MutableStateFlow<ViewModelState<Unit>>(ViewModelState.Loading(true))

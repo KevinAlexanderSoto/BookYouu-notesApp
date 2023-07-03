@@ -31,6 +31,7 @@ fun SubjectListScreen(
     subjectList: List<Subject>,
     onAddSubjectClickAction: () -> Unit,
     onSubjectClickAction: (subjectId: Int) -> Unit,
+    onSubjectLongClickAction: (subjectId: Int) -> Unit,
 ) {
     Column() {
         Box(
@@ -38,23 +39,6 @@ fun SubjectListScreen(
                 .padding(top = 20.dp)
                 .fillMaxWidth(),
         ) {
-            // TODO: future feature
-            /*
-            IconButton(
-                onClick = {
-                          // TODO: add delete subject action, new feature, pending to add
-                },
-                modifier = Modifier
-                    .align(Alignment.CenterStart)
-                    .padding(start = 20.dp),
-
-            ) {
-                Icon(
-                    painterResource(id = R.drawable.remove_24px),
-                    contentDescription = "add new",
-                    tint = Color.Black,
-                )
-            }*/
             Text(
                 text = stringResource(id = R.string.subject_list_title),
                 modifier = Modifier.align(Alignment.Center),
@@ -87,6 +71,9 @@ fun SubjectListScreen(
                             onSubjectItemClick = {
                                 onSubjectClickAction(subjectId)
                             },
+                            onSubjectLongItemClick = {
+                                onSubjectLongClickAction(subjectId)
+                            }
                         )
                     }
                 }

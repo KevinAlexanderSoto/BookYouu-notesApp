@@ -13,8 +13,8 @@ interface SubjectDao {
     @Upsert
     suspend fun upsertSubject(subject: Subject)
 
-    @Delete
-    suspend fun deleteSubject(subject: Subject)
+    @Query("DELETE  FROM subject WHERE subject_id == :subject")
+    suspend fun deleteSubject(subject: Int)
 
     @Query("SELECT * FROM subject")
     fun getSubjects(): Flow<List<Subject>>

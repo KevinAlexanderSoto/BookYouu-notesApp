@@ -25,6 +25,11 @@
 
     <string name="success_screen_text">Creada con exíto</string>
     <string name="success_screen_buttom_text">Continuar</string>
+
+    <string name="subject_delete_title_dialog">Eliminar materia</string>
+    <string name="subject_delete_text_dialog">¿Quieres eliminar esta materia? Todos los apuntes se eliminarán.</string>
+    <string name="subject_delete_button_text_dialog">Eliminar</string>
+
     <!-- RECORD SECTION -->
     <string name="record_confirmation_description_label">Descripción(opcional)</string>
     <string name="records_list_no_recordsFount_text">No tienes registros en esta clase</string>
@@ -57,5 +62,6 @@
     <string name="average_calculate_button_text">Calcular</string>
     <string name="average_title">Promedio</string>
     <string name="record_list_end_text">No hay más elementos.</string>
+
 
 </resources>

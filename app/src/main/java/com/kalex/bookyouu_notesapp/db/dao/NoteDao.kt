@@ -15,6 +15,8 @@ interface NoteDao {
 
     @Query("SELECT * FROM note WHERE subject_id == :id ORDER BY note_date DESC")
     fun getNotesOrderByDate(id: Int): Flow<List<Note>>
+    @Query("SELECT img_url FROM note WHERE subject_id == :id ORDER BY note_date DESC")
+    fun getNotesUriOrderByDate(id: Int): Flow<List<String>>
 
     @Query("SELECT * FROM note WHERE subject_id == :id ORDER BY note_date DESC LIMIT :limit OFFSET :offset")
     suspend fun getPagingNotesOrderByDate(id: Int, limit: Int, offset: Int): List<Note>
@@ -24,4 +26,7 @@ interface NoteDao {
 
     @Delete
     suspend fun deleteNote(note: Note)
+
+    @Query("DELETE FROM note WHERE subject_id == :id ")
+    suspend fun deleteNoteSById(id: Int)
 }

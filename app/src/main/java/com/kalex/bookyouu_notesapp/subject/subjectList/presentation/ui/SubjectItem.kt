@@ -1,6 +1,8 @@
 package com.kalex.bookyouu_notesapp.subject.subjectList.presentation.ui
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,19 +23,24 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SubjectItem(
     title: String,
     subTitle: String,
     classRoom: String,
     onSubjectItemClick: () -> Unit,
+    onSubjectLongItemClick: () -> Unit,
 ) {
     Box(
         modifier = Modifier
             .padding(24.dp, 16.dp)
             .fillMaxWidth()
             .height(78.dp)
-            .clickable { onSubjectItemClick.invoke() },
+            .combinedClickable(
+                onClick = { onSubjectItemClick.invoke() },
+                onLongClick = { onSubjectLongItemClick() },
+            ),
     ) {
         Column(
             modifier = Modifier.align(

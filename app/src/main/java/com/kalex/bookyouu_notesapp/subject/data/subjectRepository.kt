@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface SubjectRepository {
     fun getSubjectList(): Flow<List<Subject>>
     suspend fun upsertSubjectList(subject: Subject)
+    suspend fun deleteSubject(subject: Int)
 }

@@ -16,7 +16,7 @@ class SubjectFormInformationViewModel @Inject constructor() : ViewModel() {
     private val _classRoom = mutableStateOf("")
     private val _credits = mutableStateOf(0)
     fun isAllFieldsValid() =
-        (mapOfDays.isNotEmpty() && mapOfDays.values.contains(true) && _subjectName.value.isNotEmpty() && _credits.value != 0)
+        (mapOfDays.isNotEmpty() && mapOfDays.values.contains(true) && _subjectName.value.isNotEmpty())
 
     fun createSubjectObject() =
         Subject(

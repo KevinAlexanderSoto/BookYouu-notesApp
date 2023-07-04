@@ -11,4 +11,8 @@ class SubjectRepositoryImpl @Inject constructor(
     override suspend fun upsertSubjectList(subject: Subject) {
         subjectDao.upsertSubject(subject)
     }
+
+    override suspend fun deleteSubject(subject: Int) {
+        subjectDao.deleteSubject(subject)
+    }
 }

@@ -1,22 +1,21 @@
 package com.kalex.bookyouu_notesapp.records.recordList
 
+import android.content.Intent
 import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
@@ -32,11 +31,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import coil.compose.rememberAsyncImagePainter
 import com.kalex.bookyouu_notesapp.R
 
 @Composable
@@ -46,6 +45,7 @@ fun RecordItem(
     onRecordClick: () -> Unit,
     onDeleteRecord: () -> Unit,
 ) {
+    val context = LocalContext.current
     var showDeleteDialog by remember { mutableStateOf(false) }
     AnimatedVisibility(visible = showDeleteDialog) {
         AlertDialog(
@@ -88,6 +88,22 @@ fun RecordItem(
                 onClick = { showDeleteDialog = true },
             ) {
                 Icon(Icons.Default.Delete, contentDescription = "delete")
+            }
+            IconButton(
+                modifier = Modifier.align(Alignment.TopEnd),
+                onClick = {
+                    val intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_STREAM, recordUri)
+                        type = "image/*"
+                    }
+
+                    val chooser = Intent.createChooser(intent, "Share image")
+
+                    context.startActivity(chooser)
+                },
+            ) {
+                Icon(Icons.Default.Share, contentDescription = "Share")
             }
             AsyncImage(
                 model = recordUri,

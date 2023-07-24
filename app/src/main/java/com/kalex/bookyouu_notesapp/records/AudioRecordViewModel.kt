@@ -4,34 +4,41 @@ import android.media.MediaRecorder
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class AudioRecordViewModel @Inject constructor(
-    private val recorder: MediaRecorder,
-) : ViewModel() {
+class AudioRecordViewModel @Inject constructor() : ViewModel() {
 
     val canStopRecord = mutableStateOf(false)
     private val currentPath = mutableStateOf("")
-
+    private var recorder: MediaRecorder? = null
     fun beginAudioRecord() {
 // Set the audio source, output format, encoder and output file
-        recorder.apply {
+        recorder = MediaRecorder().apply {
             setAudioSource(MediaRecorder.AudioSource.DEFAULT)
             setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
             setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+            setAudioSamplingRate(44100)
             setOutputFile(currentPath.value)
+            try {
+                prepare()
+            } catch (e: IOException) {
+            }
+
+            start()
         }
 
-        recorder.prepare()
-        recorder.start()
         canStopRecord.value = true
     }
 
     fun stopRecording() {
         // Stop and release the MediaRecorder when done
-        recorder.stop()
-        recorder.release()
+        recorder?.apply {
+            stop()
+            release()
+        }
+        recorder = null
         canStopRecord.value = false
     }
 

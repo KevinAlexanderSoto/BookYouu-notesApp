@@ -1,6 +1,7 @@
 package com.kalex.bookyouu_notesapp.records.recordList
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
@@ -37,10 +38,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.kalex.bookyouu_notesapp.R
+import java.io.IOException
 
 @Composable
 fun RecordItem(
     recordUri: Uri,
+    voiceUri: String,
     recordDescription: String,
     onRecordClick: () -> Unit,
     onDeleteRecord: () -> Unit,
@@ -118,6 +121,24 @@ fun RecordItem(
                     .clickable { onRecordClick() },
             )
         }
+        AnimatedVisibility(visible = voiceUri.isNotEmpty()) {
+            IconButton(
+                modifier = Modifier.align(Alignment.End),
+                onClick = {
+                    MediaPlayer().apply {
+                        try {
+                            setDataSource(voiceUri)
+                            prepare()
+                            start()
+                        } catch (e: IOException) {
+                        }
+                    }
+                },
+            ) {
+                Icon(Icons.Default.Delete, contentDescription = "delete")
+            }
+        }
+
         Text(
             text = recordDescription,
             textAlign = TextAlign.Center,

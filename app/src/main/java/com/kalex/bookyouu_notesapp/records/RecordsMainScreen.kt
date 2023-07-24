@@ -31,6 +31,7 @@ import com.kalex.bookyouu_notesapp.common.handleViewModelState
 import com.kalex.bookyouu_notesapp.permission.RequireCameraPermission
 import com.kalex.bookyouu_notesapp.records.recordList.RecordItem
 import kotlinx.coroutines.launch
+import java.io.File
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -90,6 +91,7 @@ fun RecordsMainScreen(
             ) {
                 RecordItem(
                     noteList.value[it].imgUrl.decodeUri(),
+                    voiceUri = noteList.value[it].voiceUri,
                     recordDescription = noteList.value[it].noteDescription,
                     onRecordClick = { onRecordDetail(noteList.value[it].noteId) },
                     onDeleteRecord = {
@@ -100,6 +102,10 @@ fun RecordsMainScreen(
                                 null,
                                 null,
                             )
+                            if (noteList.value[it].voiceUri.isNotEmpty()) {
+                                File(noteList.value[it].voiceUri).delete()
+                            }
+
                             pagingRecordsViewModel.clearPaging()
                             pagingRecordsViewModel.getNotes(subjectId)
                         }

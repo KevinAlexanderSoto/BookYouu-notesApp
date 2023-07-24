@@ -16,9 +16,9 @@ class AudioRecordViewModel @Inject constructor() : ViewModel() {
     fun beginAudioRecord() {
 // Set the audio source, output format, encoder and output file
         recorder = MediaRecorder().apply {
-            setAudioSource(MediaRecorder.AudioSource.DEFAULT)
+            setAudioSource(MediaRecorder.AudioSource.MIC)
             setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-            setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+            setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
             setAudioSamplingRate(44100)
             setOutputFile(currentPath.value)
             try {

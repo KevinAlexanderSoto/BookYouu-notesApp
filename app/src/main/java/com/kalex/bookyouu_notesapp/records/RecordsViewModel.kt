@@ -73,7 +73,12 @@ class RecordsViewModel @Inject constructor(
     val saveRecordsState: StateFlow<ViewModelState<Unit>>
         get() = _saveRecordsState.asStateFlow()
 
-    fun createRecord(subjectId: Int, imgUrl: String, noteDescription: String) {
+    fun createRecord(
+        subjectId: Int,
+        imgUrl: String,
+        voiceNoteUri: String,
+        noteDescription: String,
+    ) {
         viewModelScope.launch(dispatcher) {
             try {
                 _saveRecordsState.update { ViewModelState.Loading(true) }
@@ -82,6 +87,7 @@ class RecordsViewModel @Inject constructor(
                         subjectId = subjectId,
                         imgUrl = imgUrl,
                         noteDate = Date(),
+                        voiceUri = voiceNoteUri,
                         noteDescription = noteDescription,
                     ),
                 )

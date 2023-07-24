@@ -1,6 +1,7 @@
 package com.kalex.bookyouu_notesapp.records.createRecord
 
 import android.net.Uri
+import android.os.Environment
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -49,14 +50,19 @@ import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
 import com.kalex.bookyouu_notesapp.common.composables.BYTextInput
 import com.kalex.bookyouu_notesapp.common.handleViewModelState
+import com.kalex.bookyouu_notesapp.records.AudioRecordViewModel
 import com.kalex.bookyouu_notesapp.records.RecordsViewModel
 import kotlinx.coroutines.launch
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
 fun RecordReview(
     subjectId: Int?,
     captureUri: Uri,
     recordsViewModel: RecordsViewModel = hiltViewModel(),
+    audioRecordViewModel: AudioRecordViewModel = hiltViewModel(),
     onReCapture: () -> Unit,
     onCaptureSaved: () -> Unit,
 ) {
@@ -66,6 +72,7 @@ fun RecordReview(
     val context = LocalContext.current
     val description = remember { mutableStateOf("") }
     val scope = rememberCoroutineScope()
+
     if (loadingState.value) {
         BYLoadingIndicator()
     } else {
@@ -112,9 +119,22 @@ fun RecordReview(
                 RecordAudioButton(
                     buttonPressed = {
                         isPressed = true
+                        val audioDir = File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "BookYouUAudio")
+                        audioDir.mkdirs()
+                        val audioDirPath = audioDir.absolutePath
+
+                        val name = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.US)
+                            .format(System.currentTimeMillis())
+
+                        val recordingFile = File("$audioDirPath/$name.m4a").path
+                        audioRecordViewModel.setCurrentPathToSave(recordingFile)
+                        audioRecordViewModel.beginAudioRecord()
                     },
                     buttonReleased = {
                         isPressed = false
+                        if (audioRecordViewModel.canStopRecord.value) {
+                            audioRecordViewModel.stopRecording()
+                        }
                     },
                 )
             }
@@ -148,6 +168,7 @@ fun RecordReview(
                     recordsViewModel.createRecord(
                         subjectId = subjectId ?: 0,
                         imgUrl = captureUri.toString(),
+                        voiceNoteUri = audioRecordViewModel.getCurrentPath(),
                         noteDescription = description.value,
                     )
                     handleViewModelState(
@@ -198,6 +219,6 @@ fun RecordAudioButton(
             },
 
     ) {
-        Icon(Icons.Default.Info, contentDescription = "do not capture")
+        Icon(Icons.Default.Info, contentDescription = "capture")
     }
 }

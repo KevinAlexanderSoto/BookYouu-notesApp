@@ -8,7 +8,10 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -16,6 +19,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CardDefaults
@@ -121,39 +125,47 @@ fun RecordItem(
                     .clickable { onRecordClick() },
             )
         }
-        AnimatedVisibility(visible = voiceUri.isNotEmpty()) {
-            IconButton(
-                modifier = Modifier.align(Alignment.End),
-                onClick = {
-                    MediaPlayer().apply {
-                        try {
-                            setDataSource(voiceUri)
-                            prepare()
-                            start()
-                        } catch (e: IOException) {
-                        }
-                    }
-                },
-            ) {
-                Icon(Icons.Default.Delete, contentDescription = "delete")
-            }
-        }
 
-        Text(
-            text = recordDescription,
-            textAlign = TextAlign.Center,
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(20.dp),
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .padding(16.dp, 10.dp)
-                .animateContentSize(
-                    animationSpec = spring(
-                        dampingRatio = Spring.DampingRatioLowBouncy,
-                        stiffness = Spring.StiffnessLow,
-                    ),
-                ).clickable {
-                    textExpanded = !textExpanded
-                },
-            maxLines = if (!textExpanded) 1 else 3,
-        )
+                .fillMaxHeight()
+                .padding(16.dp, 10.dp),
+        ) {
+            Text(
+                text = recordDescription,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(16.dp, 10.dp)
+                    .animateContentSize(
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioLowBouncy,
+                            stiffness = Spring.StiffnessLow,
+                        ),
+                    ).clickable {
+                        textExpanded = !textExpanded
+                    },
+                maxLines = if (!textExpanded) 1 else 3,
+            )
+            AnimatedVisibility(visible = voiceUri.isNotEmpty()) {
+                IconButton(
+                    modifier = Modifier,
+                    onClick = {
+                        MediaPlayer().apply {
+                            try {
+                                setDataSource(voiceUri)
+                                prepare()
+                                start()
+                            } catch (e: IOException) {
+                            }
+                        }
+                    },
+                ) {
+                    Icon(Icons.Default.PlayArrow, contentDescription = "playVoice")
+                }
+            }
+        }
     }
 }

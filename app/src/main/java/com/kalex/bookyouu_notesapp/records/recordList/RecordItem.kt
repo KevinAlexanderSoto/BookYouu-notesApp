@@ -11,8 +11,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
@@ -89,6 +89,9 @@ fun RecordItem(
         var textExpanded by remember {
             mutableStateOf(false)
         }
+        var isVoicePlaying by remember {
+            mutableStateOf(false)
+        }
         Box(modifier = Modifier.fillMaxSize()) {
             IconButton(
                 modifier = Modifier.align(Alignment.TopStart),
@@ -127,18 +130,42 @@ fun RecordItem(
         }
 
         Row(
-            horizontalArrangement = Arrangement.spacedBy(20.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .fillMaxHeight()
+                .fillMaxWidth()
                 .padding(16.dp, 10.dp),
         ) {
+            AnimatedVisibility(visible = voiceUri.isNotEmpty()) {
+                IconButton(
+                    modifier = Modifier,
+                    onClick = {
+                        if (!isVoicePlaying) {
+                            MediaPlayer().apply {
+                                try {
+                                    setDataSource(voiceUri)
+                                    prepare()
+                                    start()
+                                } catch (e: IOException) {
+                                }
+                                isVoicePlaying = isPlaying
+
+                                setOnCompletionListener {
+                                    isVoicePlaying = false
+                                }
+                            }
+                        }
+                    },
+                ) {
+                    Icon(Icons.Default.PlayArrow, contentDescription = "playVoice")
+                }
+            }
             Text(
                 text = recordDescription,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
-                    .padding(16.dp, 10.dp)
+                    .padding(1.dp, 0.dp, end = 0.dp, bottom = 0.dp)
                     .animateContentSize(
                         animationSpec = spring(
                             dampingRatio = Spring.DampingRatioLowBouncy,
@@ -149,23 +176,7 @@ fun RecordItem(
                     },
                 maxLines = if (!textExpanded) 1 else 3,
             )
-            AnimatedVisibility(visible = voiceUri.isNotEmpty()) {
-                IconButton(
-                    modifier = Modifier,
-                    onClick = {
-                        MediaPlayer().apply {
-                            try {
-                                setDataSource(voiceUri)
-                                prepare()
-                                start()
-                            } catch (e: IOException) {
-                            }
-                        }
-                    },
-                ) {
-                    Icon(Icons.Default.PlayArrow, contentDescription = "playVoice")
-                }
-            }
         }
     }
 }
+

@@ -26,17 +26,20 @@ class RecordsViewModel @Inject constructor(
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
             listOf(
                 android.Manifest.permission.CAMERA,
+                android.Manifest.permission.RECORD_AUDIO,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 android.Manifest.permission.READ_EXTERNAL_STORAGE,
             )
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             listOf(
                 android.Manifest.permission.CAMERA,
+                android.Manifest.permission.RECORD_AUDIO,
                 android.Manifest.permission.READ_MEDIA_IMAGES,
             )
         } else {
             listOf(
                 android.Manifest.permission.CAMERA,
+                android.Manifest.permission.RECORD_AUDIO,
                 android.Manifest.permission.READ_EXTERNAL_STORAGE,
             )
         }
@@ -70,7 +73,12 @@ class RecordsViewModel @Inject constructor(
     val saveRecordsState: StateFlow<ViewModelState<Unit>>
         get() = _saveRecordsState.asStateFlow()
 
-    fun createRecord(subjectId: Int, imgUrl: String, noteDescription: String) {
+    fun createRecord(
+        subjectId: Int,
+        imgUrl: String,
+        voiceNoteUri: String,
+        noteDescription: String,
+    ) {
         viewModelScope.launch(dispatcher) {
             try {
                 _saveRecordsState.update { ViewModelState.Loading(true) }
@@ -79,6 +87,7 @@ class RecordsViewModel @Inject constructor(
                         subjectId = subjectId,
                         imgUrl = imgUrl,
                         noteDate = Date(),
+                        voiceUri = voiceNoteUri,
                         noteDescription = noteDescription,
                     ),
                 )

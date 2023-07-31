@@ -14,6 +14,8 @@ data class Note(
     val subjectId: Int,
     @ColumnInfo(name = "img_url")
     val imgUrl: String,
+    @ColumnInfo(name = "voice_uri", defaultValue = "")
+    val voiceUri: String,
     @ColumnInfo(name = "note_date")
     val noteDate: Date,
     @ColumnInfo(name = "note_description")

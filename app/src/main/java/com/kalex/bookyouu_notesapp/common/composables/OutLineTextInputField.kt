@@ -34,6 +34,7 @@ object BYTextInput {
         isSingleLine: Boolean = true,
         maxLine: Int = 1,
         isError: Boolean = false,
+        textFieldModifier: Modifier = Modifier.fillMaxWidth(0.9f),
         onAction: () -> Unit = {},
         onTextChange: (String) -> Unit,
     ) {
@@ -54,7 +55,7 @@ object BYTextInput {
                 onAction()
             }),
             keyboardOptions = keyboardOptions,
-            modifier = Modifier.fillMaxWidth(0.9f),
+            modifier = textFieldModifier,
             shape = RoundedCornerShape(15.dp),
         )
     }

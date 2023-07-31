@@ -10,7 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.kalex.bookyouu_notesapp.common.decodeUri
 import com.kalex.bookyouu_notesapp.db.data.Note
-
+/**
+ * basic record list, this was the first impl of the list, latter I migrated to an paginated list
+ * **/
 @Composable
 fun RecordsList(
     data: List<Note>,
@@ -28,6 +30,7 @@ fun RecordsList(
         ) {
             RecordItem(
                 data[it].imgUrl.decodeUri(),
+                voiceUri = data[it].voiceUri,
                 recordDescription = data[it].noteDescription,
                 onRecordClick = { onRecordClick(data[it].noteId) },
                 onDeleteRecord = {

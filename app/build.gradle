@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace 'com.kalex.bookyouu_notesapp'
-    compileSdk 33
+    compileSdk generalProjectVersions.compileSdk
 
     defaultConfig {
         applicationId "com.kalex.bookyouu_notesapp"
-        minSdk 28
-        targetSdk 33
+        minSdk generalProjectVersions.minSdk
+        targetSdk generalProjectVersions.targetSdk
         versionCode 4
         versionName "1.1.0"
         setProperty("archivesBaseName", applicationId + "-v" + versionCode + "(" + versionName + ")")

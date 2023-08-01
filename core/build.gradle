@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace 'com.kalex.bookyouu_notesapp.core'
-    compileSdk 33
+    compileSdk generalProjectVersions.compileSdk
 
     defaultConfig {
-        minSdk 26
-        targetSdk 33
+        minSdk generalProjectVersions.minSdk
+        targetSdk generalProjectVersions.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"

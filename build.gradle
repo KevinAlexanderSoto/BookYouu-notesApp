@@ -6,3 +6,10 @@ plugins {
     id 'com.google.dagger.hilt.android' version '2.44' apply false
     id 'com.android.test' version '8.0.0' apply false
 }
+
+ext.generalProjectVersions = [
+        compileSdk : 34,
+        minSdk     : 28,
+        targetSdk  : 34,
+        versionName: '3.4.3'
+]

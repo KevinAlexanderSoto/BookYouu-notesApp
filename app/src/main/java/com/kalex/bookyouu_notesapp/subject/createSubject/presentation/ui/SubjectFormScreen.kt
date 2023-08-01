@@ -12,9 +12,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.kalex.bookyouu_notesapp.common.composables.BYBottomSheetLayout
-import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
-import com.kalex.bookyouu_notesapp.common.handleViewModelState
+import com.kalex.bookyouu_notesapp.core.common.composables.BYBottomSheetLayout
+import com.kalex.bookyouu_notesapp.core.common.composables.BYLoadingIndicator
+import com.kalex.bookyouu_notesapp.core.common.handleViewModelState
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormInformationViewModel
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormViewModel
 import kotlinx.coroutines.launch

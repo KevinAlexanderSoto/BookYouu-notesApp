@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.common
+package com.kalex.bookyouu_notesapp.core.common
 
 sealed class ViewModelState<T> {
     data class Success<T>(val data: T) : ViewModelState<T>()

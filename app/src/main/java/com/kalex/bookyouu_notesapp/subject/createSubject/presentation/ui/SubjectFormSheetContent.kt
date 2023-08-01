@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.kalex.bookyouu_notesapp.R
-import com.kalex.bookyouu_notesapp.common.composables.BYRoundedCheckView
+import com.kalex.bookyouu_notesapp.core.common.composables.BYRoundedCheckView
 import com.kalex.bookyouu_notesapp.subject.createSubject.DayOfWeekStringFactory
 import java.time.DayOfWeek
 

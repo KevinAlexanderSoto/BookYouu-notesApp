@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.common.composables
+package com.kalex.bookyouu_notesapp.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth

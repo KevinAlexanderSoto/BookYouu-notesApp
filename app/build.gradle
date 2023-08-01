@@ -129,6 +129,8 @@ dependencies {
     //Preferences DataStore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
+    implementation project(path: ':core')
+
     //ROOM SECTION
     def room_version = "2.5.2"
 

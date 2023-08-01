@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.common
+package com.kalex.bookyouu_notesapp.core.common
 
 import android.net.Uri
 

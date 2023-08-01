@@ -2,8 +2,8 @@ package com.kalex.bookyouu_notesapp.subject.createSubject.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kalex.bookyouu_notesapp.core.common.ViewModelState
 import com.kalex.bookyouu_notesapp.db.data.Subject
-import com.kalex.bookyouu_notesapp.common.ViewModelState
 import com.kalex.bookyouu_notesapp.subject.data.SubjectRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,16 +16,32 @@ import javax.inject.Inject
 class SubjectFormViewModel @Inject constructor(
     private val repository: SubjectRepository,
 ) : ViewModel() {
-    private val _createSubjectState = MutableStateFlow<ViewModelState<Boolean>>(ViewModelState.Loading(true))
+    private val _createSubjectState =
+        MutableStateFlow<ViewModelState<Boolean>>(
+            ViewModelState.Loading(true),
+        )
     val createSubjectState = _createSubjectState.asStateFlow()
     fun createSubject(subject: Subject) {
         viewModelScope.launch {
             try {
-                _createSubjectState.update { ViewModelState.Loading(true) }
+                _createSubjectState.update {
+                    ViewModelState.Loading(
+                        true,
+                    )
+                }
                 repository.upsertSubjectList(subject)
-                _createSubjectState.update { ViewModelState.Success(true) }
+                _createSubjectState.update {
+                    ViewModelState.Success(
+                        true,
+                    )
+                }
             } catch (e: Exception) {
-                _createSubjectState.update { ViewModelState.Error(e) } }
+                _createSubjectState.update {
+                    ViewModelState.Error(
+                        e,
+                    )
+                }
+            }
         }
     }
 }

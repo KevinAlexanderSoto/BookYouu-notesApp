@@ -24,10 +24,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.R
-import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
-import com.kalex.bookyouu_notesapp.common.composables.EmptyScreen
-import com.kalex.bookyouu_notesapp.common.decodeUri
-import com.kalex.bookyouu_notesapp.common.handleViewModelState
+import com.kalex.bookyouu_notesapp.core.common.composables.BYLoadingIndicator
+import com.kalex.bookyouu_notesapp.core.common.composables.EmptyScreen
+import com.kalex.bookyouu_notesapp.core.common.decodeUri
+import com.kalex.bookyouu_notesapp.core.common.handleViewModelState
 import com.kalex.bookyouu_notesapp.permission.RequireCameraPermission
 import com.kalex.bookyouu_notesapp.records.recordList.RecordItem
 import kotlinx.coroutines.launch
@@ -155,6 +155,7 @@ fun RecordsMainScreen(
                         EmptyScreen(
                             onAddItemClick = { onAddNewRecord.invoke() },
                             rationaleText = R.string.records_list_no_recordsFount_text,
+                            addButtonText = stringResource(R.string.subject_list_no_subjectsFount_ButtonText),
                         )
                     }
                 }

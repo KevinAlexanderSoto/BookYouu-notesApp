@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.common.composables
+package com.kalex.bookyouu_notesapp.core.common.composables
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background

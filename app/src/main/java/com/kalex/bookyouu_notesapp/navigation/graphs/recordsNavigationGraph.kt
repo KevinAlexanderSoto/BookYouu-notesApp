@@ -12,10 +12,10 @@ import com.google.accompanist.navigation.animation.navigation
 import androidx.navigation.navArgument
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.camera.CameraScreen
-import com.kalex.bookyouu_notesapp.common.composables.ScaffoldFloatingButtonAndTopBar
-import com.kalex.bookyouu_notesapp.common.composables.ScaffoldTopBar
-import com.kalex.bookyouu_notesapp.common.decodeUri
-import com.kalex.bookyouu_notesapp.common.encodeUri
+import com.kalex.bookyouu_notesapp.navigation.ScaffoldFloatingButtonAndTopBar
+import com.kalex.bookyouu_notesapp.navigation.ScaffoldTopBar
+import com.kalex.bookyouu_notesapp.core.common.decodeUri
+import com.kalex.bookyouu_notesapp.core.common.encodeUri
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.records.RecordsMainScreen
 import com.kalex.bookyouu_notesapp.records.createRecord.RecordReview

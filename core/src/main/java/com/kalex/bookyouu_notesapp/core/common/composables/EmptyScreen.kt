@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.common.composables
+package com.kalex.bookyouu_notesapp.core.common.composables
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
@@ -17,12 +17,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kalex.bookyouu_notesapp.R
+import com.kalex.bookyouu_notesapp.core.R
 
 @Composable
 fun EmptyScreen(
     onAddItemClick: () -> Unit,
-    @StringRes rationaleText: Int
+    @StringRes rationaleText: Int,
+    addButtonText: String
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -48,7 +49,7 @@ fun EmptyScreen(
                 contentDescription = "Add button",
                 modifier = Modifier.size(22.dp),
             )
-            Text(text = stringResource(R.string.subject_list_no_subjectsFount_ButtonText), modifier = Modifier.padding(8.dp, 2.dp))
+            Text(text = addButtonText , modifier = Modifier.padding(8.dp, 2.dp))
         }
     }
 }

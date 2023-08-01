@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -31,7 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.R
-import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
+import com.kalex.bookyouu_notesapp.core.common.composables.BYLoadingIndicator
 import kotlinx.coroutines.launch
 
 @ExperimentalPermissionsApi
@@ -96,8 +95,7 @@ fun CameraScreen(
                 modifier = Modifier
                     .padding(8.dp)
                     .align(Alignment.CenterHorizontally)
-                    .wrapContentSize()
-                ,
+                    .wrapContentSize(),
                 onClick = {
                     loadingState.value = true
                     coroutineScope.launch {
@@ -116,8 +114,7 @@ fun CameraScreen(
                         painterResource(id = R.drawable.camera_lens_svgrepo_com),
                         contentDescription = "Take picture",
                         modifier = Modifier
-                            .size(74.dp)
-                        ,
+                            .size(74.dp),
                     )
                 },
             )

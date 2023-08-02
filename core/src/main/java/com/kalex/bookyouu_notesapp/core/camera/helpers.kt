@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.camera
+package com.kalex.bookyouu_notesapp.core.camera
 
 import android.content.ContentResolver
 import android.content.ContentValues

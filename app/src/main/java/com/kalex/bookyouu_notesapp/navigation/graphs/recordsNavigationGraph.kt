@@ -1,22 +1,27 @@
 package com.kalex.bookyouu_notesapp.navigation.graphs
 
 import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
-import androidx.navigation.navArgument
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.kalex.bookyouu_notesapp.camera.CameraScreen
-import com.kalex.bookyouu_notesapp.navigation.ScaffoldFloatingButtonAndTopBar
-import com.kalex.bookyouu_notesapp.navigation.ScaffoldTopBar
+import com.kalex.bookyouu_notesapp.core.camera.CameraScreen
 import com.kalex.bookyouu_notesapp.core.common.decodeUri
 import com.kalex.bookyouu_notesapp.core.common.encodeUri
 import com.kalex.bookyouu_notesapp.navigation.Route
+import com.kalex.bookyouu_notesapp.navigation.ScaffoldFloatingButtonAndTopBar
+import com.kalex.bookyouu_notesapp.navigation.ScaffoldTopBar
 import com.kalex.bookyouu_notesapp.records.RecordsMainScreen
 import com.kalex.bookyouu_notesapp.records.createRecord.RecordReview
 import com.kalex.bookyouu_notesapp.records.recordsDetails.RecordMainDetail
@@ -37,16 +42,28 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
         composable(
             route = Route.RECORDS_MAIN_SCREEN,
             enterTransition = {
-                slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700),
+                )
             },
             exitTransition = {
-                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700),
+                )
             },
             popEnterTransition = {
-                slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
+                )
             },
             popExitTransition = {
-                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
+                )
             },
         ) { entry ->
             val parentEntry =
@@ -74,11 +91,20 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
         composable(
             route = Route.RECORDS_CAPTURE,
         ) {
-            CameraScreen() {
-                if (it !== null) {
-                    val encoded = it.toString().encodeUri()
-                    rootNavController.navigate(Route.RECORDS_MAIN_REVIEW + "/$encoded")
+            var navigationFlag by remember { mutableStateOf(false) }
+            var imageUri by remember { mutableStateOf("") }
+            AnimatedVisibility(!navigationFlag) {
+                CameraScreen() { imageCapturedUri ->
+                    if (imageCapturedUri !== null) {
+                        imageUri = imageCapturedUri.toString().encodeUri()
+                        navigationFlag = true
+                    }
                 }
+            }
+            if (navigationFlag) {
+                LaunchedEffect(key1 = Unit, block = {
+                    rootNavController.navigate(Route.RECORDS_MAIN_REVIEW + "/$imageUri")
+                })
             }
         }
 
@@ -92,16 +118,28 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
                 },
             ),
             enterTransition = {
-                slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700),
+                )
             },
             exitTransition = {
-                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700),
+                )
             },
             popEnterTransition = {
-                slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
+                )
             },
             popExitTransition = {
-                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
+                )
             },
         ) { backStackEntry ->
             val recordsEntry =
@@ -125,16 +163,28 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
                 },
             ),
             enterTransition = {
-                slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700),
+                )
             },
             exitTransition = {
-                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700),
+                )
             },
             popEnterTransition = {
-                slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
+                )
             },
             popExitTransition = {
-                slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700),
+                )
             },
         ) { entry ->
             val parentEntry =

@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.camera
+package com.kalex.bookyouu_notesapp.core.camera
 
 import android.net.Uri
 import android.util.Log
@@ -29,25 +29,25 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.kalex.bookyouu_notesapp.R
+import com.kalex.bookyouu_notesapp.core.R
 import com.kalex.bookyouu_notesapp.core.common.composables.BYLoadingIndicator
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @ExperimentalPermissionsApi
 @Composable
-@androidx.annotation.OptIn(androidx.camera.core.ExperimentalZeroShutterLag::class)
 fun CameraScreen(
     cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA,
     onImageFile: (Uri?) -> Unit = { },
 ) {
-    val loadingState = remember {
+    var loadingState by remember {
         mutableStateOf(false)
     }
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val coroutineScope = rememberCoroutineScope()
     var previewUseCase by remember { mutableStateOf<UseCase>(Preview.Builder().build()) }
-    val appName = context.resources.getString(R.string.app_name)
+    val appName by remember { mutableStateOf(context.resources.getString(R.string.app_name)) }
 
     val imageCaptureUseCase by remember {
         mutableStateOf(
@@ -76,7 +76,7 @@ fun CameraScreen(
             ) // TODO: Add error message
         }
     }
-    if (loadingState.value) {
+    if (loadingState) {
         BYLoadingIndicator()
     } else {
         Column(
@@ -97,14 +97,14 @@ fun CameraScreen(
                     .align(Alignment.CenterHorizontally)
                     .wrapContentSize(),
                 onClick = {
-                    loadingState.value = true
-                    coroutineScope.launch {
+                    loadingState = true
+                    coroutineScope.launch(Dispatchers.Default) {
                         imageCaptureUseCase.takePicture(
                             context.executor,
                             appName = appName,
                             context.contentResolver,
                         ).let { fileCaptured ->
-                            loadingState.value = false
+                            loadingState = false
                             onImageFile(fileCaptured)
                         }
                     }

@@ -7,6 +7,7 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY
 import androidx.camera.core.Preview
 import androidx.camera.core.UseCase
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -41,6 +42,9 @@ fun CameraScreen(
     onImageFile: (Uri?) -> Unit = { },
 ) {
     var loadingState by remember {
+        mutableStateOf(false)
+    }
+    var showCameraButton by remember {
         mutableStateOf(false)
     }
     val context = LocalContext.current
@@ -89,35 +93,43 @@ fun CameraScreen(
                 onUseCase = {
                     previewUseCase = it
                 },
+                onCameraReady = { showCameraButton = true },
             )
-
-            FloatingActionButton(
+            AnimatedVisibility(
+                visible = showCameraButton,
                 modifier = Modifier
                     .padding(8.dp)
                     .align(Alignment.CenterHorizontally)
                     .wrapContentSize(),
-                onClick = {
-                    loadingState = true
-                    coroutineScope.launch(Dispatchers.Default) {
-                        imageCaptureUseCase.takePicture(
-                            context.executor,
-                            appName = appName,
-                            context.contentResolver,
-                        ).let { fileCaptured ->
-                            loadingState = false
-                            onImageFile(fileCaptured)
+            ) {
+                FloatingActionButton(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .align(Alignment.CenterHorizontally)
+                        .wrapContentSize(),
+                    onClick = {
+                        loadingState = true
+                        coroutineScope.launch(Dispatchers.Default) {
+                            imageCaptureUseCase.takePicture(
+                                context.executor,
+                                appName = appName,
+                                context.contentResolver,
+                            ).let { fileCaptured ->
+                                loadingState = false
+                                onImageFile(fileCaptured)
+                            }
                         }
-                    }
-                },
-                content = {
-                    Icon(
-                        painterResource(id = R.drawable.camera_lens_svgrepo_com),
-                        contentDescription = "Take picture",
-                        modifier = Modifier
-                            .size(74.dp),
-                    )
-                },
-            )
+                    },
+                    content = {
+                        Icon(
+                            painterResource(id = R.drawable.camera_lens_svgrepo_com),
+                            contentDescription = "Take picture",
+                            modifier = Modifier
+                                .size(74.dp),
+                        )
+                    },
+                )
+            }
         }
     }
 }

@@ -17,9 +17,11 @@ import androidx.compose.ui.viewinterop.AndroidView
 fun CameraPreview(
     scaleType: PreviewView.ScaleType = PreviewView.ScaleType.FILL_CENTER,
     onUseCase: (UseCase) -> Unit = { },
+    onCameraReady: () -> Unit = { },
 ) {
     AndroidView(
-        modifier = Modifier.fillMaxHeight(0.85f).fillMaxWidth().clip(RoundedCornerShape(8.dp, 8.dp, 8.dp, 8.dp)),
+        modifier = Modifier.fillMaxHeight(0.85f).fillMaxWidth()
+            .clip(RoundedCornerShape(8.dp, 8.dp, 8.dp, 8.dp)),
         factory = { context ->
             val previewView = PreviewView(context).apply {
                 this.scaleType = scaleType
@@ -28,6 +30,9 @@ fun CameraPreview(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                 )
             }
+            previewView
+        },
+        update = { previewView ->
             onUseCase(
                 Preview.Builder()
                     .build()
@@ -35,7 +40,7 @@ fun CameraPreview(
                         it.setSurfaceProvider(previewView.surfaceProvider)
                     },
             )
-            previewView
+            onCameraReady()
         },
     )
 }

@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
 }
@@ -20,11 +21,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
-        }
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
-            }
         }
 
     }
@@ -74,7 +70,6 @@ kapt {
 }
 
 dependencies {
-
     implementation libs.androidx.ktx
     implementation libs.androidx.lifecycle.runtime.ktx
     implementation libs.androidx.lifecycle.runtime.compose
@@ -127,18 +122,17 @@ dependencies {
     implementation libs.androidx.datastore.preferences
 
     //ROOM SECTION
-    def room_version = "2.5.2"
-
     implementation libs.androidx.room.runtime
     implementation libs.androidx.room.ktx
     // To use Kotlin annotation processing tool (kapt)
-    kapt "androidx.room:room-compiler:$room_version"
+    ksp(libs.androidx.room.compiler)
     // optional - Paging 3 Integration
     implementation libs.androidx.room.paging
 
     //MODULES SECTION
     implementation project(path: ':core')
     implementation project(path: ':permission')
+    implementation project(path: ':db')
 
     //TESTING SECTION
     testImplementation libs.junit

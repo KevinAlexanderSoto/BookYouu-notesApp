@@ -3,7 +3,6 @@ package com.kalex.bookyouu_notesapp.records
 import android.os.Build
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kalex.bookyouu_notesapp.core.common.ViewModelState
 import com.kalex.bookyouu_notesapp.db.data.Note
 import com.kalex.bookyouu_notesapp.records.data.NotesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

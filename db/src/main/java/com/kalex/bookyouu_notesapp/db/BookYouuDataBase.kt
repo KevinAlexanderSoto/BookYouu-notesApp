@@ -1,7 +1,6 @@
 package com.kalex.bookyouu_notesapp.db
 
 import androidx.room.AutoMigration
-import androidx.room.ColumnInfo
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters

@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.kalex.bookyouu_notesapp.R
-import com.kalex.bookyouu_notesapp.common.composables.BYTextInput
+import com.kalex.bookyouu_notesapp.core.common.composables.BYTextInput
 
 @Composable
 fun AverageItem(

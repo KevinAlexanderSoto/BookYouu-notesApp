@@ -22,7 +22,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -48,9 +47,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.kalex.bookyouu_notesapp.R
-import com.kalex.bookyouu_notesapp.common.composables.BYLoadingIndicator
-import com.kalex.bookyouu_notesapp.common.composables.BYTextInput
-import com.kalex.bookyouu_notesapp.common.handleViewModelState
+import com.kalex.bookyouu_notesapp.core.common.composables.BYLoadingIndicator
+import com.kalex.bookyouu_notesapp.core.common.composables.BYTextInput
+import com.kalex.bookyouu_notesapp.core.common.handleViewModelState
 import com.kalex.bookyouu_notesapp.records.AudioRecordViewModel
 import com.kalex.bookyouu_notesapp.records.RecordsViewModel
 import kotlinx.coroutines.launch
@@ -172,7 +171,7 @@ fun RecordReview(
                         voiceNoteUri = audioRecordViewModel.getCurrentPath(),
                         noteDescription = description.value,
                     )
-                    handleViewModelState(
+                    com.kalex.bookyouu_notesapp.core.common.handleViewModelState(
                         collectAsState = recordsViewModel.saveRecordsState,
                         scope = scope,
                         onLoading = { loadingState.value = true },

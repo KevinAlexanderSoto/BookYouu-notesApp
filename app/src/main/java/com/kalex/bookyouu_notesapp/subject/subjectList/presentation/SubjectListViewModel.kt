@@ -2,7 +2,7 @@ package com.kalex.bookyouu_notesapp.subject.subjectList.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kalex.bookyouu_notesapp.common.ViewModelState
+import com.kalex.bookyouu_notesapp.core.common.ViewModelState
 import com.kalex.bookyouu_notesapp.db.data.Subject
 import com.kalex.bookyouu_notesapp.records.data.NotesRepository
 import com.kalex.bookyouu_notesapp.subject.data.SubjectRepository

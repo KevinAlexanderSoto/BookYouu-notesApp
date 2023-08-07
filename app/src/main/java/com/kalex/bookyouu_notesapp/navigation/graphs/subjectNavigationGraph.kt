@@ -8,8 +8,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
-import com.kalex.bookyouu_notesapp.common.composables.ScaffoldBottomBar
-import com.kalex.bookyouu_notesapp.common.composables.ScaffoldTopBar
+import com.kalex.bookyouu_notesapp.navigation.ScaffoldBottomBar
+import com.kalex.bookyouu_notesapp.navigation.ScaffoldTopBar
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.subject.SubjectMainScreen
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui.BYSuccessScreen

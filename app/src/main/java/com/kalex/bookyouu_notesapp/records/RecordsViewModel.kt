@@ -3,7 +3,6 @@ package com.kalex.bookyouu_notesapp.records
 import android.os.Build
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kalex.bookyouu_notesapp.common.ViewModelState
 import com.kalex.bookyouu_notesapp.db.data.Note
 import com.kalex.bookyouu_notesapp.records.data.NotesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -47,30 +46,30 @@ class RecordsViewModel @Inject constructor(
         get() = REQUIRED_PERMISSIONS
 
     private val _getRecordsState =
-        MutableStateFlow<ViewModelState<List<Note>>>(ViewModelState.Loading(true))
-    val getRecordsState: StateFlow<ViewModelState<List<Note>>>
+        MutableStateFlow<com.kalex.bookyouu_notesapp.core.common.ViewModelState<List<Note>>>(com.kalex.bookyouu_notesapp.core.common.ViewModelState.Loading(true))
+    val getRecordsState: StateFlow<com.kalex.bookyouu_notesapp.core.common.ViewModelState<List<Note>>>
         get() = _getRecordsState.asStateFlow()
 
     fun getRecordsList(subjectId: Int) {
         viewModelScope.launch(dispatcher) {
             try {
-                _getRecordsState.update { ViewModelState.Loading(true) }
+                _getRecordsState.update { com.kalex.bookyouu_notesapp.core.common.ViewModelState.Loading(true) }
                 notesRepositoryImpl.getNotesByDate(subjectId).collectLatest { list ->
                     if (list.isEmpty()) {
-                        _getRecordsState.update { ViewModelState.Empty() }
+                        _getRecordsState.update { com.kalex.bookyouu_notesapp.core.common.ViewModelState.Empty() }
                     } else {
-                        _getRecordsState.update { ViewModelState.Success(list) }
+                        _getRecordsState.update { com.kalex.bookyouu_notesapp.core.common.ViewModelState.Success(list) }
                     }
                 }
             } catch (e: Exception) {
-                _getRecordsState.update { ViewModelState.Error(e) }
+                _getRecordsState.update { com.kalex.bookyouu_notesapp.core.common.ViewModelState.Error(e) }
             }
         }
     }
 
     private val _saveRecordsState =
-        MutableStateFlow<ViewModelState<Unit>>(ViewModelState.Loading(true))
-    val saveRecordsState: StateFlow<ViewModelState<Unit>>
+        MutableStateFlow<com.kalex.bookyouu_notesapp.core.common.ViewModelState<Unit>>(com.kalex.bookyouu_notesapp.core.common.ViewModelState.Loading(true))
+    val saveRecordsState: StateFlow<com.kalex.bookyouu_notesapp.core.common.ViewModelState<Unit>>
         get() = _saveRecordsState.asStateFlow()
 
     fun createRecord(
@@ -81,7 +80,7 @@ class RecordsViewModel @Inject constructor(
     ) {
         viewModelScope.launch(dispatcher) {
             try {
-                _saveRecordsState.update { ViewModelState.Loading(true) }
+                _saveRecordsState.update { com.kalex.bookyouu_notesapp.core.common.ViewModelState.Loading(true) }
                 notesRepositoryImpl.createNotes(
                     Note(
                         subjectId = subjectId,
@@ -91,44 +90,44 @@ class RecordsViewModel @Inject constructor(
                         noteDescription = noteDescription,
                     ),
                 )
-                _saveRecordsState.update { ViewModelState.Success(Unit) }
+                _saveRecordsState.update { com.kalex.bookyouu_notesapp.core.common.ViewModelState.Success(Unit) }
             } catch (e: Exception) {
-                _saveRecordsState.update { ViewModelState.Error(e) }
+                _saveRecordsState.update { com.kalex.bookyouu_notesapp.core.common.ViewModelState.Error(e) }
             }
         }
     }
 
     private val _getRecordState =
-        MutableStateFlow<ViewModelState<Note>>(ViewModelState.Loading(true))
-    val getRecordState: StateFlow<ViewModelState<Note>>
+        MutableStateFlow<com.kalex.bookyouu_notesapp.core.common.ViewModelState<Note>>(com.kalex.bookyouu_notesapp.core.common.ViewModelState.Loading(true))
+    val getRecordState: StateFlow<com.kalex.bookyouu_notesapp.core.common.ViewModelState<Note>>
         get() = _getRecordState.asStateFlow()
 
     fun getRecordById(recordId: Int) {
         viewModelScope.launch(dispatcher) {
             try {
-                _getRecordState.update { ViewModelState.Loading(true) }
+                _getRecordState.update { com.kalex.bookyouu_notesapp.core.common.ViewModelState.Loading(true) }
                 notesRepositoryImpl.getNoteById(recordId).collectLatest { note: Note ->
-                    _getRecordState.update { ViewModelState.Success(note) }
+                    _getRecordState.update { com.kalex.bookyouu_notesapp.core.common.ViewModelState.Success(note) }
                 }
             } catch (e: Exception) {
-                _getRecordState.update { ViewModelState.Error(e) }
+                _getRecordState.update { com.kalex.bookyouu_notesapp.core.common.ViewModelState.Error(e) }
             }
         }
     }
 
     private val _deleteRecordsState =
-        MutableStateFlow<ViewModelState<Unit>>(ViewModelState.Loading(true))
-    val deleteRecordsState: StateFlow<ViewModelState<Unit>>
+        MutableStateFlow<com.kalex.bookyouu_notesapp.core.common.ViewModelState<Unit>>(com.kalex.bookyouu_notesapp.core.common.ViewModelState.Loading(true))
+    val deleteRecordsState: StateFlow<com.kalex.bookyouu_notesapp.core.common.ViewModelState<Unit>>
         get() = _deleteRecordsState.asStateFlow()
 
     fun deleteRecord(note: Note) {
         viewModelScope.launch(dispatcher) {
             try {
-                _deleteRecordsState.update { ViewModelState.Loading(true) }
+                _deleteRecordsState.update { com.kalex.bookyouu_notesapp.core.common.ViewModelState.Loading(true) }
                 notesRepositoryImpl.deleteNote(note)
-                _deleteRecordsState.update { ViewModelState.Success(Unit) }
+                _deleteRecordsState.update { com.kalex.bookyouu_notesapp.core.common.ViewModelState.Success(Unit) }
             } catch (e: Exception) {
-                _deleteRecordsState.update { ViewModelState.Error(e) }
+                _deleteRecordsState.update { com.kalex.bookyouu_notesapp.core.common.ViewModelState.Error(e) }
             }
         }
     }

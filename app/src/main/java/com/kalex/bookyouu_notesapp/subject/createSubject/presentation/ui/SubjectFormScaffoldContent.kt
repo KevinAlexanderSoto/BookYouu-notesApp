@@ -10,8 +10,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -23,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.kalex.bookyouu_notesapp.R
-import com.kalex.bookyouu_notesapp.common.composables.BYTextInput
+import com.kalex.bookyouu_notesapp.core.common.composables.BYTextInput
 import com.kalex.bookyouu_notesapp.db.data.Subject
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormInformationViewModel
 

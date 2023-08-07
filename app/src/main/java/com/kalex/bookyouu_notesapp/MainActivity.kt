@@ -6,7 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.kalex.bookyouu_notesapp.common.theme.BookYouUnotesAppTheme
+import com.kalex.bookyouu_notesapp.core.common.theme.BookYouUnotesAppTheme
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.navigation.graphs.RootNavigationGraph
 import dagger.hilt.android.AndroidEntryPoint

@@ -15,8 +15,8 @@ android {
         applicationId "com.kalex.bookyouu_notesapp"
         minSdk generalProjectVersions.minSdk
         targetSdk generalProjectVersions.targetSdk
-        versionCode 4
-        versionName "1.1.0"
+        versionCode 5
+        versionName generalProjectVersions.versionName
         setProperty("archivesBaseName", applicationId + "-v" + versionCode + "(" + versionName + ")")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

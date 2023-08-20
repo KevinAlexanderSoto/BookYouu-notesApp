@@ -133,6 +133,7 @@ dependencies {
     implementation project(path: ':core')
     implementation project(path: ':permission')
     implementation project(path: ':db')
+    implementation project(path: ':notification')
 
     //TESTING SECTION
     testImplementation libs.junit

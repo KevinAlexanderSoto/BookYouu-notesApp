@@ -12,7 +12,7 @@ class AlarmSchedulerImpl(
 ) : AlarmScheduler {
     override fun schedule(item: AlarmItem) {
         val intent = Intent(context, AlarmReceiver::class.java)
-        alarmManager.setInexactRepeating(
+        alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             item.time.atZone(ZoneId.systemDefault()).toEpochSecond() * 1000,
             AlarmManager.INTERVAL_DAY,

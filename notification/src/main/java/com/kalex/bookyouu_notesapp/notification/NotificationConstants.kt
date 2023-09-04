@@ -10,8 +10,8 @@ object NotificationConstants {
     const val SHARED_PREFERENCES_NOTIFICATION_STRING = "notification"
     val alarmItem =
         AlarmItem(
-            alarmId = 0,
-            time = LocalDateTime.now().plusSeconds((10..40000).random().toLong()),
+            alarmId = (10..20000).random(),
+            time = LocalDateTime.now().plusSeconds((10..20000).random().toLong()),
             message = NOTIFICATION_MESSAGE,
             title = NOTIFICATION_TITLE,
         )

@@ -15,7 +15,7 @@ android {
         applicationId "com.kalex.bookyouu_notesapp"
         minSdk generalProjectVersions.minSdk
         targetSdk generalProjectVersions.targetSdk
-        versionCode 5
+        versionCode generalProjectVersions.versionCode
         versionName generalProjectVersions.versionName
         setProperty("archivesBaseName", applicationId + "-v" + versionCode + "(" + versionName + ")")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

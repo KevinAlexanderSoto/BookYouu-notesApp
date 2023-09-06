@@ -22,10 +22,17 @@ sealed class BottomNavigationScreens(
         R.string.average_bottom_label,
     )
 
+    object MoreMenu : BottomNavigationScreens(
+        Route.MORE_MENU_MAIN,
+        R.drawable.settings_24px,
+        R.string.moreMenu_bottom_label,
+    )
+
     companion object {
         val bottomNavItems = listOf(
             Subject,
             Average,
+            MoreMenu,
         )
     }
 }

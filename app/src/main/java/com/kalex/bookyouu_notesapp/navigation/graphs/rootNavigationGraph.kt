@@ -18,5 +18,6 @@ fun RootNavigationGraph(
         subjectNav(rootNavController)
         recordsNav(rootNavController)
         averageNav(rootNavController)
+        moreMenuNav(rootNavController)
     }
 }

@@ -19,4 +19,7 @@ object Route {
     const val RECORDS_MAIN_REVIEW = "record_review"
     const val RECORDS_DETAIL_MAIN_ROUTE = "record_details"
     const val RECORDS_DETAIL_PARAM_SCREEN = "record_details/{noteID}"
+
+    const val MORE_MENU = "more_menu_graph"
+    const val MORE_MENU_MAIN = "more_menu_main"
 }

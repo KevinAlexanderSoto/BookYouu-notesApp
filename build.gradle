@@ -12,5 +12,6 @@ ext.generalProjectVersions = [
         compileSdk : 34,
         minSdk     : 28,
         targetSdk  : 34,
-        versionName: '1.2.0'
+        versionName: '1.2.1',
+        versionCode: 6
 ]

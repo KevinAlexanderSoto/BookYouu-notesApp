@@ -1,15 +1,15 @@
+@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.com.android.library)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
 }
 
 android {
-    namespace = "com.kalex.bookyouu_notesapp.permission"
-    compileSdk = 34
+    namespace = "com.kalex.bookyouu_notesapp.moreMenu"
+    compileSdk = ((rootProject.extra["generalProjectVersions"] as Map<*, *>)["compileSdk"] as Int)
 
     defaultConfig {
-
-        minSdkVersion((rootProject.extra["generalProjectVersions"] as Map<*, *>)["minSdk"] as Int)
+        minSdk = ((rootProject.extra["generalProjectVersions"] as Map<*, *>)["minSdk"] as Int)
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -41,6 +41,8 @@ android {
 dependencies {
 
     implementation(libs.androidx.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
 
     // COMPOSE SECTION
     implementation(libs.androidx.navigation.compose)
@@ -50,10 +52,13 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3:1.2.0-alpha01")
-    implementation(libs.androidx.material)
 
-    // TO REQUEST PERMISSIONS
-    implementation(libs.accompanist.permissions)
+    implementation(libs.androidx.foundation)
+    implementation(libs.androidx.animation)
+    implementation(libs.material3)
+    implementation(libs.androidx.runtime)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.material)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

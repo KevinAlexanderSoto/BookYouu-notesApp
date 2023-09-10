@@ -4,12 +4,15 @@ accompanist-navigation-animation = "0.31.1-alpha"
 accompanist-permissions = "0.23.1"
 activity-compose = "1.7.2"
 androidx-junit = "1.1.5"
-animation = "1.4.3"
+androidx-material3 = "1.2.0-alpha07"
+animation = "1.5.0"
 appcompat = "1.6.1"
-camera-camera2 = "1.3.0-beta02"
+camera-camera2 = "1.3.0-rc01"
+camera-camera2-mlkit = "1.3.0-beta02"
 coil-compose = "2.4.0"
 datastore-preferences = "1.0.0"
 espresso-core = "3.5.1"
+foundation = "1.5.0"
 google-material = "1.9.0"
 hilt-android = "2.46"
 hilt-navigation-compose = "1.1.0-alpha01"
@@ -18,27 +21,30 @@ kotlinx-coroutines-core = "1.7.1"
 ktx = "1.10.1"
 lifecycle-runtime-ktx = "2.6.1"
 material = "1.4.3"
-navigation-compose = "2.6.0"
+navigation-compose = "2.7.1"
 room-runtime = "2.5.2"
 agp = "8.0.0"
-org-jetbrains-kotlin-android = "1.8.10"
+org-jetbrains-kotlin-android = "1.9.0"
 com-google-android-material-material = "1.9.0"
-com-google-devtools-ksp = "1.8.10-1.0.9"
+com-google-devtools-ksp = "1.9.0-1.0.13"
+runtime = "1.5.0"
+ui = "1.5.0"
 
 [libraries]
 
 accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist-navigation-animation" }
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist-permissions" }
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
-androidx-animation = { module = "androidx.compose.animation:animation", version.ref = "animation" }
+
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camera-camera2" }
 androidx-camera-extensions = { module = "androidx.camera:camera-extensions", version.ref = "camera-camera2" }
 androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camera-camera2" }
-androidx-camera-mlkit-vision = { module = "androidx.camera:camera-mlkit-vision", version.ref = "camera-camera2" }
+androidx-camera-mlkit-vision = { module = "androidx.camera:camera-mlkit-vision", version.ref = "camera-camera2-mlkit" }
 androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "camera-camera2" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore-preferences" }
 androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
+
+androidx-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "foundation" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
 androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
@@ -47,10 +53,17 @@ androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtim
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle-runtime-ktx" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+androidx-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "runtime" }
+androidx-ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+androidx-animation = { module = "androidx.compose.animation:animation", version.ref = "animation" }
+material3 = { module = "androidx.compose.material3:material3", version.ref = "androidx-material3" }
+
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room-runtime" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room-runtime" }
 androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "room-runtime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room-runtime" }
+
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-android" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt-android" }

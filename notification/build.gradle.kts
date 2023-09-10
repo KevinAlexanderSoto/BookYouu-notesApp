@@ -8,10 +8,10 @@ plugins {
 
 android {
     namespace = "com.kalex.bookyouu_notesapp.notification"
-    compileSdk = 34
+    compileSdk = ((rootProject.extra["generalProjectVersions"] as Map<*, *>)["compileSdk"] as Int)
 
     defaultConfig {
-        minSdkVersion((rootProject.extra["generalProjectVersions"] as Map<*, *>)["minSdk"] as Int)
+        minSdk = ((rootProject.extra["generalProjectVersions"] as Map<*, *>)["minSdk"] as Int)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -32,6 +32,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = ((rootProject.extra["generalProjectVersions"] as Map<*, *>)["kotlinCompilerExtensionVersion"] as String)
     }
 }
 kapt {

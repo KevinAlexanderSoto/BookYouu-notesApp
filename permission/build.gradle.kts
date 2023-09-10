@@ -44,7 +44,7 @@ dependencies {
 
     // COMPOSE SECTION
     implementation(libs.androidx.navigation.compose)
-    implementation(platform("androidx.compose:compose-bom:2023.06.00"))
+    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")

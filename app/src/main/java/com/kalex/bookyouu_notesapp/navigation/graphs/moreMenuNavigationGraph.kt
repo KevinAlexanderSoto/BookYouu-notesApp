@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
 import com.kalex.bookyouu_notesapp.average.AverageList
+import com.kalex.bookyouu_notesapp.moreMenu.MainMoreMenu
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.navigation.ScaffoldBottomBar
 import com.kalex.bookyouu_notesapp.subject.SubjectMainScreen
@@ -24,8 +25,8 @@ fun NavGraphBuilder.moreMenuNav(rootNavController: NavHostController) {
                     rootNavController.navigate(it)
                 },
                 content = {
-
-                },
+                    MainMoreMenu()
+                }
             )
         }
     }

@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -78,7 +79,7 @@ class PagingRecordsViewModel @Inject constructor(
     }
 
     private fun sortedListNotesToCategory(result: List<Note>): List<Category> {
-        val format = SimpleDateFormat("dd/MM/yy")
+        val format = SimpleDateFormat("dd/MM/yyyy")
 
         return result.groupBy {
             format.format(it.noteDate)

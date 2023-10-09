@@ -119,7 +119,7 @@ dependencies {
     implementation libs.androidx.camera.extensions
 
     //ADBMOD
-    implementation (libs.play.services.ads)
+    //implementation (libs.play.services.ads)
 
     //Preferences DataStore
     implementation libs.androidx.datastore.preferences

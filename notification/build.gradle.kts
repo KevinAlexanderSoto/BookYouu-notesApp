@@ -1,3 +1,5 @@
+import com.android.ide.common.symbols.valueStringToInt
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.com.android.library)
@@ -8,10 +10,11 @@ plugins {
 
 android {
     namespace = "com.kalex.bookyouu_notesapp.notification"
-    compileSdk = ((rootProject.extra["generalProjectVersions"] as Map<*, *>)["compileSdk"] as Int)
+    compileSdk = valueStringToInt(libs.versions.compileSdk.get())
+
 
     defaultConfig {
-        minSdk = ((rootProject.extra["generalProjectVersions"] as Map<*, *>)["minSdk"] as Int)
+        minSdk = valueStringToInt(libs.versions.minSdk.get())
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -37,7 +40,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = ((rootProject.extra["generalProjectVersions"] as Map<*, *>)["kotlinCompilerExtensionVersion"] as String)
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
     }
 }
 kapt {

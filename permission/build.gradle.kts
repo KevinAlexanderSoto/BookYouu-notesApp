@@ -1,3 +1,5 @@
+import com.android.ide.common.symbols.valueStringToInt
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -5,11 +7,11 @@ plugins {
 
 android {
     namespace = "com.kalex.bookyouu_notesapp.permission"
-    compileSdk = 34
+    compileSdk = valueStringToInt(libs.versions.compileSdk.get())
 
     defaultConfig {
 
-        minSdkVersion((rootProject.extra["generalProjectVersions"] as Map<*, *>)["minSdk"] as Int)
+        minSdk = valueStringToInt(libs.versions.minSdk.get())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -34,7 +36,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = ((rootProject.extra["generalProjectVersions"] as Map<*, *>)["kotlinCompilerExtensionVersion"] as String)
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
     }
 }
 

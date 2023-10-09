@@ -40,7 +40,7 @@
     <string name="empty_topBar_title" />
     <string name="subject_form_title">fill all the fields</string>
     <string name="subject_form_sheet_title">Select the days of your classes</string>
-    <!-- RECORD SECTION -->
+    <!-- RECORD SECTION -->    <!-- RECORD SECTION -->    <!-- RECORD SECTION -->
     <string name="records_list_no_recordsFount_text">You do not have records in this subject</string>
     <string name="record_confirmation_buttons_title">Save the class note</string>
     <string name="record_confirmation_description_label">Description(optional)</string>
@@ -48,7 +48,7 @@
     <string name="record_delete_text">Do you what to delete this record? It will be deleted from the Gallery</string>
     <string name="record_confirm_button_text">Delete</string>
     <string name="record_cancel_button_text">Keep it</string>
-
+    <!-- AVERAGE SECTION -->    <!-- AVERAGE SECTION -->    <!-- AVERAGE SECTION -->    <!-- AVERAGE SECTION -->
     <string name="average_item_ratings_label">Enter the rating</string>
     <string name="average_item_percentage_label">%</string>
     <string name="average_percentage_average_text">You have the %1$s percentage in %2$s .</string>

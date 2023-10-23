@@ -18,11 +18,12 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SwitchCard(
+    initialState: Boolean,
     switchText: String,
     onChecked: (Boolean) -> Unit
 ) {
     Card(modifier = Modifier.wrapContentSize()) {
-        var checked by remember { mutableStateOf(true) }
+        var checked by remember { mutableStateOf(initialState) }
         Row(
             modifier = Modifier.fillMaxWidth(0.9f),
             horizontalArrangement = Arrangement.SpaceAround,

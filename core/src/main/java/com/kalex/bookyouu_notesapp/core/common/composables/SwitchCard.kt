@@ -44,7 +44,7 @@ fun SwitchCard(
 @Preview
 @Composable
 fun SwitchCardPreview() {
-    SwitchCard(switchText = "Activar feature", {
+    /*SwitchCard(switchText = "Activar feature", {
 
-    })
+    })*/
 }

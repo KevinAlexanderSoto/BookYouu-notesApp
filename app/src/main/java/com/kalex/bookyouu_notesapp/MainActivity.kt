@@ -1,6 +1,5 @@
 package com.kalex.bookyouu_notesapp
 
-import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
@@ -13,11 +12,9 @@ import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.kalex.bookyouu_notesapp.authentication.FingerPrintAuthenticationViewModel
-import com.kalex.bookyouu_notesapp.authentication.FingerPrintBaseScreen
+import com.kalex.bookyouu_notesapp.core.common.getNotificationFlag
 import com.kalex.bookyouu_notesapp.core.common.theme.BookYouUnotesAppTheme
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.navigation.graphs.RootNavigationGraph
@@ -41,12 +38,6 @@ class MainActivity : ComponentActivity() {
             BookYouUnotesAppTheme {
                 val navController = rememberAnimatedNavController()
                 val context = LocalContext.current
-                val authenticationFlag = context.getAuthenticationFlag()
-                val fingerPrintAuthentication: FingerPrintAuthenticationViewModel = hiltViewModel()
-                if (authenticationFlag?.toBooleanStrictOrNull() == true) {
-                    fingerPrintAuthentication.launchBiometric()
-                    FingerPrintBaseScreen()
-                } else {
                     RequireNotificationPermission(
                         onPermissionDenied = {
                             context.startActivity(
@@ -63,33 +54,11 @@ class MainActivity : ComponentActivity() {
                             })
                             RootNavigationGraph(
                                 navController,
-                                startDestination = Route.SUBJECT,
+                                startDestination = Route.AUTHENTICATION_ROUTE,
                             )
                         },
                     )
-                }
             }
         }
     }
-
-    private fun Context.getNotificationFlag() = this
-        .getSharedPreferences(
-            NotificationConstants.SHARED_PREFERENCES_NOTIFICATION_FLAG,
-            Context.MODE_PRIVATE,
-        )
-        .getString(
-            NotificationConstants.SHARED_PREFERENCES_NOTIFICATION_STRING,
-            null,
-        )
-
-    private fun Context.getAuthenticationFlag() = this
-        .getSharedPreferences(
-            "AUTHENTICATION_PREFERENCES_FLAG",
-            Context.MODE_PRIVATE,
-        )
-        .getString(
-            "AUTHENTICATION_PREFERENCES_STRING",
-            null,
-        )
-
 }

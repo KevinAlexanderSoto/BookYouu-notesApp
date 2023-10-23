@@ -13,9 +13,13 @@ import androidx.annotation.StringRes
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModel
 import com.kalex.bookyouu_notesapp.R
+import com.kalex.bookyouu_notesapp.core.common.ViewModelState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,8 +29,9 @@ class FingerPrintAuthenticationViewModel @Inject constructor(
 
     private var cancellationSignal: CancellationSignal? = null
 
-    private val _authenticationResult = MutableStateFlow(false)
-    val authenticationResult: StateFlow<Boolean> = _authenticationResult
+    private val _authenticationResult = MutableStateFlow<ViewModelState<Boolean>>(ViewModelState.Loading(true))
+    val authenticationResultState
+    get() = _authenticationResult.asStateFlow()
 
     @RequiresApi(Build.VERSION_CODES.Q)
     fun launchBiometric() {
@@ -50,20 +55,21 @@ class FingerPrintAuthenticationViewModel @Inject constructor(
                 context.mainExecutor,
                 authenticationCallback,
             )
+        }else{
+            _authenticationResult.update { ViewModelState.Error(Exception()) }
         }
     }
 
     private val authenticationCallback: BiometricPrompt.AuthenticationCallback =
-        @RequiresApi(Build.VERSION_CODES.P)
         object : BiometricPrompt.AuthenticationCallback() {
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
                 super.onAuthenticationSucceeded(result)
-                _authenticationResult.value = true
+                _authenticationResult.update { ViewModelState.Success(true) }
             }
 
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
                 super.onAuthenticationError(errorCode, errString)
-                _authenticationResult.value = false
+                _authenticationResult.update { ViewModelState.Error(Exception()) }
             }
 
             override fun onAuthenticationFailed() {
@@ -99,7 +105,7 @@ class FingerPrintAuthenticationViewModel @Inject constructor(
     private fun getCancellationSignal(): CancellationSignal {
         cancellationSignal = CancellationSignal()
         cancellationSignal?.setOnCancelListener {
-            // TODO
+            _authenticationResult.update { ViewModelState.Error(Exception()) }
         }
 
         return cancellationSignal as CancellationSignal

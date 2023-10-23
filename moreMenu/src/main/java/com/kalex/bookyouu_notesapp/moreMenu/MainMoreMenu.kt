@@ -12,7 +12,10 @@ import androidx.compose.ui.unit.sp
 import com.kalex.bookyouu_notesapp.core.common.composables.SwitchCard
 
 @Composable
-fun MainMoreMenu() {
+fun MainMoreMenu(
+    onBiometricAction: (Boolean) -> Unit,
+    onNotificationAction: (Boolean) -> Unit
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,
@@ -23,12 +26,18 @@ fun MainMoreMenu() {
             fontSize = 24.sp,
         )
         SwitchCard(
+            initialState = false,
             switchText = "Activar seguridad biometrica",
-            onChecked = {}
+            onChecked = {
+                onBiometricAction(it)
+            }
         )
         SwitchCard(
+            initialState = true,
             switchText = "Activar notificaciones",
-            onChecked = {}
+            onChecked = {
+                onNotificationAction(it)
+            }
         )
     }
 }

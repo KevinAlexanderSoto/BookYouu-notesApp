@@ -4,6 +4,8 @@ import com.android.ide.common.symbols.valueStringToInt
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -39,7 +41,9 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
     }
 }
-
+kapt {
+    correctErrorTypes = true
+}
 dependencies {
 
     implementation(libs.androidx.ktx)
@@ -61,6 +65,12 @@ dependencies {
     implementation(libs.androidx.runtime)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.material)
+
+    //Dagger - Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
     implementation( project(":core") )
 
     testImplementation(libs.junit)

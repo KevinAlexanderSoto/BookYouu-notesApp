@@ -20,19 +20,12 @@ fun NavGraphBuilder.moreMenuNav(rootNavController: NavHostController) {
         startDestination = Route.MORE_MENU_MAIN,
     ) {
         composable(route = Route.MORE_MENU_MAIN) {
-            val moreMenuViewModel: SwitchMenuViewModel = hiltViewModel()
+
             ScaffoldBottomBar(currentDestination = Route.MORE_MENU_MAIN, onBottomNavigationClick = {
                 rootNavController.popBackStack()
                 rootNavController.navigate(it)
             }, content = {
-                MainMoreMenu(
-                    onBiometricAction = {
-                        moreMenuViewModel.authenticationSwitchState(it)
-                    },
-                    onNotificationAction = {
-                        moreMenuViewModel.notificationSwitchState(it)
-                    }
-                )
+                MainMoreMenu()
             })
         }
     }

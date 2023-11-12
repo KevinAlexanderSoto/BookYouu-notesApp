@@ -10,14 +10,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.kalex.bookyouu_notesapp.core.common.ViewModelState
 import com.kalex.bookyouu_notesapp.core.common.composables.SwitchCard
 import com.kalex.bookyouu_notesapp.core.common.getAuthenticationFlag
 import com.kalex.bookyouu_notesapp.core.common.getNotificationFlag
+import kotlinx.coroutines.flow.update
 
 @Composable
 fun MainMoreMenu(
-    onBiometricAction: (Boolean) -> Unit,
-    onNotificationAction: (Boolean) -> Unit
+    moreMenuViewModel: SwitchMenuViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
     Column(
@@ -33,14 +35,14 @@ fun MainMoreMenu(
             initialState = context.getAuthenticationFlag()?.toBooleanStrictOrNull() ?: false,
             switchText = "Activar seguridad biometrica",
             onChecked = {
-                onBiometricAction(it)
+                moreMenuViewModel.authenticationSwitchState(it)
             }
         )
         SwitchCard(
             initialState = !context.getNotificationFlag().isNullOrEmpty(),
             switchText = "Activar notificaciones",
             onChecked = {
-                onNotificationAction(it)
+                moreMenuViewModel.notificationSwitchState(it)
             }
         )
     }

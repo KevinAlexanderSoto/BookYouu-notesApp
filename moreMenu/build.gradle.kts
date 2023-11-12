@@ -72,6 +72,7 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
 
     implementation( project(":core") )
+    implementation(project(mapOf("path" to ":authentication")))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

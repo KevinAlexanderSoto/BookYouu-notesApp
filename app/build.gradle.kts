@@ -144,6 +144,7 @@ dependencies {
     implementation(project(mapOf("path" to ":db")))
     implementation(project(mapOf("path" to ":notification")))
     implementation(project(mapOf("path" to ":moreMenu")))
+    implementation(project(mapOf("path" to ":authentication")))
 
     //TESTING SECTION
     testImplementation(libs.junit)

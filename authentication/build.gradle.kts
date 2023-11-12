@@ -2,14 +2,16 @@
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
     namespace = "com.kalex.bookyouu_notesapp.authentication"
-    compileSdk = 33
+    compileSdk = com.android.ide.common.symbols.valueStringToInt(libs.versions.compileSdk.get())
 
     defaultConfig {
-        minSdk = 28
+        minSdk = com.android.ide.common.symbols.valueStringToInt(libs.versions.minSdk.get())
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -25,19 +27,61 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
     }
 }
-
+kapt {
+    correctErrorTypes = true
+}
 dependencies {
+
 
     implementation(libs.androidx.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    // COMPOSE SECTION
+    implementation(libs.androidx.navigation.compose)
+    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
+    implementation("androidx.compose.foundation:foundation")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3:1.2.0-alpha01")
+
+    implementation(libs.androidx.foundation)
+    implementation(libs.androidx.animation)
+    implementation(libs.material3)
+    implementation(libs.androidx.runtime)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.material)
+// Coroutines
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+
+    // Coroutine Lifecycle Scopes
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    //Dagger - Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+    //BIOMETRICS
+    implementation(libs.androidx.biometric)
+    implementation(project(":core"))
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

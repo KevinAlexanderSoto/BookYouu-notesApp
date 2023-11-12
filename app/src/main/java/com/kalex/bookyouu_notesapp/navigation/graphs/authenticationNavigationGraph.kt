@@ -18,7 +18,7 @@ fun NavGraphBuilder.authenticationGraph(rootNavController: NavHostController) {
         startDestination = Route.AUTHENTICATION_SCREEN,
     ) {
         composable(route = Route.AUTHENTICATION_SCREEN) {
-            com.kalex.bookyouu_notesapp.authentication.AuthenticationMain(
+            AuthenticationMain(
                 onNavigateToMainApplication = {
                     rootNavController.popBackStack()
                     rootNavController.navigate(Route.SUBJECT)

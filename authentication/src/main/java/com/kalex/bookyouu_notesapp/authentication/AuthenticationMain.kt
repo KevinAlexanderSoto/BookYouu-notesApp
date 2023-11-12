@@ -2,6 +2,8 @@ package com.kalex.bookyouu_notesapp.authentication
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
@@ -20,15 +22,32 @@ fun AuthenticationMain(
     val authenticationFlag = context.getAuthenticationFlag()
 
     if (authenticationFlag?.toBooleanStrictOrNull() == true) {
-        LaunchedEffect(key1 = Unit, block = { fingerPrintAuthentication.launchBiometric() })
+        LaunchedEffect(
+            key1 = Unit,
+            block = {
+                val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                    .setTitle("Biometric login for my app")
+                    .setSubtitle("Log in using your biometric credential")
+                    .setNegativeButtonText("negative button")
+                    .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG)
+                    .build()
+                fingerPrintAuthentication.authenticate(context, promptInfo)
+            }
+        )
         handleViewModelState(
             fingerPrintAuthentication.authenticationResultState.collectAsStateWithLifecycle(),
             onEmpty = { },
             onLoading = {  },
             onSuccess = { onNavigateToMainApplication() },
-            onError = {
+            onError = { exception ->
                 FingerPrintBaseScreen(onAuthenticateButtonClick = {
-                    fingerPrintAuthentication.launchBiometric()
+                    val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                        .setTitle("Biometric login for my app")
+                        .setSubtitle("Log in using your biometric credential")
+                        .setNegativeButtonText("negative button")
+                        .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG)
+                        .build()
+                    fingerPrintAuthentication.authenticate(context, promptInfo)
                 })
             },
         )

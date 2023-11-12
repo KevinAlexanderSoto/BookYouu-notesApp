@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
+import androidx.fragment.app.FragmentActivity
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.core.common.getNotificationFlag
@@ -24,8 +25,11 @@ import com.kalex.bookyouu_notesapp.permission.RequireNotificationPermission
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+/**
+ * used the FragmentActivity to use the  androidx.biometric in order to support API level < 29
+ * **/
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : FragmentActivity() {
     @Inject
     lateinit var alarmScheduler: AlarmScheduler
 

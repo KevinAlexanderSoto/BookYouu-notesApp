@@ -2,9 +2,11 @@ package com.kalex.bookyouu_notesapp.records.recordsDetails
 
 import androidx.compose.foundation.gestures.rememberTransformableState
 import androidx.compose.foundation.gestures.transformable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +23,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import coil.compose.AsyncImage
+import com.kalex.bookyouu_notesapp.ads.AdmobBanner
+import com.kalex.bookyouu_notesapp.ads.AdsUniqueIds
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -45,7 +49,7 @@ fun RecordDetail(
         val format = SimpleDateFormat("dd/MM/yy")
         dateText = format.format(noteDate)
     }
-    Column(
+    Box(
         modifier = Modifier
             .padding(paddingValues)
             .fillMaxSize(),
@@ -55,7 +59,7 @@ fun RecordDetail(
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold,
             textDecoration = TextDecoration.Underline,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
+            modifier = Modifier.align(Alignment.TopCenter),
         )
 
         AsyncImage(
@@ -70,6 +74,10 @@ fun RecordDetail(
                 )
                 .transformable(state = state)
                 .fillMaxSize(),
+        )
+        AdmobBanner(
+            modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter),
+            AdsUniqueIds.RecordsDetailsBottom
         )
     }
 }

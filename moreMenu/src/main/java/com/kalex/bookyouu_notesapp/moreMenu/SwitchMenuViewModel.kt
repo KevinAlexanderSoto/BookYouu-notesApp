@@ -3,48 +3,38 @@ package com.kalex.bookyouu_notesapp.moreMenu
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.kalex.bookyouu_notesapp.authentication.BiometricSupportUseCase
+import com.kalex.bookyouu_notesapp.notification.AlarmScheduler
+import com.kalex.bookyouu_notesapp.notification.NotificationConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 @HiltViewModel
 class SwitchMenuViewModel @Inject constructor(
-    @ApplicationContext val context: Context,
     private val biometricSupport: BiometricSupportUseCase,
+    private val moreMenuFlagsUseCase: MoreMenuFlagsUseCase,
+    private val alarmScheduler: AlarmScheduler,
 ) : ViewModel() {
 
     fun authenticationSwitchState(isActive: Boolean) {
         if (isActive) {
             if (biometricSupport.checkBiometricSupport()) {
-                context.getSharedPreferences(
-                    "AUTHENTICATION_PREFERENCES_FLAG",
-                    Context.MODE_PRIVATE,
-                )
-                    .edit()
-                    .putString(
-                        "AUTHENTICATION_PREFERENCES_STRING",
-                        "true",
-                    )
-                    .apply()
+                moreMenuFlagsUseCase.activateBiometricFlag()
             } else {
-               //TODO
+                //TODO: not biometric support
             }
-
         } else {
-            context.getSharedPreferences(
-                "AUTHENTICATION_PREFERENCES_FLAG",
-                Context.MODE_PRIVATE,
-            )
-                .edit()
-                .putString(
-                    "AUTHENTICATION_PREFERENCES_STRING",
-                    "false",
-                )
-                .apply()
+            moreMenuFlagsUseCase.deactivateBiometricFlag()
         }
     }
 
     fun notificationSwitchState(isActive: Boolean) {
-
+        if (isActive) {
+            moreMenuFlagsUseCase.activateNotificationFlag()
+            alarmScheduler.schedule(NotificationConstants.alarmItem)
+        } else {
+            moreMenuFlagsUseCase.deactivateNotificationFlag()
+            alarmScheduler.cancel(NotificationConstants.alarmItem)
+        }
     }
 }

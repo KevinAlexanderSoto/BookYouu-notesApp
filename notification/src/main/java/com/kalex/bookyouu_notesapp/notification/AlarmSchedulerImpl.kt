@@ -23,16 +23,6 @@ class AlarmSchedulerImpl(
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
             ),
         )
-        context.getSharedPreferences(
-            NotificationConstants.SHARED_PREFERENCES_NOTIFICATION_FLAG,
-            Context.MODE_PRIVATE,
-        )
-            .edit()
-            .putString(
-                NotificationConstants.SHARED_PREFERENCES_NOTIFICATION_STRING,
-                "true",
-            )
-            .apply()
     }
 
     override fun cancel(item: AlarmItem) {

@@ -73,7 +73,7 @@ dependencies {
 
     implementation( project(":core") )
     implementation(project(mapOf("path" to ":authentication")))
-
+    implementation(project(mapOf("path" to ":notification")))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -17,6 +17,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.core.common.getNotificationFlag
 import com.kalex.bookyouu_notesapp.core.theme.BookYouUnotesAppTheme
+import com.kalex.bookyouu_notesapp.moreMenu.MoreMenuFlagsUseCase
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.navigation.graphs.RootNavigationGraph
 import com.kalex.bookyouu_notesapp.notification.AlarmScheduler
@@ -32,6 +33,8 @@ import javax.inject.Inject
 class MainActivity : FragmentActivity() {
     @Inject
     lateinit var alarmScheduler: AlarmScheduler
+    @Inject
+    lateinit var moreMenuFlagsUseCase: MoreMenuFlagsUseCase
 
     @RequiresApi(Build.VERSION_CODES.Q)
     @OptIn(ExperimentalAnimationApi::class, ExperimentalPermissionsApi::class)
@@ -42,6 +45,7 @@ class MainActivity : FragmentActivity() {
             BookYouUnotesAppTheme {
                 val navController = rememberAnimatedNavController()
                 val context = LocalContext.current
+
                     RequireNotificationPermission(
                         onPermissionDenied = {
                             context.startActivity(
@@ -54,6 +58,7 @@ class MainActivity : FragmentActivity() {
                             LaunchedEffect(key1 = Unit, block = {
                                 if (context.getNotificationFlag().isNullOrEmpty()) {
                                     alarmScheduler.schedule(NotificationConstants.alarmItem)
+                                    moreMenuFlagsUseCase.activateNotificationFlag()
                                 }
                             })
                             RootNavigationGraph(

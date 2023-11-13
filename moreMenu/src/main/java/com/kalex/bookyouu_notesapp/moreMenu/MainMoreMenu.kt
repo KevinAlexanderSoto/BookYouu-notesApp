@@ -39,7 +39,7 @@ fun MainMoreMenu(
             }
         )
         SwitchCard(
-            initialState = !context.getNotificationFlag().isNullOrEmpty(),
+            initialState = context.getNotificationFlag()?.toBooleanStrictOrNull() ?: false,
             switchText = stringResource(id = R.string.more_menu_notifications_item_text),
             onChecked = {
                 moreMenuViewModel.notificationSwitchState(it)

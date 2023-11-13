@@ -47,6 +47,9 @@
             </intent-filter>
         </activity>
         <receiver android:name=".notification.AlarmReceiver" android:enabled="true" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5709056978356073~3916644415" />
     </application>
 
 </manifest>

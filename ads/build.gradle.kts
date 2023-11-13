@@ -1,19 +1,16 @@
-import com.android.ide.common.symbols.valueStringToInt
-
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
 }
 
 android {
-    namespace = "com.kalex.bookyouu_notesapp.moreMenu"
-    compileSdk = valueStringToInt(libs.versions.compileSdk.get())
+    namespace = "com.kalex.bookyouu_notesapp.ads"
+    compileSdk = com.android.ide.common.symbols.valueStringToInt(libs.versions.compileSdk.get())
 
     defaultConfig {
-        minSdk = valueStringToInt(libs.versions.minSdk.get())
+        minSdk = com.android.ide.common.symbols.valueStringToInt(libs.versions.minSdk.get())
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -23,7 +20,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                "proguard-rules.pro"
             )
         }
     }
@@ -41,9 +38,7 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
     }
 }
-kapt {
-    correctErrorTypes = true
-}
+
 dependencies {
 
     implementation(libs.androidx.ktx)
@@ -65,17 +60,11 @@ dependencies {
     implementation(libs.androidx.runtime)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.material)
-
-    //Dagger - Hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
+//ADBMOD
+    implementation (libs.play.services.ads)
 
     implementation( project(":core") )
-    implementation(project(mapOf("path" to ":authentication")))
-    implementation(project(mapOf("path" to ":notification")))
-    implementation(project(mapOf("path" to ":ads")))
-    
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

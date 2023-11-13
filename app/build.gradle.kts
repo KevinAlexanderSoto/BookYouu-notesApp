@@ -125,7 +125,7 @@ dependencies {
     implementation(libs.androidx.camera.extensions)
 
     //ADBMOD
-    //implementation (libs.play.services.ads)
+    implementation (libs.play.services.ads)
 
     //Preferences DataStore
     implementation(libs.androidx.datastore.preferences)
@@ -145,6 +145,7 @@ dependencies {
     implementation(project(mapOf("path" to ":notification")))
     implementation(project(mapOf("path" to ":moreMenu")))
     implementation(project(mapOf("path" to ":authentication")))
+    implementation(project(mapOf("path" to ":ads")))
 
     //TESTING SECTION
     testImplementation(libs.junit)

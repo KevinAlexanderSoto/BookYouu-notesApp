@@ -32,6 +32,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kalex.bookyouu_notesapp.R
+import com.kalex.bookyouu_notesapp.ads.AdmobBanner
+import com.kalex.bookyouu_notesapp.ads.AdsUniqueIds
 import java.math.RoundingMode
 import kotlin.math.roundToInt
 
@@ -52,6 +54,10 @@ fun AverageList(
     Column(
         modifier = Modifier.fillMaxSize().padding(paddingValues),
     ) {
+        AdmobBanner(
+            modifier = Modifier.fillMaxWidth(),
+            AdsUniqueIds.AverageTop
+        )
         Box(
             Modifier
                 .padding(top = 20.dp)

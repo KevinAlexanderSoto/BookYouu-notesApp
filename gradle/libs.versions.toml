@@ -3,7 +3,7 @@ compileSdk = "34"
 minSdk = "28"
 targetSdk = "34"
 versionName = "1.3.0"
-versionCode = "6"
+versionCode = "7"
 kotlinCompilerExtensionVersion = "1.5.2"
 
 biometric = "1.2.0-alpha05"

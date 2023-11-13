@@ -11,7 +11,7 @@ object NotificationConstants {
     val alarmItem =
         AlarmItem(
             alarmId = (10..20000).random(),
-            time = LocalDateTime.now().plusSeconds((10..20000).random().toLong()),
+            time = LocalDateTime.now().plusSeconds((10..2000).random().toLong()),
             message = NOTIFICATION_MESSAGE,
             title = NOTIFICATION_TITLE,
         )

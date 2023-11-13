@@ -1,0 +1,5 @@
+<resources>
+    <string name="more_menu_screen_title">Configuración</string>
+    <string name="more_menu_biometric_item_text">Activar seguridad biometrica</string>
+    <string name="more_menu_notifications_item_text">Activar notificaciones</string>
+</resources>

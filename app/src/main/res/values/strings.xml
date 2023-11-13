@@ -3,6 +3,7 @@
     <!-- BOTTOM MENU SECTION -->
     <string name="subject_bottom_label">Subjects</string>
     <string name="average_bottom_label">Average</string>
+    <string name="moreMenu_bottom_label">Settings</string>
     <!--SUBJECT SECTION-->
     <string name="subject_list_no_subjectsFount_text">Upss… You do not have subjects, add one to start</string>
     <string name="subject_list_no_subjectsFount_ButtonText">Add</string>
@@ -39,7 +40,7 @@
     <string name="empty_topBar_title" />
     <string name="subject_form_title">fill all the fields</string>
     <string name="subject_form_sheet_title">Select the days of your classes</string>
-    <!-- RECORD SECTION -->
+    <!-- RECORD SECTION -->    <!-- RECORD SECTION -->    <!-- RECORD SECTION -->
     <string name="records_list_no_recordsFount_text">You do not have records in this subject</string>
     <string name="record_confirmation_buttons_title">Save the class note</string>
     <string name="record_confirmation_description_label">Description(optional)</string>
@@ -47,7 +48,7 @@
     <string name="record_delete_text">Do you what to delete this record? It will be deleted from the Gallery</string>
     <string name="record_confirm_button_text">Delete</string>
     <string name="record_cancel_button_text">Keep it</string>
-
+    <!-- AVERAGE SECTION -->    <!-- AVERAGE SECTION -->    <!-- AVERAGE SECTION -->    <!-- AVERAGE SECTION -->
     <string name="average_item_ratings_label">Enter the rating</string>
     <string name="average_item_percentage_label">%</string>
     <string name="average_percentage_average_text">You have the %1$s percentage in %2$s .</string>
@@ -57,5 +58,11 @@
     <string name="average_calculate_button_text">Calculate</string>
     <string name="average_title">Average</string>
     <string name="record_list_end_text">There are no more items to show.</string>
+
+
+    <string name="prompt_info_title">Porfavor coloque su huella para acceder \n</string>
+    <string name="prompt_info_subtitle">Please login to get access</string>
+    <string name="prompt_info_description">Recuerda haber ingresado por lo menos una vez con correo y contraseña</string>
+    <string name="prompt_info_use_app_password">Usar contraseña</string>
 
 </resources>

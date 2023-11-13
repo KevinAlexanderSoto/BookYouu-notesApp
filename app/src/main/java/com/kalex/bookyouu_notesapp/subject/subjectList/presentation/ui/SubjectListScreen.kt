@@ -22,6 +22,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kalex.bookyouu_notesapp.R
+import com.kalex.bookyouu_notesapp.ads.AdmobBanner
+import com.kalex.bookyouu_notesapp.ads.AdsUniqueIds
 import com.kalex.bookyouu_notesapp.db.data.Subject
 import com.kalex.bookyouu_notesapp.subject.createSubject.DayOfWeekStringFactory
 
@@ -53,6 +55,10 @@ fun SubjectListScreen(
                 Icon(Icons.Default.Add, contentDescription = "add new")
             }
         }
+        AdmobBanner(
+            modifier = Modifier.fillMaxWidth(),
+            AdsUniqueIds.SubjectMainTop
+        )
         LazyColumn {
             items(subjectList.size, key = { subjectList[it].subjectId }) {
                 Row(modifier = Modifier.animateItemPlacement(tween(durationMillis = 250))) {

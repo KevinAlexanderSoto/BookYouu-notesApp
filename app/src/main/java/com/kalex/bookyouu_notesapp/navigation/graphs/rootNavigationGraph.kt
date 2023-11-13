@@ -15,8 +15,10 @@ fun RootNavigationGraph(
         navController = rootNavController,
         startDestination = startDestination,
     ) {
+        authenticationGraph(rootNavController)
         subjectNav(rootNavController)
         recordsNav(rootNavController)
         averageNav(rootNavController)
+        moreMenuNav(rootNavController)
     }
 }

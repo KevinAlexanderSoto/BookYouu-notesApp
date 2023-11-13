@@ -1,7 +1,8 @@
 package com.kalex.bookyouu_notesapp.navigation
 
 object Route {
-    const val ROOT = "root_graph"
+    const val AUTHENTICATION_ROUTE = "authentication_graph"
+    const val AUTHENTICATION_SCREEN = "authentication_main_screen"
     const val SUBJECT = "subject_graph"
     const val SUBJECT_LIST = "subject_list"
     const val SUBJECT_FORM = "subject_form"
@@ -19,4 +20,7 @@ object Route {
     const val RECORDS_MAIN_REVIEW = "record_review"
     const val RECORDS_DETAIL_MAIN_ROUTE = "record_details"
     const val RECORDS_DETAIL_PARAM_SCREEN = "record_details/{noteID}"
+
+    const val MORE_MENU = "more_menu_graph"
+    const val MORE_MENU_MAIN = "more_menu_main"
 }

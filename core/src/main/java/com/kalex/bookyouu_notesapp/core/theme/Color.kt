@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.core.common.theme
+package com.kalex.bookyouu_notesapp.core.theme
 
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
@@ -6,6 +6,8 @@ import androidx.compose.ui.graphics.Color
 
 val black = Color(0xffff000000)
 val white = Color(0xffffffff)
+
+val black2 = Color(0xff101018)
 
 val Primary = Color(0xff48680d)
 val OnPrimary = Color(0xffffffff)

@@ -171,7 +171,7 @@ fun RecordReview(
                         voiceNoteUri = audioRecordViewModel.getCurrentPath(),
                         noteDescription = description.value,
                     )
-                    com.kalex.bookyouu_notesapp.core.common.handleViewModelState(
+                    handleViewModelState(
                         collectAsState = recordsViewModel.saveRecordsState,
                         scope = scope,
                         onLoading = { loadingState.value = true },
@@ -208,12 +208,7 @@ fun RecordAudioButton(
             .pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
-                        try {
-                            isPressed = true
-                            awaitRelease()
-                        } finally {
-                            isPressed = false
-                        }
+                        isPressed = !isPressed
                     },
                 )
             },

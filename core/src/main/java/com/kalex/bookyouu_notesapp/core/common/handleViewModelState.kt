@@ -45,14 +45,14 @@ fun <T> handleViewModelState(
     onLoading: @Composable () -> Unit,
     onSuccess: @Composable (T) -> Unit,
     onEmpty: @Composable () -> Unit,
-    onError: @Composable () -> Unit,
+    onError: @Composable (exception: Exception) -> Unit,
 ) {
     when (val response = stateFlow.value) {
         is ViewModelState.Empty -> {
             onEmpty()
         }
 
-        is ViewModelState.Error -> onError()
+        is ViewModelState.Error -> onError(response.exception)
         is ViewModelState.Loading -> onLoading()
         is ViewModelState.Success -> {
             onSuccess(response.data)

@@ -3,6 +3,7 @@ package com.kalex.bookyouu_notesapp.records
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -29,11 +30,12 @@ import com.kalex.bookyouu_notesapp.core.common.composables.EmptyScreen
 import com.kalex.bookyouu_notesapp.core.common.decodeUri
 import com.kalex.bookyouu_notesapp.core.common.handleViewModelState
 import com.kalex.bookyouu_notesapp.permission.RequireCameraPermission
+import com.kalex.bookyouu_notesapp.records.recordList.CategoryHeader
 import com.kalex.bookyouu_notesapp.records.recordList.RecordItem
 import kotlinx.coroutines.launch
 import java.io.File
 
-@OptIn(ExperimentalPermissionsApi::class)
+@OptIn(ExperimentalPermissionsApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun RecordsMainScreen(
     paddingValues: PaddingValues,
@@ -85,43 +87,48 @@ fun RecordsMainScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(paddingValues),
         ) {
-            items(
-                noteList.value.size,
-                key = { noteList.value[it].noteId },
-            ) {
-                RecordItem(
-                    noteList.value[it].imgUrl.decodeUri(),
-                    voiceUri = noteList.value[it].voiceUri,
-                    recordDescription = noteList.value[it].noteDescription,
-                    onRecordClick = { onRecordDetail(noteList.value[it].noteId) },
-                    onDeleteRecord = {
-                        recordsViewModel.deleteRecord(noteList.value[it])
-                        coroutineScope.launch {
-                            context.contentResolver.delete(
-                                noteList.value[it].imgUrl.decodeUri(),
-                                null,
-                                null,
-                            )
-                            if (noteList.value[it].voiceUri.isNotEmpty()) {
-                                File(noteList.value[it].voiceUri).delete()
-                            }
+            noteList.value.forEach { category ->
+                stickyHeader {
+                    CategoryHeader(category.name)
+                }
+                items(
+                    category.items.size,
+                    key = { category.items[it].noteId },
+                ) {
+                    RecordItem(
+                        category.items[it].imgUrl.decodeUri(),
+                        voiceUri = category.items[it].voiceUri,
+                        recordDescription = category.items[it].noteDescription,
+                        onRecordClick = { onRecordDetail(category.items[it].noteId) },
+                        onDeleteRecord = {
+                            recordsViewModel.deleteRecord(category.items[it])
+                            coroutineScope.launch {
+                                context.contentResolver.delete(
+                                    category.items[it].imgUrl.decodeUri(),
+                                    null,
+                                    null,
+                                )
+                                if (category.items[it].voiceUri.isNotEmpty()) {
+                                    File(category.items[it].voiceUri).delete()
+                                }
 
-                            pagingRecordsViewModel.clearPaging()
-                            pagingRecordsViewModel.getNotes(subjectId)
-                        }
-                        handleViewModelState(
-                            collectAsState = recordsViewModel.deleteRecordsState,
-                            scope = coroutineScope,
-                            onEmpty = {},
-                            onLoading = { },
-                            onSuccess = {
-                            },
-                            onError = {
-                                TODO()
-                            },
-                        )
-                    },
-                )
+                                pagingRecordsViewModel.clearPaging()
+                                pagingRecordsViewModel.getNotes(subjectId)
+                            }
+                            handleViewModelState(
+                                collectAsState = recordsViewModel.deleteRecordsState,
+                                scope = coroutineScope,
+                                onEmpty = {},
+                                onLoading = { },
+                                onSuccess = {
+                                },
+                                onError = {
+                                    TODO()
+                                },
+                            )
+                        },
+                    )
+                }
             }
             when (pagingState.value) {
                 PaginationState.REQUEST_INACTIVE -> {

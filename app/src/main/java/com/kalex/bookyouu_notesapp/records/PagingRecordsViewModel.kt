@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kalex.bookyouu_notesapp.db.data.Note
 import com.kalex.bookyouu_notesapp.records.data.NotesRepository
+import com.kalex.bookyouu_notesapp.records.recordList.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +15,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,8 +26,8 @@ class PagingRecordsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _notesList =
-        MutableStateFlow<MutableList<Note>>(mutableListOf())
-    val notesList: StateFlow<List<Note>>
+        MutableStateFlow<MutableList<Category>>(mutableListOf())
+    val notesList: StateFlow<List<Category>>
         get() = _notesList.asStateFlow()
 
     private val _pagingState =
@@ -41,8 +44,8 @@ class PagingRecordsViewModel @Inject constructor(
         }
         viewModelScope.launch(dispatcher) {
             try {
-                val result = notesRepositoryImpl.getPagingNotesByDate(subjectID, PAGE_SIZE, page * PAGE_SIZE)
-
+                val result =
+                    notesRepositoryImpl.getPagingNotesByDate(subjectID, PAGE_SIZE, page * PAGE_SIZE)
                 canPaginate = result.size == PAGE_SIZE
 
                 if (page == INITIAL_PAGE) {
@@ -51,9 +54,13 @@ class PagingRecordsViewModel @Inject constructor(
                         return@launch
                     }
                     _notesList.value.clear()
-                    _notesList.value.addAll(result)
+
+                    val dataMap = sortedListNotesToCategory(result)
+                    _notesList.value.addAll(dataMap)
+
                 } else {
-                    _notesList.value.addAll(result)
+                    val dataMap = sortedListNotesToCategory(result)
+                    _notesList.value.addAll(dataMap)
                 }
 
                 _pagingState.update { PaginationState.REQUEST_INACTIVE }
@@ -69,6 +76,21 @@ class PagingRecordsViewModel @Inject constructor(
                 _pagingState.update { if (page == INITIAL_PAGE) PaginationState.ERROR else PaginationState.PAGINATION_EXHAUST }
             }
         }
+    }
+
+    private fun sortedListNotesToCategory(result: List<Note>): List<Category> {
+        val format = SimpleDateFormat("dd/MM/yyyy")
+
+        return result.groupBy {
+            format.format(it.noteDate)
+        }
+            .toSortedMap(reverseOrder())
+            .map {
+                Category(
+                    name = it.key.toString(),
+                    items = it.value
+                )
+            }
     }
 
     fun clearPaging() {

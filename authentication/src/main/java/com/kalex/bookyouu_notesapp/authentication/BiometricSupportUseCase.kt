@@ -6,12 +6,13 @@ import android.app.KeyguardManager
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
+import javax.inject.Inject
 
 /**
  * @author kevin Alexander Soto on 11/12/2023
  * **/
-class BiometricSupportUseCase (
-    val context: Application,
+class BiometricSupportUseCase @Inject constructor(
+    val context: Context,
 ){
     fun checkBiometricSupport(): Boolean {
         val keyGuardManager = context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager

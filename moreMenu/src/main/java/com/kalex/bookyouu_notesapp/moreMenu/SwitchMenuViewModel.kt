@@ -1,12 +1,10 @@
 package com.kalex.bookyouu_notesapp.moreMenu
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.kalex.bookyouu_notesapp.authentication.BiometricSupportUseCase
 import com.kalex.bookyouu_notesapp.notification.AlarmScheduler
 import com.kalex.bookyouu_notesapp.notification.NotificationConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 @HiltViewModel

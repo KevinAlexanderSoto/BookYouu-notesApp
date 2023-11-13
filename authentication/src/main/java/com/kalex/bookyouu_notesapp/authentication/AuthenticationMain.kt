@@ -1,7 +1,5 @@
 package com.kalex.bookyouu_notesapp.authentication
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.compose.runtime.Composable
@@ -13,7 +11,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kalex.bookyouu_notesapp.core.common.getAuthenticationFlag
 import com.kalex.bookyouu_notesapp.core.common.handleViewModelState
 
-@RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun AuthenticationMain(
     onNavigateToMainApplication: () -> Unit,
@@ -27,7 +24,9 @@ fun AuthenticationMain(
         .setNegativeButtonText(stringResource(id = R.string.authentication_biometric_NegativeButtonText))
         .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG)
         .build()
-
+    FingerPrintBaseScreen(onAuthenticateButtonClick = {
+        fingerPrintAuthentication.authenticate(context, promptInfo)
+    })
     if (authenticationFlag?.toBooleanStrictOrNull() == true) {
         LaunchedEffect(
             key1 = Unit,
@@ -38,15 +37,13 @@ fun AuthenticationMain(
         handleViewModelState(
             fingerPrintAuthentication.authenticationResultState.collectAsStateWithLifecycle(),
             onEmpty = { },
-            onLoading = {  },
+            onLoading = { },
             onSuccess = { onNavigateToMainApplication() },
             onError = { exception ->
-                FingerPrintBaseScreen(onAuthenticateButtonClick = {
-                    fingerPrintAuthentication.authenticate(context, promptInfo)
-                })
+//TODO: Show a notification
             },
         )
-    }else{
+    } else {
         onNavigateToMainApplication()
     }
 }

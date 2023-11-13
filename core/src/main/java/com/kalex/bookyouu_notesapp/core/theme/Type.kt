@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.core.common.theme
+package com.kalex.bookyouu_notesapp.core.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

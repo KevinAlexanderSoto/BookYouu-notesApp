@@ -1,0 +1,4 @@
+<resources>
+    <string name="authentication_screen_title">Inicia sesión con tu huella</string>
+    <string name="authentication_screen_button_title">Iniciar sesión</string>
+</resources>

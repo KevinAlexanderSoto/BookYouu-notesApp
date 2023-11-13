@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentActivity
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.core.common.getNotificationFlag
-import com.kalex.bookyouu_notesapp.core.common.theme.BookYouUnotesAppTheme
+import com.kalex.bookyouu_notesapp.core.theme.BookYouUnotesAppTheme
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.navigation.graphs.RootNavigationGraph
 import com.kalex.bookyouu_notesapp.notification.AlarmScheduler

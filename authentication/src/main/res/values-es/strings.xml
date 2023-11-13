@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="authentication_screen_title">Inicia sesión con tu huella</string>
+    <string name="authentication_screen_button_title">Iniciar sesión</string>
+    <string name="authentication_biometric_title">Autenticacion biometrica</string>
+    <string name="authentication_biometric_subTitle">Inicia sesión usando tu huella</string>
+    <string name="authentication_biometric_NegativeButtonText">Ahora no</string>
+</resources>

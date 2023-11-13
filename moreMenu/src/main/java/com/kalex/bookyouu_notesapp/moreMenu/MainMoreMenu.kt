@@ -28,19 +28,19 @@ fun MainMoreMenu(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Configuracion",
+            text = stringResource(id = R.string.more_menu_screen_title),
             fontSize = 24.sp,
         )
         SwitchCard(
             initialState = context.getAuthenticationFlag()?.toBooleanStrictOrNull() ?: false,
-            switchText = "Activar seguridad biometrica",
+            switchText = stringResource(id = R.string.more_menu_biometric_item_text),
             onChecked = {
                 moreMenuViewModel.authenticationSwitchState(it)
             }
         )
         SwitchCard(
             initialState = !context.getNotificationFlag().isNullOrEmpty(),
-            switchText = "Activar notificaciones",
+            switchText = stringResource(id = R.string.more_menu_notifications_item_text),
             onChecked = {
                 moreMenuViewModel.notificationSwitchState(it)
             }

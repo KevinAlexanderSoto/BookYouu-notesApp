@@ -1,4 +1,7 @@
 <resources>
-    <string name="authentication_screen_title">Inicia sesión con tu huella</string>
-    <string name="authentication_screen_button_title">Iniciar sesión</string>
+    <string name="authentication_screen_title">Login</string>
+    <string name="authentication_screen_button_title">Activate finger print sensor</string>
+    <string name="authentication_biometric_title">Biometric login</string>
+    <string name="authentication_biometric_subTitle">Log in using your biometric credential</string>
+    <string name="authentication_biometric_NegativeButtonText">Not now</string>
 </resources>

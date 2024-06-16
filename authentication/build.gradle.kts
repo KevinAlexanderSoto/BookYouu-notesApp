@@ -52,12 +52,13 @@ dependencies {
 
     // COMPOSE SECTION
     implementation(libs.androidx.navigation.compose)
-    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    implementation("androidx.compose.foundation:foundation")
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3:1.2.0-alpha01")
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.foundation)
+    implementation(libs.ui)
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.tooling.preview)
+    implementation(libs.androidx.material3.v120alpha01)
+    implementation(libs.androidx.material)
 
     implementation(libs.androidx.foundation)
     implementation(libs.androidx.animation)

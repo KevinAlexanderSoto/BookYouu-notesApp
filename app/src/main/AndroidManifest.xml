@@ -11,10 +11,15 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <!-- To handle the reselection within the app on devices running Android 14
+     or higher if your app targets Android 14 (API level 34) or higher.  -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
 
     <application
@@ -28,7 +33,7 @@
         android:roundIcon="@mipmap/logoapp_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookYouUnotesApp"
-        tools:targetApi="31"
+        tools:targetApi="34"
         android:enableOnBackInvokedCallback="true"
         >
         <profileable

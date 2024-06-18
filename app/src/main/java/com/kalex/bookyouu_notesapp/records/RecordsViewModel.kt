@@ -29,13 +29,22 @@ class RecordsViewModel @Inject constructor(
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 android.Manifest.permission.READ_EXTERNAL_STORAGE,
             )
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            listOf(
+                android.Manifest.permission.CAMERA,
+                android.Manifest.permission.RECORD_AUDIO,
+                android.Manifest.permission.READ_MEDIA_IMAGES,
+                android.Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED
+            )
+        }
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             listOf(
                 android.Manifest.permission.CAMERA,
                 android.Manifest.permission.RECORD_AUDIO,
                 android.Manifest.permission.READ_MEDIA_IMAGES,
             )
-        } else {
+        }
+        else {
             listOf(
                 android.Manifest.permission.CAMERA,
                 android.Manifest.permission.RECORD_AUDIO,

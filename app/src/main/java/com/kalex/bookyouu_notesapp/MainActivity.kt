@@ -22,6 +22,7 @@ import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.navigation.graphs.RootNavigationGraph
 import com.kalex.bookyouu_notesapp.notification.AlarmScheduler
 import com.kalex.bookyouu_notesapp.notification.NotificationConstants
+import com.kalex.bookyouu_notesapp.permission.RequireAllPermission
 import com.kalex.bookyouu_notesapp.permission.RequireNotificationPermission
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -46,7 +47,7 @@ class MainActivity : FragmentActivity() {
                 val navController = rememberAnimatedNavController()
                 val context = LocalContext.current
 
-                    RequireNotificationPermission(
+                RequireAllPermission(
                         onPermissionDenied = {
                             context.startActivity(
                                 Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {

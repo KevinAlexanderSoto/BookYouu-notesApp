@@ -2,6 +2,7 @@ package com.kalex.bookyouu_notesapp.permission
 
 import android.Manifest
 import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -11,6 +12,7 @@ import com.google.accompanist.permissions.rememberMultiplePermissionsState
 @Composable
 fun RequireNotificationPermission(
     permission: List<String> = listOf(
+        android.Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED,
         android.Manifest.permission.SCHEDULE_EXACT_ALARM,
         android.Manifest.permission.USE_EXACT_ALARM,
         Manifest.permission.POST_NOTIFICATIONS,

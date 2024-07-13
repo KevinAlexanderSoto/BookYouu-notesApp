@@ -11,10 +11,12 @@ import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.fragment.app.FragmentActivity
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.kalex.bookyouu_notesapp.core.common.getAuthenticationFlag
 import com.kalex.bookyouu_notesapp.core.common.getNotificationFlag
 import com.kalex.bookyouu_notesapp.core.theme.BookYouUnotesAppTheme
 import com.kalex.bookyouu_notesapp.moreMenu.MoreMenuFlagsUseCase
@@ -46,7 +48,10 @@ class MainActivity : FragmentActivity() {
             BookYouUnotesAppTheme {
                 val navController = rememberAnimatedNavController()
                 val context = LocalContext.current
-
+                var startDestination = ""
+                val authenticationFlag = context.getAuthenticationFlag()
+                startDestination =
+                    if (authenticationFlag?.toBooleanStrictOrNull() == true) Route.AUTHENTICATION_ROUTE else Route.SUBJECT
                 RequireAllPermission(
                         onPermissionDenied = {
                             context.startActivity(
@@ -64,7 +69,7 @@ class MainActivity : FragmentActivity() {
                             })
                             RootNavigationGraph(
                                 navController,
-                                startDestination = Route.AUTHENTICATION_ROUTE,
+                                startDestination = startDestination,
                             )
                         },
                     )

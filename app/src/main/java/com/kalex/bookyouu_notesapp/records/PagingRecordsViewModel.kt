@@ -49,11 +49,11 @@ class PagingRecordsViewModel @Inject constructor(
                 canPaginate = result.size == PAGE_SIZE
 
                 if (page == INITIAL_PAGE) {
+                    _notesList.value.clear()
                     if (result.isEmpty()) {
                         _pagingState.update { PaginationState.EMPTY }
                         return@launch
                     }
-                    _notesList.value.clear()
 
                     val dataMap = sortedListNotesToCategory(result)
                     _notesList.value.addAll(dataMap)

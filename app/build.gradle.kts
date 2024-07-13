@@ -137,7 +137,7 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     // optional - Paging 3 Integration
     implementation(libs.androidx.room.paging)
-
+    debugImplementation(libs.leakcanary.android)
     //MODULES SECTIONmapOf("path" to
     implementation(project(mapOf("path" to ":core")))
     implementation(project(mapOf("path" to ":permission")))

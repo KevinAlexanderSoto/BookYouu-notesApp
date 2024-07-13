@@ -1,10 +1,11 @@
 [versions]
 compileSdk = "34"
 
+leakcanaryAndroid = "2.14"
 minSdk = "28"
 targetSdk = "34"
-versionName = "1.3.1"
-versionCode = "9"
+versionName = "1.3.2"
+versionCode = "11"
 kotlinCompilerExtensionVersion = "1.5.2"
 
 composeBom = "2024.06.00"
@@ -75,6 +76,7 @@ androidx-ui-graphics = { module = "androidx.compose.ui:ui-graphics", version.ref
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
 androidx-animation = { module = "androidx.compose.animation:animation", version.ref = "animation" }
 foundation = { module = "androidx.compose.foundation:foundation" }
+leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanaryAndroid" }
 material3 = { module = "androidx.compose.material3:material3", version.ref = "androidx-material3" }
 
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room-runtime" }

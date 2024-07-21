@@ -39,19 +39,18 @@ class MainActivity : FragmentActivity() {
     @Inject
     lateinit var moreMenuFlagsUseCase: MoreMenuFlagsUseCase
 
-    @RequiresApi(Build.VERSION_CODES.Q)
     @OptIn(ExperimentalAnimationApi::class, ExperimentalPermissionsApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var startDestination = ""
+        val authenticationFlag = applicationContext.getAuthenticationFlag()
+        startDestination =
+            if (authenticationFlag?.toBooleanStrictOrNull() == true) Route.AUTHENTICATION_ROUTE else Route.SUBJECT
         this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContent {
             BookYouUnotesAppTheme {
                 val navController = rememberAnimatedNavController()
                 val context = LocalContext.current
-                var startDestination = ""
-                val authenticationFlag = context.getAuthenticationFlag()
-                startDestination =
-                    if (authenticationFlag?.toBooleanStrictOrNull() == true) Route.AUTHENTICATION_ROUTE else Route.SUBJECT
                 RequireAllPermission(
                         onPermissionDenied = {
                             context.startActivity(

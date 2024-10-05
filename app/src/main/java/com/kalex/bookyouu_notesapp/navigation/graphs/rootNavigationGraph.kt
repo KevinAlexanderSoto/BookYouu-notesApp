@@ -1,17 +1,15 @@
 package com.kalex.bookyouu_notesapp.navigation.graphs
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.google.accompanist.navigation.animation.AnimatedNavHost
+import androidx.navigation.compose.NavHost
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun RootNavigationGraph(
     rootNavController: NavHostController,
     startDestination: String,
 ) {
-    AnimatedNavHost(
+    NavHost(
         navController = rootNavController,
         startDestination = startDestination,
     ) {

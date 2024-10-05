@@ -2,7 +2,6 @@ package com.kalex.bookyouu_notesapp.navigation.graphs
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -13,8 +12,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import com.google.accompanist.navigation.animation.composable
-import com.google.accompanist.navigation.animation.navigation
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.core.camera.CameraScreen
 import com.kalex.bookyouu_notesapp.core.common.decodeUri
@@ -26,7 +25,7 @@ import com.kalex.bookyouu_notesapp.records.RecordsMainScreen
 import com.kalex.bookyouu_notesapp.records.createRecord.RecordReview
 import com.kalex.bookyouu_notesapp.records.recordsDetails.RecordMainDetail
 
-@OptIn(ExperimentalPermissionsApi::class, ExperimentalAnimationApi::class)
+@OptIn(ExperimentalPermissionsApi::class)
 fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
     navigation(
         route = Route.RECORDS_PARAM_ROUTE,

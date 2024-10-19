@@ -203,7 +203,7 @@ fun RecordAudioButton(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .clip(CircleShape)
-            .background(if (isPressed) Color.Black else MaterialTheme.colorScheme.primary)
+            .background(if (isPressed) Color.Gray else MaterialTheme.colorScheme.primary)
             .size(50.dp)
             .pointerInput(Unit) {
                 detectTapGestures(
@@ -214,6 +214,10 @@ fun RecordAudioButton(
             },
 
     ) {
-        Icon(painterResource(id = R.drawable.mic_24px), contentDescription = "capture")
+        Icon(
+            painterResource(id = R.drawable.mic_24px),
+            tint = MaterialTheme.colorScheme.onBackground,
+            contentDescription = "capture",
+        )
     }
 }

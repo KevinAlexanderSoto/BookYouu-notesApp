@@ -32,7 +32,7 @@ class FingerPrintAuthenticationViewModel @Inject constructor(
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
                     // Handle the error case
-                    _authenticationResult.update { ViewModelState.Error(Exception()) }
+                    _authenticationResult.update { ViewModelState.Error(Exception(BiometricError.BIOMETRIC_ERROR.name)) }
                 }
 
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
@@ -44,14 +44,20 @@ class FingerPrintAuthenticationViewModel @Inject constructor(
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
                     // Handle the failure case
-                    _authenticationResult.update { ViewModelState.Error(Exception()) }
+                    _authenticationResult.update { ViewModelState.Error(Exception(BiometricError.BIOMETRIC_AUTHENTICATION_FAILED.name)) }
                 }
             })
 
         if (biometricSupport.checkBiometricSupport()) {
             biometricPrompt.authenticate(promptInfo)
         } else {
-            _authenticationResult.update { ViewModelState.Error(Exception("NO_BIOMETRIC_SUPPORT")) }
+            _authenticationResult.update { ViewModelState.Error(Exception(BiometricError.NO_BIOMETRIC_SUPPORT.name)) }
         }
     }
+}
+
+enum class BiometricError {
+    NO_BIOMETRIC_SUPPORT,
+    BIOMETRIC_AUTHENTICATION_FAILED,
+    BIOMETRIC_ERROR
 }

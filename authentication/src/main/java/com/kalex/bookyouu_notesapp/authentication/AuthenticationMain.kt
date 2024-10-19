@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp.authentication
 
+import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.compose.runtime.Composable
@@ -42,7 +43,7 @@ fun AuthenticationMain(
         onLoading = { },
         onSuccess = { onNavigateToMainApplication() },
         onError = { exception ->
-//TODO: Show a notification
+            Toast.makeText(context,"Authentication Error, try again", Toast.LENGTH_LONG).show()
         },
     )
 }

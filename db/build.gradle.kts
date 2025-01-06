@@ -1,3 +1,5 @@
+import com.android.ide.common.symbols.valueStringToInt
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.com.android.library)
@@ -7,10 +9,10 @@ plugins {
 
 android {
     namespace = "com.kalex.bookyouu_notesapp.db"
-    compileSdk = 34
+    compileSdk = valueStringToInt(libs.versions.compileSdk.get())
 
     defaultConfig {
-        minSdk = 28
+        minSdk = valueStringToInt(libs.versions.minSdk.get())
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

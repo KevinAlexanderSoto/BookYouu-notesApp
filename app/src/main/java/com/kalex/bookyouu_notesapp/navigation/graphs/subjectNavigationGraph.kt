@@ -1,13 +1,13 @@
 package com.kalex.bookyouu_notesapp.navigation.graphs
 
 import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
+import androidx.compose.material3.Scaffold
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import com.google.accompanist.navigation.animation.composable
-import com.google.accompanist.navigation.animation.navigation
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
 import com.kalex.bookyouu_notesapp.navigation.ScaffoldBottomBar
 import com.kalex.bookyouu_notesapp.navigation.ScaffoldTopBar
 import com.kalex.bookyouu_notesapp.navigation.Route
@@ -15,7 +15,6 @@ import com.kalex.bookyouu_notesapp.subject.SubjectMainScreen
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui.BYSuccessScreen
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui.SubjectForm
 
-@OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
     navigation(
         route = Route.SUBJECT,
@@ -84,11 +83,14 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
             )
         }
         composable(route = Route.SUBJECT_FORM_SUCCESS_SCREEN) {
-            BYSuccessScreen(
-                onNavigateToSubjectListScreen = {
-                    rootNavController.popBackStack(Route.SUBJECT_LIST, false)
-                },
-            )
+            Scaffold() { _ ->
+                BYSuccessScreen(
+                    onNavigateToSubjectListScreen = {
+                        rootNavController.popBackStack(Route.SUBJECT_LIST, false)
+                    },
+                )
+            }
+
         }
     }
 }

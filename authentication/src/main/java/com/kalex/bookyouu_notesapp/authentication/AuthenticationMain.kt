@@ -5,12 +5,10 @@ import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.kalex.bookyouu_notesapp.core.common.getAuthenticationFlag
 import com.kalex.bookyouu_notesapp.core.common.handleViewModelState
 
 @Composable
@@ -22,8 +20,7 @@ fun AuthenticationMain(
     val promptInfo = BiometricPrompt.PromptInfo.Builder()
         .setTitle(stringResource(id = R.string.authentication_biometric_title))
         .setSubtitle(stringResource(id = R.string.authentication_biometric_subTitle))
-        .setNegativeButtonText(stringResource(id = R.string.authentication_biometric_NegativeButtonText))
-        .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG)
+        .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
         .build()
 
     LaunchedEffect(
@@ -43,7 +40,7 @@ fun AuthenticationMain(
         onLoading = { },
         onSuccess = { onNavigateToMainApplication() },
         onError = { exception ->
-            Toast.makeText(context,"Authentication Error, try again", Toast.LENGTH_LONG).show()
+                  //The native finger print shows feedback to the user.
         },
     )
 }

@@ -9,13 +9,11 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
-import dagger.hilt.EntryPoint
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
-@AndroidEntryPoint
-class AlarmReceiver() : BroadcastReceiver() {
-    @Inject
-    lateinit var tapResultIntent: Intent
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+
+class AlarmReceiver : BroadcastReceiver(), KoinComponent {
+    private val tapResultIntent: Intent by inject()
     override fun onReceive(context: Context, intent: Intent?) {
         // tapResultIntent gets executed when user taps the notification
         tapResultIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP

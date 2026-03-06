@@ -61,7 +61,7 @@ fun SubjectListScreen(
         )
         LazyColumn {
             items(subjectList.size, key = { subjectList[it].subjectId }) {
-                Row(modifier = Modifier.animateItemPlacement(tween(durationMillis = 250))) {
+                Row(modifier = Modifier.animateItem(placementSpec = tween(durationMillis = 250))) {
                     with(subjectList[it]) {
                         SubjectItem(
                             title = subjectName,

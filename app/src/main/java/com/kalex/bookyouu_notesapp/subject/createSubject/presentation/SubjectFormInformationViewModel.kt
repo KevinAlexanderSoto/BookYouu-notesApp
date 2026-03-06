@@ -5,12 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.kalex.bookyouu_notesapp.db.data.Subject
 import com.kalex.bookyouu_notesapp.subject.createSubject.DayOfWeekStringFactory
-import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.DayOfWeek
-import javax.inject.Inject
 
-@HiltViewModel
-class SubjectFormInformationViewModel @Inject constructor() : ViewModel() {
+class SubjectFormInformationViewModel : ViewModel() {
     private val mapOfDays = mutableStateMapOf<DayOfWeek, Boolean>()
     private val _subjectName = mutableStateOf("")
     private val _classRoom = mutableStateOf("")

@@ -6,13 +6,10 @@ import com.kalex.bookyouu_notesapp.authentication.BiometricSupportState
 import com.kalex.bookyouu_notesapp.authentication.BiometricSupportUseCase
 import com.kalex.bookyouu_notesapp.notification.AlarmScheduler
 import com.kalex.bookyouu_notesapp.notification.NotificationConstants
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class SwitchMenuViewModel @Inject constructor(
+class SwitchMenuViewModel(
     private val biometricSupport: BiometricSupportUseCase,
     private val moreMenuFlagsUseCase: MoreMenuFlagsUseCase,
     private val alarmScheduler: AlarmScheduler,

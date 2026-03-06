@@ -3,12 +3,9 @@ package com.kalex.bookyouu_notesapp.records
 import android.media.MediaRecorder
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.IOException
-import javax.inject.Inject
 
-@HiltViewModel
-class AudioRecordViewModel @Inject constructor() : ViewModel() {
+class AudioRecordViewModel : ViewModel() {
 
     val canStopRecord = mutableStateOf(false)
     private val currentPath = mutableStateOf("")

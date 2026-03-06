@@ -10,12 +10,11 @@ import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
 /**
  * @author kevin Alexander Soto on 11/12/2023
  * **/
-class BiometricSupportUseCase @Inject constructor(
+class BiometricSupportUseCase(
     val context: Context,
 ) {
     fun checkBiometricSupport(): Flow<BiometricSupportState> = flow {
@@ -45,6 +44,7 @@ class BiometricSupportUseCase @Inject constructor(
                             Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
                             BIOMETRIC_STRONG or DEVICE_CREDENTIAL
                         )
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     }
                     context.startActivity(enrollIntent)
                 }

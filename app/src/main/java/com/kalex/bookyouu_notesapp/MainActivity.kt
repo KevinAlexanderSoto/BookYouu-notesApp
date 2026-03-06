@@ -26,18 +26,14 @@ import com.kalex.bookyouu_notesapp.notification.AlarmScheduler
 import com.kalex.bookyouu_notesapp.notification.NotificationConstants
 import com.kalex.bookyouu_notesapp.permission.RequireAllPermission
 import com.kalex.bookyouu_notesapp.permission.RequireNotificationPermission
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
 /**
  * used the FragmentActivity to use the  androidx.biometric in order to support API level < 29
  * **/
-@AndroidEntryPoint
 class MainActivity : FragmentActivity() {
-    @Inject
-    lateinit var alarmScheduler: AlarmScheduler
-    @Inject
-    lateinit var moreMenuFlagsUseCase: MoreMenuFlagsUseCase
+    val alarmScheduler: AlarmScheduler by inject()
+    val moreMenuFlagsUseCase: MoreMenuFlagsUseCase by inject()
 
     @OptIn(ExperimentalAnimationApi::class, ExperimentalPermissionsApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {

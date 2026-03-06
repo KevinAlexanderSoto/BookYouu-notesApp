@@ -24,23 +24,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.ads.AdmobBanner
 import com.kalex.bookyouu_notesapp.ads.AdsUniqueIds
-import java.math.RoundingMode
-import kotlin.math.roundToInt
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AverageList(
     paddingValues: PaddingValues,
-    averageViewModel: AverageViewModel = hiltViewModel(),
+    averageViewModel: AverageViewModel = koinViewModel(),
 ) {
     var addItem by remember {
         mutableStateOf(3)

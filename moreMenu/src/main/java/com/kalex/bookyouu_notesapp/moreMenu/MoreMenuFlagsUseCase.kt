@@ -2,14 +2,12 @@ package com.kalex.bookyouu_notesapp.moreMenu
 
 import android.content.Context
 import com.kalex.bookyouu_notesapp.notification.NotificationConstants
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 
 /**
  * @author kevin Alexander Soto on 11/13/2023
  * **/
-class MoreMenuFlagsUseCase @Inject constructor(
-    @ApplicationContext val context: Context,
+class MoreMenuFlagsUseCase(
+    val context: Context,
 ) {
     fun activateBiometricFlag(){
         context.getSharedPreferences(

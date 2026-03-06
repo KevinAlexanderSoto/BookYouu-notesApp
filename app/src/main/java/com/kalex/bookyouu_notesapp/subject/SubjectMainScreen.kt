@@ -13,7 +13,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.core.common.composables.BYLoadingIndicator
@@ -22,12 +21,13 @@ import com.kalex.bookyouu_notesapp.core.common.decodeUri
 import com.kalex.bookyouu_notesapp.core.common.handleViewModelState
 import com.kalex.bookyouu_notesapp.subject.subjectList.presentation.SubjectListViewModel
 import com.kalex.bookyouu_notesapp.subject.subjectList.presentation.ui.SubjectListScreen
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SubjectMainScreen(
     onAddNewSubject: () -> Unit,
     onSubjectClickAction: (String) -> Unit,
-    subjectViewModel: SubjectListViewModel = hiltViewModel(),
+    subjectViewModel: SubjectListViewModel = koinViewModel(),
 ) {
     var onDeleteSubject by remember {
         mutableStateOf(false)

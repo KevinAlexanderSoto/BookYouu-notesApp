@@ -11,28 +11,29 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import androidx.compose.ui.unit.Density
 import com.kalex.bookyouu_notesapp.core.common.composables.BYBottomSheetLayout
 import com.kalex.bookyouu_notesapp.core.common.composables.BYLoadingIndicator
 import com.kalex.bookyouu_notesapp.core.common.handleViewModelState
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormInformationViewModel
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormViewModel
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SubjectForm(
     paddingValues: PaddingValues,
     onNavigateToConfirmationScreen: () -> Unit,
-    informationViewModel: SubjectFormInformationViewModel = hiltViewModel(),
-    formViewModel: SubjectFormViewModel = hiltViewModel(),
+    informationViewModel: SubjectFormInformationViewModel = koinViewModel(),
+    formViewModel: SubjectFormViewModel = koinViewModel(),
 ) {
     val scope = rememberCoroutineScope()
     var showLoadingProgressBar by remember { mutableStateOf(false) }
     val scaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = BottomSheetState(
             initialValue = BottomSheetValue.Collapsed,
+            density = Density(density = 1f),
         ),
     )
     BYBottomSheetLayout(

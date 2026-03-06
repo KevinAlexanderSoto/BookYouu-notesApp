@@ -108,7 +108,9 @@ fun RecordItem(
                         type = "image/*"
                     }
 
-                    val chooser = Intent.createChooser(intent, "Share image")
+                    val chooser = Intent.createChooser(intent, "Share image").apply {
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
 
                     context.startActivity(chooser)
                 },
@@ -119,64 +121,53 @@ fun RecordItem(
                 model = recordUri,
                 contentDescription = null,
                 modifier = Modifier
-                    .align(Alignment.Center)
-                    .padding(8.dp)
-                    .height(280.dp)
-                    .clip(
-                        RoundedCornerShape(14.dp),
-                    )
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .clip(RoundedCornerShape(16.dp))
                     .clickable { onRecordClick() },
             )
         }
-
         Row(
-            horizontalArrangement = Arrangement.spacedBy(4.dp),
-            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .align(Alignment.CenterHorizontally)
                 .fillMaxWidth()
-                .padding(16.dp, 10.dp),
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            AnimatedVisibility(visible = voiceUri.isNotEmpty()) {
-                IconButton(
-                    modifier = Modifier,
-                    onClick = {
-                        if (!isVoicePlaying) {
-                            MediaPlayer().apply {
-                                try {
-                                    setDataSource(voiceUri)
-                                    prepare()
-                                    start()
-                                } catch (e: IOException) {
-                                }
-                                isVoicePlaying = isPlaying
-
-                                setOnCompletionListener {
-                                    isVoicePlaying = false
-                                }
-                            }
-                        }
-                    },
-                ) {
-                    Icon(Icons.Default.PlayArrow, contentDescription = "playVoice")
-                }
-            }
             Text(
                 text = recordDescription,
-                textAlign = TextAlign.Center,
                 modifier = Modifier
-                    .padding(1.dp, 0.dp, end = 0.dp, bottom = 0.dp)
+                    .weight(1f)
                     .animateContentSize(
                         animationSpec = spring(
                             dampingRatio = Spring.DampingRatioLowBouncy,
                             stiffness = Spring.StiffnessLow,
                         ),
-                    ).clickable {
-                        textExpanded = !textExpanded
-                    },
-                maxLines = if (!textExpanded) 1 else 3,
+                    )
+                    .clickable { textExpanded = !textExpanded },
+                maxLines = if (textExpanded) Int.MAX_VALUE else 2,
+                textAlign = TextAlign.Start,
             )
+            IconButton(onClick = {
+                val mediaPlayer = MediaPlayer()
+                try {
+                    mediaPlayer.setDataSource(voiceUri)
+                    mediaPlayer.prepare()
+                    mediaPlayer.start()
+                    isVoicePlaying = true
+                    mediaPlayer.setOnCompletionListener {
+                        isVoicePlaying = false
+                    }
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }) {
+                Icon(
+                    Icons.Default.PlayArrow,
+                    contentDescription = "play voice",
+                    tint = if (isVoicePlaying) androidx.compose.ui.graphics.Color.Green else androidx.compose.ui.graphics.Color.Gray,
+                )
+            }
         }
     }
 }
-

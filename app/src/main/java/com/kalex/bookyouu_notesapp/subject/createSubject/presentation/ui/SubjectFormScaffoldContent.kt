@@ -19,18 +19,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.core.common.composables.BYTextInput
 import com.kalex.bookyouu_notesapp.db.data.Subject
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormInformationViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ScaffoldContent(
     paddingValues: PaddingValues,
     onShowSheet: () -> Unit,
     onCreateSubjectClick: (Subject) -> Unit,
-    informationViewModel: SubjectFormInformationViewModel = hiltViewModel(),
+    informationViewModel: SubjectFormInformationViewModel = koinViewModel(),
 ) {
     val dayList = informationViewModel.getListOfStringSelectedDays().map {
         stringResource(id = it)

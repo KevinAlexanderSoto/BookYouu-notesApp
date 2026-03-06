@@ -6,17 +6,14 @@ import com.kalex.bookyouu_notesapp.core.common.ViewModelState
 import com.kalex.bookyouu_notesapp.db.data.Subject
 import com.kalex.bookyouu_notesapp.records.data.NotesRepository
 import com.kalex.bookyouu_notesapp.subject.data.SubjectRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class SubjectListViewModel @Inject constructor(
+class SubjectListViewModel(
     private val subjectRepository: SubjectRepository,
     private val notesRepositoryImpl: NotesRepository,
     private val dispatcher: CoroutineDispatcher,

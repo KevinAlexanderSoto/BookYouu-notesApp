@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.R
@@ -29,6 +28,7 @@ import com.kalex.bookyouu_notesapp.core.common.handleViewModelState
 import com.kalex.bookyouu_notesapp.records.recordList.CategoryHeader
 import com.kalex.bookyouu_notesapp.records.recordList.RecordItem
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 import java.io.File
 
 @OptIn(ExperimentalPermissionsApi::class, ExperimentalFoundationApi::class)
@@ -38,8 +38,8 @@ fun RecordsMainScreen(
     subjectId: Int,
     onAddNewRecord: () -> Unit,
     onRecordDetail: (id: Int) -> Unit,
-    recordsViewModel: RecordsViewModel = hiltViewModel(),
-    pagingRecordsViewModel: PagingRecordsViewModel = hiltViewModel(),
+    recordsViewModel: RecordsViewModel = koinViewModel(),
+    pagingRecordsViewModel: PagingRecordsViewModel = koinViewModel(),
 ) {
     val context = LocalContext.current
     val lazyColumnListState = rememberLazyListState()

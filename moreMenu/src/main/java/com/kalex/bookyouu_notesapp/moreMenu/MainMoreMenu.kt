@@ -17,16 +17,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.kalex.bookyouu_notesapp.ads.AdmobBanner
 import com.kalex.bookyouu_notesapp.ads.AdsUniqueIds
 import com.kalex.bookyouu_notesapp.core.common.composables.SwitchCard
 import com.kalex.bookyouu_notesapp.core.common.getAuthenticationFlag
 import com.kalex.bookyouu_notesapp.core.common.getNotificationFlag
-
+import org.koin.androidx.compose.koinViewModel
 @Composable
 fun MainMoreMenu(
-    moreMenuViewModel: SwitchMenuViewModel = hiltViewModel()
+    moreMenuViewModel: SwitchMenuViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
 

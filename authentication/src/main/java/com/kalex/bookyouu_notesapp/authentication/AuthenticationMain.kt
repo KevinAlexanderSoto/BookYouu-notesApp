@@ -1,20 +1,19 @@
 package com.kalex.bookyouu_notesapp.authentication
 
-import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kalex.bookyouu_notesapp.core.common.handleViewModelState
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AuthenticationMain(
     onNavigateToMainApplication: () -> Unit,
-    fingerPrintAuthentication: FingerPrintAuthenticationViewModel = hiltViewModel()
+    fingerPrintAuthentication: FingerPrintAuthenticationViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val promptInfo = BiometricPrompt.PromptInfo.Builder()

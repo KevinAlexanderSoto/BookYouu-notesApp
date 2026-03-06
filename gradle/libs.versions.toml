@@ -1,105 +1,95 @@
 [versions]
-compileSdk = "34"
-
-leakcanaryAndroid = "2.14"
+compileSdk = "36"
 minSdk = "28"
-targetSdk = "34"
+targetSdk = "36"
 versionName = "1.3.3"
 versionCode = "12"
-kotlinCompilerExtensionVersion = "1.5.11"
 
-composeBom = "2024.06.00"
-material3Version = "1.2.0-alpha01"
-biometric = "1.2.0-alpha05"
-material3 = "1.2.0-alpha01"
-playServicesAds = "23.1.0"
-accompanist-navigation-animation = "0.33.1-alpha"
-accompanist-permissions = "0.32.0"
-activity-compose = "1.9.0"
-androidx-junit = "1.1.5"
-androidx-material3 = "1.2.1"
-animation = "1.6.8"
-appcompat = "1.7.0"
-camera-camera2 = "1.4.0-beta02"
-camera-camera2-mlkit = "1.4.0-beta02"
-coil-compose = "2.4.0"
-datastore-preferences = "1.1.1"
-espresso-core = "3.5.1"
-foundation = "1.6.8"
-google-material = "1.9.0"
-hilt-android = "2.51.1"
-hilt-navigation-compose = "1.2.0"
+agp = "9.1.0"
+kotlin = "2.3.10"
+ksp = "2.3.6"
+koin = "4.0.0"
+compose-bom = "2026.02.01"
+
+androidx-activity = "1.12.4"
+androidx-appcompat = "1.7.1"
+androidx-biometric = "1.2.0-alpha05"
+androidx-camera = "1.5.3"
+androidx-core = "1.17.0"
+androidx-datastore = "1.2.0"
+androidx-lifecycle = "2.10.0"
+androidx-navigation = "2.9.7"
+androidx-room = "2.8.4"
+androidx-test-ext-junit = "1.3.0"
+androidx-espresso = "3.7.0"
+androidx-benchmark = "1.4.1"
+androidx-profileinstaller = "1.4.1"
+
+google-material = "1.13.0"
+play-services-ads = "25.0.0"
+accompanist = "0.36.0"
+accompanist-permissions = "0.37.3"
+coil = "2.7.0"
+coroutines = "1.10.2"
 junit = "4.13.2"
-kotlinx-coroutines-core = "1.8.1"
-ktx = "1.13.1"
-lifecycle-runtime-ktx = "2.8.3"
-material = "1.6.8"
-navigation-compose = "2.7.7"
-room-runtime = "2.6.1"
-agp = "8.4.0"
-org-jetbrains-kotlin-android = "1.9.23"
-com-google-android-material-material = "1.12.0"
-com-google-devtools-ksp = "1.9.23-1.0.19"
-runtime = "1.6.8"
-ui = "1.6.8"
+leakcanary = "2.14"
 
 [libraries]
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "androidx-biometric" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
 
-accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist-navigation-animation" }
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
+androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
+androidx-compose-ui = { module = "androidx.compose.ui:ui" }
+androidx-compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
+androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+androidx-compose-material = { module = "androidx.compose.material:material" }
+androidx-compose-material-icons-core = { module = "androidx.compose.material:material-icons-core" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
+androidx-compose-animation = { module = "androidx.compose.animation:animation" }
+androidx-compose-runtime = { module = "androidx.compose.runtime:runtime" }
+
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "androidx-camera" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "androidx-camera" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "androidx-camera" }
+androidx-camera-mlkit-vision = { module = "androidx.camera:camera-mlkit-vision", version.ref = "androidx-camera" }
+androidx-camera-extensions = { module = "androidx.camera:camera-extensions", version.ref = "androidx-camera" }
+
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "androidx-room" }
+
+androidx-benchmark-macro-junit4 = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "androidx-benchmark" }
+androidx-uiautomator = { module = "androidx.test.uiautomator:uiautomator", version = "2.3.0" }
+androidx-profileinstaller = { module = "androidx.profileinstaller:profileinstaller", version.ref = "androidx-profileinstaller" }
+androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-ext-junit" }
+androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-espresso" }
+
+google-material = { module = "com.google.android.material:material", version.ref = "google-material" }
+play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "play-services-ads" }
+accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist-permissions" }
-
-androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
-androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
-androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camera-camera2" }
-androidx-camera-extensions = { module = "androidx.camera:camera-extensions", version.ref = "camera-camera2" }
-androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camera-camera2" }
-androidx-camera-mlkit-vision = { module = "androidx.camera:camera-mlkit-vision", version.ref = "camera-camera2-mlkit" }
-androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "camera-camera2" }
-androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
-androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore-preferences" }
-androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
-
-androidx-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "foundation" }
-androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
-androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
-androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
-androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-runtime-ktx" }
-androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
-androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle-runtime-ktx" }
-androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
-androidx-material3-v120alpha01 = { module = "androidx.compose.material3:material3", version.ref = "material3Version" }
-androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
-androidx-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "runtime" }
-androidx-ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
-androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "ui" }
-androidx-ui-graphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "ui" }
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
-androidx-animation = { module = "androidx.compose.animation:animation", version.ref = "animation" }
-foundation = { module = "androidx.compose.foundation:foundation" }
-leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanaryAndroid" }
-material3 = { module = "androidx.compose.material3:material3", version.ref = "androidx-material3" }
-
-androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room-runtime" }
-androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room-runtime" }
-androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "room-runtime" }
-androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room-runtime" }
-
-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-android" }
-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt-android" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
 junit = { module = "junit:junit", version.ref = "junit" }
-kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines-core" }
-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines-core" }
-material = { group = "com.google.android.material", name = "material", version.ref = "com-google-android-material-material" }
-play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
-ui = { module = "androidx.compose.ui:ui" }
-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 
 [plugins]
+com-android-application = { id = "com.android.application", version.ref = "agp" }
 com-android-library = { id = "com.android.library", version.ref = "agp" }
-org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
-com-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "com-google-devtools-ksp" }
-
-
-[bundles]
+com-android-test = { id = "com.android.test", version.ref = "agp" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+com-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

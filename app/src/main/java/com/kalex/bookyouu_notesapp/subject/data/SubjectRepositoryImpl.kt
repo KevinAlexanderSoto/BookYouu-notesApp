@@ -2,9 +2,8 @@ package com.kalex.bookyouu_notesapp.subject.data
 
 import com.kalex.bookyouu_notesapp.db.dao.SubjectDao
 import com.kalex.bookyouu_notesapp.db.data.Subject
-import javax.inject.Inject
 
-class SubjectRepositoryImpl @Inject constructor(
+class SubjectRepositoryImpl(
     private val subjectDao: SubjectDao,
 ) : SubjectRepository {
     override fun getSubjectList() = subjectDao.getSubjects()

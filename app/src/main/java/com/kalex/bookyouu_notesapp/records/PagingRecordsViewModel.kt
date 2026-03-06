@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.kalex.bookyouu_notesapp.db.data.Note
 import com.kalex.bookyouu_notesapp.records.data.NotesRepository
 import com.kalex.bookyouu_notesapp.records.recordList.Category
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,11 +15,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.Locale
-import javax.inject.Inject
 
-@HiltViewModel
-class PagingRecordsViewModel @Inject constructor(
+class PagingRecordsViewModel(
     private val notesRepositoryImpl: NotesRepository,
     private val dispatcher: CoroutineDispatcher,
 ) : ViewModel() {

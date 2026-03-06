@@ -32,9 +32,9 @@ fun BYRoundedCheckView(
 ) {
     val isChecked = remember { mutableStateOf(false) }
 
-    val circleSize = remember { mutableStateOf(20.dp) }
-    val circleThickness = remember { mutableStateOf(2.dp) }
-    val color = remember { mutableStateOf(Color.Gray) }
+    val circleSize = 20.dp
+    val circleThickness = 2.dp
+    val color = if (isChecked.value) Color.Black else Color.Gray
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -42,31 +42,26 @@ fun BYRoundedCheckView(
             .toggleable(value = isChecked.value, role = Role.Checkbox) {
                 isChecked.value = it
                 isRoundedChecked(isChecked.value)
-                if (isChecked.value) {
-                    color.value = Color.Black
-                } else {
-                    color.value = Color.Gray
-                }
             },
     ) {
         Box(
             modifier = Modifier
                 .clip(CircleShape)
-                .size(circleSize.value)
-                .background(color.value)
-                .padding(circleThickness.value)
+                .size(circleSize)
+                .background(color)
+                .padding(circleThickness)
                 .clip(CircleShape)
                 .background(Color.White),
             contentAlignment = Alignment.Center,
         ) {
             if (isChecked.value) {
-                Icon(imageVector = Icons.Default.Check, contentDescription = "")
+                Icon(imageVector = Icons.Default.Check, contentDescription = null)
             }
         }
 
         Text(
             text = stringResource(id = text),
-            color = color.value,
+            color = color,
             fontSize = 20.sp,
             fontWeight = FontWeight.Medium,
             modifier = Modifier.padding(start = 5.dp),

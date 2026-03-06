@@ -44,7 +44,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.core.common.composables.BYLoadingIndicator
@@ -53,6 +52,7 @@ import com.kalex.bookyouu_notesapp.core.common.handleViewModelState
 import com.kalex.bookyouu_notesapp.records.AudioRecordViewModel
 import com.kalex.bookyouu_notesapp.records.RecordsViewModel
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -61,8 +61,8 @@ import java.util.Locale
 fun RecordReview(
     subjectId: Int?,
     captureUri: Uri,
-    recordsViewModel: RecordsViewModel = hiltViewModel(),
-    audioRecordViewModel: AudioRecordViewModel = hiltViewModel(),
+    recordsViewModel: RecordsViewModel = koinViewModel(),
+    audioRecordViewModel: AudioRecordViewModel = koinViewModel(),
     onReCapture: () -> Unit,
     onCaptureSaved: () -> Unit,
 ) {

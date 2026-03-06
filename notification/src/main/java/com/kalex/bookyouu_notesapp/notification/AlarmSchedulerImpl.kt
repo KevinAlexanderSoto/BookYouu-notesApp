@@ -11,7 +11,7 @@ class AlarmSchedulerImpl(
     private val alarmManager: AlarmManager,
 ) : AlarmScheduler {
     override fun schedule(item: AlarmItem) {
-        val intent = Intent(context, AlarmReceiver::class.java)
+       val intent = Intent(context, AlarmReceiver::class.java)
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             item.time.atZone(ZoneId.systemDefault()).toEpochSecond() * 1000,

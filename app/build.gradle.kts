@@ -1,11 +1,13 @@
 import com.android.ide.common.symbols.valueStringToInt
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.com.android.application)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
     id("kotlin-kapt")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.com.google.devtools.ksp)
     id("kotlin-parcelize")
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -20,7 +22,6 @@ android {
         versionCode = valueStringToInt(libs.versions.versionCode.get())
         versionName = libs.versions.versionName.get()
 
-        setProperty("archivesBaseName", applicationId + "-v" + versionCode + "(" + versionName + ")")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -50,16 +51,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
     }
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
-    }
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -78,25 +78,23 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.activity.compose)
 
-    //Paging
-    //implementation "androidx.paging:paging-compose:3.2.0-rc01"
-
     //COMPOSE SECTION
     implementation(libs.androidx.navigation.compose)
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.foundation)
-    implementation(libs.ui)
-    implementation(libs.ui.graphics)
-    implementation(libs.ui.tooling.preview)
-    implementation(libs.androidx.material3.v120alpha01)
-    implementation(libs.androidx.material)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material)
+    implementation (libs.androidx.compose.material.icons.core)
 
     //coil
     implementation(libs.coil.compose)
 
     //navigation accompanist
     implementation(libs.accompanist.navigation.animation)
-    implementation(libs.androidx.animation)
+    implementation(libs.androidx.compose.animation)
 
     //TO REQUEST PERMISSIONS
     implementation(libs.accompanist.permissions)
@@ -107,15 +105,13 @@ dependencies {
 
     // Coroutine Lifecycle Scopes
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
 
     //BIOMETRICS
     implementation (libs.androidx.biometric)
 
-    //Dagger - Hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
+    // KOIN
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
 
     //CAMERA SECTION
     implementation(libs.androidx.camera.camera2)
@@ -133,29 +129,24 @@ dependencies {
     //ROOM SECTION
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
-    // To use Kotlin annotation processing tool (kapt)
     ksp(libs.androidx.room.compiler)
-    // optional - Paging 3 Integration
     implementation(libs.androidx.room.paging)
     debugImplementation(libs.leakcanary.android)
-    //MODULES SECTIONmapOf("path" to
-    implementation(project(mapOf("path" to ":core")))
-    implementation(project(mapOf("path" to ":permission")))
-    implementation(project(mapOf("path" to ":db")))
-    implementation(project(mapOf("path" to ":notification")))
-    implementation(project(mapOf("path" to ":moreMenu")))
-    implementation(project(mapOf("path" to ":authentication")))
-    implementation(project(mapOf("path" to ":ads")))
+
+    //MODULES SECTION
+    implementation(project(":core"))
+    implementation(project(":permission"))
+    implementation(project(":db"))
+    implementation(project(":notification"))
+    implementation(project(":moreMenu"))
+    implementation(project(":authentication"))
+    implementation(project(":ads"))
 
     //TESTING SECTION
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform("androidx.compose:compose-bom:2022.10.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
-
-    // base line profile
-
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui)
+    debugImplementation(libs.androidx.compose.ui)
 }

@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "google-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-google-search"
+      ],
+      "env": {
+        "GOOGLE_SEARCH_API_KEY": "$GOOGLE_SEARCH_API_KEY",
+        "GOOGLE_SEARCH_CX": "$GOOGLE_SEARCH_CX"
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@ compileSdk = "36"
 minSdk = "28"
 targetSdk = "36"
 versionName = "1.4.0"
-versionCode = "12"
+versionCode = "13"
 
 agp = "9.1.0"
 kotlin = "2.3.10"

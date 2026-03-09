@@ -16,17 +16,13 @@ private val REQUIRED_PERMISSIONS =
         listOf(
             android.Manifest.permission.CAMERA,
             android.Manifest.permission.RECORD_AUDIO,
-            android.Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED,
-            android.Manifest.permission.READ_MEDIA_IMAGES,
             android.Manifest.permission.POST_NOTIFICATIONS,
-            android.Manifest.permission.READ_MEDIA_AUDIO,
         )
     }
     else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { //API LEVEL 33 OR ANDROID 13
         listOf(
             android.Manifest.permission.CAMERA,
             android.Manifest.permission.RECORD_AUDIO,
-            android.Manifest.permission.READ_MEDIA_IMAGES,
          /*   android.Manifest.permission.USE_EXACT_ALARM,
             android.Manifest.permission.POST_NOTIFICATIONS,
             android.Manifest.permission.SCHEDULE_EXACT_ALARM,

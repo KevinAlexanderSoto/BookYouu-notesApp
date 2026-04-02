@@ -1,60 +1,68 @@
 package com.kalex.bookyouu_notesapp.core.theme
 
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
+// Core colors
+val PrimaryTeal = Color(0xFF006A6A)
+val OnPrimaryTeal = Color(0xFFFFFFFF)
+val PrimaryContainer = Color(0xFFCCE8E8)
+val OnPrimaryContainer = Color(0xFF002020)
 
-val black = Color(0xffff000000)
-val white = Color(0xffffffff)
+val SecondaryGreen = Color(0xFF4B635C)
+val OnSecondaryGreen = Color(0xFFFFFFFF)
+val SecondaryContainer = Color(0xFFD3E8E1)
+val OnSecondaryContainer = Color(0xFF07201A)
 
-val black2 = Color(0xff101018)
+val TertiaryForest = Color(0xFF1B6C31)
+val OnTertiaryForest = Color(0xFFFFFFFF)
+val TertiaryContainer = Color(0xFFB3F5BD)
+val OnTertiaryContainer = Color(0xFF002108)
 
-val Primary = Color(0xff48680d)
-val OnPrimary = Color(0xffffffff)
-val PrimaryContainer = Color(0xffc9f088)
-val OnPrimaryContainer = Color(0xff121f00)
+val NeutralGrey = Color(0xFF5A5F5E)
+val NeutralVariant = Color(0xFFDBE5E0)
 
-val Secondary = Color(0xff396661)
-val OnSecondary = Color(0xffffffff)
-val SecondaryContainer = Color(0xffbcece6)
-val OnSecondaryContainer = Color(0xff00201d)
-
-val Tertiary = Color(0xff006c4e)
-val OnTertiary = Color(0xffffffff)
-val TertiaryContainer = Color(0xff86f8ca)
-val OnTertiaryContainer = Color(0xff002115)
-
-val Surface = Color(0xfffdfcff)
-val OnSurface = Color(0xff1a1c1e)
-val SurfaceVariant = Color(0xffdfe2eb)
-val OnSurfaceVariant = Color(0xff43474e)
-
-val RedSalsa = Color(0xffF05D5E)
-val ColorOutline = Color(0xff73777f)
-val ColorOnBackground = Color(0xff1a1c1e)
-
-val LightColors = lightColorScheme(
-    primary = Primary,
-    onPrimary = OnPrimary,
+val LightColorScheme = lightColorScheme(
+    primary = PrimaryTeal,
+    onPrimary = OnPrimaryTeal,
     primaryContainer = PrimaryContainer,
     onPrimaryContainer = OnPrimaryContainer,
-    secondary = Secondary,
-    onSecondary = OnSecondary,
+    secondary = SecondaryGreen,
+    onSecondary = OnSecondaryGreen,
     secondaryContainer = SecondaryContainer,
     onSecondaryContainer = OnSecondaryContainer,
-    tertiary = Tertiary,
-    onTertiary = OnTertiary,
+    tertiary = TertiaryForest,
+    onTertiary = OnTertiaryForest,
     tertiaryContainer = TertiaryContainer,
     onTertiaryContainer = OnTertiaryContainer,
-    onBackground = ColorOnBackground,
-    surface = Surface,
-    onSurface = OnSurface,
-    surfaceVariant = SurfaceVariant,
-    onSurfaceVariant = OnSurfaceVariant,
-    error = RedSalsa,
-    onError = RedSalsa,
-    errorContainer = RedSalsa,
-    onErrorContainer = RedSalsa,
-    outline = ColorOutline,
-    outlineVariant = ColorOutline,
+    background = Color(0xFFF4FAF9),
+    onBackground = Color(0xFF191C1B),
+    surface = Color(0xFFF4FAF9),
+    onSurface = Color(0xFF191C1B),
+    surfaceVariant = NeutralVariant,
+    onSurfaceVariant = Color(0xFF3F4947),
+    outline = Color(0xFF6F7977),
+)
+
+val DarkColorScheme = darkColorScheme(
+    primary = Color(0xFF4DDADA),
+    onPrimary = Color(0xFF003737),
+    primaryContainer = Color(0xFF004F4F),
+    onPrimaryContainer = Color(0xFFCCE8E8),
+    secondary = Color(0xFFB2CCC5),
+    onSecondary = Color(0xFF1D352F),
+    secondaryContainer = Color(0xFF334B45),
+    onSecondaryContainer = Color(0xFFD3E8E1),
+    tertiary = Color(0xFF98D8A2),
+    onTertiary = Color(0xFF003916),
+    tertiaryContainer = Color(0xFF005322),
+    onTertiaryContainer = Color(0xFFB3F5BD),
+    background = Color(0xFF191C1B),
+    onBackground = Color(0xFFE0E3E1),
+    surface = Color(0xFF191C1B),
+    onSurface = Color(0xFFE0E3E1),
+    surfaceVariant = Color(0xFF3F4947),
+    onSurfaceVariant = Color(0xFFBFC9C6),
+    outline = Color(0xFF899390),
 )

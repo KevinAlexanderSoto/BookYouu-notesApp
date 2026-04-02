@@ -18,7 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kalex.bookyouu_notesapp.core.theme.black2
+import com.kalex.bookyouu_notesapp.core.theme.NeutralGrey
 
 @Composable
 fun FingerPrintBaseScreen(
@@ -29,7 +29,7 @@ fun FingerPrintBaseScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .background(black2)
+            .background(NeutralGrey)
     ) {
         Spacer(modifier = Modifier.height(16.dp))
         Text(

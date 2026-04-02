@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.koin.androidx.compose)
 
     implementation(project(":core"))
+    implementation(project(":db"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

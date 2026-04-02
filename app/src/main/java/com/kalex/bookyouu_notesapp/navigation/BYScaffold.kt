@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp.navigation
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -8,17 +9,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
+import com.kalex.bookyouu_notesapp.navigation.bottomBar.BYNavigationBar
+import com.kalex.bookyouu_notesapp.navigation.bottomBar.BYNavigationBarItem
 import com.kalex.bookyouu_notesapp.navigation.bottomBar.BottomNavigationScreens
 import com.kalex.bookyouu_notesapp.navigation.topBar.TopBarTitleFactory
 import com.kalex.bookyouu_notesapp.navigation.topBar.TopNavigationBar
@@ -32,24 +30,17 @@ fun ScaffoldBottomBar(
     val bottomNavigationScreens = remember { BottomNavigationScreens.bottomNavItems }
     Scaffold(
         bottomBar = {
-            NavigationBar(
+            BYNavigationBar(
                 modifier = Modifier
                     .fillMaxWidth(),
             ) {
                 bottomNavigationScreens.forEach { item ->
                     val selected = currentDestination == item.route
-                    NavigationBarItem(
-                        alwaysShowLabel = true,
+                    BYNavigationBarItem(
                         selected = selected,
                         onClick = { onBottomNavigationClick(item.route) },
-                        label = { Text(text = stringResource(item.label)) },
-                        icon = {
-                            Icon(
-                                painterResource(id = item.bottomIconRes),
-                                contentDescription = "",
-                                modifier = Modifier.size(24.dp),
-                            )
-                        },
+                        label = item.label,
+                        icon = item.bottomIconRes
                     )
                 }
             }

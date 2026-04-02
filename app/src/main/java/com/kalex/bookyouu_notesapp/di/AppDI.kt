@@ -52,6 +52,7 @@ val databaseModule = module {
     }
     single { get<BookYouuDataBase>().noteDao }
     single { get<BookYouuDataBase>().subjectDao }
+    single { get<BookYouuDataBase>().obligationDao }
 }
 
 val repositoryModule = module {

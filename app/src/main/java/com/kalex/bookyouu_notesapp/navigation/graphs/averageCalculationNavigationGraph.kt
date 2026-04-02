@@ -1,6 +1,7 @@
 package com.kalex.bookyouu_notesapp.navigation.graphs
 
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
@@ -17,8 +18,13 @@ fun NavGraphBuilder.averageNav(rootNavController: NavHostController) {
             ScaffoldBottomBar(
                 currentDestination = Route.AVERAGE_MAIN,
                 onBottomNavigationClick = {
-                    rootNavController.popBackStack()
-                    rootNavController.navigate(it)
+                    rootNavController.navigate(it) {
+                        popUpTo(rootNavController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 },
                 content = { padding ->
                     AverageList(padding)

@@ -2,10 +2,8 @@ package com.kalex.bookyouu_notesapp.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
@@ -17,7 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -37,14 +34,12 @@ fun ScaffoldBottomBar(
         bottomBar = {
             NavigationBar(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(73.dp)
-                    .clip(RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)),
+                    .fillMaxWidth(),
             ) {
                 bottomNavigationScreens.forEach { item ->
                     val selected = currentDestination == item.route
                     NavigationBarItem(
-                        alwaysShowLabel = false,
+                        alwaysShowLabel = true,
                         selected = selected,
                         onClick = { onBottomNavigationClick(item.route) },
                         label = { Text(text = stringResource(item.label)) },

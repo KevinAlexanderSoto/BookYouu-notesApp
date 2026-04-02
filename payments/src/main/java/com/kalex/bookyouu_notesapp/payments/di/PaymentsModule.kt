@@ -4,6 +4,8 @@ import com.kalex.bookyouu_notesapp.payments.data.repository.RoomObligationReposi
 import com.kalex.bookyouu_notesapp.payments.domain.repository.ObligationRepository
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.GetObligationsUseCase
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.TogglePaymentUseCase
+import com.kalex.bookyouu_notesapp.payments.presentation.ObligationsViewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -12,4 +14,5 @@ val paymentsModule = module {
     singleOf(::RoomObligationRepository) { bind<ObligationRepository>() }
     singleOf(::GetObligationsUseCase)
     singleOf(::TogglePaymentUseCase)
+    viewModelOf(::ObligationsViewModel)
 }

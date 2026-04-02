@@ -21,7 +21,11 @@ sealed class BottomNavigationScreens(
         R.drawable.archive_svgrepo_com,
         R.string.average_bottom_label,
     )
-
+    object Payments : BottomNavigationScreens(
+        Route.PAYMENTS,
+        R.drawable.baseline_library_books_24,
+        R.string.payments_bottom_label,
+    )
     object MoreMenu : BottomNavigationScreens(
         Route.MORE_MENU_MAIN,
         R.drawable.settings_24px,
@@ -30,8 +34,8 @@ sealed class BottomNavigationScreens(
 
     companion object {
         val bottomNavItems = listOf(
+            Payments,
             Subject,
-            Average,
             MoreMenu,
         )
     }

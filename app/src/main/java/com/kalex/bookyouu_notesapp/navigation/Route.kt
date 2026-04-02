@@ -23,4 +23,7 @@ object Route {
 
     const val MORE_MENU = "more_menu_graph"
     const val MORE_MENU_MAIN = "more_menu_main"
+
+    const val PAYMENTS = "payments_graph"
+    const val PAYMENTS_MAIN = "payments_main"
 }

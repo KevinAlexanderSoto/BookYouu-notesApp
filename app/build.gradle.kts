@@ -141,6 +141,7 @@ dependencies {
     implementation(project(":moreMenu"))
     implementation(project(":authentication"))
     implementation(project(":ads"))
+    implementation(project(":payments"))
 
     //TESTING SECTION
     testImplementation(libs.junit)

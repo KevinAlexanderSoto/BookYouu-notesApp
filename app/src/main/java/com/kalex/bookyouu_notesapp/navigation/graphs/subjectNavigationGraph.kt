@@ -4,14 +4,18 @@ import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.kalex.bookyouu_notesapp.navigation.ScaffoldBottomBar
-import com.kalex.bookyouu_notesapp.navigation.ScaffoldTopBar
+import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldBottomBar
+import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldTopBar
 import com.kalex.bookyouu_notesapp.navigation.Route
+import com.kalex.bookyouu_notesapp.navigation.bottomBar.BottomNavigationScreens
+import com.kalex.bookyouu_notesapp.navigation.topBar.TopBarTitleFactory
 import com.kalex.bookyouu_notesapp.subject.SubjectMainScreen
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui.BYSuccessScreen
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui.SubjectForm
@@ -24,6 +28,7 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
         composable(route = Route.SUBJECT_LIST) {
             ScaffoldBottomBar(
                 currentDestination = Route.SUBJECT_LIST,
+                bottomNavigationBarScreens =  BottomNavigationScreens.bottomNavItems,
                 onBottomNavigationClick = {
                     rootNavController.navigate(it) {
                         popUpTo(rootNavController.graph.findStartDestination().id) {
@@ -72,9 +77,9 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
                     animationSpec = tween(700),
                 )
             },
-        ) {
+        ) { entry ->
             ScaffoldTopBar(
-                currentDestination = rootNavController.currentBackStackEntry?.destination,
+                title = stringResource(TopBarTitleFactory.getTopBarTitle(entry.destination.route)),
                 onBackNavigationClick = { rootNavController.popBackStack() },
                 content = {
                     SubjectForm(

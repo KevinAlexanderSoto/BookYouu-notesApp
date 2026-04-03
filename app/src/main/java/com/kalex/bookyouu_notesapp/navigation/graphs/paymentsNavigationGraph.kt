@@ -9,7 +9,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.kalex.bookyouu_notesapp.navigation.Route
-import com.kalex.bookyouu_notesapp.navigation.ScaffoldBottomBar
+import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldBottomBar
+import com.kalex.bookyouu_notesapp.navigation.bottomBar.BottomNavigationScreens
 import com.kalex.bookyouu_notesapp.payments.presentation.ObligationsScreen
 
 fun NavGraphBuilder.paymentsNav(rootNavController: NavHostController) {
@@ -20,6 +21,7 @@ fun NavGraphBuilder.paymentsNav(rootNavController: NavHostController) {
         composable(route = Route.PAYMENTS_MAIN) {
             ScaffoldBottomBar(
                 currentDestination = Route.PAYMENTS_MAIN,
+                bottomNavigationBarScreens = BottomNavigationScreens.bottomNavItems,
                 onBottomNavigationClick = {
                     rootNavController.navigate(it) {
                         popUpTo(rootNavController.graph.findStartDestination().id) {

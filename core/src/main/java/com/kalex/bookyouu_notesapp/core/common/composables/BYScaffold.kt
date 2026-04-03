@@ -1,10 +1,8 @@
-package com.kalex.bookyouu_notesapp.navigation
+package com.kalex.bookyouu_notesapp.core.common.composables
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
@@ -23,23 +21,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavDestination
-import com.kalex.bookyouu_notesapp.R
-import com.kalex.bookyouu_notesapp.navigation.bottomBar.BYNavigationBar
-import com.kalex.bookyouu_notesapp.navigation.bottomBar.BYNavigationBarItem
-import com.kalex.bookyouu_notesapp.navigation.bottomBar.BottomNavigationScreens
-import com.kalex.bookyouu_notesapp.navigation.topBar.TopBarTitleFactory
+import com.kalex.bookyouu_notesapp.core.common.BottomBarNavigationItem
+
 
 @Composable
 fun ScaffoldBottomBar(
     currentDestination: String,
     onBottomNavigationClick: (String) -> Unit,
+    bottomNavigationBarScreens: List<BottomBarNavigationItem>,
     content: @Composable (padding: PaddingValues) -> Unit,
 ) {
-    val bottomNavigationScreens = remember { BottomNavigationScreens.bottomNavItems }
+    val bottomNavigationScreens = remember { bottomNavigationBarScreens }
     Scaffold(
         bottomBar = {
             BYNavigationBar(
@@ -65,22 +58,22 @@ fun ScaffoldBottomBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScaffoldTopBar(
-    currentDestination: NavDestination?,
+    title: String? = null,
     onBackNavigationClick: () -> Unit,
     showNavigationIcon: Boolean = true,
     navigationIcon: ImageVector = Icons.AutoMirrored.Filled.ArrowBack,
     content: @Composable (padding: PaddingValues) -> Unit,
 ) {
-    val topBarTitleFactory = remember { TopBarTitleFactory() }
-    val titleRes = topBarTitleFactory.getTopBarTitle(currentDestination?.route)
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(
-                        text = stringResource(titleRes),
-                        style = MaterialTheme.typography.headlineSmall
-                    )
+                    if (title != null) {
+                        Text(
+                            text = title,
+                            style = MaterialTheme.typography.headlineSmall
+                        )
+                    }
                 },
                 navigationIcon = {
                     if (showNavigationIcon) {
@@ -110,23 +103,24 @@ fun ScaffoldTopBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScaffoldFloatingButtonAndTopBar(
-    currentDestination: NavDestination?,
+    title: String? = null,
     onBackNavigationClick: () -> Unit,
     onFloatingActionClick: () -> Unit,
     showNavigationIcon: Boolean = true,
     navigationIcon: ImageVector = Icons.Default.ArrowBack,
     content: @Composable (padding: PaddingValues) -> Unit,
 ) {
-    val topBarTitleFactory = remember { TopBarTitleFactory() }
-    val titleRes = topBarTitleFactory.getTopBarTitle(currentDestination?.route)
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(
-                        text = stringResource(titleRes),
-                        style = MaterialTheme.typography.headlineSmall
-                    )
+                    if (title != null) {
+                        Text(
+                            text = title,
+                            style = MaterialTheme.typography.headlineSmall
+                        )
+                    }
                 },
                 navigationIcon = {
                     if (showNavigationIcon) {

@@ -3,13 +3,14 @@ package com.kalex.bookyouu_notesapp.navigation.bottomBar
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.kalex.bookyouu_notesapp.R
+import com.kalex.bookyouu_notesapp.core.common.BottomBarNavigationItem
 import com.kalex.bookyouu_notesapp.navigation.Route
 
 sealed class BottomNavigationScreens(
-    val route: String,
-    @DrawableRes val bottomIconRes: Int,
-    @StringRes val label: Int,
-) {
+    override val route: String,
+    @DrawableRes override val bottomIconRes: Int,
+    @StringRes override val label: Int,
+): BottomBarNavigationItem {
     object Subject : BottomNavigationScreens(
         Route.SUBJECT_LIST,
         R.drawable.book_svgrepo_com,

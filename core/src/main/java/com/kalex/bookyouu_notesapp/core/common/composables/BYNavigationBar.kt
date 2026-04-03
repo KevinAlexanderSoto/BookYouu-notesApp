@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.navigation.bottomBar
+package com.kalex.bookyouu_notesapp.core.common.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

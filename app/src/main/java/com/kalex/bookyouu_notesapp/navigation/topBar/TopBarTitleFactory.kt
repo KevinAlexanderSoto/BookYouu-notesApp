@@ -3,7 +3,7 @@ package com.kalex.bookyouu_notesapp.navigation.topBar
 import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.navigation.Route
 
-class TopBarTitleFactory {
+object TopBarTitleFactory {
 
     fun getTopBarTitle(route: String?) =
         when (route) {

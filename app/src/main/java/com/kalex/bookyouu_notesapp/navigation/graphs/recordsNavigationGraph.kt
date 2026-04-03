@@ -9,6 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -20,12 +21,12 @@ import com.kalex.bookyouu_notesapp.core.camera.CameraScreen
 import com.kalex.bookyouu_notesapp.core.common.decodeUri
 import com.kalex.bookyouu_notesapp.core.common.encodeUri
 import com.kalex.bookyouu_notesapp.navigation.Route
-import com.kalex.bookyouu_notesapp.navigation.ScaffoldFloatingButtonAndTopBar
-import com.kalex.bookyouu_notesapp.navigation.ScaffoldTopBar
+import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldFloatingButtonAndTopBar
+import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldTopBar
+import com.kalex.bookyouu_notesapp.navigation.topBar.TopBarTitleFactory
 import com.kalex.bookyouu_notesapp.records.RecordsMainScreen
 import com.kalex.bookyouu_notesapp.records.createRecord.RecordReview
 import com.kalex.bookyouu_notesapp.records.recordsDetails.RecordMainDetail
-import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui.BYSuccessScreen
 
 @OptIn(ExperimentalPermissionsApi::class)
 fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
@@ -72,7 +73,7 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
             val subjectID = parentEntry.arguments?.getInt("subjectID") ?: 0
 
             ScaffoldFloatingButtonAndTopBar(
-                currentDestination = rootNavController.currentBackStackEntry?.destination,
+               title = stringResource(TopBarTitleFactory.getTopBarTitle(entry.destination.route)),
                 onBackNavigationClick = { rootNavController.popBackStack() },
                 onFloatingActionClick = { rootNavController.navigate(Route.RECORDS_CAPTURE) },
                 content = {
@@ -147,7 +148,7 @@ fun NavGraphBuilder.recordsNav(rootNavController: NavHostController) {
                 remember(backStackEntry) { rootNavController.getBackStackEntry(Route.RECORDS_DETAIL_PARAM_SCREEN) }
             val noteID = recordsEntry.arguments?.getInt("noteID") ?: 0
             ScaffoldTopBar(
-                currentDestination = rootNavController.currentBackStackEntry?.destination,
+                title = stringResource(TopBarTitleFactory.getTopBarTitle(backStackEntry.destination.route)) ,
                 onBackNavigationClick = { rootNavController.popBackStack() },
             ) { paddingValues ->
                 RecordMainDetail(noteID, paddingValues)

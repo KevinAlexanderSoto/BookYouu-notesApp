@@ -7,7 +7,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.kalex.bookyouu_notesapp.moreMenu.MainMoreMenu
 import com.kalex.bookyouu_notesapp.navigation.Route
-import com.kalex.bookyouu_notesapp.navigation.ScaffoldBottomBar
+import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldBottomBar
+import com.kalex.bookyouu_notesapp.navigation.bottomBar.BottomNavigationScreens
 
 fun NavGraphBuilder.moreMenuNav(rootNavController: NavHostController) {
     navigation(
@@ -16,17 +17,22 @@ fun NavGraphBuilder.moreMenuNav(rootNavController: NavHostController) {
     ) {
         composable(route = Route.MORE_MENU_MAIN) {
 
-            ScaffoldBottomBar(currentDestination = Route.MORE_MENU_MAIN, onBottomNavigationClick = {
-                rootNavController.navigate(it) {
-                    popUpTo(rootNavController.graph.findStartDestination().id) {
-                        saveState = true
+            ScaffoldBottomBar(
+                currentDestination = Route.MORE_MENU_MAIN,
+                bottomNavigationBarScreens =  BottomNavigationScreens.bottomNavItems,
+                onBottomNavigationClick = {
+                    rootNavController.navigate(it) {
+                        popUpTo(rootNavController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
                     }
-                    launchSingleTop = true
-                    restoreState = true
+                },
+                content = {
+                    MainMoreMenu()
                 }
-            }, content = {
-                MainMoreMenu()
-            })
+            )
         }
     }
 }

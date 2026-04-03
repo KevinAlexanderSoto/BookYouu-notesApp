@@ -1,6 +1,5 @@
 package com.kalex.bookyouu_notesapp.di
 
-import android.content.Context
 import android.content.Intent
 import android.media.MediaRecorder
 import android.os.Build
@@ -32,7 +31,6 @@ val appModule = module {
     single { Intent(androidContext(), MainActivity::class.java) }
     single { MoreMenuFlagsUseCase(androidContext()) }
     single { Dispatchers.IO }
-    
     single {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S) {
             MediaRecorder()

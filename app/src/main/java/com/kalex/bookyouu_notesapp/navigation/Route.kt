@@ -26,4 +26,5 @@ object Route {
 
     const val PAYMENTS = "payments_graph"
     const val PAYMENTS_MAIN = "payments_main"
+    const val PAYMENTS_CREATE: String = "payments_create"
 }

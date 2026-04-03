@@ -19,6 +19,9 @@ object TopBarTitleFactory {
             Route.PAYMENTS_MAIN -> {
                 R.string.obligations_topBar_title
             }
+            Route.PAYMENTS_CREATE -> {
+                R.string.obligations_create_topBar_title
+            }
             else -> { R.string.empty_topBar_title }
         }
 }

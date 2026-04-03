@@ -3,6 +3,7 @@ package com.kalex.bookyouu_notesapp.navigation.graphs
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -10,7 +11,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldBottomBar
+import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldTopBar
 import com.kalex.bookyouu_notesapp.navigation.bottomBar.BottomNavigationScreens
+import com.kalex.bookyouu_notesapp.navigation.topBar.TopBarTitleFactory
 import com.kalex.bookyouu_notesapp.payments.presentation.ObligationsScreen
 
 fun NavGraphBuilder.paymentsNav(rootNavController: NavHostController) {
@@ -36,11 +39,25 @@ fun NavGraphBuilder.paymentsNav(rootNavController: NavHostController) {
                         ObligationsScreen(
                             onMenuClick = {
                                 // TODO: Open drawer if any
+                            },
+                            onFloatingActionClick = {
+                                rootNavController.navigate(Route.PAYMENTS_CREATE)
                             }
                         )
                     }
                 },
             )
+        }
+        composable(
+            route = Route.PAYMENTS_CREATE
+        ) { backStackEntry ->
+            ScaffoldTopBar(
+                title = stringResource(TopBarTitleFactory.getTopBarTitle(backStackEntry.destination.route)),
+                onBackNavigationClick = { rootNavController.popBackStack() },
+                showNavigationIcon = true,
+            ){
+
+            }
         }
     }
 }

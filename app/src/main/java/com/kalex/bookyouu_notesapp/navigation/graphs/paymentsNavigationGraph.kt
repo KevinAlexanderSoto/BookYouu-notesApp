@@ -1,5 +1,8 @@
 package com.kalex.bookyouu_notesapp.navigation.graphs
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -26,12 +29,14 @@ fun NavGraphBuilder.paymentsNav(rootNavController: NavHostController) {
                         restoreState = true
                     }
                 },
-                content = {
-                    ObligationsScreen(
-                        onMenuClick = {
-                            // TODO: Open drawer if any
-                        }
-                    )
+                content = { paddingValues ->
+                    Box(modifier = Modifier.padding(paddingValues)) {
+                        ObligationsScreen(
+                            onMenuClick = {
+                                // TODO: Open drawer if any
+                            }
+                        )
+                    }
                 },
             )
         }

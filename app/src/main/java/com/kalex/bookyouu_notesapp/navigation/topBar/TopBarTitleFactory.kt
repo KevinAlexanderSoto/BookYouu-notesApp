@@ -16,6 +16,9 @@ class TopBarTitleFactory {
             Route.RECORDS_DETAIL_PARAM_SCREEN -> {
                 R.string.record_detailScreen_topBar_title
             }
+            Route.PAYMENTS_MAIN -> {
+                R.string.obligations_topBar_title
+            }
             else -> { R.string.empty_topBar_title }
         }
 }

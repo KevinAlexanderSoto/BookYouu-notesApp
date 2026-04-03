@@ -14,6 +14,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.core.common.getAuthenticationFlag
@@ -41,11 +42,11 @@ class MainActivity : FragmentActivity() {
         var startDestination = ""
         val authenticationFlag = applicationContext.getAuthenticationFlag()
         startDestination =
-            if (authenticationFlag?.toBooleanStrictOrNull() == true) Route.AUTHENTICATION_ROUTE else Route.SUBJECT
+            if (authenticationFlag?.toBooleanStrictOrNull() == true) Route.AUTHENTICATION_ROUTE else Route.PAYMENTS
         this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContent {
             BookYouUnotesAppTheme {
-                val navController = rememberAnimatedNavController()
+                val navController = rememberNavController()
                 val context = LocalContext.current
                 RequireAllPermission(
                         onPermissionDenied = {

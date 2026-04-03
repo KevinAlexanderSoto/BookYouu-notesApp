@@ -23,7 +23,7 @@ sealed class BottomNavigationScreens(
         R.string.average_bottom_label,
     )
     object Payments : BottomNavigationScreens(
-        Route.PAYMENTS,
+        Route.PAYMENTS_MAIN,
         R.drawable.baseline_library_books_24,
         R.string.payments_bottom_label,
     )

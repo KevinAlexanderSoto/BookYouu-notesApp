@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Screen Titles -->
+    <string name="payments_title">Obligations</string>
+    <string name="upcoming_payments">Upcoming Payments</string>
+    <string name="view_all">VIEW ALL</string>
+    <string name="no_obligations">No obligations found</string>
+
+    <!-- Overview Card -->
+    <string name="current_balance">CURRENT BALANCE</string>
+    <string name="pending">PENDING</string>
+    <string name="paid">PAID</string>
+
+    <!-- Obligation Row -->
+    <string name="paid_on">Paid %1$s</string>
+    <string name="due_on">Due %1$d</string>
+
+    <!-- Creation Screen -->
+    <string name="new_entry">NEW ENTRY</string>
+    <string name="define_commitment">Define Your Commitment</string>
+    <string name="obligation_name_label">OBLIGATION NAME</string>
+    <string name="obligation_name_placeholder">e.g. Rent, Netflix, Car Loan</string>
+    <string name="amount_label">AMOUNT</string>
+    <string name="amount_placeholder">0.00</string>
+    <string name="save_obligation">Save Obligation</string>
+    <string name="payment_frequency">PAYMENT FREQUENCY</string>
+    <string name="day_of_month">DAY OF MONTH</string>
+    <string name="day_of_week">DAY OF WEEK</string>
+    <string name="select_category">SELECT CATEGORY</string>
+
+    <!-- Success State -->
+    <string name="obligation_created_title">Obligation\nCreated</string>
+    <string name="obligation_created_message">Your payment obligation for %1$s\nhas been successfully scheduled.</string>
+    <string name="done">Done</string>
+    <string name="add_another">Add Another</string>
+</resources>

@@ -13,6 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.kalex.bookyouu_notesapp.payments.R
 import com.kalex.bookyouu_notesapp.payments.presentation.components.ObligationRow
 import com.kalex.bookyouu_notesapp.payments.presentation.components.ObligationsScaffold
 import com.kalex.bookyouu_notesapp.payments.presentation.components.OverviewCard
@@ -27,7 +29,7 @@ fun ObligationsScreen(
     val uiState by viewModel.uiState.collectAsState()
 
     ObligationsScaffold(
-        title = "Obligations", //TODO: Use strings
+        title = stringResource(R.string.payments_title),
         onNavigationClick = onMenuClick,
         onFloatingActionClick = onFloatingActionClick,
     ) { paddingValues ->
@@ -64,13 +66,13 @@ fun ObligationsScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "Upcoming Payments",
+                                text = stringResource(R.string.upcoming_payments),
                                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                                 color = MaterialTheme.colorScheme.onSurface
                             )
                             TextButton(onClick = { /* TODO: View All */ }) {
                                 Text(
-                                    text = "VIEW ALL",
+                                    text = stringResource(R.string.view_all),
                                     style = MaterialTheme.typography.labelLarge.copy(
                                         fontWeight = FontWeight.Bold,
                                         letterSpacing = 1.sp
@@ -97,7 +99,7 @@ fun ObligationsScreen(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    text = "No obligations found",
+                                    text = stringResource(R.string.no_obligations),
                                     style = MaterialTheme.typography.bodyLarge,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )

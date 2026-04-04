@@ -9,6 +9,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.kalex.bookyouu_notesapp.payments.R
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -37,7 +39,7 @@ fun OverviewCard(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "CURRENT BALANCE",
+                text = stringResource(R.string.current_balance),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 letterSpacing = 1.sp
@@ -63,7 +65,7 @@ fun OverviewCard(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "PENDING",
+                        text = stringResource(R.string.pending),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -85,7 +87,7 @@ fun OverviewCard(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "PAID",
+                        text = stringResource(R.string.paid),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

@@ -18,6 +18,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.kalex.bookyouu_notesapp.payments.R
 import com.kalex.bookyouu_notesapp.payments.domain.model.Obligation
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -81,9 +83,9 @@ fun ObligationRow(
                 Text(
                     text = if (obligation.isPaid) {
                         val formattedDate = obligation.lastPaidDate?.let { dateFormatter.format(it) } ?: "Unknown"
-                        "Paid $formattedDate"
+                        stringResource(R.string.paid_on, formattedDate)
                     } else {
-                        "Due ${obligation.dayOfMonth}" // Simple day display
+                        stringResource(R.string.due_on, obligation.dayOfMonth)
                     },
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -120,7 +122,7 @@ fun ObligationRow(
                             color = badgeColor
                             ) {
                             Text(
-                            text = if (obligation.isPaid) "PAID" else "PENDING",
+                            text = if (obligation.isPaid) stringResource(R.string.paid) else stringResource(R.string.pending),
                             modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
                             style = MaterialTheme.typography.labelSmall.copy(
                             fontWeight = FontWeight.ExtraBold,

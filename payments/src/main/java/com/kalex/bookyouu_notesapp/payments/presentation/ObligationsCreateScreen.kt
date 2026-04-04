@@ -14,6 +14,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.res.stringResource
+import com.kalex.bookyouu_notesapp.payments.R
 import com.kalex.bookyouu_notesapp.core.common.composables.SuccessStatusScreen
 import com.kalex.bookyouu_notesapp.payments.presentation.components.CategoryGrid
 import com.kalex.bookyouu_notesapp.payments.presentation.components.LabeledInput
@@ -55,11 +57,11 @@ fun ObligationsCreateScreen(
 ) {
     if (state.isSuccess) {
         SuccessStatusScreen(
-            title = "Obligation\nCreated",
-            message = "Your payment obligation for ${state.name}\nhas been successfully scheduled.",
-            primaryButtonText = "Done",
+            title = stringResource(R.string.obligation_created_title),
+            message = stringResource(R.string.obligation_created_message, state.name),
+            primaryButtonText = stringResource(R.string.done),
             onPrimaryClick = onBack,
-            secondaryButtonText = "Add Another",
+            secondaryButtonText = stringResource(R.string.add_another),
             onSecondaryClick = { onAction(ObligationsCreateAction.OnResetClick) }
         )
     } else {
@@ -85,7 +87,7 @@ fun ObligationsCreateScreen(
                 if (state.isLoading) {
                     CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary, modifier = Modifier.size(24.dp))
                 } else {
-                    Text("Save Obligation", style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold))
+                    Text(stringResource(R.string.save_obligation), style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold))
                 }
             }
         }
@@ -100,7 +102,7 @@ fun ObligationsCreateScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "NEW ENTRY",
+                text = stringResource(R.string.new_entry),
                 style = TextStyle(
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
@@ -109,7 +111,7 @@ fun ObligationsCreateScreen(
             )
 
             Text(
-                text = "Define Your Commitment",
+                text = stringResource(R.string.define_commitment),
                 style = TextStyle(
                     fontSize = 28.sp,
                     fontWeight = FontWeight.ExtraBold,
@@ -129,19 +131,19 @@ fun ObligationsCreateScreen(
             Spacer(modifier = Modifier.height(32.dp))
 
             LabeledInput(
-                label = "OBLIGATION NAME",
+                label = stringResource(R.string.obligation_name_label),
                 value = state.name,
                 onValueChange = { onAction(ObligationsCreateAction.OnNameChange(it)) },
-                placeholder = "e.g. Rent, Netflix, Car Loan"
+                placeholder = stringResource(R.string.obligation_name_placeholder)
             )
 
             Spacer(modifier = Modifier.height(24.dp))
 
             LabeledInput(
-                label = "AMOUNT",
+                label = stringResource(R.string.amount_label),
                 value = state.amount,
                 onValueChange = { onAction(ObligationsCreateAction.OnAmountChange(it)) },
-                placeholder = "0.00",
+                placeholder = stringResource(R.string.amount_placeholder),
                 leadingIcon = {
                     Text(
                         "$",

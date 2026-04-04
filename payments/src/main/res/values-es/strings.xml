@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Screen Titles -->
+    <string name="payments_title">Obligaciones</string>
+    <string name="upcoming_payments">Próximos Pagos</string>
+    <string name="view_all">VER TODO</string>
+    <string name="no_obligations">No se encontraron obligaciones</string>
+
+    <!-- Overview Card -->
+    <string name="current_balance">BALANCE ACTUAL</string>
+    <string name="pending">PENDIENTE</string>
+    <string name="paid">PAGADO</string>
+
+    <!-- Obligation Row -->
+    <string name="paid_on">Pagado el %1$s</string>
+    <string name="due_on">Vence el día %1$d</string>
+
+    <!-- Creation Screen -->
+    <string name="new_entry">NUEVO INGRESO</string>
+    <string name="define_commitment">Define Tu Compromiso</string>
+    <string name="obligation_name_label">NOMBRE DE LA OBLIGACIÓN</string>
+    <string name="obligation_name_placeholder">ej. Arriendo, Netflix, Préstamo</string>
+    <string name="amount_label">MONTO</string>
+    <string name="amount_placeholder">0.00</string>
+    <string name="save_obligation">Guardar Obligación</string>
+    <string name="payment_frequency">FRECUENCIA DE PAGO</string>
+    <string name="day_of_month">DÍA DEL MES</string>
+    <string name="day_of_week">DÍA DE LA SEMANA</string>
+    <string name="select_category">SELECCIONAR CATEGORÍA</string>
+
+    <!-- Success State -->
+    <string name="obligation_created_title">Obligación\nCreada</string>
+    <string name="obligation_created_message">Tu obligación de pago para %1$s\nha sido programada con éxito.</string>
+    <string name="done">Listo</string>
+    <string name="add_another">Agregar Otra</string>
+</resources>

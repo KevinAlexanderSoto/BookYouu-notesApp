@@ -17,6 +17,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.kalex.bookyouu_notesapp.payments.R
 import com.kalex.bookyouu_notesapp.payments.domain.model.PaymentFrequency
 
 @Composable
@@ -30,7 +32,7 @@ fun PaymentFrequencyCard(
     val colorScheme = androidx.compose.material3.MaterialTheme.colorScheme
     Surface(
         modifier = modifier.fillMaxWidth(),
-        color = colorScheme.surfaceVariant.copy(alpha = 0.5f), // Using surfaceVariant
+        color = colorScheme.surfaceVariant.copy(alpha = 0.5f),
         shape = RoundedCornerShape(16.dp)
     ) {
         Column(
@@ -39,7 +41,7 @@ fun PaymentFrequencyCard(
         ) {
             Column {
                 Text(
-                    text = "PAYMENT FREQUENCY",
+                    text = stringResource(R.string.payment_frequency),
                     style = TextStyle(
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
@@ -56,7 +58,7 @@ fun PaymentFrequencyCard(
 
             Column {
                 Text(
-                    text = if (selectedFrequency == PaymentFrequency.WEEKLY) "DAY OF WEEK" else "DAY OF MONTH",
+                    text = if (selectedFrequency == PaymentFrequency.WEEKLY) stringResource(R.string.day_of_week) else stringResource(R.string.day_of_month),
                     style = TextStyle(
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,

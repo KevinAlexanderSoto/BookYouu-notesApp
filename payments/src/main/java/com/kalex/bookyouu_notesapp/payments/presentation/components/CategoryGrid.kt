@@ -22,6 +22,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.kalex.bookyouu_notesapp.payments.R
 import com.kalex.bookyouu_notesapp.payments.domain.model.ObligationCategory
 
 @Composable
@@ -33,7 +35,7 @@ fun CategoryGrid(
     val colorScheme = androidx.compose.material3.MaterialTheme.colorScheme
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
-            text = "SELECT CATEGORY",
+            text = stringResource(R.string.select_category),
             style = TextStyle(
                 fontSize = 11.sp,
                 fontWeight = FontWeight.Bold,

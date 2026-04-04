@@ -5,6 +5,12 @@ import com.kalex.bookyouu_notesapp.navigation.Route
 
 object TopBarTitleFactory {
 
+    /**
+     * Gets the string resource ID for the top bar title based on the provided route.
+     *
+     * @param route The current navigation route string.
+     * @return The resource ID of the top bar title string, or a default empty title if the route is unknown.
+     */
     fun getTopBarTitle(route: String?) =
         when (route) {
             Route.SUBJECT_FORM -> {

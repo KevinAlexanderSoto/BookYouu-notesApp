@@ -18,6 +18,8 @@ data class ObligationEntity(
     val dayOfMonth: Int, // 1 - 31
     @ColumnInfo(name = "category")
     val category: String,
+    @ColumnInfo(name = "frequency", defaultValue = "MONTHLY")
+    val frequency: String = "MONTHLY",
     @ColumnInfo(name = "is_paid")
     val isPaid: Boolean = false,
     @ColumnInfo(name = "last_paid_date")

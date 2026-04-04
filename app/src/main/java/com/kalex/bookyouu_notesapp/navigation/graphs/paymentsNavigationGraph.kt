@@ -9,11 +9,12 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldBottomBar
 import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldTopBar
+import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.navigation.bottomBar.BottomNavigationScreens
 import com.kalex.bookyouu_notesapp.navigation.topBar.TopBarTitleFactory
+import com.kalex.bookyouu_notesapp.payments.presentation.ObligationsCreateRoot
 import com.kalex.bookyouu_notesapp.payments.presentation.ObligationsScreen
 
 fun NavGraphBuilder.paymentsNav(rootNavController: NavHostController) {
@@ -55,8 +56,8 @@ fun NavGraphBuilder.paymentsNav(rootNavController: NavHostController) {
                 title = stringResource(TopBarTitleFactory.getTopBarTitle(backStackEntry.destination.route)),
                 onBackNavigationClick = { rootNavController.popBackStack() },
                 showNavigationIcon = true,
-            ){
-
+            ){ paddingValues ->
+                ObligationsCreateRoot(paddingValues)
             }
         }
     }

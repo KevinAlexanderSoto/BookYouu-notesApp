@@ -46,3 +46,4 @@ output.json
 
 #NDK
 obj/
+.aider*

@@ -30,13 +30,14 @@ fun CategoryGrid(
     onCategorySelected: (ObligationCategory) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val colorScheme = androidx.compose.material3.MaterialTheme.colorScheme
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
             text = "SELECT CATEGORY",
             style = TextStyle(
                 fontSize = 11.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Gray
+                color = colorScheme.onSurfaceVariant
             ),
             modifier = Modifier.padding(bottom = 8.dp)
         )
@@ -64,6 +65,7 @@ fun CategoryCard(
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
+    val colorScheme = androidx.compose.material3.MaterialTheme.colorScheme
     val icon = when (category) { // TODO: chnage the icons
         ObligationCategory.HOUSE -> Icons.Default.Home
         ObligationCategory.INTERNET -> Icons.Filled.Warning
@@ -77,10 +79,10 @@ fun CategoryCard(
         modifier = Modifier
             .aspectRatio(1.2f)
             .clip(RoundedCornerShape(12.dp))
-            .background(if (isSelected) Color.White else Color(0xFFF5F5F5))
+            .background(if (isSelected) colorScheme.surface else colorScheme.surfaceVariant)
             .border(
                 width = if (isSelected) 2.dp else 0.dp,
-                color = if (isSelected) Color(0xFF004D40) else Color.Transparent,
+                color = if (isSelected) colorScheme.primary else Color.Transparent,
                 shape = RoundedCornerShape(12.dp)
             )
             .clickable { onClick() }
@@ -94,7 +96,7 @@ fun CategoryCard(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                tint = if (isSelected) Color(0xFF004D40) else Color.Gray,
+                tint = if (isSelected) colorScheme.primary else colorScheme.onSurfaceVariant,
                 modifier = Modifier.size(28.dp)
             )
             Spacer(modifier = Modifier.height(4.dp))
@@ -103,7 +105,7 @@ fun CategoryCard(
                 style = TextStyle(
                     fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
-                    color = if (isSelected) Color(0xFF004D40) else Color.Gray
+                    color = if (isSelected) colorScheme.primary else colorScheme.onSurfaceVariant
                 )
             )
         }

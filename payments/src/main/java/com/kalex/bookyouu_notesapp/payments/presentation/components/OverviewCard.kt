@@ -92,7 +92,7 @@ fun OverviewCard(
                     Text(
                         text = currencyFormatter.format(paidAmount),
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                        color = Color(0xFF1B6C31) // Tertiary forest color
+                        color = MaterialTheme.colorScheme.tertiary
                     )
                 }
             }

@@ -97,38 +97,39 @@ fun ObligationRow(
                         Icon(
                             imageVector = Icons.Default.CheckCircle,
                             contentDescription = null,
-                            tint = Color(0xFF1B6C31),
+                            tint = MaterialTheme.colorScheme.tertiary,
                             modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.width(4.dp))
-                    }
-                    Text(
-                        text = currencyFormatter.format(obligation.amount),
-                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                        color = if (obligation.isPaid) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface
-                    )
-                }
-                
-                Spacer(modifier = Modifier.height(4.dp))
-                
-                // Badge
-                val badgeColor = if (obligation.isPaid) Color(0xFFB3F5BD) else Color(0xFFFFDBCF)
-                val badgeTextColor = if (obligation.isPaid) Color(0xFF002108) else Color(0xFF3B0900)
-                
-                Surface(
-                    shape = RoundedCornerShape(8.dp),
-                    color = badgeColor
-                ) {
-                    Text(
-                        text = if (obligation.isPaid) "PAID" else "PENDING",
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
-                        style = MaterialTheme.typography.labelSmall.copy(
+                            )
+                            Spacer(modifier = Modifier.width(4.dp))
+                            }
+                            Text(
+                            text = currencyFormatter.format(obligation.amount),
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                            color = if (obligation.isPaid) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface
+                            )
+                            }
+
+                            Spacer(modifier = Modifier.height(4.dp))
+
+                            // Badge
+                            val badgeColor = if (obligation.isPaid) MaterialTheme.colorScheme.tertiaryContainer else MaterialTheme.colorScheme.errorContainer
+                            val badgeTextColor = if (obligation.isPaid) MaterialTheme.colorScheme.onTertiaryContainer else MaterialTheme.colorScheme.onErrorContainer
+
+                            Surface(
+                            shape = RoundedCornerShape(8.dp),
+                            color = badgeColor
+                            ) {
+                            Text(
+                            text = if (obligation.isPaid) "PAID" else "PENDING",
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                            style = MaterialTheme.typography.labelSmall.copy(
                             fontWeight = FontWeight.ExtraBold,
                             fontSize = 10.sp
-                        ),
-                        color = badgeTextColor
-                    )
-                }
+                            ),
+                            color = badgeTextColor
+                            )
+                            }
+
             }
         }
     }

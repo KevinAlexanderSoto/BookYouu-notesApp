@@ -31,7 +31,7 @@ fun ObligationsScaffold(
                         text = title,
                         style = MaterialTheme.typography.headlineMedium.copy(
                             fontWeight = FontWeight.Bold,
-                            color = Color(0xFF006A6A) // Primary teal
+                            color = MaterialTheme.colorScheme.primary // Primary teal
                         )
                     )
                 },
@@ -41,7 +41,7 @@ fun ObligationsScaffold(
                             Icon(
                                 imageVector = navigationIcon,
                                 contentDescription = "navigation",
-                                tint = Color(0xFF006A6A)
+                                tint = MaterialTheme.colorScheme.primary
                             )
                         }
                     }

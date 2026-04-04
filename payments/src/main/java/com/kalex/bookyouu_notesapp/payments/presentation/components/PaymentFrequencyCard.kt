@@ -27,9 +27,10 @@ fun PaymentFrequencyCard(
     onDaySelected: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val colorScheme = androidx.compose.material3.MaterialTheme.colorScheme
     Surface(
         modifier = modifier.fillMaxWidth(),
-        color = Color(0xFFF5F5F5), // Light gray background
+        color = colorScheme.surfaceVariant.copy(alpha = 0.5f), // Using surfaceVariant
         shape = RoundedCornerShape(16.dp)
     ) {
         Column(
@@ -42,7 +43,7 @@ fun PaymentFrequencyCard(
                     style = TextStyle(
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.Gray
+                        color = colorScheme.onSurfaceVariant
                     ),
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
@@ -59,7 +60,7 @@ fun PaymentFrequencyCard(
                     style = TextStyle(
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.Gray
+                        color = colorScheme.onSurfaceVariant
                     ),
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
@@ -79,11 +80,12 @@ fun SegmentedToggleButton(
     selectedOption: PaymentFrequency,
     onOptionSelected: (PaymentFrequency) -> Unit
 ) {
+    val colorScheme = androidx.compose.material3.MaterialTheme.colorScheme
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(8.dp))
-            .background(Color(0xFFE0E0E0)),
+            .background(colorScheme.outlineVariant.copy(alpha = 0.3f)),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         options.forEach { option ->
@@ -93,7 +95,7 @@ fun SegmentedToggleButton(
                     .weight(1f)
                     .padding(4.dp)
                     .clip(RoundedCornerShape(6.dp))
-                    .background(if (isSelected) Color.White else Color.Transparent)
+                    .background(if (isSelected) colorScheme.surface else Color.Transparent)
                     .clickable { onOptionSelected(option) }
                     .padding(vertical = 8.dp),
                 contentAlignment = Alignment.Center
@@ -103,7 +105,7 @@ fun SegmentedToggleButton(
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                        color = if (isSelected) Color(0xFF004D40) else Color.Gray
+                        color = if (isSelected) colorScheme.primary else colorScheme.onSurfaceVariant
                     )
                 )
             }
@@ -117,6 +119,7 @@ fun DaySelector(
     selectedDay: Int,
     onDaySelected: (Int) -> Unit
 ) {
+    val colorScheme = androidx.compose.material3.MaterialTheme.colorScheme
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -126,7 +129,7 @@ fun DaySelector(
                 modifier = Modifier
                     .size(40.dp)
                     .clip(RoundedCornerShape(8.dp))
-                    .background(if (isSelected) Color(0xFF004D40) else Color(0xFFE0E0E0))
+                    .background(if (isSelected) colorScheme.primary else colorScheme.outlineVariant.copy(alpha = 0.3f))
                     .clickable { onDaySelected(day) },
                 contentAlignment = Alignment.Center
             ) {
@@ -135,7 +138,7 @@ fun DaySelector(
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
-                        color = if (isSelected) Color.White else Color.Black
+                        color = if (isSelected) colorScheme.onPrimary else colorScheme.onSurface
                     )
                 )
             }

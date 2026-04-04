@@ -75,7 +75,7 @@ fun ObligationsScreen(
                                         fontWeight = FontWeight.Bold,
                                         letterSpacing = 1.sp
                                     ),
-                                    color = Color(0xFF4B635C) // Secondary green
+                                    color = MaterialTheme.colorScheme.secondary
                                 )
                             }
                         }

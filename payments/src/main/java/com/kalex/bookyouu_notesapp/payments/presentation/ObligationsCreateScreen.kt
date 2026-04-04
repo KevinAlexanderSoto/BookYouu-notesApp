@@ -76,14 +76,14 @@ fun ObligationsCreateScreen(
                     .padding(16.dp)
                     .height(56.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF004D40),
-                    contentColor = Color.White,
-                    disabledContainerColor = Color.Gray.copy(alpha = 0.5f)
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                    disabledContainerColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
                 ),
                 shape = MaterialTheme.shapes.medium
             ) {
                 if (state.isLoading) {
-                    CircularProgressIndicator(color = Color.White, modifier = Modifier.size(24.dp))
+                    CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary, modifier = Modifier.size(24.dp))
                 } else {
                     Text("Save Obligation", style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold))
                 }
@@ -104,7 +104,7 @@ fun ObligationsCreateScreen(
                 style = TextStyle(
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF004D40)
+                    color = MaterialTheme.colorScheme.primary
                 )
             )
 
@@ -113,7 +113,7 @@ fun ObligationsCreateScreen(
                 style = TextStyle(
                     fontSize = 28.sp,
                     fontWeight = FontWeight.ExtraBold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onBackground
                 )
             )
 
@@ -123,7 +123,7 @@ fun ObligationsCreateScreen(
                     .width(40.dp)
                     .height(4.dp)
             ) {
-                Divider(color = Color(0xFF004D40), thickness = 4.dp)
+                Divider(color = MaterialTheme.colorScheme.primary, thickness = 4.dp)
             }
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -148,7 +148,7 @@ fun ObligationsCreateScreen(
                         style = TextStyle(
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
-                            color = Color(0xFF004D40)
+                            color = MaterialTheme.colorScheme.primary
                         )
                     )
                 },

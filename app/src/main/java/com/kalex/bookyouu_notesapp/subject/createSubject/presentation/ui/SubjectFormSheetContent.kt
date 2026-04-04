@@ -54,7 +54,7 @@ fun SheetContent(
             content = {
                 items(DayOfWeek.values().size) {
                     BYRoundedCheckView(
-                        text = DayOfWeekStringFactory.getDayStringResource(DayOfWeek.values()[it]),
+                        text = stringResource(DayOfWeekStringFactory.getDayStringResource(DayOfWeek.values()[it])),
                         isRoundedChecked = { isCheck ->
                             if (isCheck) {
                                 onOptionSelected(DayOfWeek.values()[it])

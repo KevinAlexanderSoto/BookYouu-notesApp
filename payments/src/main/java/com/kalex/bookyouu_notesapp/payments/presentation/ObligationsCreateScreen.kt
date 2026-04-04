@@ -14,6 +14,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.kalex.bookyouu_notesapp.core.common.composables.SuccessStatusScreen
 import com.kalex.bookyouu_notesapp.payments.presentation.components.CategoryGrid
 import com.kalex.bookyouu_notesapp.payments.presentation.components.LabeledInput
 import com.kalex.bookyouu_notesapp.payments.presentation.components.PaymentFrequencyCard
@@ -22,6 +23,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ObligationsCreateRoot(
     paddingValues: PaddingValues,
+    onBack: () -> Unit,
     viewModel: ObligationsCreateViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -40,6 +42,7 @@ fun ObligationsCreateRoot(
         paddingValues = paddingValues,
         state = state,
         onAction = viewModel::onAction,
+        onBack = onBack
     )
 }
 
@@ -47,9 +50,20 @@ fun ObligationsCreateRoot(
 fun ObligationsCreateScreen(
     state: ObligationsCreateState,
     onAction: (ObligationsCreateAction) -> Unit,
+    onBack: () -> Unit,
     paddingValues: PaddingValues,
 ) {
-    Scaffold(
+    if (state.isSuccess) {
+        SuccessStatusScreen(
+            title = "Obligation\nCreated",
+            message = "Your payment obligation for ${state.name}\nhas been successfully scheduled.",
+            primaryButtonText = "Done",
+            onPrimaryClick = onBack,
+            secondaryButtonText = "Add Another",
+            onSecondaryClick = { onAction(ObligationsCreateAction.OnResetClick) }
+        )
+    } else {
+        Scaffold(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues),
@@ -160,4 +174,5 @@ fun ObligationsCreateScreen(
             Spacer(modifier = Modifier.height(32.dp))
         }
     }
+}
 }

@@ -10,7 +10,8 @@ data class ObligationsCreateState(
     val dayOfMonth: Int = 1,
     val category: ObligationCategory? = null,
     val isLoading: Boolean = false,
-    val isSaveEnabled: Boolean = false
+    val isSaveEnabled: Boolean = false,
+    val isSuccess: Boolean = false
 )
 
 sealed interface ObligationsCreateAction {
@@ -20,6 +21,7 @@ sealed interface ObligationsCreateAction {
     data class OnDayChange(val day: Int) : ObligationsCreateAction
     data class OnCategoryChange(val category: ObligationCategory) : ObligationsCreateAction
     data object OnSaveClick : ObligationsCreateAction
+    data object OnResetClick : ObligationsCreateAction
 }
 
 sealed interface ObligationsCreateEvent {

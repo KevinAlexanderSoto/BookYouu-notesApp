@@ -43,6 +43,9 @@ class ObligationsCreateViewModel(
             ObligationsCreateAction.OnSaveClick -> {
                 saveObligation()
             }
+            ObligationsCreateAction.OnResetClick -> {
+                _state.update { ObligationsCreateState() }
+            }
         }
     }
 
@@ -70,6 +73,7 @@ class ObligationsCreateViewModel(
             
             try {
                 addObligationUseCase(newObligation)
+                _state.update { it.copy(isSuccess = true) }
                 _events.send(ObligationsCreateEvent.ObligationSaved)
             } catch (e: Exception) {
                 _events.send(ObligationsCreateEvent.ShowError(e.message ?: "Unknown error"))

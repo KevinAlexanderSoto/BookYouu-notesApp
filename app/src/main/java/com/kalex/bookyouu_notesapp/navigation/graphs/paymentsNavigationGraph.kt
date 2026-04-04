@@ -57,7 +57,10 @@ fun NavGraphBuilder.paymentsNav(rootNavController: NavHostController) {
                 onBackNavigationClick = { rootNavController.popBackStack() },
                 showNavigationIcon = true,
             ){ paddingValues ->
-                ObligationsCreateRoot(paddingValues)
+                ObligationsCreateRoot(
+                    paddingValues = paddingValues,
+                    onBack = { rootNavController.popBackStack() }
+                )
             }
         }
     }

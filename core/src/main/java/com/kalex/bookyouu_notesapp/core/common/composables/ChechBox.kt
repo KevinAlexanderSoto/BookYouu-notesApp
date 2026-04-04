@@ -1,6 +1,5 @@
 package com.kalex.bookyouu_notesapp.core.common.composables
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -19,15 +18,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun BYRoundedCheckView(
-    @StringRes text: Int,
+    text: String,
     isRoundedChecked: (isChecked: Boolean) -> Unit,
 ) {
     val isChecked = remember { mutableStateOf(false) }
@@ -60,11 +59,23 @@ fun BYRoundedCheckView(
         }
 
         Text(
-            text = stringResource(id = text),
+            text = text,
             color = color,
             fontSize = 20.sp,
             fontWeight = FontWeight.Medium,
             modifier = Modifier.padding(start = 5.dp),
         )
     }
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun BYRoundedCheckViewPreview() {
+    // Using a placeholder string resource ID for demonstration
+    BYRoundedCheckView(
+        "Text", // Replace with actual string resource
+        isRoundedChecked = { isChecked ->
+            // Dummy implementation for preview
+        }
+    )
 }

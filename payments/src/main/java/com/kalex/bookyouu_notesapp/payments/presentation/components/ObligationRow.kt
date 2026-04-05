@@ -20,8 +20,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import com.kalex.bookyouu_notesapp.payments.R
 import com.kalex.bookyouu_notesapp.payments.domain.model.Obligation
+import com.kalex.bookyouu_notesapp.payments.domain.model.ObligationCategory
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -35,16 +37,16 @@ fun ObligationRow(
     isSelected: Boolean = false,
     modifier: Modifier = Modifier
 ) {
-    val currencyFormatter = NumberFormat.getCurrencyInstance(Locale("es", "CO")).apply {
+    val currencyFormatter = NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
         maximumFractionDigits = 2
     }
     
     val dateFormatter = SimpleDateFormat("MMM dd", Locale.getDefault())
     
-    val alpha = if (obligation.isPaid) 0.6f else 1.0f
+    val contentAlpha = if (obligation.isPaid) 0.5f else 1.0f
     val backgroundColor = when {
         isSelected -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
-        obligation.isPaid -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
+        obligation.isPaid -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
         else -> MaterialTheme.colorScheme.surface
     }
     
@@ -57,14 +59,13 @@ fun ObligationRow(
             ),
         shape = RoundedCornerShape(16.dp),
         color = backgroundColor,
-        tonalElevation = 4.dp,
-        shadowElevation = if (isSelected) 0.dp else 2.dp,
+        tonalElevation = if (obligation.isPaid) 0.dp else 1.dp,
+        shadowElevation = if (isSelected || obligation.isPaid) 0.dp else 2.dp,
         border = if (isSelected) androidx.compose.foundation.BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else null
     ) {
         Row(
             modifier = Modifier
-                .padding(16.dp)
-                .alpha(alpha),
+                .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Selection Icon or Category Icon
@@ -74,7 +75,8 @@ fun ObligationRow(
                     .clip(RoundedCornerShape(12.dp))
                     .background(
                         if (isSelected) MaterialTheme.colorScheme.primary
-                        else MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f)
+                        else if (obligation.isPaid) MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.2f)
+                        else MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.4f)
                     ),
                 contentAlignment = Alignment.Center
             ) {
@@ -89,7 +91,7 @@ fun ObligationRow(
                     Icon(
                         imageVector = getCategoryIcon(obligation.category),
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.secondary,
+                        tint = if (obligation.isPaid) MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f) else MaterialTheme.colorScheme.secondary,
                         modifier = Modifier.size(24.dp)
                     )
                 }
@@ -99,11 +101,22 @@ fun ObligationRow(
             
             // Name and Date
             Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = obligation.name,
-                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                    color = MaterialTheme.colorScheme.onSurface
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = obligation.name,
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = if (obligation.isPaid) MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f) else MaterialTheme.colorScheme.onSurface
+                    )
+                    if (obligation.isPaid) {
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Icon(
+                            imageVector = Icons.Default.CheckCircle,
+                            contentDescription = null,
+                            tint = Color(0xFF4CAF50),
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
+                }
                 Text(
                     text = if (obligation.isPaid) {
                         val formattedDate = obligation.lastPaidDate?.let { dateFormatter.format(it) } ?: "Unknown"
@@ -112,50 +125,38 @@ fun ObligationRow(
                         stringResource(R.string.due_on, obligation.dayOfMonth)
                     },
                     style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = if (obligation.isPaid) MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f) else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             
             // Amount and Status
             Column(horizontalAlignment = Alignment.End) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    if (obligation.isPaid) {
-                        Icon(
-                            imageVector = Icons.Default.CheckCircle,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.tertiary,
-                            modifier = Modifier.size(16.dp)
-                            )
-                            Spacer(modifier = Modifier.width(4.dp))
-                            }
-                            Text(
-                            text = currencyFormatter.format(obligation.amount),
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = if (obligation.isPaid) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface
-                            )
-                            }
+                Text(
+                    text = currencyFormatter.format(obligation.amount),
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                    color = if (obligation.isPaid) MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f) else MaterialTheme.colorScheme.onSurface
+                )
 
-                            Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(4.dp))
 
-                            // Badge
-                            val badgeColor = if (obligation.isPaid) MaterialTheme.colorScheme.tertiaryContainer else MaterialTheme.colorScheme.errorContainer
-                            val badgeTextColor = if (obligation.isPaid) MaterialTheme.colorScheme.onTertiaryContainer else MaterialTheme.colorScheme.onErrorContainer
+                // Badge
+                val badgeColor = if (obligation.isPaid) MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.5f) else MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.8f)
+                val badgeTextColor = if (obligation.isPaid) MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.7f) else MaterialTheme.colorScheme.onErrorContainer
 
-                            Surface(
-                            shape = RoundedCornerShape(8.dp),
-                            color = badgeColor
-                            ) {
-                            Text(
-                            text = if (obligation.isPaid) stringResource(R.string.paid) else stringResource(R.string.pending),
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
-                            style = MaterialTheme.typography.labelSmall.copy(
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = badgeColor
+                ) {
+                    Text(
+                        text = if (obligation.isPaid) stringResource(R.string.paid) else stringResource(R.string.pending),
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                        style = MaterialTheme.typography.labelSmall.copy(
                             fontWeight = FontWeight.ExtraBold,
                             fontSize = 10.sp
-                            ),
-                            color = badgeTextColor
-                            )
-                            }
-
+                        ),
+                        color = badgeTextColor
+                    )
+                }
             }
         }
     }
@@ -163,11 +164,18 @@ fun ObligationRow(
 
 @Composable
 fun getCategoryIcon(category: String): ImageVector {
-    return when (category.lowercase()) {
-        "home", "rent" -> Icons.Default.Home
-        "gym", "fitness" -> Icons.Default.Info //TODO: Set the correct icon
-        "internet", "web", "tech" -> Icons.Default.AccountBox //TODO: Set the correct icon
-        "electricity", "utility", "power" -> Icons.Default.Build //TODO: Set the correct icon
-        else -> Icons.Default.Face //TODO: Set the correct icon
+    val obligationCategory = try {
+        ObligationCategory.valueOf(category.uppercase())
+    } catch (e: Exception) {
+        ObligationCategory.GENERAL
+    }
+
+    return when (obligationCategory) {
+        ObligationCategory.HOUSE -> Icons.Default.Home
+        ObligationCategory.SUBSCRIPTION -> ImageVector.vectorResource(R.drawable.subscriptions_24dp)
+        ObligationCategory.GYM -> ImageVector.vectorResource(R.drawable.outline_exercise_24)
+        ObligationCategory.UTILITY -> Icons.Default.Build
+        ObligationCategory.GENERAL -> Icons.Default.Person
+        ObligationCategory.TRANSPORT -> ImageVector.vectorResource(R.drawable.baseline_directions_car_24)
     }
 }

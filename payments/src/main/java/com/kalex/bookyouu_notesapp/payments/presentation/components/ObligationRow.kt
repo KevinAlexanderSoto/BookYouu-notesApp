@@ -1,10 +1,8 @@
 package com.kalex.bookyouu_notesapp.payments.presentation.components
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -12,7 +10,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -28,14 +25,14 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-@OptIn(ExperimentalFoundationApi::class)
+
 @Composable
 fun ObligationRow(
+    modifier: Modifier = Modifier,
     obligation: Obligation,
     onToggle: (Obligation) -> Unit,
     onLongClick: (Obligation) -> Unit,
     isSelected: Boolean = false,
-    modifier: Modifier = Modifier
 ) {
     val currencyFormatter = NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
         maximumFractionDigits = 2
@@ -43,7 +40,6 @@ fun ObligationRow(
     
     val dateFormatter = SimpleDateFormat("MMM dd", Locale.getDefault())
     
-    val contentAlpha = if (obligation.isPaid) 0.5f else 1.0f
     val backgroundColor = when {
         isSelected -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
         obligation.isPaid -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)

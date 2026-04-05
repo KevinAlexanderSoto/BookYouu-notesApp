@@ -3,6 +3,7 @@ package com.kalex.bookyouu_notesapp.payments.di
 import com.kalex.bookyouu_notesapp.payments.data.repository.RoomObligationRepository
 import com.kalex.bookyouu_notesapp.payments.domain.repository.ObligationRepository
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.AddObligationUseCase
+import com.kalex.bookyouu_notesapp.payments.domain.usecase.DeleteObligationUseCase
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.GetObligationsUseCase
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.TogglePaymentUseCase
 import com.kalex.bookyouu_notesapp.payments.presentation.ObligationsCreateViewModel
@@ -17,6 +18,7 @@ val paymentsModule = module {
     singleOf(::GetObligationsUseCase)
     singleOf(::AddObligationUseCase)
     singleOf(::TogglePaymentUseCase)
+    singleOf(::DeleteObligationUseCase)
     viewModelOf(::ObligationsViewModel)
     viewModelOf(::ObligationsCreateViewModel)
 }

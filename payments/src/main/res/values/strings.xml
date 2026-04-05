@@ -33,4 +33,10 @@
     <string name="obligation_created_message">Your payment obligation for %1$s\nhas been successfully scheduled.</string>
     <string name="done">Done</string>
     <string name="add_another">Add Another</string>
+
+    <!-- Deletion -->
+    <string name="delete_obligations_title">Delete Obligations</string>
+    <string name="delete_obligations_message">Are you sure you want to delete %1$d selected obligations?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
 </resources>

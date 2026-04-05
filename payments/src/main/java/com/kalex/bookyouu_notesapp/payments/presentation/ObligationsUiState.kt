@@ -7,5 +7,7 @@ data class ObligationsUiState(
     val pendingAmount: Double = 0.0,
     val paidAmount: Double = 0.0,
     val obligations: List<Obligation> = emptyList(),
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val isSelectionMode: Boolean = false,
+    val selectedObligations: Set<Int> = emptySet()
 )

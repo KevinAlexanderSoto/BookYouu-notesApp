@@ -1,7 +1,8 @@
 package com.kalex.bookyouu_notesapp.payments.presentation.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,10 +26,13 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ObligationRow(
     obligation: Obligation,
     onToggle: (Obligation) -> Unit,
+    onLongClick: (Obligation) -> Unit,
+    isSelected: Boolean = false,
     modifier: Modifier = Modifier
 ) {
     val currencyFormatter = NumberFormat.getCurrencyInstance(Locale("es", "CO")).apply {
@@ -38,16 +42,24 @@ fun ObligationRow(
     val dateFormatter = SimpleDateFormat("MMM dd", Locale.getDefault())
     
     val alpha = if (obligation.isPaid) 0.6f else 1.0f
-    val backgroundColor = if (obligation.isPaid) MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f) else MaterialTheme.colorScheme.surface
+    val backgroundColor = when {
+        isSelected -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+        obligation.isPaid -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
+        else -> MaterialTheme.colorScheme.surface
+    }
     
     Surface(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { onToggle(obligation) },
+            .combinedClickable(
+                onClick = { onToggle(obligation) },
+                onLongClick = { onLongClick(obligation) }
+            ),
         shape = RoundedCornerShape(16.dp),
         color = backgroundColor,
         tonalElevation = 4.dp,
-        shadowElevation = 2.dp
+        shadowElevation = if (isSelected) 0.dp else 2.dp,
+        border = if (isSelected) androidx.compose.foundation.BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else null
     ) {
         Row(
             modifier = Modifier
@@ -55,20 +67,32 @@ fun ObligationRow(
                 .alpha(alpha),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Category Icon
+            // Selection Icon or Category Icon
             Box(
                 modifier = Modifier
                     .size(48.dp)
                     .clip(RoundedCornerShape(12.dp))
-                    .background(MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f)),
+                    .background(
+                        if (isSelected) MaterialTheme.colorScheme.primary
+                        else MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f)
+                    ),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(
-                    imageVector = getCategoryIcon(obligation.category),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.secondary,
-                    modifier = Modifier.size(24.dp)
-                )
+                if (isSelected) {
+                    Icon(
+                        imageVector = Icons.Default.Check,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                } else {
+                    Icon(
+                        imageVector = getCategoryIcon(obligation.category),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
             }
             
             Spacer(modifier = Modifier.width(16.dp))

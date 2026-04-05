@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -21,6 +23,10 @@ fun ObligationsScaffold(
     onFloatingActionClick: () -> Unit,
     showNavigationIcon: Boolean = true,
     navigationIcon: ImageVector = Icons.Default.Menu,
+    isSelectionMode: Boolean = false,
+    selectedCount: Int = 0,
+    onClearSelection: () -> Unit = {},
+    onDeleteSelected: () -> Unit = {},
     content: @Composable (padding: PaddingValues) -> Unit,
 ) {
     Scaffold(
@@ -28,20 +34,39 @@ fun ObligationsScaffold(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = title,
+                        text = if (isSelectionMode) "$selectedCount selected" else title,
                         style = MaterialTheme.typography.headlineMedium.copy(
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary // Primary teal
+                            color = MaterialTheme.colorScheme.primary
                         )
                     )
                 },
                 navigationIcon = {
-                    if (showNavigationIcon) {
+                    if (isSelectionMode) {
+                        IconButton(onClick = onClearSelection) {
+                            Icon(
+                                imageVector = Icons.Default.Close,
+                                contentDescription = "clear selection",
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    } else if (showNavigationIcon) {
                         IconButton(onClick = onNavigationClick) {
                             Icon(
                                 imageVector = navigationIcon,
                                 contentDescription = "navigation",
                                 tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+                },
+                actions = {
+                    if (isSelectionMode) {
+                        IconButton(onClick = onDeleteSelected) {
+                            Icon(
+                                imageVector = Icons.Default.Delete,
+                                contentDescription = "delete selected",
+                                tint = MaterialTheme.colorScheme.error
                             )
                         }
                     }
@@ -52,11 +77,13 @@ fun ObligationsScaffold(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(
-                modifier = Modifier.padding(0.dp, 8.dp),
-                onClick = { onFloatingActionClick() },
-            ) {
-                Icon(Icons.Default.Add, contentDescription = "add")
+            if (!isSelectionMode) {
+                FloatingActionButton(
+                    modifier = Modifier.padding(0.dp, 8.dp),
+                    onClick = { onFloatingActionClick() },
+                ) {
+                    Icon(Icons.Default.Add, contentDescription = "add")
+                }
             }
         },
     ) { paddingValues ->

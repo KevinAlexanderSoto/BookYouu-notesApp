@@ -10,10 +10,10 @@ enum class PaymentFrequency {
 
 enum class ObligationCategory {
     HOUSE,
-    INTERNET,
+    SUBSCRIPTION,
     GYM,
     UTILITY,
-    FOOD,
+    GENERAL,
     TRANSPORT
 }
 

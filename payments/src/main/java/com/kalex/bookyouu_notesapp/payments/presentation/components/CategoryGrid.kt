@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import com.kalex.bookyouu_notesapp.payments.R
 import com.kalex.bookyouu_notesapp.payments.domain.model.ObligationCategory
 
@@ -68,13 +69,13 @@ fun CategoryCard(
     onClick: () -> Unit
 ) {
     val colorScheme = androidx.compose.material3.MaterialTheme.colorScheme
-    val icon = when (category) { // TODO: chnage the icons
+    val icon = when (category) {
         ObligationCategory.HOUSE -> Icons.Default.Home
-        ObligationCategory.INTERNET -> Icons.Filled.Warning
-        ObligationCategory.GYM -> Icons.Default.Home
-        ObligationCategory.UTILITY -> Icons.Default.Face
-        ObligationCategory.FOOD -> Icons.Default.Build
-        ObligationCategory.TRANSPORT -> Icons.Default.AddCircle
+        ObligationCategory.SUBSCRIPTION -> ImageVector.vectorResource(R.drawable.subscriptions_24dp)
+        ObligationCategory.GYM -> ImageVector.vectorResource(R.drawable.outline_exercise_24)
+        ObligationCategory.UTILITY -> Icons.Default.Build
+        ObligationCategory.GENERAL -> Icons.Default.Person
+        ObligationCategory.TRANSPORT -> ImageVector.vectorResource(R.drawable.baseline_directions_car_24)
     }
 
     Box(

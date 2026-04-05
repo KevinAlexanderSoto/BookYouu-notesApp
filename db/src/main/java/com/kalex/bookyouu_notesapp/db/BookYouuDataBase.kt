@@ -15,22 +15,8 @@ import com.kalex.bookyouu_notesapp.db.typeConvertes.DayOfWeekTypeConverter
 
 @Database(
     entities = [Subject::class, Note::class, ObligationEntity::class],
-    version = 4,
-    exportSchema = true,
-    autoMigrations = [
-        AutoMigration(
-            from = 1,
-            to = 2,
-        ),
-        AutoMigration(
-            from = 2,
-            to = 3,
-        ),
-        AutoMigration(
-            from = 3,
-            to = 4,
-        ),
-    ],
+    version = 1,
+    exportSchema = true
 )
 @TypeConverters(DateTypeConverter::class, DayOfWeekTypeConverter::class)
 abstract class BookYouuDataBase : RoomDatabase() {

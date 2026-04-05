@@ -19,10 +19,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ObligationsScaffold(
     title: String,
-    onNavigationClick: () -> Unit,
     onFloatingActionClick: () -> Unit,
-    showNavigationIcon: Boolean = true,
-    navigationIcon: ImageVector = Icons.Default.Menu,
     isSelectionMode: Boolean = false,
     selectedCount: Int = 0,
     onClearSelection: () -> Unit = {},
@@ -50,14 +47,6 @@ fun ObligationsScaffold(
                                 tint = MaterialTheme.colorScheme.primary
                             )
                         }
-                    } else if (showNavigationIcon) {
-                        IconButton(onClick = onNavigationClick) {
-                            Icon(
-                                imageVector = navigationIcon,
-                                contentDescription = "navigation",
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
                     }
                 },
                 actions = {
@@ -79,7 +68,7 @@ fun ObligationsScaffold(
         floatingActionButton = {
             if (!isSelectionMode) {
                 FloatingActionButton(
-                    modifier = Modifier.padding(0.dp, 8.dp),
+                    modifier = Modifier.padding(0.dp, 0.dp),
                     onClick = { onFloatingActionClick() },
                 ) {
                     Icon(Icons.Default.Add, contentDescription = "add")

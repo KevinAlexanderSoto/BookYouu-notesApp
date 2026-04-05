@@ -25,6 +25,7 @@ import com.kalex.bookyouu_notesapp.core.common.getNotificationFlag
 import org.koin.androidx.compose.koinViewModel
 @Composable
 fun MainMoreMenu(
+    modifier: Modifier = Modifier,
     moreMenuViewModel: SwitchMenuViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
@@ -36,7 +37,8 @@ fun MainMoreMenu(
         mutableStateOf(moreMenuViewModel.hasBiometricSupport)
     }
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

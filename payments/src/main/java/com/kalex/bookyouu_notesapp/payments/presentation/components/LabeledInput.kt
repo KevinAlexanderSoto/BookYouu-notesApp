@@ -92,7 +92,7 @@ fun LabeledInput(
                 textStyle = TextStyle(
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onBackground
                 ),
                 keyboardOptions = keyboardOptions,
                 visualTransformation = visualTransformation,

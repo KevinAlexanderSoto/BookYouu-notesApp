@@ -1,5 +1,7 @@
 package com.kalex.bookyouu_notesapp.navigation.graphs
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -29,8 +31,10 @@ fun NavGraphBuilder.moreMenuNav(rootNavController: NavHostController) {
                         restoreState = true
                     }
                 },
-                content = {
-                    MainMoreMenu()
+                content = { paddingValues ->
+                    MainMoreMenu(
+                        modifier = Modifier.padding(paddingValues)
+                    )
                 }
             )
         }

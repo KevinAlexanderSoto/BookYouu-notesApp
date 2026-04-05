@@ -33,7 +33,6 @@ fun ObligationsScreen(
 
     ObligationsScaffold(
         title = stringResource(R.string.payments_title),
-        onNavigationClick = onMenuClick,
         onFloatingActionClick = onFloatingActionClick,
         isSelectionMode = uiState.isSelectionMode,
         selectedCount = uiState.selectedObligations.size,
@@ -43,7 +42,7 @@ fun ObligationsScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(top = paddingValues.calculateTopPadding(), bottom = 4.dp)
         ) {
             if (uiState.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
@@ -51,16 +50,16 @@ fun ObligationsScreen(
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(horizontal = 20.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(bottom = 24.dp)
+                        .padding(horizontal = 12.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    contentPadding = PaddingValues(bottom = 12.dp)
                 ) {
                     item {
                         OverviewCard(
                             totalBalance = uiState.totalBalance,
                             pendingAmount = uiState.pendingAmount,
                             paidAmount = uiState.paidAmount,
-                            modifier = Modifier.padding(vertical = 8.dp)
+                            modifier = Modifier.padding(vertical = 1.dp)
                         )
                     }
 
@@ -68,7 +67,7 @@ fun ObligationsScreen(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(vertical = 16.dp),
+                                .padding(vertical = 8.dp),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {

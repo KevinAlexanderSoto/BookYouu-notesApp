@@ -35,7 +35,8 @@ fun BYNavigationBar(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(80.dp)
+                .navigationBarsPadding()
+                .height(62.dp)
                 .selectableGroup(),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically,
@@ -43,6 +44,7 @@ fun BYNavigationBar(
         )
     }
 }
+
 
 @Composable
 fun RowScope.BYNavigationBarItem(
@@ -60,7 +62,7 @@ fun RowScope.BYNavigationBarItem(
         modifier = modifier
             .weight(1f)
             .fillMaxHeight()
-            .padding(6.dp)
+            .padding(8.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(backgroundColor)
             .clickable(
@@ -77,15 +79,15 @@ fun RowScope.BYNavigationBarItem(
             Icon(
                 painter = painterResource(id = icon),
                 contentDescription = null,
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier.size(16.dp),
                 tint = contentColor
             )
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(2.dp))
             Text(
                 text = stringResource(id = label).uppercase(Locale.getDefault()),
                 style = MaterialTheme.typography.labelSmall.copy(
                     fontWeight = FontWeight.Bold,
-                    letterSpacing = 0.5.sp
+                    letterSpacing = 0.3.sp
                 ),
                 color = contentColor
             )

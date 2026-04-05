@@ -36,7 +36,7 @@ fun NavGraphBuilder.paymentsNav(rootNavController: NavHostController) {
                     }
                 },
                 content = { paddingValues ->
-                    Box(modifier = Modifier.padding(paddingValues)) {
+                    Box(modifier = Modifier.padding(bottom = paddingValues.calculateBottomPadding())) {
                         ObligationsScreen(
                             onMenuClick = {
                                 // TODO: Open drawer if any

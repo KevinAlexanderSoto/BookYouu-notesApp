@@ -46,10 +46,12 @@ fun CategoryGrid(
         )
         
         LazyVerticalGrid(
-            columns = GridCells.Fixed(3),
+            columns = GridCells.Adaptive(80.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.height(200.dp) // Fixed height to avoid infinite height in Column
+            verticalArrangement = Arrangement.spacedBy(11.dp),
+            modifier = Modifier
+                .heightIn(min = 128.dp, max = 264.dp)
+                .widthIn(min = 256.dp, max = 512.dp)
         ) {
             items(ObligationCategory.entries) { category ->
                 CategoryCard(

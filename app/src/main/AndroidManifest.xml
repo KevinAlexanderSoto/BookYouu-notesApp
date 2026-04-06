@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
@@ -45,6 +46,11 @@
             </intent-filter>
         </activity>
         <receiver android:name=".notification.AlarmReceiver" android:enabled="true" />
+        <receiver android:name=".notification.BootReceiver" android:enabled="true" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-5709056978356073~3916644415" />

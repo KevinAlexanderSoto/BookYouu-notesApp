@@ -2,7 +2,6 @@
     <string name="app_name">BookYouU</string>
     <!-- BOTTOM MENU SECTION -->
     <string name="subject_bottom_label">Subjects</string>
-    <string name="average_bottom_label">Average</string>
     <string name="payments_bottom_label">Payments</string>
     <string name="moreMenu_bottom_label">Settings</string>
     <!--SUBJECT SECTION-->
@@ -51,15 +50,6 @@
     <string name="record_delete_text">Do you what to delete this record? It will be deleted from the Gallery</string>
     <string name="record_confirm_button_text">Delete</string>
     <string name="record_cancel_button_text">Keep it</string>
-    <!-- AVERAGE SECTION -->    <!-- AVERAGE SECTION -->    <!-- AVERAGE SECTION -->    <!-- AVERAGE SECTION -->
-    <string name="average_item_ratings_label">Enter the rating</string>
-    <string name="average_item_percentage_label">%</string>
-    <string name="average_percentage_average_text">You have the %1$s percentage in %2$s .</string>
-    <string name="average_percentage_error_text">Ups… percentage greater than 100%</string>
-    <string name="average_confirmButton_text">OK</string>
-    <string name="average_dialog_title">Result</string>
-    <string name="average_calculate_button_text">Calculate</string>
-    <string name="average_title">Average</string>
     <string name="record_list_end_text">There are no more items to show.</string>
 
 

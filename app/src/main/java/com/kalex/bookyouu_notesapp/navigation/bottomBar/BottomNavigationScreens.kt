@@ -17,11 +17,6 @@ sealed class BottomNavigationScreens(
         R.string.subject_bottom_label,
     )
 
-    object Average : BottomNavigationScreens(
-        Route.AVERAGE_MAIN,
-        R.drawable.archive_svgrepo_com,
-        R.string.average_bottom_label,
-    )
     object Payments : BottomNavigationScreens(
         Route.PAYMENTS_MAIN,
         R.drawable.baseline_library_books_24,

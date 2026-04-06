@@ -7934,7 +7934,6 @@ HSPLcom/kalex/bookyouu_notesapp/di/SubjectModule;->provideDispatcher()Lkotlinx/c
 HSPLcom/kalex/bookyouu_notesapp/di/SubjectModule;->provideRepository(Lcom/kalex/bookyouu_notesapp/db/dao/SubjectDao;)Lcom/kalex/bookyouu_notesapp/subject/data/SubjectRepository;
 HSPLcom/kalex/bookyouu_notesapp/di/SubjectModule_ProvideDispatcherFactory;->provideDispatcher(Lcom/kalex/bookyouu_notesapp/di/SubjectModule;)Lkotlinx/coroutines/CoroutineDispatcher;
 HSPLcom/kalex/bookyouu_notesapp/di/SubjectModule_ProvideRepositoryFactory;->provideRepository(Lcom/kalex/bookyouu_notesapp/di/SubjectModule;Lcom/kalex/bookyouu_notesapp/db/dao/SubjectDao;)Lcom/kalex/bookyouu_notesapp/subject/data/SubjectRepository;
-HSPLcom/kalex/bookyouu_notesapp/navigation/bottomBar/BottomNavigationScreens$Average;-><init>()V
 HSPLcom/kalex/bookyouu_notesapp/navigation/bottomBar/BottomNavigationScreens$Companion;-><init>()V
 HSPLcom/kalex/bookyouu_notesapp/navigation/bottomBar/BottomNavigationScreens$Companion;-><init>(Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 HSPLcom/kalex/bookyouu_notesapp/navigation/bottomBar/BottomNavigationScreens$Companion;->getBottomNavItems()Ljava/util/List;
@@ -7945,11 +7944,6 @@ HSPLcom/kalex/bookyouu_notesapp/navigation/bottomBar/BottomNavigationScreens;->a
 HSPLcom/kalex/bookyouu_notesapp/navigation/bottomBar/BottomNavigationScreens;->getBottomIconRes()I
 HSPLcom/kalex/bookyouu_notesapp/navigation/bottomBar/BottomNavigationScreens;->getLabel()I
 HSPLcom/kalex/bookyouu_notesapp/navigation/bottomBar/BottomNavigationScreens;->getRoute()Ljava/lang/String;
-HSPLcom/kalex/bookyouu_notesapp/navigation/graphs/AverageCalculationNavigationGraphKt$averageNav$1$1;-><init>(Landroidx/navigation/NavHostController;)V
-HSPLcom/kalex/bookyouu_notesapp/navigation/graphs/AverageCalculationNavigationGraphKt$averageNav$1;-><init>(Landroidx/navigation/NavHostController;)V
-HSPLcom/kalex/bookyouu_notesapp/navigation/graphs/AverageCalculationNavigationGraphKt$averageNav$1;->invoke(Landroidx/navigation/NavGraphBuilder;)V
-HSPLcom/kalex/bookyouu_notesapp/navigation/graphs/AverageCalculationNavigationGraphKt$averageNav$1;->invoke(Ljava/lang/Object;)Ljava/lang/Object;
-HSPLcom/kalex/bookyouu_notesapp/navigation/graphs/AverageCalculationNavigationGraphKt;->averageNav(Landroidx/navigation/NavGraphBuilder;Landroidx/navigation/NavHostController;)V
 HSPLcom/kalex/bookyouu_notesapp/navigation/graphs/RecordsNavigationGraphKt$recordsNav$1;-><init>()V
 HSPLcom/kalex/bookyouu_notesapp/navigation/graphs/RecordsNavigationGraphKt$recordsNav$1;->invoke(Landroidx/navigation/NavArgumentBuilder;)V
 HSPLcom/kalex/bookyouu_notesapp/navigation/graphs/RecordsNavigationGraphKt$recordsNav$1;->invoke(Ljava/lang/Object;)Ljava/lang/Object;
@@ -11816,13 +11810,9 @@ Lcom/kalex/bookyouu_notesapp/di/RecordsModule;
 Lcom/kalex/bookyouu_notesapp/di/SubjectModule;
 Lcom/kalex/bookyouu_notesapp/di/SubjectModule_ProvideDispatcherFactory;
 Lcom/kalex/bookyouu_notesapp/di/SubjectModule_ProvideRepositoryFactory;
-Lcom/kalex/bookyouu_notesapp/navigation/bottomBar/BottomNavigationScreens$Average;
 Lcom/kalex/bookyouu_notesapp/navigation/bottomBar/BottomNavigationScreens$Companion;
 Lcom/kalex/bookyouu_notesapp/navigation/bottomBar/BottomNavigationScreens$Subject;
 Lcom/kalex/bookyouu_notesapp/navigation/bottomBar/BottomNavigationScreens;
-Lcom/kalex/bookyouu_notesapp/navigation/graphs/AverageCalculationNavigationGraphKt$averageNav$1$1;
-Lcom/kalex/bookyouu_notesapp/navigation/graphs/AverageCalculationNavigationGraphKt$averageNav$1;
-Lcom/kalex/bookyouu_notesapp/navigation/graphs/AverageCalculationNavigationGraphKt;
 Lcom/kalex/bookyouu_notesapp/navigation/graphs/RecordsNavigationGraphKt$recordsNav$1;
 Lcom/kalex/bookyouu_notesapp/navigation/graphs/RecordsNavigationGraphKt$recordsNav$2$10;
 Lcom/kalex/bookyouu_notesapp/navigation/graphs/RecordsNavigationGraphKt$recordsNav$2$11;

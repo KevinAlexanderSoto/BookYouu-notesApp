@@ -5,7 +5,6 @@ import android.media.MediaRecorder
 import android.os.Build
 import androidx.room.Room
 import com.kalex.bookyouu_notesapp.MainActivity
-import com.kalex.bookyouu_notesapp.average.AverageViewModel
 import com.kalex.bookyouu_notesapp.db.BookYouuDataBase
 import com.kalex.bookyouu_notesapp.db.DBConstants
 import com.kalex.bookyouu_notesapp.moreMenu.MoreMenuFlagsUseCase
@@ -66,5 +65,4 @@ val viewModelModule = module {
     viewModelOf(::AudioRecordViewModel)
     viewModelOf(::SubjectFormInformationViewModel)
     viewModelOf(::SwitchMenuViewModel)
-    viewModelOf(::AverageViewModel)
 }

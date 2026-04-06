@@ -16,7 +16,7 @@ interface ObligationDao {
     suspend fun updateObligation(obligation: ObligationEntity)
     
     @Insert
-    suspend fun insertObligation(obligation: ObligationEntity)
+    suspend fun insertObligation(obligation: ObligationEntity): Long
 
     @Query("DELETE FROM obligations WHERE id = :id")
     suspend fun deleteObligation(id: Int)

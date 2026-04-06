@@ -6,7 +6,7 @@ import com.kalex.bookyouu_notesapp.payments.domain.repository.ObligationReposito
 class AddObligationUseCase(
     private val repository: ObligationRepository
 ) {
-    suspend operator fun invoke(obligation: Obligation) {
-        repository.addObligation(obligation)
+    suspend operator fun invoke(obligation: Obligation): Int {
+        return repository.addObligation(obligation)
     }
 }

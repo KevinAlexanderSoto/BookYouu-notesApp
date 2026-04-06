@@ -6,13 +6,17 @@ import com.kalex.bookyouu_notesapp.payments.domain.model.Obligation
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.DeleteObligationUseCase
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.GetObligationsUseCase
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.TogglePaymentUseCase
+import com.kalex.bookyouu_notesapp.notification.AlarmScheduler
+import com.kalex.bookyouu_notesapp.notification.AlarmItem
+import java.time.LocalDateTime
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class ObligationsViewModel(
     private val getObligationsUseCase: GetObligationsUseCase,
     private val togglePaymentUseCase: TogglePaymentUseCase,
-    private val deleteObligationUseCase: DeleteObligationUseCase
+    private val deleteObligationUseCase: DeleteObligationUseCase,
+    private val alarmScheduler: AlarmScheduler
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ObligationsUiState(isLoading = true))
@@ -45,6 +49,7 @@ class ObligationsViewModel(
     fun onDeleteObligation(id: Int) {
         viewModelScope.launch {
             deleteObligationUseCase(id)
+            cancelNotification(id)
         }
     }
 
@@ -73,7 +78,19 @@ class ObligationsViewModel(
         val selectedIds = _uiState.value.selectedObligations.toList()
         viewModelScope.launch {
             deleteObligationUseCase.deleteMultiple(selectedIds)
+            selectedIds.forEach { cancelNotification(it) }
             clearSelection()
         }
+    }
+
+    private fun cancelNotification(id: Int) {
+        alarmScheduler.cancel(
+            AlarmItem(
+                alarmId = id,
+                time = LocalDateTime.now(), // Time doesn't matter for cancellation
+                message = "",
+                title = ""
+            )
+        )
     }
 }

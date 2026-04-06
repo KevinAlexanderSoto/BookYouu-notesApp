@@ -33,4 +33,8 @@
     <string name="obligation_created_message">Tu obligación de pago para %1$s\nha sido programada con éxito.</string>
     <string name="done">Listo</string>
     <string name="add_another">Agregar Otra</string>
+
+    <!-- Notifications -->
+    <string name="notification_obligation_title">Recordatorio de Pago</string>
+    <string name="notification_obligation_message">No olvides pagar: %1$s</string>
 </resources>

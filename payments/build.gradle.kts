@@ -74,6 +74,7 @@ dependencies {
 
     implementation(project(":core"))
     implementation(project(":db"))
+    implementation(project(":notification"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

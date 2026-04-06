@@ -8,6 +8,8 @@ import com.kalex.bookyouu_notesapp.payments.domain.usecase.GetObligationsUseCase
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.TogglePaymentUseCase
 import com.kalex.bookyouu_notesapp.payments.presentation.ObligationsCreateViewModel
 import com.kalex.bookyouu_notesapp.payments.presentation.ObligationsViewModel
+import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
@@ -20,5 +22,5 @@ val paymentsModule = module {
     singleOf(::TogglePaymentUseCase)
     singleOf(::DeleteObligationUseCase)
     viewModelOf(::ObligationsViewModel)
-    viewModelOf(::ObligationsCreateViewModel)
+    viewModel { ObligationsCreateViewModel(get(), get(), androidContext()) }
 }

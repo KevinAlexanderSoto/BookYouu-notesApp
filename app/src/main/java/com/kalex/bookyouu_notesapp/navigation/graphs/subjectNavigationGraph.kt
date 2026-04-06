@@ -11,13 +11,14 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import com.kalex.bookyouu_notesapp.R
 import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldBottomBar
 import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldTopBar
+import com.kalex.bookyouu_notesapp.core.common.composables.SuccessStatusScreen
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.navigation.bottomBar.BottomNavigationScreens
 import com.kalex.bookyouu_notesapp.navigation.topBar.TopBarTitleFactory
 import com.kalex.bookyouu_notesapp.subject.SubjectMainScreen
-import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui.BYSuccessScreen
 import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.ui.SubjectForm
 
 fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
@@ -95,10 +96,13 @@ fun NavGraphBuilder.subjectNav(rootNavController: NavHostController) {
         }
         composable(route = Route.SUBJECT_FORM_SUCCESS_SCREEN) {
             Scaffold() { _ ->
-                BYSuccessScreen(
-                    onNavigateToSubjectListScreen = {
+                SuccessStatusScreen(
+                    title = stringResource(R.string.success_screen_text),
+                    message = "",
+                    primaryButtonText = stringResource(R.string.success_screen_buttom_text),
+                    onPrimaryClick =  {
                         rootNavController.popBackStack(Route.SUBJECT_LIST, false)
-                    },
+                    }
                 )
             }
 

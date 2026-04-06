@@ -37,15 +37,7 @@ private val REQUIRED_PERMISSIONS =
              android.Manifest.permission.READ_EXTERNAL_STORAGE,
          )
      }
-    else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) { // ANDROID 10 -11
-        listOf(
-            android.Manifest.permission.CAMERA,
-            android.Manifest.permission.RECORD_AUDIO,
-            android.Manifest.permission.READ_EXTERNAL_STORAGE,
-
-        )
-    }
-    else { // Android 9
+    else { // ANDROID 11
         listOf(
             android.Manifest.permission.CAMERA,
             android.Manifest.permission.RECORD_AUDIO,

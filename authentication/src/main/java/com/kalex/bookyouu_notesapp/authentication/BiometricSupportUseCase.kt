@@ -1,9 +1,7 @@
 package com.kalex.bookyouu_notesapp.authentication
 
-import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.provider.Settings
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
@@ -19,55 +17,45 @@ class BiometricSupportUseCase(
 ) {
     fun checkBiometricSupport(): Flow<BiometricSupportState> = flow {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val biometricManager = BiometricManager.from(context)
-            when (biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)) {
-                BiometricManager.BIOMETRIC_SUCCESS -> emit(BiometricSupportState.Success(true))
+        val biometricManager = BiometricManager.from(context)
+        when (biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)) {
+            BiometricManager.BIOMETRIC_SUCCESS -> emit(BiometricSupportState.Success(true))
 
-                BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> emit(
-                    BiometricSupportState.Error(
-                        BiometricSupportState.ErrorCases.BIOMETRIC_ERROR_NO_HARDWARE
-                    )
+            BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> emit(
+                BiometricSupportState.Error(
+                    BiometricSupportState.ErrorCases.BIOMETRIC_ERROR_NO_HARDWARE
                 )
+            )
 
-                BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> emit(
-                    BiometricSupportState.Error(
-                        BiometricSupportState.ErrorCases.BIOMETRIC_ERROR_HW_UNAVAILABLE
-                    )
+            BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> emit(
+                BiometricSupportState.Error(
+                    BiometricSupportState.ErrorCases.BIOMETRIC_ERROR_HW_UNAVAILABLE
                 )
+            )
 
-                BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
-                    emit(BiometricSupportState.Error(BiometricSupportState.ErrorCases.BIOMETRIC_ERROR_NONE_ENROLLED))
-                    // Prompts the user to create credentials that your app accepts.
-                    val enrollIntent = Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
-                        putExtra(
-                            Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
-                            BIOMETRIC_STRONG or DEVICE_CREDENTIAL
-                        )
-                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    }
-                    context.startActivity(enrollIntent)
-                }
-
-                BiometricManager.BIOMETRIC_ERROR_SECURITY_UPDATE_REQUIRED -> {
-                    emit(BiometricSupportState.Error(BiometricSupportState.ErrorCases.BIOMETRIC_ERROR_SECURITY_UPDATE_REQUIRED))
-                }
-
-                BiometricManager.BIOMETRIC_ERROR_UNSUPPORTED -> {
-                    emit(BiometricSupportState.Error(BiometricSupportState.ErrorCases.BIOMETRIC_ERROR_UNSUPPORTED))
-                }
-
-                BiometricManager.BIOMETRIC_STATUS_UNKNOWN -> {
-                    emit(BiometricSupportState.Error(BiometricSupportState.ErrorCases.BIOMETRIC_STATUS_UNKNOWN))
-                }
-            }
-        } else {
-            val keyGuardManager =
-                context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-            if (!keyGuardManager.isDeviceSecure) {
+            BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
                 emit(BiometricSupportState.Error(BiometricSupportState.ErrorCases.BIOMETRIC_ERROR_NONE_ENROLLED))
-            } else {
-                emit(BiometricSupportState.Success(true))
+                // Prompts the user to create credentials that your app accepts.
+                val enrollIntent = Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
+                    putExtra(
+                        Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
+                        BIOMETRIC_STRONG or DEVICE_CREDENTIAL
+                    )
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                context.startActivity(enrollIntent)
+            }
+
+            BiometricManager.BIOMETRIC_ERROR_SECURITY_UPDATE_REQUIRED -> {
+                emit(BiometricSupportState.Error(BiometricSupportState.ErrorCases.BIOMETRIC_ERROR_SECURITY_UPDATE_REQUIRED))
+            }
+
+            BiometricManager.BIOMETRIC_ERROR_UNSUPPORTED -> {
+                emit(BiometricSupportState.Error(BiometricSupportState.ErrorCases.BIOMETRIC_ERROR_UNSUPPORTED))
+            }
+
+            BiometricManager.BIOMETRIC_STATUS_UNKNOWN -> {
+                emit(BiometricSupportState.Error(BiometricSupportState.ErrorCases.BIOMETRIC_STATUS_UNKNOWN))
             }
         }
     }

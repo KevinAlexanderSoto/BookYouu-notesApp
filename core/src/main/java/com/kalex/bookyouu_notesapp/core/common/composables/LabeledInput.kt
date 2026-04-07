@@ -1,4 +1,4 @@
-package com.kalex.bookyouu_notesapp.payments.presentation.components
+package com.kalex.bookyouu_notesapp.core.common.composables
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -102,7 +102,7 @@ fun LabeledInput(
     }
 }
 
-internal class NumberVisualTransformation : VisualTransformation {
+class NumberVisualTransformation : VisualTransformation {
     private val symbols = DecimalFormatSymbols(Locale("es", "CO")).apply {
         groupingSeparator = '.'
     }

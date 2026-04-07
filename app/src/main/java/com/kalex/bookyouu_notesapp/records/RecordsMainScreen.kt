@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.kalex.bookyouu_notesapp.R
+import com.kalex.bookyouu_notesapp.core.common.UiText
 import com.kalex.bookyouu_notesapp.core.common.composables.BYLoadingIndicator
 import com.kalex.bookyouu_notesapp.core.common.composables.EmptyScreen
 import com.kalex.bookyouu_notesapp.core.common.decodeUri
@@ -148,9 +149,11 @@ fun RecordsMainScreen(
             PaginationState.EMPTY -> {
                 item {
                     EmptyScreen(
-                        onAddItemClick = { onAddNewRecord.invoke() },
-                        rationaleText = R.string.records_list_no_recordsFount_text,
-                        addButtonText = stringResource(R.string.subject_list_no_subjectsFount_ButtonText),
+                        title = UiText.StringResource(R.string.records_empty_title),
+                        description = UiText.StringResource(R.string.records_empty_description),
+                        mainIcon = R.drawable.camera_svgrepo_com,
+                        buttonText = UiText.StringResource(R.string.subject_list_no_subjectsFount_ButtonText),
+                        onButtonClick = { onAddNewRecord.invoke() }
                     )
                 }
             }

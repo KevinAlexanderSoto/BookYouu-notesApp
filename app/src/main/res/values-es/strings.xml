@@ -4,11 +4,16 @@
     <!-- BOTTOM MENU SECTION -->
     <string name="subject_bottom_label">Materias</string>
     <string name="payments_bottom_label">Payments</string>
+    <string name="expenses_bottom_label">Gastos</string>
     <string name="moreMenu_bottom_label">Config</string>
     <!--SUBJECT SECTION-->
     <string name="subject_list_title">Tus clases</string>
     <string name="subject_list_no_subjectsFount_text">Upss… No has agregado materias, añade una para comenzar</string>
     <string name="subject_list_no_subjectsFount_ButtonText">Agregar</string>
+    <string name="subject_empty_title">No hay Materias</string>
+    <string name="subject_empty_description">Aún no has agregado materias. Añade una para empezar a organizar tus apuntes.</string>
+    <string name="records_empty_title">Sin Registros</string>
+    <string name="records_empty_description">No has agregado registros a esta materia. Toma una foto o graba un audio para comenzar.</string>
     <string name="subject_form_title">Ingresa la información</string>
     <string name="subject_form_subjectName_label">Materia</string>
     <string name="subject_form_classRoom_label">Salón(opcional)</string>

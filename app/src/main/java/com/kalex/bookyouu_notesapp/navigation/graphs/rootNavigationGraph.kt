@@ -18,5 +18,6 @@ fun RootNavigationGraph(
         recordsNav(rootNavController)
         moreMenuNav(rootNavController)
         paymentsNav(rootNavController)
+        expensesNav(rootNavController)
     }
 }

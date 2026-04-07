@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="expenses_title">Gastos</string>
+    <string name="add_expense">Agregar Gasto</string>
+    <string name="amount_label">Monto</string>
+    <string name="description_label">Descripción</string>
+    <string name="category_label">Categoría</string>
+    <string name="save_expense">Guardar Gasto</string>
+    <string name="total_spent_in">Total Gastado en %1$s</string>
+    <string name="no_expenses">No hay gastos registrados para este mes.</string>
+    <string name="add_one">Agregar uno</string>
+    <string name="previous_month">Mes anterior</string>
+    <string name="next_month">Siguiente mes</string>
+    <string name="expense_saved">Gasto guardado</string>
+    <string name="error_saving_expense">Error al guardar el gasto</string>
+    <string name="amount_placeholder">0.00</string>
+    <string name="description_placeholder">¿En qué gastaste?</string>
+
+    <!-- Empty State -->
+    <string name="empty_expenses_title">No Gastos Aún</string>
+    <string name="empty_expenses_description">Parece que no has registrado ningún gasto en este mes. ¡Empieza a organizar tus finanzas ahora!</string>
+    <string name="empty_expenses_button">Guardar Gasto</string>
+</resources>

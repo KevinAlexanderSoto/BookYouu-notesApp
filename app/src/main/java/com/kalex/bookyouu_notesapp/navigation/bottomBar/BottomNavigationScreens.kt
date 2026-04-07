@@ -22,6 +22,11 @@ sealed class BottomNavigationScreens(
         R.drawable.baseline_library_books_24,
         R.string.payments_bottom_label,
     )
+    object Expenses : BottomNavigationScreens(
+        Route.EXPENSES_LIST,
+        R.drawable.baseline_calculate_24,
+        R.string.expenses_bottom_label,
+    )
     object MoreMenu : BottomNavigationScreens(
         Route.MORE_MENU_MAIN,
         R.drawable.settings_24px,
@@ -31,6 +36,7 @@ sealed class BottomNavigationScreens(
     companion object {
         val bottomNavItems = listOf(
             Payments,
+            Expenses,
             Subject,
             MoreMenu,
         )

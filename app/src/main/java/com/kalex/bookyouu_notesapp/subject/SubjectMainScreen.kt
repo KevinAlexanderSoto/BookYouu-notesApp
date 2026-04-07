@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kalex.bookyouu_notesapp.R
+import com.kalex.bookyouu_notesapp.core.common.UiText
 import com.kalex.bookyouu_notesapp.core.common.composables.BYLoadingIndicator
 import com.kalex.bookyouu_notesapp.core.common.composables.EmptyScreen
 import com.kalex.bookyouu_notesapp.core.common.decodeUri
@@ -90,9 +91,11 @@ fun SubjectMainScreen(
         subjectViewModel.getSubjectState.collectAsStateWithLifecycle(),
         onEmpty = {
             EmptyScreen(
-                onAddItemClick = { onAddNewSubject.invoke() },
-                rationaleText = R.string.subject_list_no_subjectsFount_text,
-                addButtonText = stringResource(R.string.subject_list_no_subjectsFount_ButtonText),
+                title = UiText.StringResource(R.string.subject_empty_title),
+                description = UiText.StringResource(R.string.subject_empty_description),
+                mainIcon = R.drawable.book_svgrepo_com,
+                buttonText = UiText.StringResource(R.string.subject_list_no_subjectsFount_ButtonText),
+                onButtonClick = { onAddNewSubject.invoke() }
             )
         },
         onLoading = { BYLoadingIndicator() },

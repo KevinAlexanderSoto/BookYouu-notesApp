@@ -142,6 +142,7 @@ dependencies {
     implementation(project(":authentication"))
     implementation(project(":ads"))
     implementation(project(":payments"))
+    implementation(project(":expenses"))
 
     //TESTING SECTION
     testImplementation(libs.junit)

@@ -18,7 +18,7 @@ import androidx.compose.ui.res.stringResource
 import com.kalex.bookyouu_notesapp.payments.R
 import com.kalex.bookyouu_notesapp.core.common.composables.SuccessStatusScreen
 import com.kalex.bookyouu_notesapp.payments.presentation.components.CategoryGrid
-import com.kalex.bookyouu_notesapp.payments.presentation.components.LabeledInput
+import com.kalex.bookyouu_notesapp.core.common.composables.LabeledInput
 import com.kalex.bookyouu_notesapp.payments.presentation.components.PaymentFrequencyCard
 import org.koin.androidx.compose.koinViewModel
 

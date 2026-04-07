@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="expenses_title">Expenses</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="amount_label">Amount</string>
+    <string name="description_label">Description</string>
+    <string name="category_label">Category</string>
+    <string name="save_expense">Save Expense</string>
+    <string name="total_spent_in">Total Spent in %1$s</string>
+    <string name="no_expenses">No expenses recorded for this month.</string>
+    <string name="add_one">Add One</string>
+    <string name="previous_month">Previous Month</string>
+    <string name="next_month">Next Month</string>
+    <string name="expense_saved">Expense Saved</string>
+    <string name="error_saving_expense">Error saving expense</string>
+    <string name="amount_placeholder">0.00</string>
+    <string name="description_placeholder">What did you spend on?</string>
+
+    <!-- Empty State -->
+    <string name="empty_expenses_title">No Expenses Yet</string>
+    <string name="empty_expenses_description">It seems you haven\'t registered any expenses this month. Start organizing your finances now!</string>
+    <string name="empty_expenses_button">Save Expense</string>
+</resources>

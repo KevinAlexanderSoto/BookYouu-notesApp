@@ -3,10 +3,15 @@
     <!-- BOTTOM MENU SECTION -->
     <string name="subject_bottom_label">Subjects</string>
     <string name="payments_bottom_label">Payments</string>
+    <string name="expenses_bottom_label">Expenses</string>
     <string name="moreMenu_bottom_label">Settings</string>
     <!--SUBJECT SECTION-->
     <string name="subject_list_no_subjectsFount_text">Upss… You do not have subjects, add one to start</string>
     <string name="subject_list_no_subjectsFount_ButtonText">Add</string>
+    <string name="subject_empty_title">No Subjects Yet</string>
+    <string name="subject_empty_description">You don\'t have any subjects added. Add one to start organizing your class notes.</string>
+    <string name="records_empty_title">No Records Found</string>
+    <string name="records_empty_description">You haven\'t added any records to this subject yet. Take a photo or record audio to begin.</string>
     <string name="subject_form_subjectName_label">Subject name</string>
     <string name="subject_form_classRoom_label">Classroom(optional)</string>
     <string name="subject_form_credits_label">Credits(optional)</string>

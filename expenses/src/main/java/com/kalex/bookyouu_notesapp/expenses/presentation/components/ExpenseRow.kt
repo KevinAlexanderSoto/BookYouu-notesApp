@@ -3,8 +3,7 @@ package com.kalex.bookyouu_notesapp.expenses.presentation.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -119,5 +118,8 @@ fun getCategoryIcon(category: Category): ImageVector {
         Category.HEALTH -> Icons.Default.Star
         Category.LEISURE -> Icons.Default.Star
         Category.OTHERS -> Icons.Default.Star
+        Category.EDUCATION -> Icons.Default.Star
+        Category.HOME -> Icons.Default.Star
+        Category.SHOPPING -> Icons.Default.Star
     }
 }

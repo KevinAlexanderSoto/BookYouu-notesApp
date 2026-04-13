@@ -10,7 +10,8 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
-import java.time.LocalDateTime
+import java.time.LocalDate
+import java.time.LocalTime
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -36,7 +37,10 @@ class ExpenseViewModel(
         val savedMonth = savedStateHandle.get<String>("selected_month")
         val initialMonth = savedMonth?.let { YearMonth.parse(it) } ?: YearMonth.now()
         
-        _state.update { it.copy(selectedMonth = initialMonth) }
+        _state.update { it.copy(
+            selectedMonth = initialMonth,
+            selectedDate = if (initialMonth == YearMonth.now()) LocalDate.now() else initialMonth.atDay(1)
+        ) }
         loadExpenses(initialMonth)
     }
 
@@ -44,8 +48,14 @@ class ExpenseViewModel(
         when (action) {
             is ExpenseAction.OnMonthChange -> {
                 savedStateHandle["selected_month"] = action.newMonth.toString()
-                _state.update { it.copy(selectedMonth = action.newMonth) }
+                _state.update { it.copy(
+                    selectedMonth = action.newMonth,
+                    selectedDate = if (action.newMonth == YearMonth.now()) LocalDate.now() else action.newMonth.atDay(1)
+                ) }
                 loadExpenses(action.newMonth)
+            }
+            is ExpenseAction.OnDateChange -> {
+                _state.update { it.copy(selectedDate = action.newDate) }
             }
             is ExpenseAction.OnDeleteExpense -> {
                 viewModelScope.launch {
@@ -87,14 +97,14 @@ class ExpenseViewModel(
             _state.update { it.copy(isLoading = true) }
             try {
                 val amount = action.amount.toDoubleOrNull() ?: 0.0
-                val now = LocalDateTime.now()
-                val monthYearStr = "${now.monthValue.toString().padStart(2, '0')}-${now.year}"
+                val dateTime = action.date.atTime(LocalTime.now())
+                val monthYearStr = "${dateTime.monthValue.toString().padStart(2, '0')}-${dateTime.year}"
                 
                 val newExpense = Expense(
                     amount = amount,
                     description = action.description,
                     category = action.category,
-                    date = now,
+                    date = dateTime,
                     monthYear = monthYearStr
                 )
                 addExpenseUseCase(newExpense)

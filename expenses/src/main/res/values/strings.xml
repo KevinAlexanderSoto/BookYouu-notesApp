@@ -2,9 +2,10 @@
 <resources>
     <string name="expenses_title">Expenses</string>
     <string name="add_expense">Add Expense</string>
-    <string name="amount_label">Amount</string>
-    <string name="description_label">Description</string>
-    <string name="category_label">Category</string>
+    <string name="amount_label">AMOUNT</string>
+    <string name="description_label">DESCRIPTION</string>
+    <string name="category_label">SELECT CATEGORY</string>
+    <string name="date_label">DATE</string>
     <string name="save_expense">Save Expense</string>
     <string name="total_spent_in">Total Spent in %1$s</string>
     <string name="no_expenses">No expenses recorded for this month.</string>

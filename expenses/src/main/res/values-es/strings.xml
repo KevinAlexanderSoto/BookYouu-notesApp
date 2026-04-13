@@ -2,9 +2,10 @@
 <resources>
     <string name="expenses_title">Gastos</string>
     <string name="add_expense">Agregar Gasto</string>
-    <string name="amount_label">Monto</string>
-    <string name="description_label">Descripción</string>
-    <string name="category_label">Categoría</string>
+    <string name="amount_label">MONTO</string>
+    <string name="description_label">DESCRIPCIÓN</string>
+    <string name="category_label">SELECCIONAR CATEGORÍA</string>
+    <string name="date_label">FECHA</string>
     <string name="save_expense">Guardar Gasto</string>
     <string name="total_spent_in">Total Gastado en %1$s</string>
     <string name="no_expenses">No hay gastos registrados para este mes.</string>

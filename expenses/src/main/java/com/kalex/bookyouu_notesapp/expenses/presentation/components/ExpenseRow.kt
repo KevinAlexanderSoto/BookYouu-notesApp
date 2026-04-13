@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.kalex.bookyouu_notesapp.expenses.domain.model.Category
@@ -119,7 +120,7 @@ fun getCategoryIcon(category: Category): ImageVector {
         Category.LEISURE -> Icons.Default.Star
         Category.OTHERS -> Icons.Default.Star
         Category.EDUCATION -> Icons.Default.Star
-        Category.HOME -> Icons.Default.Star
+        Category.HOME -> Icons.Default.Home
         Category.SHOPPING -> Icons.Default.Star
     }
 }

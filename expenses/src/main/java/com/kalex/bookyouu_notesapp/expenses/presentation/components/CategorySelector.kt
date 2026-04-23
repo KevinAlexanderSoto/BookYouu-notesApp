@@ -35,8 +35,8 @@ fun CategorySelector(
     ) {
         items(Category.values()) { category ->
             val isSelected = category == selectedCategory
-            val backgroundColor = if (isSelected) Color(0xFF2D5D57) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
-            val contentColor = if (isSelected) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
+            val backgroundColor = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+            val contentColor = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
             
             Column(
                 modifier = Modifier
@@ -65,7 +65,7 @@ fun CategorySelector(
                         fontSize = 11.sp,
                         fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
                     ),
-                    color = if (isSelected) Color(0xFF2D5D57) else MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center,
                     maxLines = 1
                 )

@@ -35,9 +35,9 @@ sealed class BottomNavigationScreens(
 
     companion object {
         val bottomNavItems = listOf(
-            Journal,
-            Payments,
             Expenses,
+            Payments,
+            Journal,
             MoreMenu,
         )
     }

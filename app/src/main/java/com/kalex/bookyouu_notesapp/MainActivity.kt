@@ -38,7 +38,7 @@ class MainActivity : FragmentActivity() {
         var startDestination = ""
         val authenticationFlag = applicationContext.getAuthenticationFlag()
         startDestination =
-            if (authenticationFlag?.toBooleanStrictOrNull() == true) Route.AUTHENTICATION_ROUTE else Route.JOURNAL
+            if (authenticationFlag?.toBooleanStrictOrNull() == true) Route.AUTHENTICATION_ROUTE else Route.EXPENSES
         this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContent {
             BookYouUnotesAppTheme {

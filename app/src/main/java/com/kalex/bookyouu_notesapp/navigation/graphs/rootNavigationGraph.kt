@@ -14,8 +14,8 @@ fun RootNavigationGraph(
         startDestination = startDestination,
     ) {
         authenticationGraph(rootNavController)
-        subjectNav(rootNavController)
-        recordsNav(rootNavController)
+        journalNav(rootNavController)
+        journalEntryNav(rootNavController)
         moreMenuNav(rootNavController)
         paymentsNav(rootNavController)
         expensesNav(rootNavController)

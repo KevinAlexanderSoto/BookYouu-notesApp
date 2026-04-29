@@ -10,6 +10,7 @@ import com.kalex.bookyouu_notesapp.di.databaseModule
 import com.kalex.bookyouu_notesapp.di.repositoryModule
 import com.kalex.bookyouu_notesapp.di.viewModelModule
 import com.kalex.bookyouu_notesapp.expenses.di.expensesModule
+import com.kalex.bookyouu_notesapp.journal.di.journalModule
 import com.kalex.bookyouu_notesapp.notification.di.notificationModule
 import com.kalex.bookyouu_notesapp.payments.di.paymentsModule
 import com.kalex.bookyouu_notesapp.notification.NotificationConstants
@@ -29,7 +30,8 @@ class BookYouuApplication : Application() {
                 authenticationModule,
                 notificationModule,
                 paymentsModule,
-                expensesModule
+                expensesModule,
+                journalModule
             )
         }
         configureNotificationChannel(this)

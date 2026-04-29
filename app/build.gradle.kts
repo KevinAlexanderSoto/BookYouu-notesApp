@@ -143,6 +143,7 @@ dependencies {
     implementation(project(":ads"))
     implementation(project(":payments"))
     implementation(project(":expenses"))
+    implementation(project(":journal"))
 
     //TESTING SECTION
     testImplementation(libs.junit)

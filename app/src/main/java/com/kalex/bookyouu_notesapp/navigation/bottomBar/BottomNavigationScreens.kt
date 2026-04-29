@@ -11,10 +11,10 @@ sealed class BottomNavigationScreens(
     @DrawableRes override val bottomIconRes: Int,
     @StringRes override val label: Int,
 ): BottomBarNavigationItem {
-    object Subject : BottomNavigationScreens(
-        Route.SUBJECT_LIST,
+    object Journal : BottomNavigationScreens(
+        Route.JOURNAL_LIST,
         R.drawable.book_svgrepo_com,
-        R.string.subject_bottom_label,
+        R.string.journal_bottom_label,
     )
 
     object Payments : BottomNavigationScreens(
@@ -35,9 +35,9 @@ sealed class BottomNavigationScreens(
 
     companion object {
         val bottomNavItems = listOf(
+            Journal,
             Payments,
             Expenses,
-            Subject,
             MoreMenu,
         )
     }

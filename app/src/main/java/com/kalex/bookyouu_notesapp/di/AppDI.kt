@@ -9,16 +9,7 @@ import com.kalex.bookyouu_notesapp.db.BookYouuDataBase
 import com.kalex.bookyouu_notesapp.db.DBConstants
 import com.kalex.bookyouu_notesapp.moreMenu.MoreMenuFlagsUseCase
 import com.kalex.bookyouu_notesapp.moreMenu.SwitchMenuViewModel
-import com.kalex.bookyouu_notesapp.records.AudioRecordViewModel
-import com.kalex.bookyouu_notesapp.records.PagingRecordsViewModel
-import com.kalex.bookyouu_notesapp.records.RecordsViewModel
-import com.kalex.bookyouu_notesapp.records.data.NotesRepository
-import com.kalex.bookyouu_notesapp.records.data.NotesRepositoryImpl
-import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormInformationViewModel
-import com.kalex.bookyouu_notesapp.subject.createSubject.presentation.SubjectFormViewModel
-import com.kalex.bookyouu_notesapp.subject.data.SubjectRepository
-import com.kalex.bookyouu_notesapp.subject.data.SubjectRepositoryImpl
-import com.kalex.bookyouu_notesapp.subject.subjectList.presentation.SubjectListViewModel
+import com.kalex.bookyouu_notesapp.journal.di.journalModule
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -47,22 +38,16 @@ val databaseModule = module {
             DBConstants.DB_NAME
         ).build()
     }
-    single { get<BookYouuDataBase>().noteDao }
-    single { get<BookYouuDataBase>().subjectDao }
+    single { get<BookYouuDataBase>().journalEntryDao }
+    single { get<BookYouuDataBase>().journalDao }
     single { get<BookYouuDataBase>().obligationDao }
 }
 
 val repositoryModule = module {
-    singleOf(::NotesRepositoryImpl) { bind<NotesRepository>() }
-    singleOf(::SubjectRepositoryImpl) { bind<SubjectRepository>() }
+    // Repositories are now in journalModule
 }
 
 val viewModelModule = module {
-    viewModelOf(::SubjectFormViewModel)
-    viewModelOf(::SubjectListViewModel)
-    viewModelOf(::RecordsViewModel)
-    viewModelOf(::PagingRecordsViewModel)
-    viewModelOf(::AudioRecordViewModel)
-    viewModelOf(::SubjectFormInformationViewModel)
     viewModelOf(::SwitchMenuViewModel)
 }
+

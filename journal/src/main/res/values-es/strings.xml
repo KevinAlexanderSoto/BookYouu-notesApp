@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- BOTTOM MENU SECTION -->
+
+
+    <!--JOURNAL SECTION-->
+    <string name="journal_list_title">Tus proyectos</string>
+    <string name="journal_list_no_journalsFount_text">Upss… No has agregado proyectos, añade uno para comenzar</string>
+    <string name="journal_list_no_journalsFount_ButtonText">Agregar</string>
+    <string name="journal_empty_title">No hay Proyectos</string>
+    <string name="journal_empty_description">Aún no has agregado proyectos. Añade uno para empezar a registrar tus hobbies o progresos.</string>
+    <string name="journal_entries_empty_title">Sin Entradas</string>
+    <string name="journal_entries_empty_description">No has agregado entradas a este proyecto. Toma una foto o graba un audio para comenzar.</string>
+    <string name="journal_form_title">Ingresa la información</string>
+    <string name="journal_form_name_label">Nombre del proyecto</string>
+    <string name="journal_form_location_label">Ubicación/Contexto(opcional)</string>
+    <string name="journal_form_priority_label">Prioridad(opcional)</string>
+    <string name="journal_form_day_label">Días</string>
+    <string name="journal_form_sheet_title">Selecciona los días</string>
+    <string name="journal_form_button_text">Crear</string>
+    <string name="journal_form_monday">Lunes</string>
+    <string name="journal_form_tuesday">Martes</string>
+    <string name="journal_form_wednesday">Miércoles</string>
+    <string name="journal_form_thursday">Jueves</string>
+    <string name="journal_form_friday">Viernes</string>
+    <string name="journal_form_saturday">Sábado</string>
+    <string name="journal_form_sunday">Domingo</string>
+
+    <string name="success_screen_text">Creado con éxito</string>
+    <string name="success_screen_buttom_text">Continuar</string>
+
+    <string name="journal_delete_title_dialog">Eliminar proyecto</string>
+    <string name="journal_delete_text_dialog">¿Quieres eliminar este proyecto? Todas las entradas se eliminarán.</string>
+    <string name="journal_delete_button_text_dialog">Eliminar</string>
+
+    <!-- ENTRY SECTION -->
+    <string name="journal_entry_confirmation_description_label">Descripción(opcional)</string>
+    <string name="journal_entries_list_no_entriesFount_text">No tienes entradas en este proyecto</string>
+    <string name="journal_entry_confirmation_buttons_title">Guardar entrada</string>
+    <string name="journal_entry_delete_title">¿Eliminar entrada?</string>
+    <string name="journal_entry_delete_text">¿Deseas eliminar esta entrada? Se eliminará también de la Galería</string>
+    <string name="journal_entry_confirm_button_text">Eliminar</string>
+    <string name="journal_entry_cancel_button_text">Mantener</string>
+    <string name="journal_entry_list_end_text">No hay más elementos.</string>
+</resources>

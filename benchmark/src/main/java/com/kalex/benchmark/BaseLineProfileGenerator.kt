@@ -19,7 +19,7 @@ class BaseLineProfileGenerator {
     ) {
         startActivityAndWait()
         device.wait(
-            Until.hasObject(By.text("Your subjects")),
+            Until.hasObject(By.text("Your projects")),
             30_000,
         )
     }

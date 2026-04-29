@@ -1,0 +1,42 @@
+<resources>
+    <!-- BOTTOM MENU SECTION -->
+
+
+    <!--JOURNAL SECTION-->
+    <string name="journal_list_title">Your projects</string>
+    <string name="journal_list_no_journalsFount_text">Upss… You do not have projects, add one to start</string>
+    <string name="journal_list_no_journalsFount_ButtonText">Add</string>
+    <string name="journal_empty_title">No Projects Yet</string>
+    <string name="journal_empty_description">You don\'t have any projects added. Add one to start tracking your hobbies or progress.</string>
+    <string name="journal_entries_empty_title">No Entries Found</string>
+    <string name="journal_entries_empty_description">You haven\'t added any entries to this project yet. Take a photo or record audio to begin.</string>
+    <string name="journal_form_name_label">Project name</string>
+    <string name="journal_form_location_label">Location/Context(optional)</string>
+    <string name="journal_form_priority_label">Priority(optional)</string>
+    <string name="journal_form_title">fill all the fields</string>
+    <string name="journal_form_day_label">Days</string>
+    <string name="journal_form_monday">Monday</string>
+    <string name="journal_form_tuesday">Tuesday</string>
+    <string name="journal_form_wednesday">Wednesday</string>
+    <string name="journal_form_thursday">Thursday</string>
+    <string name="journal_form_friday">Friday</string>
+    <string name="journal_form_saturday">Saturday</string>
+    <string name="journal_form_sunday">Sunday</string>
+    <string name="success_screen_text">Created successfully</string>
+    <string name="success_screen_buttom_text">Continue</string>
+    <string name="journal_form_button_text">Create</string>
+    <string name="journal_form_sheet_title">Select the days</string>
+    <string name="journal_delete_title_dialog">Delete project</string>
+    <string name="journal_delete_text_dialog">Do you want to delete this project? All the entries will be deleted.</string>
+    <string name="journal_delete_button_text_dialog">Delete</string>
+
+    <!-- ENTRY SECTION -->
+    <string name="journal_entries_list_no_entriesFount_text">You do not have entries in this project</string>
+    <string name="journal_entry_confirmation_buttons_title">Save entry</string>
+    <string name="journal_entry_confirmation_description_label">Description(optional)</string>
+    <string name="journal_entry_delete_title">Delete entry?</string>
+    <string name="journal_entry_delete_text">Do you what to delete this entry? It will be deleted from the Gallery</string>
+    <string name="journal_entry_confirm_button_text">Delete</string>
+    <string name="journal_entry_cancel_button_text">Keep it</string>
+    <string name="journal_entry_list_end_text">There are no more items to show.</string>
+</resources>

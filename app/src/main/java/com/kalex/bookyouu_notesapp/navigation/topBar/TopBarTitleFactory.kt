@@ -13,14 +13,14 @@ object TopBarTitleFactory {
      */
     fun getTopBarTitle(route: String?) =
         when (route) {
-            Route.SUBJECT_FORM -> {
-                R.string.subject_form_topBar_title
+            Route.JOURNAL_FORM -> {
+                R.string.journal_form_topBar_title
             }
-            Route.RECORDS_MAIN_SCREEN -> {
-                R.string.record_mainScreen_topBar_title
+            Route.JOURNAL_ENTRY_MAIN_SCREEN -> {
+                R.string.journal_entry_mainScreen_topBar_title
             }
-            Route.RECORDS_DETAIL_PARAM_SCREEN -> {
-                R.string.record_detailScreen_topBar_title
+            Route.JOURNAL_ENTRY_DETAIL_PARAM_SCREEN -> {
+                R.string.journal_entry_detailScreen_topBar_title
             }
             Route.PAYMENTS_MAIN -> {
                 R.string.obligations_topBar_title

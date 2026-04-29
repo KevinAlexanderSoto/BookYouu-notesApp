@@ -17,7 +17,7 @@ fun NavGraphBuilder.authenticationGraph(rootNavController: NavHostController) {
             AuthenticationMain(
                 onNavigateToMainApplication = {
                     rootNavController.popBackStack()
-                    rootNavController.navigate(Route.SUBJECT)
+                    rootNavController.navigate(Route.JOURNAL)
                 })
         }
     }

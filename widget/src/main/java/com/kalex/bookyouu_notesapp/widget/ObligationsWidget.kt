@@ -31,6 +31,7 @@ import com.kalex.bookyouu_notesapp.payments.domain.usecase.GetPendingObligationU
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ObligationsWidget : GlanceAppWidget(), KoinComponent {
@@ -62,125 +63,205 @@ class ObligationsWidget : GlanceAppWidget(), KoinComponent {
         val normalizedPage = remember { mutableIntStateOf(0) }
         val totalPages = summary.size
 
-        LaunchedEffect(currentPage){
+        LaunchedEffect(currentPage, totalPages) {
             normalizedPage.intValue = if (totalPages > 0) {
                 if (currentPage >= totalPages) 0 else if (currentPage < 0) totalPages - 1 else currentPage
             } else 0
         }
 
-
         Scaffold(
             backgroundColor = GlanceTheme.colors.surface,
-            titleBar = {
-                Row(
-                    modifier = GlanceModifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 12.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-
-                   if (summary.isNotEmpty()) {
-                        Image(
-                            provider = ImageProvider(android.R.drawable.ic_media_previous),
-                            contentDescription = "Previous",
-                            modifier = GlanceModifier
-                                .size(32.dp)
-                                .clickable(actionRunCallback<UpdatePageAction>(
-                                    actionParametersOf(UpdatePageAction.KEY_INCREMENT to -1)
-                                ))
-                        )
-                        Spacer(modifier = GlanceModifier.width(24.dp))
-                        Image(
-                            provider = ImageProvider(android.R.drawable.ic_media_next),
-                            contentDescription = "Next",
-                            modifier = GlanceModifier
-                                .size(32.dp)
-                                .clickable(actionRunCallback<UpdatePageAction>(
-                                    actionParametersOf(UpdatePageAction.KEY_INCREMENT to 1)
-                                ))
-                        )
-                    }
-                }
-            },
             content = {
                 if (summary.isEmpty()) {
-                    Box(modifier = GlanceModifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Box(
+                        modifier = GlanceModifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
                         Text(
                             text = LocalContext.current.getString(R.string.no_upcoming_payments),
-                            style = TextStyle(color = GlanceTheme.colors.onSurfaceVariant, fontSize = 12.sp)
+                            style = TextStyle(
+                                color = GlanceTheme.colors.onSurfaceVariant,
+                                fontSize = 12.sp
+                            )
                         )
                     }
                 } else {
                     val obligation = summary[normalizedPage.intValue]
 
                     Column(
-                        modifier = GlanceModifier.fillMaxSize().padding(bottom = 16.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalAlignment = Alignment.CenterVertically
+                        modifier = GlanceModifier
+                            .fillMaxSize()
+                            .padding(12.dp,16.dp),
+                        horizontalAlignment = Alignment.Start,
+                        verticalAlignment = Alignment.Top
                     ) {
-                        Box(
-                            modifier = GlanceModifier.defaultWeight(),
-                            contentAlignment = Alignment.Center
+                        // Top Row: Icon, Name/Sub, Badge
+                        Row(
+                            modifier = GlanceModifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            PaymentCard(obligation, currencyFormatter)
+                            // Icon in Circle
+                            Box(
+                                modifier = GlanceModifier
+                                    .size(48.dp)
+                                    .background(GlanceTheme.colors.secondaryContainer)
+                                    .cornerRadius(24.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Image(
+                                    provider = ImageProvider(getCategoryIcon(obligation.category)),
+                                    contentDescription = null,
+                                    modifier = GlanceModifier.size(24.dp)
+                                )
+                            }
+
+                            Spacer(modifier = GlanceModifier.width(12.dp))
+
+                            Column(modifier = GlanceModifier.defaultWeight()) {
+                                Text(
+                                    text = obligation.name,
+                                    maxLines = 1,
+                                    style = TextStyle(
+                                        color = GlanceTheme.colors.onSurface,
+                                        fontSize = 18.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                )
+                                Text(
+                                    text = obligation.category.lowercase()
+                                        .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() },
+                                    style = TextStyle(
+                                        color = GlanceTheme.colors.onSurfaceVariant,
+                                        fontSize = 14.sp
+                                    )
+                                )
+                            }
+
+                            // Due Badge
+                            val dueStatus = getDueStatus(obligation.dayOfMonth)
+                            val badgeColor = if (dueStatus.isPastDue) GlanceTheme.colors.errorContainer else GlanceTheme.colors.tertiaryContainer
+                            val onBadgeColor = if (dueStatus.isPastDue) GlanceTheme.colors.onErrorContainer else GlanceTheme.colors.onTertiaryContainer
+
+                            Box(
+                                modifier = GlanceModifier
+                                    .background(badgeColor)
+                                    .cornerRadius(16.dp)
+                                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                            ) {
+                                Text(
+                                    text = dueStatus.text,
+                                    style = TextStyle(
+                                        color = onBadgeColor,
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                )
+                            }
                         }
-                        
-                        // Page Indicator
-                        Text(
-                            text = "${normalizedPage.intValue + 1} / $totalPages",
-                            style = TextStyle(
-                                color = GlanceTheme.colors.onSurface,
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.Medium
+
+                        Spacer(modifier = GlanceModifier.defaultWeight())
+
+                        // Middle: Amount
+                        Column(modifier = GlanceModifier.fillMaxWidth()) {
+                            Text(
+                                text = "TOTAL COMMITMENT",
+                                style = TextStyle(
+                                    color = GlanceTheme.colors.onSurfaceVariant,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Medium
+                                )
                             )
-                        )
+                            Spacer(modifier = GlanceModifier.height(4.dp))
+                            Text(
+                                text = currencyFormatter.format(obligation.amount),
+                                style = TextStyle(
+                                    color = GlanceTheme.colors.primary,
+                                    fontSize = 32.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            )
+                        }
+
+                        Spacer(modifier = GlanceModifier.defaultWeight())
+
+                        // Bottom: Arrows and Indicator
+                        Row(
+                            modifier = GlanceModifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Image(
+                                provider = ImageProvider(R.drawable.outline_arrow_back_24),
+                                contentDescription = "Previous",
+                                modifier = GlanceModifier
+                                    .size(30.dp)
+                                    .clickable(
+                                        actionRunCallback<UpdatePageAction>(
+                                            actionParametersOf(UpdatePageAction.KEY_INCREMENT to -1)
+                                        )
+                                    )
+                            )
+
+                            Spacer(modifier = GlanceModifier.width(16.dp))
+
+                            Text(
+                                text = "${normalizedPage.intValue + 1} / $totalPages",
+                                style = TextStyle(
+                                    color = GlanceTheme.colors.onSurfaceVariant,
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.Medium
+                                )
+                            )
+
+                            Spacer(modifier = GlanceModifier.width(16.dp))
+
+                            Image(
+                                provider = ImageProvider(R.drawable.outline_arrow_forward_24),
+                                contentDescription = "Next",
+                                modifier = GlanceModifier
+                                    .size(30.dp)
+                                    .clickable(
+                                        actionRunCallback<UpdatePageAction>(
+                                            actionParametersOf(UpdatePageAction.KEY_INCREMENT to 1)
+                                        )
+                                    )
+                            )
+                        }
                     }
                 }
             }
         )
     }
 
-    @Composable
-    private fun PaymentCard(obligation: Obligation, currencyFormatter: NumberFormat) {
-        Column(
-            modifier = GlanceModifier
-                .fillMaxSize()
-                .background(GlanceTheme.colors.secondaryContainer)
-                .cornerRadius(24.dp)
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            //Colocar la categoria
-            //Colocar mas informacion de la fecha
-            Text(
-                text = "${obligation.dayOfMonth}",
-                style = TextStyle(
-                    color = GlanceTheme.colors.primary,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            )
-            Spacer(modifier = GlanceModifier.height(8.dp))
-            Text(
-                text = obligation.name,
-                maxLines = 1,
-                style = TextStyle(
-                    color = GlanceTheme.colors.onSecondaryContainer,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium
-                )
-            )
-            Spacer(modifier = GlanceModifier.height(8.dp))
-            Text(
-                text = currencyFormatter.format(obligation.amount),
-                style = TextStyle(
-                    color = GlanceTheme.colors.onSecondaryContainer,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            )
+    private fun getCategoryIcon(category: String): Int {
+        return when (category.uppercase()) {
+            "GYM" -> android.R.drawable.ic_lock_power_off
+            "HOUSE" -> android.R.drawable.ic_menu_today
+            "SUBSCRIPTION" -> android.R.drawable.ic_menu_slideshow
+            "UTILITY" -> android.R.drawable.ic_menu_compass
+            "TRANSPORT" -> android.R.drawable.ic_menu_directions
+            else -> android.R.drawable.ic_menu_help
         }
     }
+
+    private fun getDueStatus(dayOfMonth: Int): DueStatus {
+        val today = Calendar.getInstance()
+        val currentDay = today.get(Calendar.DAY_OF_MONTH)
+
+        val targetDate = Calendar.getInstance().apply {
+            set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        }
+
+        val formatter = SimpleDateFormat("dd MMM", Locale.getDefault())
+        val dateText = formatter.format(targetDate.time)
+
+        return DueStatus(
+            text = dateText,
+            isPastDue = dayOfMonth < currentDay
+        )
+    }
+
+    data class DueStatus(val text: String, val isPastDue: Boolean)
 }
 
 class UpdatePageAction : ActionCallback {

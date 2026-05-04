@@ -8,15 +8,6 @@ enum class PaymentFrequency {
     BI_WEEKLY
 }
 
-enum class ObligationCategory {
-    HOUSE,
-    SUBSCRIPTION,
-    GYM,
-    UTILITY,
-    GENERAL,
-    TRANSPORT
-}
-
 data class Obligation(
     val id: Int = 0,
     val name: String,

@@ -99,7 +99,7 @@ class ObligationsCreateViewModel(
                 name = currentState.name,
                 amount = currentState.amount.toDoubleOrNull() ?: 0.0,
                 dayOfMonth = currentState.dayOfMonth,
-                category = currentState.category?.name ?: "",
+                category = currentState.category?.name() ?: "",
                 frequency = currentState.frequency
             )
             

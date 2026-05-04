@@ -24,13 +24,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.painterResource
 import com.kalex.bookyouu_notesapp.payments.R
-import com.kalex.bookyouu_notesapp.payments.domain.model.ObligationCategory
+import com.kalex.bookyouu_notesapp.core.common.Category
+import com.kalex.bookyouu_notesapp.core.common.CategoryIcon
 
 @Composable
 fun CategoryGrid(
-    selectedCategory: ObligationCategory?,
-    onCategorySelected: (ObligationCategory) -> Unit,
+    selectedCategory: Category?,
+    onCategorySelected: (Category) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val colorScheme = androidx.compose.material3.MaterialTheme.colorScheme
@@ -53,7 +55,7 @@ fun CategoryGrid(
                 .heightIn(min = 128.dp, max = 264.dp)
                 .widthIn(min = 256.dp, max = 512.dp)
         ) {
-            items(ObligationCategory.entries) { category ->
+            items(Category.values()) { category ->
                 CategoryCard(
                     category = category,
                     isSelected = category == selectedCategory,
@@ -66,20 +68,12 @@ fun CategoryGrid(
 
 @Composable
 fun CategoryCard(
-    category: ObligationCategory,
+    category: Category,
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
     val colorScheme = androidx.compose.material3.MaterialTheme.colorScheme
-    val icon = when (category) {
-        ObligationCategory.HOUSE -> Icons.Default.Home
-        ObligationCategory.SUBSCRIPTION -> ImageVector.vectorResource(R.drawable.subscriptions_24dp)
-        ObligationCategory.GYM -> ImageVector.vectorResource(R.drawable.outline_exercise_24)
-        ObligationCategory.UTILITY -> Icons.Default.Build
-        ObligationCategory.GENERAL -> Icons.Default.Person
-        ObligationCategory.TRANSPORT -> ImageVector.vectorResource(R.drawable.baseline_directions_car_24)
-    }
-
+    
     Box(
         modifier = Modifier
             .aspectRatio(1.2f)
@@ -98,15 +92,19 @@ fun CategoryCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = if (isSelected) colorScheme.primary else colorScheme.onSurfaceVariant,
-                modifier = Modifier.size(28.dp)
-            )
+            when (val icon = category.icon) {
+                is CategoryIcon.Resource -> {
+                    Icon(
+                        painter = painterResource(id = icon.resId),
+                        contentDescription = null,
+                        tint = if (isSelected) colorScheme.primary else colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(28.dp)
+                    )
+                }
+            }
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = category.name,
+                text = stringResource(category.displayNameRes),
                 style = TextStyle(
                     fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,

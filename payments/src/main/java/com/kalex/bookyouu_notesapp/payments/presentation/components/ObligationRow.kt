@@ -18,9 +18,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.painterResource
 import com.kalex.bookyouu_notesapp.payments.R
 import com.kalex.bookyouu_notesapp.payments.domain.model.Obligation
-import com.kalex.bookyouu_notesapp.payments.domain.model.ObligationCategory
+import com.kalex.bookyouu_notesapp.core.common.Category
+import com.kalex.bookyouu_notesapp.core.common.CategoryIcon
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -84,12 +86,19 @@ fun ObligationRow(
                         modifier = Modifier.size(24.dp)
                     )
                 } else {
-                    Icon(
-                        imageVector = getCategoryIcon(obligation.category),
-                        contentDescription = null,
-                        tint = if (obligation.isPaid) MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f) else MaterialTheme.colorScheme.secondary,
-                        modifier = Modifier.size(24.dp)
-                    )
+                    val categoryObj = Category.fromName(obligation.category)
+                    val tint = if (obligation.isPaid) MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f) else MaterialTheme.colorScheme.secondary
+                    
+                    when (val icon = categoryObj.icon) {
+                        is CategoryIcon.Resource -> {
+                            Icon(
+                                painter = painterResource(id = icon.resId),
+                                contentDescription = null,
+                                tint = tint,
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                    }
                 }
             }
             
@@ -155,23 +164,5 @@ fun ObligationRow(
                 }
             }
         }
-    }
-}
-
-@Composable
-fun getCategoryIcon(category: String): ImageVector {
-    val obligationCategory = try {
-        ObligationCategory.valueOf(category.uppercase())
-    } catch (e: Exception) {
-        ObligationCategory.GENERAL
-    }
-
-    return when (obligationCategory) {
-        ObligationCategory.HOUSE -> Icons.Default.Home
-        ObligationCategory.SUBSCRIPTION -> ImageVector.vectorResource(R.drawable.subscriptions_24dp)
-        ObligationCategory.GYM -> ImageVector.vectorResource(R.drawable.outline_exercise_24)
-        ObligationCategory.UTILITY -> Icons.Default.Build
-        ObligationCategory.GENERAL -> Icons.Default.Person
-        ObligationCategory.TRANSPORT -> ImageVector.vectorResource(R.drawable.baseline_directions_car_24)
     }
 }

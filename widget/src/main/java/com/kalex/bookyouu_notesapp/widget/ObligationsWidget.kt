@@ -1,11 +1,14 @@
 package com.kalex.bookyouu_notesapp.widget
 
 import android.content.Context
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.datastore.preferences.core.Preferences
@@ -26,6 +29,8 @@ import androidx.glance.state.PreferencesGlanceStateDefinition
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
+import com.kalex.bookyouu_notesapp.core.common.Category
+import com.kalex.bookyouu_notesapp.core.common.CategoryIcon
 import com.kalex.bookyouu_notesapp.payments.domain.model.Obligation
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.GetPendingObligationUseCase
 import org.koin.core.component.KoinComponent
@@ -87,11 +92,12 @@ class ObligationsWidget : GlanceAppWidget(), KoinComponent {
                     }
                 } else {
                     val obligation = summary[normalizedPage.intValue]
+                    val categoryObj = Category.fromName(obligation.category)
 
                     Column(
                         modifier = GlanceModifier
                             .fillMaxSize()
-                            .padding(12.dp,16.dp),
+                            .padding(12.dp, 16.dp),
                         horizontalAlignment = Alignment.Start,
                         verticalAlignment = Alignment.Top
                     ) {
@@ -108,8 +114,11 @@ class ObligationsWidget : GlanceAppWidget(), KoinComponent {
                                     .cornerRadius(24.dp),
                                 contentAlignment = Alignment.Center
                             ) {
+                                val iconProvider = when (val icon = categoryObj.icon) {
+                                    is CategoryIcon.Resource -> ImageProvider(icon.resId)
+                                }
                                 Image(
-                                    provider = ImageProvider(getCategoryIcon(obligation.category)),
+                                    provider = iconProvider,
                                     contentDescription = null,
                                     modifier = GlanceModifier.size(24.dp)
                                 )
@@ -128,8 +137,7 @@ class ObligationsWidget : GlanceAppWidget(), KoinComponent {
                                     )
                                 )
                                 Text(
-                                    text = obligation.category.lowercase()
-                                        .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() },
+                                    text = LocalContext.current.getString(categoryObj.displayNameRes),
                                     style = TextStyle(
                                         color = GlanceTheme.colors.onSurfaceVariant,
                                         fontSize = 14.sp
@@ -231,17 +239,6 @@ class ObligationsWidget : GlanceAppWidget(), KoinComponent {
                 }
             }
         )
-    }
-
-    private fun getCategoryIcon(category: String): Int {
-        return when (category.uppercase()) {
-            "GYM" -> android.R.drawable.ic_lock_power_off
-            "HOUSE" -> android.R.drawable.ic_menu_today
-            "SUBSCRIPTION" -> android.R.drawable.ic_menu_slideshow
-            "UTILITY" -> android.R.drawable.ic_menu_compass
-            "TRANSPORT" -> android.R.drawable.ic_menu_directions
-            else -> android.R.drawable.ic_menu_help
-        }
     }
 
     private fun getDueStatus(dayOfMonth: Int): DueStatus {

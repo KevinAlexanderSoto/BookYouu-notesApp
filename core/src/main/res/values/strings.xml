@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">BookYouU</string>
+    
+    <!-- Categories -->
+    <string name="category_food">Food</string>
+    <string name="category_health">Health</string>
+    <string name="category_education">Education</string>
+    <string name="category_entertainment">Entertainment</string>
+    <string name="category_transport">Transport</string>
+    <string name="category_home">Home</string>
+    <string name="category_shopping">Shopping</string>
+    <string name="category_others">Others</string>
+    <string name="category_gym">Gym</string>
+    <string name="category_subscription">Subscription</string>
+    <string name="category_utility">Utility</string>
+    <string name="category_general">General</string>
 </resources>

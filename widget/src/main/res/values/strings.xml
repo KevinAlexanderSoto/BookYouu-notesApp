@@ -5,4 +5,5 @@
     <string name="widget_pending">Pending:</string>
     <string name="widget_total">Total:</string>
     <string name="no_upcoming_payments">No upcoming payments</string>
+    <string name="widget_total_commitment">TOTAL COMMITMENT</string>
 </resources>

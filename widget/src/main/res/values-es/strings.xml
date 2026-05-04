@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_name">Widget de Obligaciones</string>
+    <string name="widget_title">Próximos Pagos</string>
+    <string name="widget_pending">Pendientes:</string>
+    <string name="widget_total">Total:</string>
+    <string name="no_upcoming_payments">No hay pagos próximos</string>
+    <string name="widget_total_commitment">COMPROMISO TOTAL</string>
+</resources>

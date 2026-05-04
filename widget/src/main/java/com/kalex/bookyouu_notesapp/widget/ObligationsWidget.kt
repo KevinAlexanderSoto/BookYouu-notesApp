@@ -164,7 +164,7 @@ class ObligationsWidget : GlanceAppWidget(), KoinComponent {
                         // Middle: Amount
                         Column(modifier = GlanceModifier.fillMaxWidth()) {
                             Text(
-                                text = "TOTAL COMMITMENT",
+                                text = LocalContext.current.getString(R.string.widget_total_commitment),
                                 style = TextStyle(
                                     color = GlanceTheme.colors.onSurfaceVariant,
                                     fontSize = 11.sp,

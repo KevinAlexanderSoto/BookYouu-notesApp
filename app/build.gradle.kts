@@ -144,6 +144,7 @@ dependencies {
     implementation(project(":payments"))
     implementation(project(":expenses"))
     implementation(project(":journal"))
+    implementation(project(":widget"))
 
     //TESTING SECTION
     testImplementation(libs.junit)

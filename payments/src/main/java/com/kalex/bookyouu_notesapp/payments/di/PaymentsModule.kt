@@ -5,6 +5,7 @@ import com.kalex.bookyouu_notesapp.payments.domain.repository.ObligationReposito
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.AddObligationUseCase
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.DeleteObligationUseCase
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.GetObligationsUseCase
+import com.kalex.bookyouu_notesapp.payments.domain.usecase.GetPendingObligationUseCase
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.TogglePaymentUseCase
 import com.kalex.bookyouu_notesapp.payments.presentation.ObligationsCreateViewModel
 import com.kalex.bookyouu_notesapp.payments.presentation.ObligationsViewModel
@@ -18,9 +19,10 @@ import org.koin.dsl.module
 val paymentsModule = module {
     singleOf(::RoomObligationRepository) { bind<ObligationRepository>() }
     singleOf(::GetObligationsUseCase)
-    singleOf(::AddObligationUseCase)
-    singleOf(::TogglePaymentUseCase)
-    singleOf(::DeleteObligationUseCase)
+    singleOf(::GetPendingObligationUseCase)
+    single { AddObligationUseCase(get(), androidContext()) }
+    single { TogglePaymentUseCase(get(), androidContext()) }
+    single { DeleteObligationUseCase(get(), androidContext()) }
     viewModelOf(::ObligationsViewModel)
     viewModel { ObligationsCreateViewModel(get(), get(), androidContext()) }
 }

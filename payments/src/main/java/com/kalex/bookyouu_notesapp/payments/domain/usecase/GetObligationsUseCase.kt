@@ -10,11 +10,12 @@ class GetObligationsUseCase(
 ) {
     operator fun invoke(): Flow<PaymentsSummary> {
         return repository.getObligations().map { list ->
+            val (paid, pending) = list.partition { it.isPaid }
             PaymentsSummary(
                 obligations = list,
                 totalBalance = list.sumOf { it.amount },
-                pendingAmount = list.filter { !it.isPaid }.sumOf { it.amount },
-                paidAmount = list.filter { it.isPaid }.sumOf { it.amount }
+                pendingAmount = pending.sumOf { it.amount },
+                paidAmount = paid.sumOf { it.amount }
             )
         }
     }

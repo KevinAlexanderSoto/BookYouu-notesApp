@@ -77,7 +77,7 @@ class ObligationsViewModel(
     fun deleteSelectedObligations() {
         val selectedIds = _uiState.value.selectedObligations.toList()
         viewModelScope.launch {
-            deleteObligationUseCase.deleteMultiple(selectedIds)
+            deleteObligationUseCase(selectedIds)
             selectedIds.forEach { cancelNotification(it) }
             clearSelection()
         }

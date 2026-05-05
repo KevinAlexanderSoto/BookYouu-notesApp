@@ -7,7 +7,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -17,8 +16,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.res.stringResource
 import com.kalex.bookyouu_notesapp.payments.R
 import com.kalex.bookyouu_notesapp.core.common.composables.SuccessStatusScreen
-import com.kalex.bookyouu_notesapp.payments.presentation.components.CategoryGrid
 import com.kalex.bookyouu_notesapp.core.common.composables.LabeledInput
+import com.kalex.bookyouu_notesapp.expenses.presentation.components.CategorySelector
 import com.kalex.bookyouu_notesapp.payments.presentation.components.PaymentFrequencyCard
 import org.koin.androidx.compose.koinViewModel
 
@@ -99,8 +98,6 @@ fun ObligationsCreateScreen(
                 .padding(horizontal = 24.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            Spacer(modifier = Modifier.height(24.dp))
-
             Text(
                 text = stringResource(R.string.new_entry),
                 style = TextStyle(
@@ -168,7 +165,8 @@ fun ObligationsCreateScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            CategoryGrid(
+            CategorySelector(
+                modifier = Modifier.height(225.dp),
                 selectedCategory = state.category,
                 onCategorySelected = { onAction(ObligationsCreateAction.OnCategoryChange(it)) }
             )

@@ -1,7 +1,7 @@
 package com.kalex.bookyouu_notesapp.expenses.presentation
 
+import com.kalex.bookyouu_notesapp.core.common.Category
 import com.kalex.bookyouu_notesapp.core.common.UiText
-import com.kalex.bookyouu_notesapp.expenses.domain.model.Category
 import java.time.LocalDate
 import java.time.YearMonth
 

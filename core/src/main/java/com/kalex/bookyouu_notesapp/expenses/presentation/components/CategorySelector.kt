@@ -1,30 +1,40 @@
 package com.kalex.bookyouu_notesapp.expenses.presentation.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kalex.bookyouu_notesapp.expenses.domain.model.Category
+import com.kalex.bookyouu_notesapp.core.common.Category
+import com.kalex.bookyouu_notesapp.core.common.CategoryIcon
 
 @Composable
 fun CategorySelector(
+    modifier: Modifier = Modifier.Companion,
     selectedCategory: Category?,
     onCategorySelected: (Category) -> Unit,
-    modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),
@@ -35,38 +45,43 @@ fun CategorySelector(
     ) {
         items(Category.values()) { category ->
             val isSelected = category == selectedCategory
-            val backgroundColor = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
-            val contentColor = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
-            
+            val backgroundColor =
+                if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant.copy(
+                    alpha = 0.3f
+                )
+            val contentColor =
+                if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
+
             Column(
-                modifier = Modifier
+                modifier = Modifier.Companion
                     .fillMaxWidth()
                     .clickable { onCategorySelected(category) },
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.Companion.CenterHorizontally
             ) {
                 Box(
-                    modifier = Modifier
+                    modifier = Modifier.Companion
                         .size(64.dp)
                         .clip(CircleShape)
                         .background(backgroundColor),
-                    contentAlignment = Alignment.Center
+                    contentAlignment = Alignment.Companion.Center
                 ) {
+                    val icon = category.icon as CategoryIcon.Resource
                     Icon(
-                        imageVector = getCategoryIcon(category),
-                        contentDescription = category.displayName,
+                        painter = painterResource(id = icon.resId),
+                        contentDescription = stringResource(category.displayNameRes),
                         tint = contentColor,
-                        modifier = Modifier.size(28.dp)
+                        modifier = Modifier.Companion.size(28.dp)
                     )
                 }
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.Companion.height(8.dp))
                 Text(
-                    text = category.displayName,
+                    text = stringResource(category.displayNameRes),
                     style = MaterialTheme.typography.labelSmall.copy(
                         fontSize = 11.sp,
-                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
+                        fontWeight = if (isSelected) FontWeight.Companion.Bold else FontWeight.Companion.Medium
                     ),
                     color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center,
+                    textAlign = TextAlign.Companion.Center,
                     maxLines = 1
                 )
             }

@@ -1,7 +1,5 @@
 package com.kalex.bookyouu_notesapp.expenses.domain.usecase
 
-import com.kalex.bookyouu_notesapp.expenses.domain.model.Category
-import com.kalex.bookyouu_notesapp.expenses.domain.model.Expense
 import com.kalex.bookyouu_notesapp.expenses.domain.model.MonthlySummary
 import com.kalex.bookyouu_notesapp.expenses.domain.repository.ExpenseRepository
 import kotlinx.coroutines.flow.Flow

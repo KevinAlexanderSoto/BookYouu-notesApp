@@ -10,10 +10,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.kalex.bookyouu_notesapp.expenses.domain.model.Category
+import com.kalex.bookyouu_notesapp.core.common.CategoryIcon
 import com.kalex.bookyouu_notesapp.expenses.presentation.ExpenseUi
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,7 +39,7 @@ fun ExpenseRow(
             val color = if (dismissState.dismissDirection == SwipeToDismissBoxValue.EndToStart) {
                 MaterialTheme.colorScheme.errorContainer
             } else Color.Transparent
-            
+
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -79,15 +79,16 @@ fun ExpenseRow(
                         ),
                     contentAlignment = Alignment.Center
                 ) {
+                    val icon = expense.category.icon as CategoryIcon.Resource
                     Icon(
-                        imageVector = getCategoryIcon(expense.category),
+                        painter = painterResource(id = icon.resId),
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
-                
+
                 Spacer(modifier = Modifier.width(16.dp))
-                
+
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = expense.description,
@@ -100,7 +101,7 @@ fun ExpenseRow(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-                
+
                 Text(
                     text = expense.amount,
                     style = MaterialTheme.typography.titleMedium,
@@ -109,18 +110,5 @@ fun ExpenseRow(
                 )
             }
         }
-    }
-}
-
-fun getCategoryIcon(category: Category): ImageVector {
-    return when (category) {//TODO: update the icons
-        Category.FOOD -> Icons.Default.Star
-        Category.TRANSPORT -> Icons.Default.Star
-        Category.HEALTH -> Icons.Default.Star
-        Category.LEISURE -> Icons.Default.Star
-        Category.OTHERS -> Icons.Default.Star
-        Category.EDUCATION -> Icons.Default.Star
-        Category.HOME -> Icons.Default.Home
-        Category.SHOPPING -> Icons.Default.Star
     }
 }

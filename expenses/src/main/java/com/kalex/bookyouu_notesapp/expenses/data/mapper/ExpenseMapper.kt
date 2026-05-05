@@ -1,7 +1,7 @@
 package com.kalex.bookyouu_notesapp.expenses.data.mapper
 
+import com.kalex.bookyouu_notesapp.core.common.Category
 import com.kalex.bookyouu_notesapp.db.data.ExpenseEntity
-import com.kalex.bookyouu_notesapp.expenses.domain.model.Category
 import com.kalex.bookyouu_notesapp.expenses.domain.model.Expense
 import java.time.Instant
 import java.time.LocalDateTime

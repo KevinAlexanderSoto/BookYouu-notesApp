@@ -14,9 +14,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kalex.bookyouu_notesapp.core.common.Category
 import com.kalex.bookyouu_notesapp.core.common.composables.BYScaffold
 import com.kalex.bookyouu_notesapp.core.common.composables.LargeAmountInput
-import com.kalex.bookyouu_notesapp.expenses.domain.model.Category
 import com.kalex.bookyouu_notesapp.expenses.presentation.components.CategorySelector
 import com.kalex.bookyouu_notesapp.expenses.R as ExpensesR
 import kotlinx.coroutines.flow.collectLatest
@@ -144,9 +144,9 @@ fun AddExpenseScreen(
                     fontWeight = FontWeight.Bold
                 )
                 CategorySelector(
+                    modifier = Modifier.height(225.dp),
                     selectedCategory = selectedCategory,
                     onCategorySelected = onCategorySelected,
-                    modifier = Modifier.height(200.dp)
                 )
             }
 

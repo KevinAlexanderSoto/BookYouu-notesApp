@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp.expenses.domain.model
 
+import com.kalex.bookyouu_notesapp.core.common.Category
 import java.time.LocalDateTime
 
 data class Expense(

@@ -4,6 +4,7 @@ import com.kalex.bookyouu_notesapp.payments.data.repository.RoomObligationReposi
 import com.kalex.bookyouu_notesapp.payments.domain.repository.ObligationRepository
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.AddObligationUseCase
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.DeleteObligationUseCase
+import com.kalex.bookyouu_notesapp.payments.domain.usecase.GetObligationByIdUseCase
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.GetObligationsUseCase
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.GetPendingObligationUseCase
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.TogglePaymentUseCase
@@ -23,6 +24,7 @@ val paymentsModule = module {
     single { AddObligationUseCase(get(), androidContext()) }
     single { TogglePaymentUseCase(get(), androidContext()) }
     single { DeleteObligationUseCase(get(), androidContext()) }
+    singleOf(::GetObligationByIdUseCase)
     viewModelOf(::ObligationsViewModel)
-    viewModel { ObligationsCreateViewModel(get(), get(), androidContext()) }
+    viewModelOf(::ObligationsCreateViewModel)
 }

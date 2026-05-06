@@ -7,19 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2026-05-04
+
+### Added
+- **Edit Expenses**: Ability to edit existing expenses by clicking on them in the list.
+- **Edit Payments**: Replaced the edit button with a modern gesture-based system. Swiping a payment obligation from **left to right** now triggers the edit flow, while swiping from **right to left** remains for deletion.
+- **Flexible Date Selection**: Allowed selecting any date (including previous months) when adding or editing an expense.
+
 ## [2.2.0] - 2026-05-04
 
 ### Added
-- **ObligationsWidget**: A home screen widget to visualize upcoming payments and commitments.
+- **ObligationsWidget**: A home screen widget to visualize upcoming payments and commitments using Glance.
 - Centralized **Category System** in the core module for consistent icon and color mapping across features.
-- Spanish localization and string resources for the home screen widget.
-- UI redesign for `ObligationsWidget` with improved layout and readability.
+- Spanish localization and string resources for the home screen widget and total commitment summaries.
+- UI redesign for `ObligationsWidget` with improved layout, better spacing, and readability.
 
 ### Changed
-- Refactored **Journal** module (previously Subjects and Records) for better separation of concerns.
+- **Journal Module Refactor**: Migrated "Subjects" and "Records" into a unified `:journal` module.
+    - Renamed entities: `Subject` -> `Journal` and `Note` -> `JournalEntry`.
+    - Updated terminology across the UI (e.g., "Subjects" to "Projects", "Classroom" to "Location").
+    - Implemented a Room database migration (version 2 to 3) for the renamed tables.
 - Updated application design to fully utilize **Material3** color schemes in Expenses and common components.
 - Updated start destination and bottom navigation order to prioritize the **Expenses** feature.
 - Consolidated and moved `CategorySelector` to the core module for wider reuse.
+
+### Fixed
+- Fixed unique ID handling in AdMob integration.
 
 ## [2.1.0] - 2026-04-13
 

@@ -11,7 +11,8 @@ data class ObligationsCreateState(
     val category: Category? = null,
     val isLoading: Boolean = false,
     val isSaveEnabled: Boolean = false,
-    val isSuccess: Boolean = false
+    val isSuccess: Boolean = false,
+    val editingObligationId: Int? = null
 )
 
 sealed interface ObligationsCreateAction {

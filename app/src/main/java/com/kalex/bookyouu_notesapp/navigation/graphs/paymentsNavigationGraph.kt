@@ -7,8 +7,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import androidx.navigation.navArgument
 import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldBottomBar
 import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldTopBar
 import com.kalex.bookyouu_notesapp.navigation.Route
@@ -42,7 +44,10 @@ fun NavGraphBuilder.paymentsNav(rootNavController: NavHostController) {
                                 // TODO: Open drawer if any
                             },
                             onFloatingActionClick = {
-                                rootNavController.navigate(Route.PAYMENTS_CREATE)
+                                rootNavController.navigate(Route.PAYMENTS_CREATE.replace("{obligationId}", "-1"))
+                            },
+                            onEditClick = { id ->
+                                rootNavController.navigate(Route.PAYMENTS_CREATE.replace("{obligationId}", id.toString()))
                             }
                         )
                     }
@@ -50,7 +55,13 @@ fun NavGraphBuilder.paymentsNav(rootNavController: NavHostController) {
             )
         }
         composable(
-            route = Route.PAYMENTS_CREATE
+            route = Route.PAYMENTS_CREATE,
+            arguments = listOf(
+                navArgument("obligationId") {
+                    type = NavType.IntType
+                    defaultValue = -1
+                }
+            )
         ) { backStackEntry ->
             ScaffoldTopBar(
                 title = stringResource(TopBarTitleFactory.getTopBarTitle(backStackEntry.destination.route)),

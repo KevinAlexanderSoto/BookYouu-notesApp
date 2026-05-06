@@ -34,6 +34,10 @@ class RoomObligationRepository(
         return dao.insertObligation(obligation.toEntity()).toInt()
     }
 
+    override suspend fun getObligationById(id: Int): Obligation? {
+        return dao.getObligationById(id)?.toDomain()
+    }
+
     override suspend fun deleteObligation(id: Int) {
         dao.deleteObligation(id)
     }

@@ -54,13 +54,15 @@ fun ObligationsCreateScreen(
     onBack: () -> Unit,
     paddingValues: PaddingValues,
 ) {
+    val isEditing = state.editingObligationId != null
+
     if (state.isSuccess) {
         SuccessStatusScreen(
-            title = stringResource(R.string.obligation_created_title),
-            message = stringResource(R.string.obligation_created_message, state.name),
+            title = if (isEditing) "Obligation Updated" else stringResource(R.string.obligation_created_title),
+            message = if (isEditing) "Your obligation '${state.name}' has been updated successfully." else stringResource(R.string.obligation_created_message, state.name),
             primaryButtonText = stringResource(R.string.done),
             onPrimaryClick = onBack,
-            secondaryButtonText = stringResource(R.string.add_another),
+            secondaryButtonText = if (isEditing) null else stringResource(R.string.add_another),
             onSecondaryClick = { onAction(ObligationsCreateAction.OnResetClick) }
         )
     } else {
@@ -86,7 +88,8 @@ fun ObligationsCreateScreen(
                 if (state.isLoading) {
                     CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary, modifier = Modifier.size(24.dp))
                 } else {
-                    Text(stringResource(R.string.save_obligation), style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold))
+                    val buttonText = if (isEditing) "Update Obligation" else stringResource(R.string.save_obligation)
+                    Text(buttonText, style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold))
                 }
             }
         }
@@ -99,7 +102,7 @@ fun ObligationsCreateScreen(
                 .verticalScroll(rememberScrollState())
         ) {
             Text(
-                text = stringResource(R.string.new_entry),
+                text = if (isEditing) "EDIT ENTRY" else stringResource(R.string.new_entry),
                 style = TextStyle(
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
@@ -108,7 +111,7 @@ fun ObligationsCreateScreen(
             )
 
             Text(
-                text = stringResource(R.string.define_commitment),
+                text = if (isEditing) "Update Commitment" else stringResource(R.string.define_commitment),
                 style = TextStyle(
                     fontSize = 28.sp,
                     fontWeight = FontWeight.ExtraBold,
@@ -122,7 +125,7 @@ fun ObligationsCreateScreen(
                     .width(40.dp)
                     .height(4.dp)
             ) {
-                Divider(color = MaterialTheme.colorScheme.primary, thickness = 4.dp)
+                HorizontalDivider(color = MaterialTheme.colorScheme.primary, thickness = 4.dp)
             }
 
             Spacer(modifier = Modifier.height(32.dp))

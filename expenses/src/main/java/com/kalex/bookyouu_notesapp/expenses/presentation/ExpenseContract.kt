@@ -19,7 +19,8 @@ data class ExpenseState(
     val selectedMonth: YearMonth = YearMonth.now(),
     val selectedDate: LocalDate = LocalDate.now(),
     val isLoading: Boolean = false,
-    val error: UiText? = null
+    val error: UiText? = null,
+    val editingExpenseId: Long? = null
 )
 
 sealed interface ExpenseAction {
@@ -27,16 +28,19 @@ sealed interface ExpenseAction {
     data class OnDateChange(val newDate: LocalDate) : ExpenseAction
     data class OnDeleteExpense(val id: Long) : ExpenseAction
     object OnAddExpenseClick : ExpenseAction
+    data class OnEditExpenseClick(val id: Long) : ExpenseAction
     data class OnSaveExpense(
         val amount: String,
         val description: String,
         val category: Category,
-        val date: LocalDate
+        val date: LocalDate,
+        val id: Long? = null
     ) : ExpenseAction
 }
 
 sealed interface ExpenseEvent {
     object NavigateToAddExpense : ExpenseEvent
+    data class NavigateToEditExpense(val id: Long) : ExpenseEvent
     data class ShowSnackbar(val message: UiText) : ExpenseEvent
     object ExpenseSaved : ExpenseEvent
 }

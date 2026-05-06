@@ -1,17 +1,12 @@
 package com.kalex.bookyouu_notesapp.payments.presentation
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,6 +23,7 @@ fun ObligationsScreen(
     viewModel: ObligationsViewModel = koinViewModel(),
     onMenuClick: () -> Unit = {},
     onFloatingActionClick: () -> Unit = {},
+    onEditClick: (Int) -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -95,43 +91,15 @@ fun ObligationsScreen(
                     ) { obligation ->
                         val isSelected = uiState.selectedObligations.contains(obligation.id)
 
-                        val dismissState = rememberSwipeToDismissBoxState()
-
-                        SwipeToDismissBox(
-                            state = dismissState,
-                            enableDismissFromStartToEnd = false,
-                            backgroundContent = {
-                                AnimatedVisibility(dismissState.targetValue == SwipeToDismissBoxValue.EndToStart){
-                                Box(
-                                    Modifier
-                                        .fillMaxSize()
-                                        .background(MaterialTheme.colorScheme.errorContainer, shape = MaterialTheme.shapes.medium)
-                                        .padding(horizontal = 20.dp),
-                                    contentAlignment = Alignment.CenterEnd
-                                ) {
-                                    Icon(
-                                        Icons.Default.Delete,
-                                        contentDescription = "Delete",
-                                        tint = MaterialTheme.colorScheme.onErrorContainer,
-                                        modifier = Modifier.alpha(1f)
-                                    )
-                                }
-                                }
-                            },
-                            onDismiss = {
-                                if (it == SwipeToDismissBoxValue.EndToStart) {
-                                    viewModel.onDeleteObligation(obligation.id)
-                                }
-                            }
-                        ) {
-                            ObligationRow(
-                                obligation = obligation,
-                                isSelected = isSelected,
-                                onToggle = { viewModel.onPaymentToggled(it) },
-                                onLongClick = { viewModel.toggleSelection(it.id) },
-                                modifier = Modifier.animateItem()
-                            )
-                        }
+                        ObligationRow(
+                            obligation = obligation,
+                            isSelected = isSelected,
+                            onToggle = { viewModel.onPaymentToggled(it) },
+                            onLongClick = { viewModel.toggleSelection(it.id) },
+                            onEditClick = { onEditClick(it.id) },
+                            onDeleteClick = { viewModel.onDeleteObligation(it.id) },
+                            modifier = Modifier.animateItem()
+                        )
                     }
 
                     if (uiState.obligations.isEmpty()) {

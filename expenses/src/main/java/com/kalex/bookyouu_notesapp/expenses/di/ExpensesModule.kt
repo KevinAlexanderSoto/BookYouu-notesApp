@@ -17,5 +17,6 @@ val expensesModule = module {
     singleOf(::GetMonthlySummaryUseCase)
     singleOf(::AddExpenseUseCase)
     singleOf(::DeleteExpenseUseCase)
+    singleOf(::GetExpenseByIdUseCase)
     viewModelOf(::ExpenseViewModel)
 }

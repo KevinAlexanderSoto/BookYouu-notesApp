@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import androidx.room.Upsert
 import com.kalex.bookyouu_notesapp.db.data.ObligationEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -15,8 +16,11 @@ interface ObligationDao {
     @Update
     suspend fun updateObligation(obligation: ObligationEntity)
     
-    @Insert
+    @Upsert
     suspend fun insertObligation(obligation: ObligationEntity): Long
+
+    @Query("SELECT * FROM obligations WHERE id = :id")
+    suspend fun getObligationById(id: Int): ObligationEntity?
 
     @Query("DELETE FROM obligations WHERE id = :id")
     suspend fun deleteObligation(id: Int)

@@ -32,7 +32,8 @@ import java.util.Locale
 fun ExpenseListRoot(
     viewModel: ExpenseViewModel,
     paddingValues: PaddingValues,
-    onNavigateToAddExpense: () -> Unit
+    onNavigateToAddExpense: () -> Unit,
+    onNavigateToEditExpense: (Long) -> Unit
 ) {
     val state by viewModel.state.collectAsState()
     
@@ -40,6 +41,7 @@ fun ExpenseListRoot(
         viewModel.events.collectLatest { event ->
             when (event) {
                 ExpenseEvent.NavigateToAddExpense -> onNavigateToAddExpense()
+                is ExpenseEvent.NavigateToEditExpense -> onNavigateToEditExpense(event.id)
                 else -> Unit
             }
         }
@@ -110,7 +112,8 @@ fun ExpenseListScreen(
                     items(state.expenses, key = { it.id }) { expense ->
                         ExpenseRow(
                             expense = expense,
-                            onDelete = { onAction(ExpenseAction.OnDeleteExpense(expense.id)) }
+                            onDelete = { onAction(ExpenseAction.OnDeleteExpense(expense.id)) },
+                            onClick = { onAction(ExpenseAction.OnEditExpenseClick(expense.id)) }
                         )
                     }
                 }

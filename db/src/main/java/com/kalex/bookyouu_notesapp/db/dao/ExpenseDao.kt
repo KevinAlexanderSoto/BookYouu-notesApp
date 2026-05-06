@@ -15,6 +15,9 @@ interface ExpenseDao {
     @Query("DELETE FROM expenses WHERE id = :id")
     suspend fun deleteExpense(id: Long)
 
+    @Query("SELECT * FROM expenses WHERE id = :id")
+    suspend fun getExpenseById(id: Long): ExpenseEntity?
+
     @Query("SELECT * FROM expenses WHERE month_year = :monthYear ORDER BY date DESC")
     fun getExpensesByMonth(monthYear: String): Flow<List<ExpenseEntity>>
 }

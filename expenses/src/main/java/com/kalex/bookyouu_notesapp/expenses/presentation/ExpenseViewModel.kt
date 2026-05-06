@@ -21,6 +21,7 @@ class ExpenseViewModel(
     private val getMonthlySummaryUseCase: GetMonthlySummaryUseCase,
     private val addExpenseUseCase: AddExpenseUseCase,
     private val deleteExpenseUseCase: DeleteExpenseUseCase,
+    private val getExpenseByIdUseCase: GetExpenseByIdUseCase,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -41,7 +42,30 @@ class ExpenseViewModel(
             selectedMonth = initialMonth,
             selectedDate = if (initialMonth == YearMonth.now()) LocalDate.now() else initialMonth.atDay(1)
         ) }
+
+        val expenseId = savedStateHandle.get<Long>("expenseId")
+        if (expenseId != null && expenseId != -1L) {
+            loadExpenseForEditing(expenseId)
+        }
+
         loadExpenses(initialMonth)
+    }
+
+    private fun loadExpenseForEditing(id: Long) {
+        viewModelScope.launch {
+            _state.update { it.copy(isLoading = true, editingExpenseId = id) }
+            val expense = getExpenseByIdUseCase(id)
+            if (expense != null) {
+                _state.update { it.copy(
+                    selectedDate = expense.date.toLocalDate(),
+                    isLoading = false
+                ) }
+                // We'll pass these to the UI via a one-time event or just state
+                // For now, let's keep the editingExpenseId in state
+            } else {
+                _state.update { it.copy(isLoading = false, editingExpenseId = null) }
+            }
+        }
     }
 
     fun onAction(action: ExpenseAction) {
@@ -65,6 +89,11 @@ class ExpenseViewModel(
             ExpenseAction.OnAddExpenseClick -> {
                 viewModelScope.launch {
                     _events.send(ExpenseEvent.NavigateToAddExpense)
+                }
+            }
+            is ExpenseAction.OnEditExpenseClick -> {
+                viewModelScope.launch {
+                    _events.send(ExpenseEvent.NavigateToEditExpense(action.id))
                 }
             }
             is ExpenseAction.OnSaveExpense -> {
@@ -96,18 +125,19 @@ class ExpenseViewModel(
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
             try {
-                val amount = action.amount.toDoubleOrNull() ?: 0.0
+                val amount = action.amount.replace(",", "").toDoubleOrNull() ?: 0.0
                 val dateTime = action.date.atTime(LocalTime.now())
                 val monthYearStr = "${dateTime.monthValue.toString().padStart(2, '0')}-${dateTime.year}"
                 
-                val newExpense = Expense(
+                val expense = Expense(
+                    id = action.id ?: 0,
                     amount = amount,
                     description = action.description,
                     category = action.category,
                     date = dateTime,
                     monthYear = monthYearStr
                 )
-                addExpenseUseCase(newExpense)
+                addExpenseUseCase(expense)
                 _events.send(ExpenseEvent.ExpenseSaved)
             } catch (e: Exception) {
                 _events.send(ExpenseEvent.ShowSnackbar(UiText.DynamicString(e.message ?: "Error saving expense")))
@@ -116,6 +146,9 @@ class ExpenseViewModel(
             }
         }
     }
+    
+    suspend fun getExpense(id: Long): Expense? = getExpenseByIdUseCase(id)
+
 
     private fun Expense.toUiModel(): ExpenseUi {
         return ExpenseUi(

@@ -24,4 +24,8 @@ class RoomExpenseRepository(
     override suspend fun deleteExpense(id: Long) {
         dao.deleteExpense(id)
     }
+
+    override suspend fun getExpenseById(id: Long): Expense? {
+        return dao.getExpenseById(id)?.toDomain()
+    }
 }

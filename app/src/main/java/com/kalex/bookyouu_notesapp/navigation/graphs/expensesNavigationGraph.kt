@@ -3,7 +3,9 @@ package com.kalex.bookyouu_notesapp.navigation.graphs
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldBottomBar
 import com.kalex.bookyouu_notesapp.expenses.presentation.AddExpenseRoot
@@ -37,13 +39,24 @@ fun NavGraphBuilder.expensesNav(rootNavController: NavHostController) {
                         viewModel = viewModel,
                         paddingValues = paddingValues,
                         onNavigateToAddExpense = {
-                            rootNavController.navigate(Route.ADD_EXPENSE)
+                            rootNavController.navigate(Route.ADD_EXPENSE.replace("{expenseId}", "-1"))
+                        },
+                        onNavigateToEditExpense = { id ->
+                            rootNavController.navigate(Route.ADD_EXPENSE.replace("{expenseId}", id.toString()))
                         }
                     )
                 })
         }
 
-        composable(route = Route.ADD_EXPENSE) {
+        composable(
+            route = Route.ADD_EXPENSE,
+            arguments = listOf(
+                navArgument("expenseId") {
+                    type = NavType.LongType
+                    defaultValue = -1L
+                }
+            )
+        ) {
             val viewModel = koinViewModel<ExpenseViewModel>()
             AddExpenseRoot(
                 viewModel = viewModel,

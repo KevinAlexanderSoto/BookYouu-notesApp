@@ -1,9 +1,12 @@
 package com.kalex.bookyouu_notesapp.payments.presentation
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kalex.bookyouu_notesapp.core.common.Category
 import com.kalex.bookyouu_notesapp.payments.domain.model.Obligation
 import com.kalex.bookyouu_notesapp.payments.domain.usecase.AddObligationUseCase
+import com.kalex.bookyouu_notesapp.payments.domain.usecase.GetObligationByIdUseCase
 import com.kalex.bookyouu_notesapp.notification.AlarmScheduler
 import com.kalex.bookyouu_notesapp.notification.AlarmItem
 import com.kalex.bookyouu_notesapp.payments.R as PaymentsR
@@ -15,8 +18,10 @@ import kotlinx.coroutines.launch
 
 class ObligationsCreateViewModel(
     private val addObligationUseCase: AddObligationUseCase,
+    private val getObligationByIdUseCase: GetObligationByIdUseCase,
     private val alarmScheduler: AlarmScheduler,
-    private val context: Context
+    private val context: Context,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ObligationsCreateState())
@@ -24,6 +29,33 @@ class ObligationsCreateViewModel(
 
     private val _events = Channel<ObligationsCreateEvent>()
     val events = _events.receiveAsFlow()
+
+    init {
+        val obligationId = savedStateHandle.get<Int>("obligationId")
+        if (obligationId != null && obligationId != -1) {
+            loadObligationForEditing(obligationId)
+        }
+    }
+
+    private fun loadObligationForEditing(id: Int) {
+        viewModelScope.launch {
+            _state.update { it.copy(isLoading = true, editingObligationId = id) }
+            val obligation = getObligationByIdUseCase(id)
+            if (obligation != null) {
+                _state.update { it.copy(
+                    name = obligation.name,
+                    amount = String.format("%.0f", obligation.amount),
+                    frequency = obligation.frequency,
+                    dayOfMonth = obligation.dayOfMonth,
+                    category = Category.fromName(obligation.category),
+                    isLoading = false
+                ) }
+                validate()
+            } else {
+                _state.update { it.copy(isLoading = false, editingObligationId = null) }
+            }
+        }
+    }
 
     fun onAction(action: ObligationsCreateAction) {
         when (action) {
@@ -84,7 +116,7 @@ class ObligationsCreateViewModel(
     private fun validate() {
         val currentState = _state.value
         val isNameValid = currentState.name.isNotBlank()
-        val isAmountValid = currentState.amount.toDoubleOrNull() != null
+        val isAmountValid = currentState.amount.replace(",", "").replace(".", "").toDoubleOrNull() != null
         val isCategoryValid = currentState.category != null
         
         _state.update { it.copy(isSaveEnabled = isNameValid && isAmountValid && isCategoryValid) }
@@ -95,16 +127,17 @@ class ObligationsCreateViewModel(
             _state.update { it.copy(isLoading = true) }
             
             val currentState = _state.value
-            val newObligation = Obligation(
+            val obligationToSave = Obligation(
+                id = currentState.editingObligationId ?: 0,
                 name = currentState.name,
-                amount = currentState.amount.toDoubleOrNull() ?: 0.0,
+                amount = currentState.amount.replace(",", "").replace(".", "").toDoubleOrNull() ?: 0.0,
                 dayOfMonth = currentState.dayOfMonth,
                 category = currentState.category?.name() ?: "",
                 frequency = currentState.frequency
             )
             
             try {
-                val id = addObligationUseCase(newObligation)
+                val id = addObligationUseCase(obligationToSave)
                 
                 // Schedule notification
                 val alarmTime = calculateAlarmTime(currentState.dayOfMonth)
@@ -112,7 +145,7 @@ class ObligationsCreateViewModel(
                     AlarmItem(
                         alarmId = id,
                         time = alarmTime,
-                        message = context.getString(PaymentsR.string.notification_obligation_message, newObligation.name),
+                        message = context.getString(PaymentsR.string.notification_obligation_message, obligationToSave.name),
                         title = context.getString(PaymentsR.string.notification_obligation_title)
                     )
                 )

@@ -7,4 +7,5 @@ interface ExpenseRepository {
     fun getExpensesByMonth(monthYear: String): Flow<List<Expense>>
     suspend fun insertExpense(expense: Expense)
     suspend fun deleteExpense(id: Long)
+    suspend fun getExpenseById(id: Long): Expense?
 }

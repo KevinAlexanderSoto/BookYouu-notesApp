@@ -35,6 +35,16 @@ fun AddExpenseRoot(
     var amount by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf<Category?>(null) }
+
+    LaunchedEffect(state.editingExpenseId) {
+        state.editingExpenseId?.let { id ->
+            viewModel.getExpense(id)?.let { expense ->
+                amount = String.format("%.0f", expense.amount)
+                description = expense.description
+                selectedCategory = expense.category
+            }
+        }
+    }
     
     LaunchedEffect(Unit) {
         viewModel.events.collectLatest { event ->
@@ -56,7 +66,15 @@ fun AddExpenseRoot(
         onDateChange = { viewModel.onAction(ExpenseAction.OnDateChange(it)) },
         onSaveClick = {
             selectedCategory?.let { category ->
-                viewModel.onAction(ExpenseAction.OnSaveExpense(amount, description, category, state.selectedDate))
+                viewModel.onAction(
+                    ExpenseAction.OnSaveExpense(
+                        amount = amount,
+                        description = description,
+                        category = category,
+                        date = state.selectedDate,
+                        id = state.editingExpenseId
+                    )
+                )
             }
         },
         onNavigateBack = onNavigateBack
@@ -82,13 +100,7 @@ fun AddExpenseScreen(
 
     if (showDatePicker) {
         val datePickerState = rememberDatePickerState(
-            initialSelectedDateMillis = state.selectedDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli(),
-            selectableDates = object : SelectableDates {
-                override fun isSelectableDate(utcTimeMillis: Long): Boolean {
-                    val date = Instant.ofEpochMilli(utcTimeMillis).atZone(ZoneId.of("UTC")).toLocalDate()
-                    return date.month == state.selectedMonth.month && date.year == state.selectedMonth.year
-                }
-            }
+            initialSelectedDateMillis = state.selectedDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
         )
 
         DatePickerDialog(
@@ -234,7 +246,8 @@ fun AddExpenseScreen(
                         strokeWidth = 2.dp
                     )
                 } else {
-                    Text(stringResource(ExpensesR.string.save_expense), fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                    val text = if (state.editingExpenseId != null) "Update Expense" else stringResource(ExpensesR.string.save_expense)
+                    Text(text, fontWeight = FontWeight.Bold, fontSize = 18.sp)
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))

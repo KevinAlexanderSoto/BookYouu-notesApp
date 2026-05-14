@@ -75,7 +75,7 @@ fun ExpenseListScreen(
     ) { padding ->
         Column(
             modifier = Modifier
-                .padding(padding)
+                .padding(top = padding.calculateTopPadding())
                 .fillMaxSize()
         ) {
             MonthNavigator(
@@ -130,7 +130,7 @@ fun MonthNavigator(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

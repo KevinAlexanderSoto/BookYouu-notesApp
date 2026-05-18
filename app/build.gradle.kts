@@ -27,6 +27,7 @@ android {
             useSupportLibrary = true
         }
 
+        setProperty("archivesBaseName", "BookYouu-$versionName")
     }
 
     buildTypes {

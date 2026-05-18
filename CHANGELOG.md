@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.1] - 2026-05-15
+
 ### Fixed
 - **AddExpenseScreen Date Offset**: Fixed a bug where selecting a date in the expense screen resulted in a one-day offset due to timezone conversion issues between DatePicker (UTC) and system local time.
-- update swipe-to-dismiss behavior and navigation in ObligationRow
+- **Payment Obligations Edit Loop**: Fixed a bug where swiping to edit a payment obligation would trigger the navigation event multiple times per gesture. Implemented a guard mechanism and `launchSingleTop` to ensure the edit screen opens only once and allows proper back navigation.
+
 ## [2.3.0] - 2026-05-04
 
 ### Added

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **AddExpenseScreen Date Offset**: Fixed a bug where selecting a date in the expense screen resulted in a one-day offset due to timezone conversion issues between DatePicker (UTC) and system local time.
+- update swipe-to-dismiss behavior and navigation in ObligationRow
 ## [2.3.0] - 2026-05-04
 
 ### Added

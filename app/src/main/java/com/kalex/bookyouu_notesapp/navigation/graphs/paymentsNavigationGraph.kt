@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp.navigation.graphs
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
@@ -47,7 +48,9 @@ fun NavGraphBuilder.paymentsNav(rootNavController: NavHostController) {
                                 rootNavController.navigate(Route.PAYMENTS_CREATE.replace("{obligationId}", "-1"))
                             },
                             onEditClick = { id ->
-                                rootNavController.navigate(Route.PAYMENTS_CREATE.replace("{obligationId}", id.toString()))
+                                rootNavController.navigate(Route.PAYMENTS_CREATE.replace("{obligationId}", id.toString())) {
+                                    launchSingleTop = true
+                                }
                             }
                         )
                     }

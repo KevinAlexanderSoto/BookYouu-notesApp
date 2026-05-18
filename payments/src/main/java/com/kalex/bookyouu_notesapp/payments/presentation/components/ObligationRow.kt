@@ -7,7 +7,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,6 +23,7 @@ import com.kalex.bookyouu_notesapp.payments.R
 import com.kalex.bookyouu_notesapp.payments.domain.model.Obligation
 import com.kalex.bookyouu_notesapp.core.common.Category
 import com.kalex.bookyouu_notesapp.core.common.CategoryIcon
+import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -48,37 +51,27 @@ fun ObligationRow(
         obligation.isPaid -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
         else -> MaterialTheme.colorScheme.surface
     }
-
-    val dismissState = rememberSwipeToDismissBoxState(
-        confirmValueChange = {
-            when (it) {
-                SwipeToDismissBoxValue.StartToEnd -> {
-                    onEditClick(obligation)
-                    false // Don't dismiss
-                }
-                SwipeToDismissBoxValue.EndToStart -> {
-                    onDeleteClick(obligation)
-                    true // Dismiss
-                }
-                else -> false
-            }
-        }
-    )
+    val scope = rememberCoroutineScope()
+    val boxDismissState =
+        rememberSwipeToDismissBoxState(
+            SwipeToDismissBoxValue.Settled,
+        )
 
     SwipeToDismissBox(
-        state = dismissState,
+        modifier = modifier,
+        state = boxDismissState,
         backgroundContent = {
-            val alignment = when (dismissState.dismissDirection) {
+            val alignment = when (boxDismissState.dismissDirection) {
                 SwipeToDismissBoxValue.StartToEnd -> Alignment.CenterStart
                 SwipeToDismissBoxValue.EndToStart -> Alignment.CenterEnd
                 else -> Alignment.Center
             }
-            val color = when (dismissState.dismissDirection) {
+            val color = when (boxDismissState.dismissDirection) {
                 SwipeToDismissBoxValue.StartToEnd -> MaterialTheme.colorScheme.primaryContainer
                 SwipeToDismissBoxValue.EndToStart -> MaterialTheme.colorScheme.errorContainer
                 else -> Color.Transparent
             }
-            val icon = when (dismissState.dismissDirection) {
+            val icon = when (boxDismissState.dismissDirection) {
                 SwipeToDismissBoxValue.StartToEnd -> Icons.Default.Edit
                 SwipeToDismissBoxValue.EndToStart -> Icons.Default.Delete
                 else -> null
@@ -95,14 +88,22 @@ fun ObligationRow(
                     Icon(
                         imageVector = icon,
                         contentDescription = null,
-                        tint = if (dismissState.dismissDirection == SwipeToDismissBoxValue.StartToEnd)
+                        tint = if (boxDismissState.dismissDirection == SwipeToDismissBoxValue.StartToEnd)
                             MaterialTheme.colorScheme.onPrimaryContainer
                         else MaterialTheme.colorScheme.onErrorContainer
                     )
                 }
             }
         },
-        modifier = modifier
+       onDismiss = { dismissState ->
+           when (dismissState) {
+               SwipeToDismissBoxValue.StartToEnd -> { onEditClick(obligation)
+                   scope.launch {  boxDismissState.reset() }
+               }
+               SwipeToDismissBoxValue.EndToStart -> { onDeleteClick(obligation) }
+               SwipeToDismissBoxValue.Settled -> { }
+           }
+       }
     ) {
         Surface(
             modifier = Modifier

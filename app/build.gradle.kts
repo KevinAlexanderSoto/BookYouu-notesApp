@@ -10,6 +10,10 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+base {
+    archivesName.set("BookYouu-${libs.versions.versionName.get()}")
+}
+
 android {
     namespace = "com.kalex.bookyouu_notesapp"
     compileSdk = valueStringToInt(libs.versions.compileSdk.get())
@@ -26,8 +30,6 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-
-        setProperty("archivesBaseName", "BookYouu-$versionName")
     }
 
     buildTypes {

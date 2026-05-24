@@ -13,7 +13,8 @@ fun ObligationEntity.toDomain(): Obligation {
         category = category,
         frequency = PaymentFrequency.valueOf(frequency),
         isPaid = isPaid,
-        lastPaidDate = lastPaidDate
+        lastPaidDate = lastPaidDate,
+        reminderEnabled = reminderEnabled
     )
 }
 
@@ -26,6 +27,7 @@ fun Obligation.toEntity(): ObligationEntity {
         category = category,
         frequency = frequency.name,
         isPaid = isPaid,
-        lastPaidDate = lastPaidDate
+        lastPaidDate = lastPaidDate,
+        reminderEnabled = reminderEnabled
     )
 }

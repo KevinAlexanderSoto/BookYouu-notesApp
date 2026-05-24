@@ -21,6 +21,8 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
         val title = intent?.getStringExtra("EXTRA_TITLE") ?: NotificationConstants.NOTIFICATION_TITLE
         val message = intent?.getStringExtra("EXTRA_MESSAGE") ?: NotificationConstants.NOTIFICATION_MESSAGE
         val alarmId = intent?.getIntExtra("EXTRA_ALARM_ID", 78) ?: 78
+        val frequencyName = intent?.getStringExtra("EXTRA_FREQUENCY") ?: AlarmFrequency.NONE.name
+        val frequency = AlarmFrequency.valueOf(frequencyName)
 
         // tapResultIntent gets executed when user taps the notification
         tapResultIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -42,14 +44,23 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
         notificationService.notify(alarmId, notification)
 
-        // Reschedule for next day to maintain repeating behavior
-        alarmScheduler.schedule(
-            AlarmItem(
-                alarmId = alarmId,
-                time = LocalDateTime.now().plusDays(1),
-                message = message,
-                title = title
+        // Reschedule based on frequency
+        val nextTime = when (frequency) {
+            AlarmFrequency.DAILY -> LocalDateTime.now().plusDays(1)
+            AlarmFrequency.MONTHLY -> LocalDateTime.now().plusMonths(1)
+            AlarmFrequency.NONE -> null
+        }
+
+        nextTime?.let {
+            alarmScheduler.schedule(
+                AlarmItem(
+                    alarmId = alarmId,
+                    time = it,
+                    message = message,
+                    title = title,
+                    frequency = frequency
+                )
             )
-        )
+        }
     }
 }

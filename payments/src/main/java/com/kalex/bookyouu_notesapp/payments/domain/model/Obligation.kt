@@ -16,5 +16,6 @@ data class Obligation(
     val category: String,
     val frequency: PaymentFrequency = PaymentFrequency.MONTHLY,
     val isPaid: Boolean = false,
-    val lastPaidDate: Date? = null
+    val lastPaidDate: Date? = null,
+    val reminderEnabled: Boolean = true
 )

@@ -21,6 +21,7 @@ object NotificationConstants {
                 time = alarmTime,
                 message = NOTIFICATION_MESSAGE,
                 title = NOTIFICATION_TITLE,
+                frequency = AlarmFrequency.DAILY
             )
         }
 }

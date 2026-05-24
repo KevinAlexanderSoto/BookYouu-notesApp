@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **User-Controlled Reminders**: Added a toggle switch in the Obligation creation and edit screens, allowing users to choose whether to receive monthly notifications for each commitment.
+- **Monthly Notification Frequency**: Implemented a recurring scheduling system that correctly reschedules obligation reminders every month.
+- **Notification Persistence**: Enhanced `BootReceiver` to automatically restore and reschedule active obligation reminders after a device restart.
+- **Spanish Localization**: Added missing translations for the reminder toggle and obligation deletion flows.
+
+### Fixed
+- **Obligation Rescheduling Bug**: Fixed an issue where monthly reminders were incorrectly being rescheduled as daily notifications after their first occurrence.
+
+### Changed
+- **Database Schema (v4)**: Updated `ObligationEntity` to include `reminder_enabled` state with automatic migration from version 3.
+- **Alarm Logic Refactor**: Centralized alarm calculation and scheduling logic into a shared `AlarmUtils` for better maintainability.
+
 ## [2.3.1] - 2026-05-15
 
 ### Fixed

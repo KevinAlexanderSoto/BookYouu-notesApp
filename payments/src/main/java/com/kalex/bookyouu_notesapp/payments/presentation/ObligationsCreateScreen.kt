@@ -168,6 +168,44 @@ fun ObligationsCreateScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
 
+            Text(
+                text = stringResource(R.string.reminder_label),
+                style = TextStyle(
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+            ) {
+                Text(
+                    text = stringResource(R.string.enable_monthly_reminder),
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                )
+                Switch(
+                    checked = state.isReminderEnabled,
+                    onCheckedChange = { onAction(ObligationsCreateAction.OnReminderToggle(it)) },
+                    colors = SwitchDefaults.colors(
+                        checkedThumbColor = MaterialTheme.colorScheme.primary,
+                        checkedTrackColor = MaterialTheme.colorScheme.primaryContainer,
+                        uncheckedThumbColor = MaterialTheme.colorScheme.outline,
+                        uncheckedTrackColor = MaterialTheme.colorScheme.surfaceVariant
+                    )
+                )
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
             CategorySelector(
                 modifier = Modifier.height(225.dp),
                 selectedCategory = state.category,

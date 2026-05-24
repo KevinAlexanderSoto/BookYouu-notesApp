@@ -12,7 +12,8 @@ data class ObligationsCreateState(
     val isLoading: Boolean = false,
     val isSaveEnabled: Boolean = false,
     val isSuccess: Boolean = false,
-    val editingObligationId: Int? = null
+    val editingObligationId: Int? = null,
+    val isReminderEnabled: Boolean = true
 )
 
 sealed interface ObligationsCreateAction {
@@ -21,6 +22,7 @@ sealed interface ObligationsCreateAction {
     data class OnFrequencyChange(val frequency: PaymentFrequency) : ObligationsCreateAction
     data class OnDayChange(val day: Int) : ObligationsCreateAction
     data class OnCategoryChange(val category: Category) : ObligationsCreateAction
+    data class OnReminderToggle(val enabled: Boolean) : ObligationsCreateAction
     data object OnSaveClick : ObligationsCreateAction
     data object OnResetClick : ObligationsCreateAction
 }

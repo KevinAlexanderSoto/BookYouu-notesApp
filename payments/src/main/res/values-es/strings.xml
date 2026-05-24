@@ -27,12 +27,20 @@
     <string name="day_of_month">DÍA DEL MES</string>
     <string name="day_of_week">DÍA DE LA SEMANA</string>
     <string name="select_category">SELECCIONAR CATEGORÍA</string>
+    <string name="reminder_label">RECORDATORIO</string>
+    <string name="enable_monthly_reminder">Activar Recordatorio Mensual</string>
 
     <!-- Success State -->
     <string name="obligation_created_title">Obligación\nCreada</string>
     <string name="obligation_created_message">Tu obligación de pago para %1$s\nha sido programada con éxito.</string>
     <string name="done">Listo</string>
     <string name="add_another">Agregar Otra</string>
+
+    <!-- Deletion -->
+    <string name="delete_obligations_title">Eliminar Obligaciones</string>
+    <string name="delete_obligations_message">¿Estás seguro de que deseas eliminar %1$d obligaciones seleccionadas?</string>
+    <string name="delete">Eliminar</string>
+    <string name="cancel">Cancelar</string>
 
     <!-- Notifications -->
     <string name="notification_obligation_title">Recordatorio de Pago</string>

@@ -11,6 +11,8 @@ import com.kalex.bookyouu_notesapp.notification.AlarmScheduler
 import com.kalex.bookyouu_notesapp.notification.AlarmItem
 import com.kalex.bookyouu_notesapp.payments.R as PaymentsR
 import android.content.Context
+import com.kalex.bookyouu_notesapp.notification.AlarmFrequency
+import com.kalex.bookyouu_notesapp.notification.AlarmUtils
 import java.time.LocalDateTime
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
@@ -48,6 +50,7 @@ class ObligationsCreateViewModel(
                     frequency = obligation.frequency,
                     dayOfMonth = obligation.dayOfMonth,
                     category = Category.fromName(obligation.category),
+                    isReminderEnabled = obligation.reminderEnabled,
                     isLoading = false
                 ) }
                 validate()
@@ -77,6 +80,9 @@ class ObligationsCreateViewModel(
                 _state.update { it.copy(category = action.category) }
                 validate()
             }
+            is ObligationsCreateAction.OnReminderToggle -> {
+                _state.update { it.copy(isReminderEnabled = action.enabled) }
+            }
             ObligationsCreateAction.OnSaveClick -> {
                 saveObligation()
             }
@@ -84,33 +90,6 @@ class ObligationsCreateViewModel(
                 _state.update { ObligationsCreateState() }
             }
         }
-    }
-
-    private fun calculateAlarmTime(dayOfMonth: Int): LocalDateTime {
-        val now = LocalDateTime.now()
-        val currentMonth = now.month
-        val currentYear = now.year
-        
-        // Handle months with fewer days than the requested dayOfMonth
-        val maxDays = currentMonth.length(now.toLocalDate().isLeapYear)
-        val targetDay = if (dayOfMonth > maxDays) maxDays else dayOfMonth
-        
-        var alarmTime = LocalDateTime.of(currentYear, currentMonth, targetDay, 9, 0)
-        
-        if (alarmTime.isBefore(now)) {
-            // If it's already passed this month, schedule for next month
-            val nextMonthDate = now.toLocalDate().plusMonths(1)
-            val nextMonthMaxDays = nextMonthDate.month.length(nextMonthDate.isLeapYear)
-            val nextTargetDay = if (dayOfMonth > nextMonthMaxDays) nextMonthMaxDays else dayOfMonth
-            
-            alarmTime = LocalDateTime.of(
-                nextMonthDate.year,
-                nextMonthDate.month,
-                nextTargetDay,
-                9, 0
-            )
-        }
-        return alarmTime
     }
 
     private fun validate() {
@@ -133,22 +112,36 @@ class ObligationsCreateViewModel(
                 amount = currentState.amount.replace(",", "").replace(".", "").toDoubleOrNull() ?: 0.0,
                 dayOfMonth = currentState.dayOfMonth,
                 category = currentState.category?.name() ?: "",
-                frequency = currentState.frequency
+                frequency = currentState.frequency,
+                reminderEnabled = currentState.isReminderEnabled
             )
             
             try {
                 val id = addObligationUseCase(obligationToSave)
                 
-                // Schedule notification
-                val alarmTime = calculateAlarmTime(currentState.dayOfMonth)
-                alarmScheduler.schedule(
-                    AlarmItem(
-                        alarmId = id,
-                        time = alarmTime,
-                        message = context.getString(PaymentsR.string.notification_obligation_message, obligationToSave.name),
-                        title = context.getString(PaymentsR.string.notification_obligation_title)
+                if (currentState.isReminderEnabled) {
+                    // Schedule notification
+                    val alarmTime = AlarmUtils.calculateNextMonthlyAlarmTime(currentState.dayOfMonth)
+                    alarmScheduler.schedule(
+                        AlarmItem(
+                            alarmId = id,
+                            time = alarmTime,
+                            message = context.getString(PaymentsR.string.notification_obligation_message, obligationToSave.name),
+                            title = context.getString(PaymentsR.string.notification_obligation_title),
+                            frequency = AlarmFrequency.MONTHLY
+                        )
                     )
-                )
+                } else {
+                    // Cancel any existing notification for this ID
+                    alarmScheduler.cancel(
+                        AlarmItem(
+                            alarmId = id,
+                            time = LocalDateTime.now(),
+                            message = "",
+                            title = ""
+                        )
+                    )
+                }
                 
                 _state.update { it.copy(isSuccess = true) }
                 _events.send(ObligationsCreateEvent.ObligationSaved)

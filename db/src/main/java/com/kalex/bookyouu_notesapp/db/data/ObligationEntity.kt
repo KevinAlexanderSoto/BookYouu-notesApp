@@ -23,5 +23,7 @@ data class ObligationEntity(
     @ColumnInfo(name = "is_paid")
     val isPaid: Boolean = false,
     @ColumnInfo(name = "last_paid_date")
-    val lastPaidDate: Date? = null // Timestamp for "Paid Oct 02"
+    val lastPaidDate: Date? = null, // Timestamp for "Paid Oct 02"
+    @ColumnInfo(name = "reminder_enabled", defaultValue = "1")
+    val reminderEnabled: Boolean = true
 )

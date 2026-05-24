@@ -20,11 +20,12 @@ import com.kalex.bookyouu_notesapp.db.typeConvertes.DayOfWeekTypeConverter
 
 @Database(
     entities = [Journal::class, JournalEntry::class, ObligationEntity::class, ExpenseEntity::class],
-    version = 3,
+    version = 4,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(from = 1, to = 2),
-        AutoMigration(from = 2, to = 3, spec = BookYouuDataBase.Migration2To3::class)
+        AutoMigration(from = 2, to = 3, spec = BookYouuDataBase.Migration2To3::class),
+        AutoMigration(from = 3, to = 4)
     ]
 )
 @TypeConverters(DateTypeConverter::class, DayOfWeekTypeConverter::class)

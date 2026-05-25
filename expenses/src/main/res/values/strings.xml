@@ -5,6 +5,9 @@
     <string name="amount_label">AMOUNT</string>
     <string name="description_label">DESCRIPTION</string>
     <string name="category_label">SELECT CATEGORY</string>
+    <string name="installments_label">INSTALLMENTS (OPTIONAL)</string>
+    <string name="installments_placeholder">Number of cuotes (e.g. 12)</string>
+    <string name="installments_suffix">cuotes</string>
     <string name="date_label">DATE</string>
     <string name="save_expense">Save Expense</string>
     <string name="total_spent_in">Total Spent in %1$s</string>

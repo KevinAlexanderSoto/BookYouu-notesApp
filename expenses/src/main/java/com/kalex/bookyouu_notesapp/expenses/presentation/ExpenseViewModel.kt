@@ -58,6 +58,7 @@ class ExpenseViewModel(
             if (expense != null) {
                 _state.update { it.copy(
                     selectedDate = expense.date.toLocalDate(),
+                    installments = expense.totalInstallments?.toString() ?: "",
                     isLoading = false
                 ) }
                 // We'll pass these to the UI via a one-time event or just state
@@ -85,6 +86,9 @@ class ExpenseViewModel(
                 viewModelScope.launch {
                     deleteExpenseUseCase(action.id)
                 }
+            }
+            is ExpenseAction.OnInstallmentsChange -> {
+                _state.update { it.copy(installments = action.installments) }
             }
             ExpenseAction.OnAddExpenseClick -> {
                 viewModelScope.launch {
@@ -128,6 +132,7 @@ class ExpenseViewModel(
                 val amount = action.amount.replace(",", "").toDoubleOrNull() ?: 0.0
                 val dateTime = action.date.atTime(LocalTime.now())
                 val monthYearStr = "${dateTime.monthValue.toString().padStart(2, '0')}-${dateTime.year}"
+                val installments = action.installments?.toIntOrNull()
                 
                 val expense = Expense(
                     id = action.id ?: 0,
@@ -135,7 +140,8 @@ class ExpenseViewModel(
                     description = action.description,
                     category = action.category,
                     date = dateTime,
-                    monthYear = monthYearStr
+                    monthYear = monthYearStr,
+                    totalInstallments = installments
                 )
                 addExpenseUseCase(expense)
                 _events.send(ExpenseEvent.ExpenseSaved)
@@ -156,7 +162,8 @@ class ExpenseViewModel(
             amount = "$ ${amountFormatter.format(amount)}",
             description = description,
             category = category,
-            date = date.format(dateFormatter)
+            date = date.format(dateFormatter),
+            totalInstallments = totalInstallments
         )
     }
 }

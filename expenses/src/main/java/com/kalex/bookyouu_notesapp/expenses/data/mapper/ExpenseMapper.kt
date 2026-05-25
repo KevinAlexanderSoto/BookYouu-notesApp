@@ -12,9 +12,10 @@ fun ExpenseEntity.toDomain(): Expense {
         id = id,
         amount = amount,
         description = description,
-        category = Category.values().find { it.id == categoryId } ?: Category.OTHERS,
+        category = Category.fromId(categoryId),
         date = LocalDateTime.ofInstant(Instant.ofEpochMilli(date), ZoneId.systemDefault()),
-        monthYear = monthYear
+        monthYear = monthYear,
+        totalInstallments = totalInstallments
     )
 }
 
@@ -25,6 +26,7 @@ fun Expense.toEntity(): ExpenseEntity {
         description = description,
         categoryId = category.id,
         date = date.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(),
-        monthYear = monthYear
+        monthYear = monthYear,
+        totalInstallments = totalInstallments
     )
 }

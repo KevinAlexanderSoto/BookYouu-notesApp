@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 4,
-    "identityHash": "626a6a829af043672956942cacec55e0",
+    "identityHash": "c8d72fca6fda458f98129b113f0c2f01",
     "entities": [
       {
         "tableName": "journal",
@@ -164,7 +164,7 @@
       },
       {
         "tableName": "expenses",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `amount` REAL NOT NULL, `description` TEXT NOT NULL, `category_id` INTEGER NOT NULL, `date` INTEGER NOT NULL, `month_year` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `amount` REAL NOT NULL, `description` TEXT NOT NULL, `category_id` INTEGER NOT NULL, `date` INTEGER NOT NULL, `month_year` TEXT NOT NULL, `total_installments` INTEGER)",
         "fields": [
           {
             "fieldPath": "id",
@@ -201,6 +201,11 @@
             "columnName": "month_year",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "totalInstallments",
+            "columnName": "total_installments",
+            "affinity": "INTEGER"
           }
         ],
         "primaryKey": {
@@ -213,7 +218,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '626a6a829af043672956942cacec55e0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c8d72fca6fda458f98129b113f0c2f01')"
     ]
   }
 }

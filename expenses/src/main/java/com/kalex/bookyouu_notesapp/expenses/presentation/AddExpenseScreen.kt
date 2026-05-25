@@ -1,8 +1,8 @@
 package com.kalex.bookyouu_notesapp.expenses.presentation
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.DateRange
@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kalex.bookyouu_notesapp.core.common.Category
@@ -46,7 +47,7 @@ fun AddExpenseRoot(
             }
         }
     }
-    
+
     LaunchedEffect(Unit) {
         viewModel.events.collectLatest { event ->
             when (event) {
@@ -65,6 +66,7 @@ fun AddExpenseRoot(
         selectedCategory = selectedCategory,
         onCategorySelected = { selectedCategory = it },
         onDateChange = { viewModel.onAction(ExpenseAction.OnDateChange(it)) },
+        onInstallmentsChange = { viewModel.onAction(ExpenseAction.OnInstallmentsChange(it)) },
         onSaveClick = {
             selectedCategory?.let { category ->
                 viewModel.onAction(
@@ -73,6 +75,7 @@ fun AddExpenseRoot(
                         description = description,
                         category = category,
                         date = state.selectedDate,
+                        installments = state.installments,
                         id = state.editingExpenseId
                     )
                 )
@@ -93,15 +96,18 @@ fun AddExpenseScreen(
     selectedCategory: Category?,
     onCategorySelected: (Category) -> Unit,
     onDateChange: (LocalDate) -> Unit,
+    onInstallmentsChange: (String) -> Unit,
     onSaveClick: () -> Unit,
     onNavigateBack: () -> Unit
 ) {
     var showDatePicker by remember { mutableStateOf(false) }
-    val dateFormatter = remember { DateTimeFormatter.ofPattern("EEEE, dd 'de' MMMM", Locale.getDefault()) }
+    val dateFormatter =
+        remember { DateTimeFormatter.ofPattern("EEEE, dd 'de' MMMM", Locale.getDefault()) }
 
     if (showDatePicker) {
         val datePickerState = rememberDatePickerState(
-            initialSelectedDateMillis = state.selectedDate.atStartOfDay(ZoneId.of("UTC")).toInstant().toEpochMilli()
+            initialSelectedDateMillis = state.selectedDate.atStartOfDay(ZoneId.of("UTC"))
+                .toInstant().toEpochMilli()
         )
 
         DatePickerDialog(
@@ -109,7 +115,9 @@ fun AddExpenseScreen(
             confirmButton = {
                 TextButton(onClick = {
                     datePickerState.selectedDateMillis?.let {
-                        onDateChange(Instant.ofEpochMilli(it).atZone(ZoneId.of("UTC")).toLocalDate())
+                        onDateChange(
+                            Instant.ofEpochMilli(it).atZone(ZoneId.of("UTC")).toLocalDate()
+                        )
                     }
                     showDatePicker = false
                 }) {
@@ -174,7 +182,12 @@ fun AddExpenseScreen(
                 TextField(
                     value = description,
                     onValueChange = onDescriptionChange,
-                    placeholder = { Text(stringResource(ExpensesR.string.description_placeholder), color = Color.LightGray) },
+                    placeholder = {
+                        Text(
+                            stringResource(ExpensesR.string.description_placeholder),
+                            color = Color.LightGray
+                        )
+                    },
                     modifier = Modifier.fillMaxWidth(),
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = Color.Transparent,
@@ -182,6 +195,45 @@ fun AddExpenseScreen(
                         focusedIndicatorColor = Color.LightGray,
                         unfocusedIndicatorColor = Color.LightGray.copy(alpha = 0.5f)
                     ),
+                    singleLine = true
+                )
+            }
+
+            // Installments Section
+            Column {
+                Text(
+                    text = stringResource(ExpensesR.string.installments_label),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = Color.Gray,
+                    fontWeight = FontWeight.Bold
+                )
+                TextField(
+                    value = state.installments,
+                    onValueChange = {
+                        if (it.isEmpty()) {
+                            onInstallmentsChange(it)
+                        } else {
+                            val value = it.filter { char -> char.isDigit() }
+                                .toIntOrNull()
+                            if (value != null && value in 1..48) {
+                                onInstallmentsChange(value.toString())
+                            }
+                        }
+                    },
+                    placeholder = {
+                        Text(
+                            stringResource(ExpensesR.string.installments_placeholder),
+                            color = Color.LightGray
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = Color.Transparent,
+                        unfocusedContainerColor = Color.Transparent,
+                        focusedIndicatorColor = Color.LightGray,
+                        unfocusedIndicatorColor = Color.LightGray.copy(alpha = 0.5f)
+                    ),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     singleLine = true
                 )
             }
@@ -204,7 +256,14 @@ fun AddExpenseScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     val dateText = if (state.selectedDate == LocalDate.now()) {
-                        "Hoy, ${state.selectedDate.format(DateTimeFormatter.ofPattern("dd 'de' MMMM", Locale.getDefault()))}"
+                        "Hoy, ${
+                            state.selectedDate.format(
+                                DateTimeFormatter.ofPattern(
+                                    "dd 'de' MMMM",
+                                    Locale.getDefault()
+                                )
+                            )
+                        }"
                     } else {
                         state.selectedDate.format(dateFormatter)
                     }
@@ -247,7 +306,10 @@ fun AddExpenseScreen(
                         strokeWidth = 2.dp
                     )
                 } else {
-                    val text = if (state.editingExpenseId != null) "Update Expense" else stringResource(ExpensesR.string.save_expense)
+                    val text =
+                        if (state.editingExpenseId != null) "Update Expense" else stringResource(
+                            ExpensesR.string.save_expense
+                        )
                     Text(text, fontWeight = FontWeight.Bold, fontSize = 18.sp)
                 }
             }

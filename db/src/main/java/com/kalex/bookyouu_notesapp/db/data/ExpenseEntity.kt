@@ -18,5 +18,7 @@ data class ExpenseEntity(
     @ColumnInfo(name = "date")
     val date: Long,
     @ColumnInfo(name = "month_year")
-    val monthYear: String // Format: "MM-YYYY"
+    val monthYear: String, // Format: "MM-YYYY"
+    @ColumnInfo(name = "total_installments")
+    val totalInstallments: Int? = null
 )

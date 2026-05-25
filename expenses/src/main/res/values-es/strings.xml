@@ -5,6 +5,9 @@
     <string name="amount_label">MONTO</string>
     <string name="description_label">DESCRIPCIÓN</string>
     <string name="category_label">SELECCIONAR CATEGORÍA</string>
+    <string name="installments_label">CUOTAS (OPCIONAL)</string>
+    <string name="installments_placeholder">Número de cuotas (ej. 12)</string>
+    <string name="installments_suffix">cuotas</string>
     <string name="date_label">FECHA</string>
     <string name="save_expense">Guardar Gasto</string>
     <string name="total_spent_in">Total Gastado en %1$s</string>

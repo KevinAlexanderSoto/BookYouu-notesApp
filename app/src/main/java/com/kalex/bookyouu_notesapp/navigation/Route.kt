@@ -29,4 +29,9 @@ object Route {
     const val EXPENSES = "expenses_graph"
     const val EXPENSES_LIST = "expenses_list"
     const val ADD_EXPENSE = "add_expense?expenseId={expenseId}"
+
+    const val INVESTMENTS = "investments_graph"
+    const val INVESTMENTS_LIST = "investments_list"
+    const val ADD_INVESTMENT = "add_investment"
+    const val INVESTMENT_DETAIL = "investment_detail/{investmentId}"
 }

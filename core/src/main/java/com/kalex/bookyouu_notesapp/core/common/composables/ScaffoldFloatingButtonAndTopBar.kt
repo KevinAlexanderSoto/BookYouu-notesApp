@@ -18,11 +18,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.kalex.bookyouu_notesapp.core.theme.BookYouUnotesAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScaffoldFloatingButtonAndTopBar(
+    modifier: Modifier = Modifier,
     title: String? = null,
     onBackNavigationClick: () -> Unit,
     onFloatingActionClick: () -> Unit,
@@ -32,6 +35,7 @@ fun ScaffoldFloatingButtonAndTopBar(
 ) {
 
     Scaffold(
+        modifier = modifier,
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
@@ -72,5 +76,23 @@ fun ScaffoldFloatingButtonAndTopBar(
         },
     ) { paddingValues ->
         content(paddingValues)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ScaffoldFloatingButtonAndTopBarPreview() {
+    BookYouUnotesAppTheme {
+        ScaffoldFloatingButtonAndTopBar(
+            title = "Preview Title",
+            onBackNavigationClick = { },
+            onFloatingActionClick = { },
+            showNavigationIcon = true
+        ) { paddingValues ->
+            Text(
+                modifier = Modifier.padding(paddingValues),
+                text = "Content Area"
+            )
+        }
     }
 }

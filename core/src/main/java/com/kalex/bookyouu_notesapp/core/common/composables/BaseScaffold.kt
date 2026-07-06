@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BYScaffold(
+fun BaseScaffold(
     modifier: Modifier = Modifier,
     topBarTitle: String? = null,
     navigationIcon: @Composable () -> Unit = {},

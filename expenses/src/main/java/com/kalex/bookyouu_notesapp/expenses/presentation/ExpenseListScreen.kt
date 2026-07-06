@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.kalex.bookyouu_notesapp.core.common.UiText
 import com.kalex.bookyouu_notesapp.core.common.composables.BYLoadingIndicator
-import com.kalex.bookyouu_notesapp.core.common.composables.BYScaffold
+import com.kalex.bookyouu_notesapp.core.common.composables.BaseScaffold
 import com.kalex.bookyouu_notesapp.core.common.composables.EmptyScreen
 import com.kalex.bookyouu_notesapp.expenses.presentation.components.ExpenseRow
 import com.kalex.bookyouu_notesapp.expenses.presentation.components.ExpenseSummaryCard
@@ -60,7 +60,7 @@ fun ExpenseListScreen(
     paddingValues: PaddingValues,
     onAction: (ExpenseAction) -> Unit
 ) {
-    BYScaffold(
+    BaseScaffold(
         modifier = Modifier.padding(bottom = paddingValues.calculateBottomPadding() ),
         topBarTitle = "Expenses",
         floatingActionButton = {

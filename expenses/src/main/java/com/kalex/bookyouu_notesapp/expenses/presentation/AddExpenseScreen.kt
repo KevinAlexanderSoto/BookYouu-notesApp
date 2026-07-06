@@ -17,7 +17,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kalex.bookyouu_notesapp.core.common.Category
-import com.kalex.bookyouu_notesapp.core.common.composables.BYScaffold
+import com.kalex.bookyouu_notesapp.core.common.composables.BaseScaffold
 import com.kalex.bookyouu_notesapp.core.common.composables.LargeAmountInput
 import com.kalex.bookyouu_notesapp.expenses.presentation.components.CategorySelector
 import com.kalex.bookyouu_notesapp.expenses.R as ExpensesR
@@ -134,7 +134,7 @@ fun AddExpenseScreen(
         }
     }
 
-    BYScaffold(
+    BaseScaffold(
         topBarTitle = null,
         navigationIcon = {
             IconButton(onClick = onNavigateBack) {

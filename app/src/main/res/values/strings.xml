@@ -5,6 +5,7 @@
     <string name="expenses_bottom_label">Expenses</string>
     <string name="moreMenu_bottom_label">Settings</string>
     <string name="journal_bottom_label">Journal</string>
+    <string name="investments_bottom_label">Investments</string>
     <!-- TOP BAR SECTION -->
     <string name="obligations_topBar_title">Obligations</string>
     <string name="obligations_create_topBar_title">Add Obligation</string>
@@ -23,9 +24,9 @@
     <string name="permission_notAvailable_button_text">OK</string>
     <string name="empty_topBar_title" />
 
-    <string name="prompt_info_title">Porfavor coloque su huella para acceder \n</string>
+    <string name="prompt_info_title">Please place your fingerprint to access \n</string>
     <string name="prompt_info_subtitle">Please login to get access</string>
-    <string name="prompt_info_description">Recuerda haber ingresado por lo menos una vez con correo y contraseña</string>
-    <string name="prompt_info_use_app_password">Usar contraseña</string>
+    <string name="prompt_info_description">Remember to have logged in at least once with email and password</string>
+    <string name="prompt_info_use_app_password">Use password</string>
 
 </resources>

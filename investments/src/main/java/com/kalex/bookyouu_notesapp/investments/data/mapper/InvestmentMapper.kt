@@ -1,15 +1,16 @@
 package com.kalex.bookyouu_notesapp.investments.data.mapper
 
 import com.kalex.bookyouu_notesapp.db.data.InvestmentEntity
-import com.kalex.bookyouu_notesapp.db.data.InvestmentTransactionEntity
 import com.kalex.bookyouu_notesapp.investments.domain.model.Investment
-import com.kalex.bookyouu_notesapp.investments.domain.model.InvestmentTransaction
+import com.kalex.bookyouu_notesapp.investments.presentation.InvestmentType
 
 fun InvestmentEntity.toDomain(): Investment {
+    val safeType = runCatching { InvestmentType.valueOf(type) }
+        .getOrDefault(InvestmentType.GENERAL)
     return Investment(
         id = id,
         name = name,
-        type = type,
+        type = safeType,
         initialAmount = initialAmount,
         currency = currency,
         dateCreated = dateCreated
@@ -20,31 +21,9 @@ fun Investment.toEntity(): InvestmentEntity {
     return InvestmentEntity(
         id = id,
         name = name,
-        type = type,
+        type = type.name,
         initialAmount = initialAmount,
         currency = currency,
         dateCreated = dateCreated
-    )
-}
-
-fun InvestmentTransactionEntity.toDomain(): InvestmentTransaction {
-    return InvestmentTransaction(
-        id = id,
-        investmentId = investmentId,
-        amount = amount,
-        date = date,
-        description = description,
-        type = type
-    )
-}
-
-fun InvestmentTransaction.toEntity(): InvestmentTransactionEntity {
-    return InvestmentTransactionEntity(
-        id = id,
-        investmentId = investmentId,
-        amount = amount,
-        date = date,
-        description = description,
-        type = type
     )
 }

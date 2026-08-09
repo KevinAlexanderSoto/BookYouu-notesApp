@@ -9,13 +9,11 @@ import androidx.room.TypeConverters
 import androidx.room.migration.AutoMigrationSpec
 import com.kalex.bookyouu_notesapp.db.dao.ExpenseDao
 import com.kalex.bookyouu_notesapp.db.dao.InvestmentDao
-import com.kalex.bookyouu_notesapp.db.dao.InvestmentTransactionDao
 import com.kalex.bookyouu_notesapp.db.dao.JournalEntryDao
 import com.kalex.bookyouu_notesapp.db.dao.ObligationDao
 import com.kalex.bookyouu_notesapp.db.dao.JournalDao
 import com.kalex.bookyouu_notesapp.db.data.ExpenseEntity
 import com.kalex.bookyouu_notesapp.db.data.InvestmentEntity
-import com.kalex.bookyouu_notesapp.db.data.InvestmentTransactionEntity
 import com.kalex.bookyouu_notesapp.db.data.JournalEntry
 import com.kalex.bookyouu_notesapp.db.data.ObligationEntity
 import com.kalex.bookyouu_notesapp.db.data.Journal
@@ -29,7 +27,6 @@ import com.kalex.bookyouu_notesapp.db.typeConvertes.DayOfWeekTypeConverter
         ObligationEntity::class,
         ExpenseEntity::class,
         InvestmentEntity::class,
-        InvestmentTransactionEntity::class
     ],
     version = 5,
     exportSchema = true,
@@ -47,7 +44,6 @@ abstract class BookYouuDataBase : RoomDatabase() {
     abstract val obligationDao: ObligationDao
     abstract val expenseDao: ExpenseDao
     abstract val investmentDao: InvestmentDao
-    abstract val investmentTransactionDao: InvestmentTransactionDao
 
     @RenameTable(fromTableName = "Subject", toTableName = "journal")
     @RenameColumn(tableName = "Subject", fromColumnName = "subject_id", toColumnName = "journal_id")

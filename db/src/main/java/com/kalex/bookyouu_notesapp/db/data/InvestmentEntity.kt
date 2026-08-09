@@ -12,7 +12,7 @@ data class InvestmentEntity(
     @ColumnInfo(name = "name")
     val name: String,
     @ColumnInfo(name = "type")
-    val type: String, // e.g., "Stocks", "Crypto", "Cash", "Savings"
+    val type: String,
     @ColumnInfo(name = "initial_amount")
     val initialAmount: Double,
     @ColumnInfo(name = "currency")

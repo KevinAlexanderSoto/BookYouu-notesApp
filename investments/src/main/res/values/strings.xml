@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Add Investment Screen -->
+    <string name="add_investment_title">New Investment</string>
+    <string name="add_investment_back_description">Back</string>
+    <string name="add_investment_initial_amount_label">Initial amount</string>
+    <string name="add_investment_name_label">Investment Name</string>
+    <string name="add_investment_name_placeholder">e.g., S&amp;P 500 Index</string>
+    <string name="add_investment_category_label">Category</string>
+    <string name="add_investment_category_stocks">Stocks</string>
+    <string name="add_investment_category_savings">Savings</string>
+    <string name="add_investment_category_crypto">Crypto</string>
+    
+    <string name="add_investment_term_label">Investment Term (Days)</string>
+    <string name="add_investment_term_no_term">No term</string>
+    <string name="add_investment_term_days_suffix">%1$sd</string>
+    <string name="add_investment_duration_indefinite">Duration: Indefinite / No term</string>
+    <string name="add_investment_duration_days">Duration: %1$s days</string>
+    <string name="add_investment_custom_days_label">Custom Days (1 - 360)</string>
+    <string name="add_investment_custom_days_placeholder_no_term">No fixed term (or enter 1-360)</string>
+    <string name="add_investment_custom_days_placeholder_active">Enter days (1-360)</string>
+    
+    <string name="add_investment_revenue_label">Annual Revenue (%)</string>
+    <string name="add_investment_revenue_placeholder">e.g., 8.5</string>
+    <string name="add_investment_button_create">Create Investment</string>
+    
+    <string name="add_investment_error_empty_name">Name cannot be empty</string>
+    <string name="add_investment_error_saving">Error saving investment</string>
+
+    <!-- Investment Types -->
+    <string name="investment_high_yield_savings">High-Yield Savings</string>
+    <string name="investment_cdt">CDT</string>
+    <string name="investment_usd">USD (US Dollars)</string>
+    <string name="investment_stocks">Stocks</string>
+    <string name="investment_bonds">Bonds</string>
+    <string name="investment_mutual_funds">Mutual Funds</string>
+    <string name="investment_etf">ETF</string>
+    <string name="investment_real_estate">Real Estate</string>
+    <string name="investment_crypto">Cryptocurrency</string>
+    <string name="investment_general">General</string>
+
+    <!-- Portfolio & Cards -->
+    <string name="net_worth_card_title">TOTAL NET WORTH</string>
+</resources>

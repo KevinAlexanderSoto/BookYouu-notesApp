@@ -148,6 +148,7 @@ dependencies {
     implementation(project(":expenses"))
     implementation(project(":journal"))
     implementation(project(":widget"))
+    implementation(project(":investments"))
 
     //TESTING SECTION
     testImplementation(libs.junit)

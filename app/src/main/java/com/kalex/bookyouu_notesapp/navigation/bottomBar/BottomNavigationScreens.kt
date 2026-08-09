@@ -11,11 +11,11 @@ sealed class BottomNavigationScreens(
     @DrawableRes override val bottomIconRes: Int,
     @StringRes override val label: Int,
 ): BottomBarNavigationItem {
-    object Journal : BottomNavigationScreens(
+   /* object Journal : BottomNavigationScreens(
         Route.JOURNAL_LIST,
         R.drawable.book_svgrepo_com,
         R.string.journal_bottom_label,
-    )
+    )*/
 
     object Payments : BottomNavigationScreens(
         Route.PAYMENTS_MAIN,
@@ -27,6 +27,11 @@ sealed class BottomNavigationScreens(
         R.drawable.baseline_calculate_24,
         R.string.expenses_bottom_label,
     )
+    object Investments : BottomNavigationScreens(
+        Route.INVESTMENTS,
+        R.drawable.baseline_library_books_24,
+        R.string.investments_bottom_label,
+    )
     object MoreMenu : BottomNavigationScreens(
         Route.MORE_MENU_MAIN,
         R.drawable.settings_24px,
@@ -37,7 +42,8 @@ sealed class BottomNavigationScreens(
         val bottomNavItems = listOf(
             Expenses,
             Payments,
-            Journal,
+            Investments,
+            //Journal,
             MoreMenu,
         )
     }

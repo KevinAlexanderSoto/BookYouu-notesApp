@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Add Investment Screen -->
+    <string name="add_investment_title">Nueva inversión</string>
+    <string name="add_investment_back_description">Regresar</string>
+    <string name="add_investment_initial_amount_label">Monto inicial</string>
+    <string name="add_investment_name_label">Nombre de la inversión</string>
+    <string name="add_investment_name_placeholder">ej., Índice S&amp;P 500</string>
+    <string name="add_investment_category_label">Categoría</string>
+    <string name="add_investment_category_stocks">Acciones</string>
+    <string name="add_investment_category_savings">Ahorros</string>
+    <string name="add_investment_category_crypto">Cripto</string>
+    
+    <string name="add_investment_term_label">Plazo de inversión (Días)</string>
+    <string name="add_investment_term_no_term">Sin plazo</string>
+    <string name="add_investment_term_days_suffix">%1$sd</string>
+    <string name="add_investment_duration_indefinite">Duración: Indefinido / Sin plazo</string>
+    <string name="add_investment_duration_days">Duración: %1$s días</string>
+    <string name="add_investment_custom_days_label">Días personalizados (1 - 360)</string>
+    <string name="add_investment_custom_days_placeholder_no_term">Sin plazo fijo (o ingresa 1-360)</string>
+    <string name="add_investment_custom_days_placeholder_active">Ingresa los días (1-360)</string>
+    
+    <string name="add_investment_revenue_label">Rendimiento anual (%)</string>
+    <string name="add_investment_revenue_placeholder">ej., 8.5</string>
+    <string name="add_investment_button_create">Crear inversión</string>
+    
+    <string name="add_investment_error_empty_name">El nombre no puede estar vacío</string>
+    <string name="add_investment_error_saving">Error al guardar la inversión</string>
+
+    <!-- Tipos de Inversión -->
+    <string name="investment_high_yield_savings">Cuenta de Alto Rendimiento</string>
+    <string name="investment_cdt">CDT</string>
+    <string name="investment_usd">Dólares (USD)</string>
+    <string name="investment_stocks">Acciones</string>
+    <string name="investment_bonds">Bonos</string>
+    <string name="investment_mutual_funds">Fondos de Inversión</string>
+    <string name="investment_etf">ETF</string>
+    <string name="investment_real_estate">Bienes Raíces</string>
+    <string name="investment_crypto">Criptomonedas</string>
+    <string name="investment_general">General</string>
+
+    <!-- Portafolio y Tarjetas -->
+    <string name="net_worth_card_title">PATRIMONIO NETO TOTAL</string>
+</resources>

@@ -33,5 +33,4 @@ object Route {
     const val INVESTMENTS = "investments_graph"
     const val INVESTMENTS_LIST = "investments_list"
     const val ADD_INVESTMENT = "add_investment"
-    const val INVESTMENT_DETAIL = "investment_detail/{investmentId}"
 }

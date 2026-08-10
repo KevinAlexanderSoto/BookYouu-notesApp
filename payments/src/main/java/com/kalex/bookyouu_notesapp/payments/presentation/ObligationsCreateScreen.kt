@@ -207,7 +207,6 @@ fun ObligationsCreateScreen(
             Spacer(modifier = Modifier.height(32.dp))
 
             CategorySelector(
-                modifier = Modifier.height(225.dp),
                 selectedCategory = state.category,
                 onCategorySelected = { onAction(ObligationsCreateAction.OnCategoryChange(it)) }
             )

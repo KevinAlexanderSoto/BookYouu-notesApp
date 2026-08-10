@@ -2,6 +2,8 @@ package com.kalex.bookyouu_notesapp.expenses.presentation
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -146,7 +148,8 @@ fun AddExpenseScreen(
             modifier = Modifier
                 .padding(padding)
                 .padding(horizontal = 24.dp)
-                .fillMaxSize(),
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             // Amount Section
@@ -165,7 +168,6 @@ fun AddExpenseScreen(
                     fontWeight = FontWeight.Bold
                 )
                 CategorySelector(
-                    modifier = Modifier.height(225.dp),
                     selectedCategory = selectedCategory,
                     onCategorySelected = onCategorySelected,
                 )
@@ -283,7 +285,7 @@ fun AddExpenseScreen(
                 HorizontalDivider(color = Color.LightGray, thickness = 1.dp)
             }
 
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Save Button
             Button(

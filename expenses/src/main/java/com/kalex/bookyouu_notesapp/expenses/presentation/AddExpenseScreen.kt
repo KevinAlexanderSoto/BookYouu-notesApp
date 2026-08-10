@@ -150,7 +150,7 @@ fun AddExpenseScreen(
                 .padding(horizontal = 24.dp)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
+            verticalArrangement = Arrangement.spacedBy(18.dp)
         ) {
             // Amount Section
             LargeAmountInput(
@@ -285,7 +285,7 @@ fun AddExpenseScreen(
                 HorizontalDivider(color = Color.LightGray, thickness = 1.dp)
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             // Save Button
             Button(

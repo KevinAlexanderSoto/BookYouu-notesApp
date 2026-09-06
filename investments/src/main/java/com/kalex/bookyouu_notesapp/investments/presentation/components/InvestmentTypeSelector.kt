@@ -29,6 +29,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Icon
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
 import com.kalex.bookyouu_notesapp.investments.R
 import com.kalex.bookyouu_notesapp.investments.presentation.InvestmentType
 import com.kalex.bookyouu_notesapp.investments.presentation.RiskLevel
@@ -56,10 +62,28 @@ fun InvestmentTypeSelector(
             onExpandedChange = { expanded = !expanded },
             modifier = Modifier.fillMaxWidth()
         ) {
+            val (selectedBg, selectedIconColor) = getInvestmentColors(selectedType)
+
             OutlinedTextField(
                 value = stringResource(selectedType.titleResId),
                 onValueChange = {},
                 readOnly = true,
+                leadingIcon = {
+                    Box(
+                        modifier = Modifier
+                            .size(32.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(selectedBg),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(id = selectedType.iconResId),
+                            contentDescription = null,
+                            tint = selectedIconColor,
+                            modifier = Modifier.size(18.dp)
+                        )
+                    }
+                },
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = MaterialTheme.colorScheme.primary,
@@ -79,6 +103,7 @@ fun InvestmentTypeSelector(
                 modifier = Modifier.background(MaterialTheme.colorScheme.surface)
             ) {
                 InvestmentType.entries.forEach { type ->
+                    val (typeBg, typeIconColor) = getInvestmentColors(type)
                     DropdownMenuItem(
                         text = {
                             Row(
@@ -86,11 +111,28 @@ fun InvestmentTypeSelector(
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Text(
-                                    text = stringResource(type.titleResId),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = if (type == selectedType) FontWeight.Bold else FontWeight.Normal
-                                )
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(30.dp)
+                                            .clip(RoundedCornerShape(8.dp))
+                                            .background(typeBg),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Icon(
+                                            painter = painterResource(id = type.iconResId),
+                                            contentDescription = null,
+                                            tint = typeIconColor,
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                    }
+                                    Spacer(modifier = Modifier.width(10.dp))
+                                    Text(
+                                        text = stringResource(type.titleResId),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        fontWeight = if (type == selectedType) FontWeight.Bold else FontWeight.Normal
+                                    )
+                                }
                                 RiskLevelBadge(riskLevel = type.riskLevel)
                             }
                         },

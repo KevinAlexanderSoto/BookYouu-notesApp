@@ -18,7 +18,7 @@ class InvestmentListViewModel(
     private val investmentsRepositoryImpl: InvestmentsRepository
 ) : ViewModel() {
 
-    private val amountFormatter = DecimalFormat("#,##0.00")
+    private val amountFormatter = DecimalFormat("#,##0")
     private val percentFormatter = DecimalFormat("0.0")
     private val dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.getDefault())
 
@@ -38,7 +38,7 @@ class InvestmentListViewModel(
             .onEach { summary ->
                 _state.update { state ->
                     state.copy(
-                        totalNetWorth = summary.sumOf { it.initialAmount }.toString(),
+                        totalNetWorth = "$ ${amountFormatter.format(summary.sumOf { it.initialAmount })}",
                         investments = summary.map { it.toUiModel() },
                         isLoading = false
                     )

@@ -12,7 +12,7 @@ data class InvestmentUi(
 )
 
 data class PortfolioState(
-    val totalNetWorth: String = "$ 0.00",
+    val totalNetWorth: String = "$ 0",
     val investments: List<InvestmentUi> = emptyList(),
     val isLoading: Boolean = false,
     val error: UiText? = null

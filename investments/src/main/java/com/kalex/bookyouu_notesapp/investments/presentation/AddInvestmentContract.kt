@@ -56,52 +56,52 @@ enum class InvestmentType(
 
     HIGH_YIELD_SAVINGS(
         titleResId = R.string.investment_high_yield_savings,
-        iconResId = R.drawable.outline_money_bag_24,
+        iconResId = R.drawable.ic_high_yield_savings,
         riskLevel = RiskLevel.LOW
     ),
     CDT(
         titleResId = R.string.investment_cdt,
-        iconResId = R.drawable.outline_money_bag_24,
+        iconResId = R.drawable.ic_cdt,
         riskLevel = RiskLevel.LOW
     ),
     USD(
         titleResId = R.string.investment_usd,
-        iconResId = R.drawable.outline_money_bag_24,
+        iconResId = R.drawable.ic_usd,
         riskLevel = RiskLevel.MEDIUM
     ),
     STOCKS(
         titleResId = R.string.investment_stocks,
-        iconResId = R.drawable.outline_money_bag_24,
+        iconResId = R.drawable.ic_stocks,
         riskLevel = RiskLevel.HIGH
     ),
     BONDS(
         titleResId = R.string.investment_bonds,
-        iconResId = R.drawable.outline_money_bag_24,
+        iconResId = R.drawable.ic_bonds,
         riskLevel = RiskLevel.LOW
     ),
     MUTUAL_FUNDS(
         titleResId = R.string.investment_mutual_funds,
-        iconResId = R.drawable.outline_money_bag_24,
+        iconResId = R.drawable.ic_mutual_funds,
         riskLevel = RiskLevel.MEDIUM
     ),
     ETF(
         titleResId = R.string.investment_etf,
-        iconResId = R.drawable.outline_money_bag_24,
+        iconResId = R.drawable.ic_etf,
         riskLevel = RiskLevel.MEDIUM
     ),
     REAL_ESTATE(
         titleResId = R.string.investment_real_estate,
-        iconResId = R.drawable.outline_money_bag_24,
+        iconResId = R.drawable.ic_real_estate,
         riskLevel = RiskLevel.MEDIUM
     ),
     CRYPTO(
         titleResId = R.string.investment_crypto,
-        iconResId = R.drawable.outline_money_bag_24,
+        iconResId = R.drawable.ic_crypto,
         riskLevel = RiskLevel.VERY_HIGH
     ),
     GENERAL(
         titleResId = R.string.investment_general,
-        iconResId = R.drawable.outline_money_bag_24,
+        iconResId = R.drawable.ic_general,
         riskLevel = RiskLevel.LOW
     )
 }

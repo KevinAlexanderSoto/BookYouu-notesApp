@@ -63,12 +63,17 @@ fun NetWorthCard(
                     fontWeight = FontWeight.SemiBold
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = totalNetWorth,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                )
+                totalNetWorth.split("\n").forEachIndexed { index, line ->
+                    if (index > 0) {
+                        Spacer(modifier = Modifier.height(4.dp))
+                    }
+                    Text(
+                        text = line,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                }
             }
         }
     }

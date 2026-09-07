@@ -41,7 +41,7 @@ class InvestmentListViewModel(
                 val usdFormatted = "$ ${amountFormatter.format(usdSum)} USD"
                 val copFormatted = "$ ${amountFormatter.format(copSum)} COP"
                 val totalFormatted = if (usdSum > 0 && copSum > 0) {
-                    "$usdFormatted • $copFormatted"
+                    "$usdFormatted\n$copFormatted"
                 } else if (copSum > 0) {
                     copFormatted
                 } else {

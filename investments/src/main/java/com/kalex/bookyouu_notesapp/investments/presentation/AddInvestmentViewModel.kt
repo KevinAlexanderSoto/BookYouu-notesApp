@@ -32,6 +32,9 @@ class AddInvestmentViewModel(
             is AddInvestmentAction.OnTypeChange -> {
                 _state.update { it.copy(selectedType = action.type) }
             }
+            is AddInvestmentAction.OnCurrencyChange -> {
+                _state.update { it.copy(selectedCurrency = action.currency) }
+            }
             is AddInvestmentAction.OnTermChange -> {
                 val newTerm = if (action.term.isBlank()) {
                     ""
@@ -74,6 +77,7 @@ class AddInvestmentViewModel(
                     name = currentState.name,
                     type = currentState.selectedType,
                     initialAmount = currentState.amount.toDoubleOrNull() ?: 0.0,
+                    currency = currentState.selectedCurrency,
                     dateCreated = System.currentTimeMillis()
                 )
                 repository.upsertInvestment(investment)

@@ -59,7 +59,9 @@ fun InvestmentsPortfolioScreen(
         ) {
             item {
                 NetWorthCard(
-                    totalNetWorth = state.totalNetWorth
+                    totalNetWorth = state.totalNetWorth,
+                    usdNetWorth = state.usdNetWorth,
+                    copNetWorth = state.copNetWorth
                 )
             }
             item {

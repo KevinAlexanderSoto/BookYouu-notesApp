@@ -5,10 +5,20 @@ import androidx.annotation.StringRes
 import com.kalex.bookyouu_notesapp.core.common.UiText
 import com.kalex.bookyouu_notesapp.investments.R
 
+enum class Currency(
+    val code: String,
+    val symbol: String,
+    @StringRes val titleResId: Int
+) {
+    USD("USD", "$", R.string.currency_usd),
+    COP("COP", "$", R.string.currency_cop)
+}
+
 data class AddInvestmentState(
     val amount: String = "0",
     val name: String = "",
     val selectedType: InvestmentType = InvestmentType.GENERAL,
+    val selectedCurrency: Currency = Currency.USD,
     val term: String = "",
     val annualRevenue: String = "",
     val isLoading: Boolean = false,
@@ -19,6 +29,7 @@ sealed interface AddInvestmentAction {
     data class OnAmountChange(val amount: String) : AddInvestmentAction
     data class OnNameChange(val name: String) : AddInvestmentAction
     data class OnTypeChange(val type: InvestmentType) : AddInvestmentAction
+    data class OnCurrencyChange(val currency: Currency) : AddInvestmentAction
     data class OnTermChange(val term: String) : AddInvestmentAction
     data class OnRevenueChange(val revenue: String) : AddInvestmentAction
     object OnCreateInvestment : AddInvestmentAction

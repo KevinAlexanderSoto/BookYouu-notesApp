@@ -40,7 +40,7 @@ class InvestmentListViewModelTest {
             name = "My Savings",
             type = InvestmentType.USD,
             initialAmount = 5656.0,
-            currency = "USD",
+            currency = Currency.USD,
             dateCreated = 1700000000000L
         )
         fakeRepository.investments = listOf(sampleInvestment)
@@ -49,10 +49,11 @@ class InvestmentListViewModelTest {
         testDispatcher.scheduler.advanceUntilIdle()
 
         val state = viewModel.state.value
-        assertEquals("$ 5,656", state.totalNetWorth)
+        assertEquals("$ 5,656 USD", state.totalNetWorth)
         assertEquals(1, state.investments.size)
         assertEquals("MY SAVINGS", state.investments[0].name.uppercase())
         assertEquals(InvestmentType.USD, state.investments[0].type)
+        assertEquals(Currency.USD, state.investments[0].currency)
     }
 
     private class FakeInvestmentsRepository : InvestmentsRepository {

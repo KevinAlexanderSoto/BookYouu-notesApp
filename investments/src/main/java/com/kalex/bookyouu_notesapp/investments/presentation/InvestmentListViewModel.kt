@@ -36,9 +36,23 @@ class InvestmentListViewModel(
 
         investmentsRepositoryImpl.getInvestments() .onStart { _state.update { it.copy(isLoading = true) } }
             .onEach { summary ->
+                val usdSum = summary.filter { it.currency == Currency.USD }.sumOf { it.initialAmount }
+                val copSum = summary.filter { it.currency == Currency.COP }.sumOf { it.initialAmount }
+                val usdFormatted = "$ ${amountFormatter.format(usdSum)} USD"
+                val copFormatted = "$ ${amountFormatter.format(copSum)} COP"
+                val totalFormatted = if (usdSum > 0 && copSum > 0) {
+                    "$usdFormatted • $copFormatted"
+                } else if (copSum > 0) {
+                    copFormatted
+                } else {
+                    usdFormatted
+                }
+
                 _state.update { state ->
                     state.copy(
-                        totalNetWorth = "$ ${amountFormatter.format(summary.sumOf { it.initialAmount })}",
+                        usdNetWorth = usdFormatted,
+                        copNetWorth = copFormatted,
+                        totalNetWorth = totalFormatted,
                         investments = summary.map { it.toUiModel() },
                         isLoading = false
                     )
@@ -77,7 +91,8 @@ class InvestmentListViewModel(
             id = id,
             name = name,
             type = type,
-            balance = "$ ${amountFormatter.format(initialAmount)}",
+            currency = currency,
+            balance = "$ ${amountFormatter.format(initialAmount)} ${currency.code}",
             typeLabel = type.name,
             dateCreated = date
         )

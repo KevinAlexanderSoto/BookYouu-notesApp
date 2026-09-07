@@ -6,12 +6,15 @@ data class InvestmentUi(
     val id: Long,
     val name: String,
     val type: InvestmentType,
+    val currency: Currency,
     val balance: String,
     val typeLabel: String,
     val dateCreated: String
 )
 
 data class PortfolioState(
+    val usdNetWorth: String = "$ 0",
+    val copNetWorth: String = "$ 0",
     val totalNetWorth: String = "$ 0",
     val investments: List<InvestmentUi> = emptyList(),
     val isLoading: Boolean = false,

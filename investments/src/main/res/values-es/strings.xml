@@ -10,6 +10,9 @@
     <string name="add_investment_category_stocks">Acciones</string>
     <string name="add_investment_category_savings">Ahorros</string>
     <string name="add_investment_category_crypto">Cripto</string>
+    <string name="add_investment_currency_label">Moneda</string>
+    <string name="currency_usd">USD ($)</string>
+    <string name="currency_cop">COP ($)</string>
     
     <string name="add_investment_term_label">Plazo de inversión (Días)</string>
     <string name="add_investment_term_no_term">Sin plazo</string>

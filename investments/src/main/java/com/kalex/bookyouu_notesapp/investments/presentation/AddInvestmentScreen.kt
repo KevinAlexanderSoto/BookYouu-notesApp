@@ -33,6 +33,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kalex.bookyouu_notesapp.core.common.composables.LabeledInput
 import com.kalex.bookyouu_notesapp.core.common.composables.LargeAmountInput
 import com.kalex.bookyouu_notesapp.investments.R
+import com.kalex.bookyouu_notesapp.investments.presentation.components.CurrencySelector
 import com.kalex.bookyouu_notesapp.investments.presentation.components.InvestmentDaysSelector
 import com.kalex.bookyouu_notesapp.investments.presentation.components.InvestmentTypeSelector
 import org.koin.androidx.compose.koinViewModel
@@ -92,6 +93,13 @@ fun AddInvestmentScreen(
                 value = state.name,
                 onValueChange = { viewModel.onAction(AddInvestmentAction.OnNameChange(it)) },
                 placeholder = stringResource(R.string.add_investment_name_placeholder)
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            CurrencySelector(
+                selectedCurrency = state.selectedCurrency,
+                onCurrencySelected = { viewModel.onAction(AddInvestmentAction.OnCurrencyChange(it)) }
             )
 
             Spacer(modifier = Modifier.height(24.dp))

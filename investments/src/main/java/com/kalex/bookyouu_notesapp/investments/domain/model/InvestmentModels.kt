@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp.investments.domain.model
 
+import com.kalex.bookyouu_notesapp.investments.presentation.Currency
 import com.kalex.bookyouu_notesapp.investments.presentation.InvestmentType
 
 data class Investment(
@@ -7,6 +8,6 @@ data class Investment(
     val name: String,
     val type: InvestmentType,
     val initialAmount: Double,
-    val currency: String = "USD",
+    val currency: Currency = Currency.USD,
     val dateCreated: Long
 )

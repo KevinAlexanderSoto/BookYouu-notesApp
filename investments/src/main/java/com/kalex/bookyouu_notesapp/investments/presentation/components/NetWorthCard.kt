@@ -32,6 +32,8 @@ import com.kalex.bookyouu_notesapp.investments.R
 @Composable
 fun NetWorthCard(
     totalNetWorth: String,
+    usdNetWorth: String = "",
+    copNetWorth: String = ""
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -63,7 +65,7 @@ fun NetWorthCard(
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = totalNetWorth,
-                    style = MaterialTheme.typography.headlineLarge,
+                    style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
                 )

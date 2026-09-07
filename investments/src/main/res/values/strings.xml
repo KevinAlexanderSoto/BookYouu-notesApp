@@ -10,6 +10,9 @@
     <string name="add_investment_category_stocks">Stocks</string>
     <string name="add_investment_category_savings">Savings</string>
     <string name="add_investment_category_crypto">Crypto</string>
+    <string name="add_investment_currency_label">Currency</string>
+    <string name="currency_usd">USD ($)</string>
+    <string name="currency_cop">COP ($)</string>
     
     <string name="add_investment_term_label">Investment Term (Days)</string>
     <string name="add_investment_term_no_term">No term</string>

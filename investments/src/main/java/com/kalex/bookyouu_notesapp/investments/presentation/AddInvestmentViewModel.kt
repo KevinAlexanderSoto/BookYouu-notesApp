@@ -21,8 +21,13 @@ class AddInvestmentViewModel(
     private val _events = Channel<AddInvestmentEvent>()
     val events = _events.receiveAsFlow()
 
+    private var existingDateCreated: Long? = null
+
     fun onAction(action: AddInvestmentAction) {
         when (action) {
+            is AddInvestmentAction.LoadInvestment -> {
+                loadInvestment(action.id)
+            }
             is AddInvestmentAction.OnAmountChange -> {
                 _state.update { it.copy(amount = action.amount) }
             }
@@ -58,6 +63,78 @@ class AddInvestmentViewModel(
             AddInvestmentAction.OnCreateInvestment -> {
                 createInvestment()
             }
+            AddInvestmentAction.OnDeleteClick -> {
+                _state.update { it.copy(showDeleteDialog = true) }
+            }
+            AddInvestmentAction.OnDismissDeleteDialog -> {
+                _state.update { it.copy(showDeleteDialog = false) }
+            }
+            AddInvestmentAction.OnConfirmDelete -> {
+                deleteInvestment()
+            }
+        }
+    }
+
+    private fun loadInvestment(id: Long) {
+        if (id <= 0) return
+        viewModelScope.launch {
+            _state.update { it.copy(isLoading = true) }
+            try {
+                val investment = repository.getInvestmentById(id).firstOrNull()
+                if (investment != null) {
+                    existingDateCreated = investment.dateCreated
+                    val amountStr = if (investment.initialAmount % 1 == 0.0) {
+                        investment.initialAmount.toLong().toString()
+                    } else {
+                        investment.initialAmount.toString()
+                    }
+                    _state.update {
+                        it.copy(
+                            investmentId = investment.id,
+                            isEditMode = true,
+                            name = investment.name,
+                            amount = amountStr,
+                            selectedType = investment.type,
+                            selectedCurrency = investment.currency,
+                            isLoading = false
+                        )
+                    }
+                } else {
+                    _state.update { it.copy(isLoading = false) }
+                }
+            } catch (e: Exception) {
+                _state.update { it.copy(isLoading = false, error = UiText.DynamicString(e.message ?: "Error loading investment")) }
+            }
+        }
+    }
+
+    private fun deleteInvestment() {
+        _state.update { it.copy(showDeleteDialog = false) }
+        val id = _state.value.investmentId ?: return
+        viewModelScope.launch {
+            _state.update { it.copy(isLoading = true) }
+            try {
+                val investment = repository.getInvestmentById(id).firstOrNull()
+                if (investment != null) {
+                    repository.deleteInvestment(investment)
+                } else {
+                    repository.deleteInvestment(
+                        Investment(
+                            id = id,
+                            name = _state.value.name,
+                            type = _state.value.selectedType,
+                            initialAmount = _state.value.amount.toDoubleOrNull() ?: 0.0,
+                            currency = _state.value.selectedCurrency,
+                            dateCreated = existingDateCreated ?: System.currentTimeMillis()
+                        )
+                    )
+                }
+                _events.send(AddInvestmentEvent.InvestmentDeleted)
+            } catch (e: Exception) {
+                _events.send(AddInvestmentEvent.ShowError(UiText.DynamicString(e.message ?: "Error deleting investment")))
+            } finally {
+                _state.update { it.copy(isLoading = false) }
+            }
         }
     }
 
@@ -74,11 +151,12 @@ class AddInvestmentViewModel(
             _state.update { it.copy(isLoading = true) }
             try {
                 val investment = Investment(
+                    id = currentState.investmentId ?: 0L,
                     name = currentState.name,
                     type = currentState.selectedType,
                     initialAmount = currentState.amount.toDoubleOrNull() ?: 0.0,
                     currency = currentState.selectedCurrency,
-                    dateCreated = System.currentTimeMillis()
+                    dateCreated = existingDateCreated ?: System.currentTimeMillis()
                 )
                 repository.upsertInvestment(investment)
                 _events.send(AddInvestmentEvent.InvestmentCreated)

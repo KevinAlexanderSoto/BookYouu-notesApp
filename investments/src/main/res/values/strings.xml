@@ -30,6 +30,15 @@
     <string name="add_investment_error_empty_name">Name cannot be empty</string>
     <string name="add_investment_error_saving">Error saving investment</string>
 
+    <!-- Edit & Delete Investment -->
+    <string name="edit_investment_title">Edit Investment</string>
+    <string name="edit_investment_button_save">Save Changes</string>
+    <string name="delete_investment_button">Delete Investment</string>
+    <string name="delete_investment_dialog_title">Delete Investment?</string>
+    <string name="delete_investment_dialog_body">Are you sure you want to delete \'%1$s\'? This action cannot be undone.</string>
+    <string name="delete_investment_confirm">Delete</string>
+    <string name="cancel">Cancel</string>
+
     <!-- Investment Types -->
     <string name="investment_high_yield_savings">High-Yield Savings</string>
     <string name="investment_cdt">CDT</string>

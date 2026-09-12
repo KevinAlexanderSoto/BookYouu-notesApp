@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp.investments.presentation
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -18,8 +20,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -41,16 +45,24 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddInvestmentScreen(
+    investmentId: Long = NON_INVESTMENT_ID,
     onBackClick: () -> Unit,
     onSuccess: () -> Unit,
     viewModel: AddInvestmentViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
+    LaunchedEffect(investmentId) {
+        if (investmentId > 0) {
+            viewModel.onAction(AddInvestmentAction.LoadInvestment(investmentId))
+        }
+    }
+
     LaunchedEffect(viewModel.events) {
         viewModel.events.collect { event ->
             when (event) {
                 AddInvestmentEvent.InvestmentCreated -> onSuccess()
+                AddInvestmentEvent.InvestmentDeleted -> onSuccess()
                 is AddInvestmentEvent.ShowError -> {
                     // TODO: Show snackbar or toast
                 }
@@ -61,7 +73,12 @@ fun AddInvestmentScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(stringResource(R.string.add_investment_title), fontWeight = FontWeight.Bold) },
+                title = {
+                    Text(
+                        text = if (state.isEditMode) stringResource(R.string.edit_investment_title) else stringResource(R.string.add_investment_title),
+                        fontWeight = FontWeight.Bold
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.Default.ArrowBack, contentDescription = stringResource(R.string.add_investment_back_description))
@@ -135,9 +152,68 @@ fun AddInvestmentScreen(
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
-                Text(stringResource(R.string.add_investment_button_create), fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text(
+                    text = if (state.isEditMode) stringResource(R.string.edit_investment_button_save) else stringResource(R.string.add_investment_button_create),
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
             }
 
+            if (state.isEditMode) {
+                Spacer(modifier = Modifier.height(16.dp))
+                OutlinedButton(
+                    onClick = { viewModel.onAction(AddInvestmentAction.OnDeleteClick) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(56.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.error),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        contentColor = MaterialTheme.colorScheme.error
+                    )
+                ) {
+                    Text(
+                        text = stringResource(R.string.delete_investment_button),
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+        }
+
+        if (state.showDeleteDialog) {
+            AlertDialog(
+                onDismissRequest = { viewModel.onAction(AddInvestmentAction.OnDismissDeleteDialog) },
+                title = { Text(stringResource(R.string.delete_investment_dialog_title)) },
+                text = {
+                    Text(
+                        stringResource(
+                            R.string.delete_investment_dialog_body,
+                            state.name
+                        )
+                    )
+                },
+                confirmButton = {
+                    TextButton(
+                        onClick = { viewModel.onAction(AddInvestmentAction.OnConfirmDelete) }
+                    ) {
+                        Text(
+                            stringResource(R.string.delete_investment_confirm),
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = { viewModel.onAction(AddInvestmentAction.OnDismissDeleteDialog) }
+                    ) {
+                        Text(stringResource(R.string.cancel))
+                    }
+                }
+            )
         }
     }
 }

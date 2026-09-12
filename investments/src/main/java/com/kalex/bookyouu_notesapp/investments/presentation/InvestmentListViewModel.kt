@@ -69,7 +69,9 @@ class InvestmentListViewModel(
         when (action) {
             InvestmentsAction.LoadPortfolio -> loadPortfolio()
             is InvestmentsAction.OnInvestmentClick -> {
-                // Detail screen is not implemented/needed yet
+                viewModelScope.launch {
+                    _events.send(InvestmentsEvent.NavigateToEditInvestment(action.id))
+                }
             }
             InvestmentsAction.OnAddInvestmentClick -> {
                 viewModelScope.launch {

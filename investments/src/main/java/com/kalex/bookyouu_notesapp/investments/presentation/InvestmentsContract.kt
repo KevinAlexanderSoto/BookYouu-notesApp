@@ -31,4 +31,5 @@ sealed interface InvestmentsAction {
 sealed interface InvestmentsEvent {
     object NavigateToAddInvestment : InvestmentsEvent
     data class ShowError(val message: UiText) : InvestmentsEvent
+    data class NavigateToEditInvestment(val id: Long) : InvestmentsEvent
 }

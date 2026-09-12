@@ -26,7 +26,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun InvestmentsPortfolioScreen(
     paddingValues: PaddingValues,
-    onNavigateToAddInvestment: () -> Unit,
+    onNavigateToAddInvestment: (investmentId: Long) -> Unit,
     viewModel: InvestmentListViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -34,10 +34,11 @@ fun InvestmentsPortfolioScreen(
     LaunchedEffect(viewModel.events) {
         viewModel.events.collect { event ->
             when (event) {
-                InvestmentsEvent.NavigateToAddInvestment -> onNavigateToAddInvestment()
+                InvestmentsEvent.NavigateToAddInvestment -> onNavigateToAddInvestment(NON_INVESTMENT_ID)
                 is InvestmentsEvent.ShowError -> {
                     // Handle error
                 }
+                is InvestmentsEvent.NavigateToEditInvestment ->  onNavigateToAddInvestment( event.id)
             }
         }
     }

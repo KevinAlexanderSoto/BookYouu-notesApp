@@ -30,6 +30,15 @@
     <string name="add_investment_error_empty_name">El nombre no puede estar vacío</string>
     <string name="add_investment_error_saving">Error al guardar la inversión</string>
 
+    <!-- Editar y Eliminar Inversión -->
+    <string name="edit_investment_title">Editar inversión</string>
+    <string name="edit_investment_button_save">Guardar cambios</string>
+    <string name="delete_investment_button">Eliminar inversión</string>
+    <string name="delete_investment_dialog_title">¿Eliminar inversión?</string>
+    <string name="delete_investment_dialog_body">¿Estás seguro de que deseas eliminar \'%1$s\'? Esta acción no se puede deshacer.</string>
+    <string name="delete_investment_confirm">Eliminar</string>
+    <string name="cancel">Cancelar</string>
+
     <!-- Tipos de Inversión -->
     <string name="investment_high_yield_savings">Cuenta de Alto Rendimiento</string>
     <string name="investment_cdt">CDT</string>

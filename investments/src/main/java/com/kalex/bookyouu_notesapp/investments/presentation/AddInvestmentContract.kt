@@ -15,6 +15,8 @@ enum class Currency(
 }
 
 data class AddInvestmentState(
+    val investmentId: Long? = null,
+    val isEditMode: Boolean = false,
     val amount: String = "0",
     val name: String = "",
     val selectedType: InvestmentType = InvestmentType.GENERAL,
@@ -22,10 +24,12 @@ data class AddInvestmentState(
     val term: String = "",
     val annualRevenue: String = "",
     val isLoading: Boolean = false,
+    val showDeleteDialog: Boolean = false,
     val error: UiText? = null
 )
 
 sealed interface AddInvestmentAction {
+    data class LoadInvestment(val id: Long) : AddInvestmentAction
     data class OnAmountChange(val amount: String) : AddInvestmentAction
     data class OnNameChange(val name: String) : AddInvestmentAction
     data class OnTypeChange(val type: InvestmentType) : AddInvestmentAction
@@ -33,11 +37,14 @@ sealed interface AddInvestmentAction {
     data class OnTermChange(val term: String) : AddInvestmentAction
     data class OnRevenueChange(val revenue: String) : AddInvestmentAction
     object OnCreateInvestment : AddInvestmentAction
+    object OnDeleteClick : AddInvestmentAction
+    object OnConfirmDelete : AddInvestmentAction
+    object OnDismissDeleteDialog : AddInvestmentAction
 }
 
-sealed interface
-AddInvestmentEvent {
+sealed interface AddInvestmentEvent {
     object InvestmentCreated : AddInvestmentEvent
+    object InvestmentDeleted : AddInvestmentEvent
     data class ShowError(val message: UiText) : AddInvestmentEvent
 }
 
@@ -58,6 +65,8 @@ enum class RiskLevel {
     HIGH,
     VERY_HIGH
 }
+
+const val NON_INVESTMENT_ID = -1L
 
 enum class InvestmentType(
     @StringRes val titleResId: Int,

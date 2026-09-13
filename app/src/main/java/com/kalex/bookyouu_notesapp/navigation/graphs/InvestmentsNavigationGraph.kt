@@ -66,7 +66,7 @@ fun NavGraphBuilder.investmentsNav(rootNavController: NavHostController) {
             }
         ) {
             AddInvestmentScreen(
-                investmentId = it.arguments?.getLong("investmentId") ?: -1L,
+                investmentId = it.arguments?.getLong("investmentId") ?: NON_INVESTMENT_ID,
                 onBackClick = { rootNavController.popBackStack() },
                 onSuccess = { rootNavController.popBackStack() }
             )

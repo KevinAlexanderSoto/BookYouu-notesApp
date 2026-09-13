@@ -18,7 +18,7 @@ class InvestmentListViewModel(
     private val investmentsRepositoryImpl: InvestmentsRepository
 ) : ViewModel() {
 
-    private val amountFormatter = DecimalFormat("#,##0.00")
+    private val amountFormatter = DecimalFormat("#,##0")
     private val percentFormatter = DecimalFormat("0.0")
     private val dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.getDefault())
 
@@ -36,9 +36,23 @@ class InvestmentListViewModel(
 
         investmentsRepositoryImpl.getInvestments() .onStart { _state.update { it.copy(isLoading = true) } }
             .onEach { summary ->
+                val usdSum = summary.filter { it.currency == Currency.USD }.sumOf { it.initialAmount }
+                val copSum = summary.filter { it.currency == Currency.COP }.sumOf { it.initialAmount }
+                val usdFormatted = "$ ${amountFormatter.format(usdSum)} USD"
+                val copFormatted = "$ ${amountFormatter.format(copSum)} COP"
+                val totalFormatted = if (usdSum > 0 && copSum > 0) {
+                    "$usdFormatted\n$copFormatted"
+                } else if (copSum > 0) {
+                    copFormatted
+                } else {
+                    usdFormatted
+                }
+
                 _state.update { state ->
                     state.copy(
-                        totalNetWorth = summary.sumOf { it.initialAmount }.toString(),
+                        usdNetWorth = usdFormatted,
+                        copNetWorth = copFormatted,
+                        totalNetWorth = totalFormatted,
                         investments = summary.map { it.toUiModel() },
                         isLoading = false
                     )
@@ -55,7 +69,9 @@ class InvestmentListViewModel(
         when (action) {
             InvestmentsAction.LoadPortfolio -> loadPortfolio()
             is InvestmentsAction.OnInvestmentClick -> {
-                // Detail screen is not implemented/needed yet
+                viewModelScope.launch {
+                    _events.send(InvestmentsEvent.NavigateToEditInvestment(action.id))
+                }
             }
             InvestmentsAction.OnAddInvestmentClick -> {
                 viewModelScope.launch {
@@ -77,7 +93,8 @@ class InvestmentListViewModel(
             id = id,
             name = name,
             type = type,
-            balance = "$ ${amountFormatter.format(initialAmount)}",
+            currency = currency,
+            balance = "$ ${amountFormatter.format(initialAmount)} ${currency.code}",
             typeLabel = type.name,
             dateCreated = date
         )

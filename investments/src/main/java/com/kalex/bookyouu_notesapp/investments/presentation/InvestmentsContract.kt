@@ -6,13 +6,16 @@ data class InvestmentUi(
     val id: Long,
     val name: String,
     val type: InvestmentType,
+    val currency: Currency,
     val balance: String,
     val typeLabel: String,
     val dateCreated: String
 )
 
 data class PortfolioState(
-    val totalNetWorth: String = "$ 0.00",
+    val usdNetWorth: String = "$ 0",
+    val copNetWorth: String = "$ 0",
+    val totalNetWorth: String = "$ 0",
     val investments: List<InvestmentUi> = emptyList(),
     val isLoading: Boolean = false,
     val error: UiText? = null
@@ -28,4 +31,5 @@ sealed interface InvestmentsAction {
 sealed interface InvestmentsEvent {
     object NavigateToAddInvestment : InvestmentsEvent
     data class ShowError(val message: UiText) : InvestmentsEvent
+    data class NavigateToEditInvestment(val id: Long) : InvestmentsEvent
 }

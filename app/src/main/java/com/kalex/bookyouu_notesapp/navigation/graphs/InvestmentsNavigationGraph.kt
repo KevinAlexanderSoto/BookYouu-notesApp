@@ -12,6 +12,9 @@ import com.kalex.bookyouu_notesapp.investments.presentation.InvestmentsPortfolio
 import com.kalex.bookyouu_notesapp.navigation.Route
 import com.kalex.bookyouu_notesapp.navigation.bottomBar.BottomNavigationScreens
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+import com.kalex.bookyouu_notesapp.investments.presentation.NON_INVESTMENT_ID
 
 fun NavGraphBuilder.investmentsNav(rootNavController: NavHostController) {
     navigation(
@@ -34,8 +37,8 @@ fun NavGraphBuilder.investmentsNav(rootNavController: NavHostController) {
                 content = { paddingValues ->
                     InvestmentsPortfolioScreen(
                         paddingValues = paddingValues,
-                        onNavigateToAddInvestment = {
-                            rootNavController.navigate(Route.ADD_INVESTMENT)
+                        onNavigateToAddInvestment = { investmentId ->
+                            rootNavController.navigate(Route.ADD_INVESTMENT.replace("{investmentId}", investmentId.toString()))
                         }
                     )
                 },
@@ -43,6 +46,12 @@ fun NavGraphBuilder.investmentsNav(rootNavController: NavHostController) {
         }
         composable(
             route = Route.ADD_INVESTMENT,
+            arguments =  listOf(
+                navArgument("investmentId") {
+                    type = NavType.LongType
+                    defaultValue = NON_INVESTMENT_ID
+                }
+            ),
             enterTransition = {
                 slideIntoContainer(
                     AnimatedContentTransitionScope.SlideDirection.Up,
@@ -57,6 +66,7 @@ fun NavGraphBuilder.investmentsNav(rootNavController: NavHostController) {
             }
         ) {
             AddInvestmentScreen(
+                investmentId = it.arguments?.getLong("investmentId") ?: NON_INVESTMENT_ID,
                 onBackClick = { rootNavController.popBackStack() },
                 onSuccess = { rootNavController.popBackStack() }
             )

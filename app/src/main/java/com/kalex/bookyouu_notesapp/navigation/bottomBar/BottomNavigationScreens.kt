@@ -28,7 +28,7 @@ sealed class BottomNavigationScreens(
         R.string.expenses_bottom_label,
     )
     object Investments : BottomNavigationScreens(
-        Route.INVESTMENTS,
+        Route.INVESTMENTS_LIST,
         R.drawable.baseline_library_books_24,
         R.string.investments_bottom_label,
     )

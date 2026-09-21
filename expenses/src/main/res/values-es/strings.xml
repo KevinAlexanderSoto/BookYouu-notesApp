@@ -24,4 +24,16 @@
     <string name="empty_expenses_title">No Gastos Aún</string>
     <string name="empty_expenses_description">Parece que no has registrado ningún gasto en este mes. ¡Empieza a organizar tus finanzas ahora!</string>
     <string name="empty_expenses_button">Guardar Gasto</string>
+
+    <!-- PDF Export -->
+    <string name="export_pdf">Exportar PDF</string>
+    <string name="exporting_pdf">Generando PDF...</string>
+    <string name="share_pdf_title">Compartir Reporte de Gastos</string>
+    <string name="pdf_report_title">Reporte Mensual de Gastos</string>
+    <string name="pdf_date_header">Fecha</string>
+    <string name="pdf_category_header">Categoría</string>
+    <string name="pdf_description_header">Descripción</string>
+    <string name="pdf_amount_header">Monto</string>
+    <string name="pdf_total_spent">Total Gastado</string>
+    <string name="pdf_total_transactions">Total de Gastos</string>
 </resources>

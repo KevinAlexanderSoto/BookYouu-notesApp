@@ -1,6 +1,7 @@
 package com.kalex.bookyouu_notesapp.core.common.composables
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -17,6 +18,7 @@ fun BaseScaffold(
     modifier: Modifier = Modifier,
     topBarTitle: String? = null,
     navigationIcon: @Composable () -> Unit = {},
+    actions: @Composable RowScope.() -> Unit = {},
     floatingActionButton: @Composable () -> Unit = {},
     content: @Composable (padding: PaddingValues) -> Unit,
 ) {
@@ -33,6 +35,7 @@ fun BaseScaffold(
                     }
                 },
                 navigationIcon = navigationIcon,
+                actions = actions,
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = Color.Transparent,
                 )

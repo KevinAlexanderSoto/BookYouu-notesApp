@@ -24,4 +24,16 @@
     <string name="empty_expenses_title">No Expenses Yet</string>
     <string name="empty_expenses_description">It seems you haven\'t registered any expenses this month. Start organizing your finances now!</string>
     <string name="empty_expenses_button">Save Expense</string>
+
+    <!-- PDF Export -->
+    <string name="export_pdf">Export PDF</string>
+    <string name="exporting_pdf">Generating PDF...</string>
+    <string name="share_pdf_title">Share Monthly Expense Report</string>
+    <string name="pdf_report_title">Monthly Expense Report</string>
+    <string name="pdf_date_header">Date</string>
+    <string name="pdf_category_header">Category</string>
+    <string name="pdf_description_header">Description</string>
+    <string name="pdf_amount_header">Amount</string>
+    <string name="pdf_total_spent">Total Spent</string>
+    <string name="pdf_total_transactions">Total Transactions</string>
 </resources>

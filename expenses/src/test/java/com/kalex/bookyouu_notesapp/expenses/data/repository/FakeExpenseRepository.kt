@@ -30,4 +30,8 @@ class FakeExpenseRepository : ExpenseRepository {
     override suspend fun deleteExpense(id: Long) {
         _expenses.value = _expenses.value.filter { it.id != id }
     }
+
+    override suspend fun getExpenseById(id: Long): Expense? {
+        return _expenses.value.find { it.id == id }
+    }
 }

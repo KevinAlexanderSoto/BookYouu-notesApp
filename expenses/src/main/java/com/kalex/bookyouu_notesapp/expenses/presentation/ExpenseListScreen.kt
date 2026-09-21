@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp.expenses.presentation
 
+import android.content.Intent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -7,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -14,6 +16,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.kalex.bookyouu_notesapp.core.common.UiText
@@ -36,12 +40,26 @@ fun ExpenseListRoot(
     onNavigateToEditExpense: (Long) -> Unit
 ) {
     val state by viewModel.state.collectAsState()
+    val context = LocalContext.current
     
     LaunchedEffect(Unit) {
         viewModel.events.collectLatest { event ->
             when (event) {
                 ExpenseEvent.NavigateToAddExpense -> onNavigateToAddExpense()
                 is ExpenseEvent.NavigateToEditExpense -> onNavigateToEditExpense(event.id)
+                is ExpenseEvent.SharePdf -> {
+                    val sendIntent = Intent(Intent.ACTION_SEND).apply {
+                        type = "application/pdf"
+                        putExtra(Intent.EXTRA_STREAM, event.uri)
+                        putExtra(Intent.EXTRA_SUBJECT, event.title)
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    }
+                    val shareIntent = Intent.createChooser(
+                        sendIntent,
+                        context.getString(ExpensesR.string.share_pdf_title)
+                    )
+                    context.startActivity(shareIntent)
+                }
                 else -> Unit
             }
         }
@@ -62,7 +80,28 @@ fun ExpenseListScreen(
 ) {
     BaseScaffold(
         modifier = Modifier.padding(bottom = paddingValues.calculateBottomPadding() ),
-        topBarTitle = "Expenses",
+        topBarTitle = stringResource(ExpensesR.string.expenses_title),
+        actions = {
+            if (state.expenses.isNotEmpty()) {
+                if (state.isExportingPdf) {
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .size(24.dp)
+                            .padding(end = 8.dp),
+                        strokeWidth = 2.dp,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                } else {
+                    IconButton(onClick = { onAction(ExpenseAction.OnExportPdfClick) }) {
+                        Icon(
+                            imageVector = Icons.Default.Share,
+                            contentDescription = stringResource(ExpensesR.string.export_pdf),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+            }
+        },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { onAction(ExpenseAction.OnAddExpenseClick) },

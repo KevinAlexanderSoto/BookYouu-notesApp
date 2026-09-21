@@ -1,7 +1,7 @@
 package com.kalex.bookyouu_notesapp.expenses.domain.usecase
 
 import com.kalex.bookyouu_notesapp.expenses.data.repository.FakeExpenseRepository
-import com.kalex.bookyouu_notesapp.expenses.domain.model.Category
+import com.kalex.bookyouu_notesapp.core.common.Category
 import com.kalex.bookyouu_notesapp.expenses.domain.model.Expense
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking

@@ -116,7 +116,8 @@ fun ObligationRow(
                     scope.launch { boxDismissState.reset() }
                 }
                 SwipeToDismissBoxValue.EndToStart -> {
-                    onDeleteClick(obligation)
+                //TODO: Too easy to delete obligation no confirmation needed
+                //onDeleteClick(obligation)
                 }
                 SwipeToDismissBoxValue.Settled -> {}
             }

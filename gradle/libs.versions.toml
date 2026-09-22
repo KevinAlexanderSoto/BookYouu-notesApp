@@ -2,8 +2,8 @@
 compileSdk = "36"
 minSdk = "30"
 targetSdk = "36"
-versionName = "2.6.0"
-versionCode = "22"
+versionName = "2.7.0"
+versionCode = "23"
 
 agp = "9.1.0"
 kotlin = "2.3.10"

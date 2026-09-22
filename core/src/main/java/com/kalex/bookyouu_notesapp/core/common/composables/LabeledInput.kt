@@ -44,54 +44,54 @@ fun LabeledInput(
     }
 
     Column(modifier = modifier.fillMaxWidth()) {
-        Text(
-            text = label.uppercase(),
-            style = TextStyle(
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Gray
-            ),
-            modifier = Modifier.padding(bottom = 4.dp)
-        )
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            if (leadingIcon != null) {
-                Box(modifier = Modifier.padding(end = 8.dp)) {
-                    leadingIcon()
-                }
-            }
-            TextField(
-                value = value,
-                onValueChange = { newRawValue ->
-                    // Always pass the raw, unformatted input to the callback
-                    // Remove any non-digit characters if it's a number input (optional, but safer)
-                    val cleanValue = if (keyboardOptions.keyboardType == KeyboardType.Number) {
-                        newRawValue.filter { it.isDigit() }
-                    } else {
-                        newRawValue
-                    }
-                    onValueChange(cleanValue)
-                },
-                placeholder = {
-                    Text(
-                        text = placeholder,
-                        style = TextStyle(
-                            fontSize = 18.sp,
-                            color = Color.LightGray,
-                            fontWeight = FontWeight.Medium
-                        )
-                    )
-                },
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color.Transparent,
-                    unfocusedContainerColor = Color.Transparent,
-                    disabledContainerColor = Color.Transparent,
-                    focusedIndicatorColor = Color.LightGray,
-                    unfocusedIndicatorColor = Color.LightGray.copy(alpha = 0.5f),
+            Text(
+                text = label.uppercase(),
+                style = TextStyle(
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 ),
+                modifier = Modifier.padding(bottom = 4.dp)
+            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                if (leadingIcon != null) {
+                    Box(modifier = Modifier.padding(end = 8.dp)) {
+                        leadingIcon()
+                    }
+                }
+                TextField(
+                    value = value,
+                    onValueChange = { newRawValue ->
+                        // Always pass the raw, unformatted input to the callback
+                        // Remove any non-digit characters if it's a number input (optional, but safer)
+                        val cleanValue = if (keyboardOptions.keyboardType == KeyboardType.Number) {
+                            newRawValue.filter { it.isDigit() }
+                        } else {
+                            newRawValue
+                        }
+                        onValueChange(cleanValue)
+                    },
+                    placeholder = {
+                        Text(
+                            text = placeholder,
+                            style = TextStyle(
+                                fontSize = 18.sp,
+                                color = MaterialTheme.colorScheme.outlineVariant,
+                                fontWeight = FontWeight.Medium
+                            )
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = Color.Transparent,
+                        unfocusedContainerColor = Color.Transparent,
+                        disabledContainerColor = Color.Transparent,
+                        focusedIndicatorColor = MaterialTheme.colorScheme.primary,
+                        unfocusedIndicatorColor = MaterialTheme.colorScheme.outlineVariant,
+                    ),
                 textStyle = TextStyle(
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,

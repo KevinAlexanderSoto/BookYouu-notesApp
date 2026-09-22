@@ -29,7 +29,7 @@ sealed class BottomNavigationScreens(
     )
     object Investments : BottomNavigationScreens(
         Route.INVESTMENTS_LIST,
-        R.drawable.baseline_library_books_24,
+        R.drawable.outline_money_bag_24,
         R.string.investments_bottom_label,
     )
     object MoreMenu : BottomNavigationScreens(

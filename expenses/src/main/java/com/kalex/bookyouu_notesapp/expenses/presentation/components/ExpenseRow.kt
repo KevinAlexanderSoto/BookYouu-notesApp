@@ -3,18 +3,24 @@ package com.kalex.bookyouu_notesapp.expenses.presentation.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.kalex.bookyouu_notesapp.core.common.CategoryIcon
+import com.kalex.bookyouu_notesapp.core.common.getCategoryColors
+import com.kalex.bookyouu_notesapp.expenses.R as ExpensesR
 import com.kalex.bookyouu_notesapp.expenses.presentation.ExpenseUi
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -25,6 +31,10 @@ fun ExpenseRow(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val (backgroundColor, iconColor) = remember(expense.category) {
+        getCategoryColors(expense.category)
+    }
+
     val dismissState = rememberSwipeToDismissBoxState(
         confirmValueChange = {
             if (it == SwipeToDismissBoxValue.EndToStart) {
@@ -45,7 +55,8 @@ fun ExpenseRow(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(color)
+                    .padding(horizontal = 16.dp, vertical = 6.dp)
+                    .background(color, shape = RoundedCornerShape(16.dp))
                     .padding(horizontal = 20.dp),
                 contentAlignment = Alignment.CenterEnd
             ) {
@@ -61,11 +72,13 @@ fun ExpenseRow(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .padding(horizontal = 16.dp, vertical = 6.dp)
                 .clickable { onClick() },
+            shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surface
-            )
+                containerColor = Color.White
+            ),
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             Row(
                 modifier = Modifier
@@ -75,18 +88,17 @@ fun ExpenseRow(
             ) {
                 Box(
                     modifier = Modifier
-                        .size(48.dp)
-                        .background(
-                            color = MaterialTheme.colorScheme.primaryContainer,
-                            shape = MaterialTheme.shapes.medium
-                        ),
+                        .size(52.dp)
+                        .clip(RoundedCornerShape(14.dp))
+                        .background(backgroundColor),
                     contentAlignment = Alignment.Center
                 ) {
                     val icon = expense.category.icon as CategoryIcon.Resource
                     Icon(
                         painter = painterResource(id = icon.resId),
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
+                        contentDescription = stringResource(id = expense.category.displayNameRes),
+                        tint = iconColor,
+                        modifier = Modifier.size(26.dp)
                     )
                 }
 
@@ -95,13 +107,28 @@ fun ExpenseRow(
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = expense.description,
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Bold
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
+                    Spacer(modifier = Modifier.height(4.dp))
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
+                        Surface(
+                            color = backgroundColor,
+                            shape = RoundedCornerShape(6.dp)
+                        ) {
+                            Text(
+                                text = stringResource(id = expense.category.displayNameRes),
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = iconColor,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        }
                         Text(
                             text = expense.date,
                             style = MaterialTheme.typography.bodySmall,
@@ -109,12 +136,7 @@ fun ExpenseRow(
                         )
                         expense.totalInstallments?.let { installments ->
                             Text(
-                                text = "•",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                            Text(
-                                text = "$installments ${androidx.compose.ui.res.stringResource(com.kalex.bookyouu_notesapp.expenses.R.string.installments_suffix)}",
+                                text = "• $installments ${stringResource(ExpensesR.string.installments_suffix)}",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -122,11 +144,13 @@ fun ExpenseRow(
                     }
                 }
 
+                Spacer(modifier = Modifier.width(8.dp))
+
                 Text(
                     text = expense.amount,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
         }

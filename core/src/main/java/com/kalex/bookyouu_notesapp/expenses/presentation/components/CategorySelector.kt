@@ -1,6 +1,8 @@
 package com.kalex.bookyouu_notesapp.expenses.presentation.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,7 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -51,12 +53,19 @@ fun CategorySelector(
             ) {
                 rowCategories.forEach { category ->
                     val isSelected = category == selectedCategory
-                    val backgroundColor =
-                        if (isSelected) MaterialTheme.colorScheme.primary
-                        else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
-                    val contentColor =
-                        if (isSelected) MaterialTheme.colorScheme.onPrimary
-                        else MaterialTheme.colorScheme.onSurfaceVariant
+                    val shape = RoundedCornerShape(16.dp)
+                    val boxModifier = if (isSelected) {
+                        Modifier
+                            .size(60.dp)
+                            .clip(shape)
+                            .background(category.backgroundColor)
+                            .border(BorderStroke(2.5.dp, MaterialTheme.colorScheme.primary), shape)
+                    } else {
+                        Modifier
+                            .size(60.dp)
+                            .clip(shape)
+                            .background(category.backgroundColor.copy(alpha = 0.85f))
+                    }
 
                     Column(
                         modifier = Modifier
@@ -65,28 +74,25 @@ fun CategorySelector(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Box(
-                            modifier = Modifier
-                                .size(64.dp)
-                                .clip(CircleShape)
-                                .background(backgroundColor),
+                            modifier = boxModifier,
                             contentAlignment = Alignment.Center
                         ) {
                             val icon = category.icon as CategoryIcon.Resource
                             Icon(
                                 painter = painterResource(id = icon.resId),
                                 contentDescription = stringResource(category.displayNameRes),
-                                tint = contentColor,
+                                tint = category.iconColor,
                                 modifier = Modifier.size(28.dp)
                             )
                         }
-                        Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(6.dp))
                         Text(
                             text = stringResource(category.displayNameRes),
                             style = MaterialTheme.typography.labelSmall.copy(
                                 fontSize = 11.sp,
                                 fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
                             ),
-                            color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                            color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
                             textAlign = TextAlign.Center,
                             maxLines = 1
                         )

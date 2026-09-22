@@ -34,7 +34,7 @@ fun ObligationsScaffold(
                         text = if (isSelectionMode) "$selectedCount selected" else title,
                         style = MaterialTheme.typography.headlineMedium.copy(
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary
+                            color = MaterialTheme.colorScheme.onBackground
                         )
                     )
                 },

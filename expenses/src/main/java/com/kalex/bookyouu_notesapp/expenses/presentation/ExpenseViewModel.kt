@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.kalex.bookyouu_notesapp.core.common.UiText
 import com.kalex.bookyouu_notesapp.expenses.domain.model.Expense
 import com.kalex.bookyouu_notesapp.expenses.domain.usecase.*
+import com.kalex.bookyouu_notesapp.expenses.presentation.pdf.MonthlyReportPdfExporter
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -22,6 +23,7 @@ class ExpenseViewModel(
     private val addExpenseUseCase: AddExpenseUseCase,
     private val deleteExpenseUseCase: DeleteExpenseUseCase,
     private val getExpenseByIdUseCase: GetExpenseByIdUseCase,
+    private val pdfGenerator: MonthlyReportPdfExporter,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -61,8 +63,6 @@ class ExpenseViewModel(
                     installments = expense.totalInstallments?.toString() ?: "",
                     isLoading = false
                 ) }
-                // We'll pass these to the UI via a one-time event or just state
-                // For now, let's keep the editingExpenseId in state
             } else {
                 _state.update { it.copy(isLoading = false, editingExpenseId = null) }
             }
@@ -102,6 +102,9 @@ class ExpenseViewModel(
             }
             is ExpenseAction.OnSaveExpense -> {
                 saveExpense(action)
+            }
+            ExpenseAction.OnExportPdfClick -> {
+                exportPdf()
             }
         }
     }
@@ -152,9 +155,37 @@ class ExpenseViewModel(
             }
         }
     }
-    
-    suspend fun getExpense(id: Long): Expense? = getExpenseByIdUseCase(id)
 
+    private fun exportPdf() {
+        val currentState = _state.value
+        if (currentState.expenses.isEmpty()) {
+            viewModelScope.launch {
+                _events.send(ExpenseEvent.ShowSnackbar(UiText.StringResource(com.kalex.bookyouu_notesapp.expenses.R.string.no_expenses)))
+            }
+            return
+        }
+
+        viewModelScope.launch {
+            _state.update { it.copy(isExportingPdf = true) }
+            try {
+                val month = currentState.selectedMonth
+                val monthYearStr = "${month.monthValue.toString().padStart(2, '0')}-${month.year}"
+                val uri = pdfGenerator.generateMonthlyReport(
+                    monthYear = monthYearStr,
+                    totalSpent = currentState.totalSpent,
+                    expenses = currentState.expenses
+                )
+                val title = "Monthly_Expense_Report_$monthYearStr.pdf"
+                _events.send(ExpenseEvent.SharePdf(uri, title))
+            } catch (e: Exception) {
+                _events.send(ExpenseEvent.ShowSnackbar(UiText.DynamicString(e.message ?: "Failed to generate PDF")))
+            } finally {
+                _state.update { it.copy(isExportingPdf = false) }
+            }
+        }
+    }
+
+    suspend fun getExpense(id: Long): Expense? = getExpenseByIdUseCase(id)
 
     private fun Expense.toUiModel(): ExpenseUi {
         return ExpenseUi(

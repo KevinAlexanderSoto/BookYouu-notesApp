@@ -1,5 +1,6 @@
 package com.kalex.bookyouu_notesapp.expenses.presentation
 
+import android.net.Uri
 import com.kalex.bookyouu_notesapp.core.common.Category
 import com.kalex.bookyouu_notesapp.core.common.UiText
 import java.time.LocalDate
@@ -22,7 +23,8 @@ data class ExpenseState(
     val installments: String = "",
     val isLoading: Boolean = false,
     val error: UiText? = null,
-    val editingExpenseId: Long? = null
+    val editingExpenseId: Long? = null,
+    val isExportingPdf: Boolean = false
 )
 
 sealed interface ExpenseAction {
@@ -40,6 +42,7 @@ sealed interface ExpenseAction {
         val installments: String? = null,
         val id: Long? = null
     ) : ExpenseAction
+    object OnExportPdfClick : ExpenseAction
 }
 
 sealed interface ExpenseEvent {
@@ -47,4 +50,5 @@ sealed interface ExpenseEvent {
     data class NavigateToEditExpense(val id: Long) : ExpenseEvent
     data class ShowSnackbar(val message: UiText) : ExpenseEvent
     object ExpenseSaved : ExpenseEvent
+    data class SharePdf(val uri: Uri, val title: String) : ExpenseEvent
 }

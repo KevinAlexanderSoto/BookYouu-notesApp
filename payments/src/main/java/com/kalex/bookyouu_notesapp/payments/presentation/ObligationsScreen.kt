@@ -72,16 +72,6 @@ fun ObligationsScreen(
                                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                                 color = MaterialTheme.colorScheme.onSurface
                             )
-                            TextButton(onClick = { /* TODO: View All */ }) {
-                                Text(
-                                    text = stringResource(R.string.view_all),
-                                    style = MaterialTheme.typography.labelLarge.copy(
-                                        fontWeight = FontWeight.Bold,
-                                        letterSpacing = 1.sp
-                                    ),
-                                    color = MaterialTheme.colorScheme.secondary
-                                )
-                            }
                         }
                     }
 

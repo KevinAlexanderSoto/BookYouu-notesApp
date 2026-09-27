@@ -1,30 +1,44 @@
 package com.kalex.bookyouu_notesapp.widget
 
 import android.content.Context
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.glance.*
+import androidx.glance.GlanceId
+import androidx.glance.GlanceModifier
+import androidx.glance.GlanceTheme
+import androidx.glance.Image
+import androidx.glance.ImageProvider
+import androidx.glance.LocalContext
 import androidx.glance.action.ActionParameters
 import androidx.glance.action.actionParametersOf
-import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.action.ActionCallback
 import androidx.glance.appwidget.action.actionRunCallback
+import androidx.glance.appwidget.components.CircleIconButton
 import androidx.glance.appwidget.components.Scaffold
 import androidx.glance.appwidget.cornerRadius
 import androidx.glance.appwidget.provideContent
 import androidx.glance.appwidget.state.updateAppWidgetState
-import androidx.glance.layout.*
+import androidx.glance.background
+import androidx.glance.currentState
+import androidx.glance.layout.Alignment
+import androidx.glance.layout.Box
+import androidx.glance.layout.Column
+import androidx.glance.layout.Row
+import androidx.glance.layout.Spacer
+import androidx.glance.layout.fillMaxSize
+import androidx.glance.layout.fillMaxWidth
+import androidx.glance.layout.height
+import androidx.glance.layout.padding
+import androidx.glance.layout.size
+import androidx.glance.layout.width
 import androidx.glance.state.PreferencesGlanceStateDefinition
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
@@ -37,7 +51,8 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 
 class ObligationsWidget : GlanceAppWidget(), KoinComponent {
 
@@ -97,7 +112,7 @@ class ObligationsWidget : GlanceAppWidget(), KoinComponent {
                     Column(
                         modifier = GlanceModifier
                             .fillMaxSize()
-                            .padding(12.dp, 16.dp),
+                            .padding(8.dp, 16.dp),
                         horizontalAlignment = Alignment.Start,
                         verticalAlignment = Alignment.Top
                     ) {
@@ -147,14 +162,16 @@ class ObligationsWidget : GlanceAppWidget(), KoinComponent {
 
                             // Due Badge
                             val dueStatus = getDueStatus(obligation.dayOfMonth)
-                            val badgeColor = if (dueStatus.isPastDue) GlanceTheme.colors.errorContainer else GlanceTheme.colors.tertiaryContainer
-                            val onBadgeColor = if (dueStatus.isPastDue) GlanceTheme.colors.onErrorContainer else GlanceTheme.colors.onTertiaryContainer
-
+                            val badgeColor =
+                                if (dueStatus.isPastDue) GlanceTheme.colors.errorContainer else GlanceTheme.colors.tertiaryContainer
+                            val onBadgeColor =
+                                if (dueStatus.isPastDue) GlanceTheme.colors.onErrorContainer else GlanceTheme.colors.onTertiaryContainer
+                            Spacer(modifier = GlanceModifier.width(2.dp))
                             Box(
                                 modifier = GlanceModifier
                                     .background(badgeColor)
                                     .cornerRadius(16.dp)
-                                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                                    .padding(horizontal = 6.dp, vertical = 4.dp)
                             ) {
                                 Text(
                                     text = dueStatus.text,
@@ -198,17 +215,18 @@ class ObligationsWidget : GlanceAppWidget(), KoinComponent {
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Image(
-                                provider = ImageProvider(R.drawable.outline_arrow_back_24),
-                                contentDescription = "Previous",
-                                modifier = GlanceModifier
-                                    .size(30.dp)
-                                    .clickable(
-                                        actionRunCallback<UpdatePageAction>(
-                                            actionParametersOf(UpdatePageAction.KEY_INCREMENT to -1)
-                                        )
+
+                            if (currentPage > 0) {
+                                CircleIconButton(
+                                    imageProvider = ImageProvider(R.drawable.outline_arrow_back_24),
+                                    contentDescription = "Previous",
+                                    modifier = GlanceModifier
+                                        .size(30.dp),
+                                    onClick = actionRunCallback<UpdatePageAction>(
+                                        actionParametersOf(UpdatePageAction.KEY_INCREMENT to -1)
                                     )
-                            )
+                                )
+                            }
 
                             Spacer(modifier = GlanceModifier.width(16.dp))
 
@@ -223,17 +241,17 @@ class ObligationsWidget : GlanceAppWidget(), KoinComponent {
 
                             Spacer(modifier = GlanceModifier.width(16.dp))
 
-                            Image(
-                                provider = ImageProvider(R.drawable.outline_arrow_forward_24),
-                                contentDescription = "Next",
-                                modifier = GlanceModifier
-                                    .size(30.dp)
-                                    .clickable(
-                                        actionRunCallback<UpdatePageAction>(
-                                            actionParametersOf(UpdatePageAction.KEY_INCREMENT to 1)
-                                        )
+                            if ((currentPage + 1) < totalPages) {
+                                CircleIconButton(
+                                    imageProvider = ImageProvider(R.drawable.outline_arrow_forward_24),
+                                    contentDescription = "Next",
+                                    modifier = GlanceModifier
+                                        .size(30.dp),
+                                    onClick = actionRunCallback<UpdatePageAction>(
+                                        actionParametersOf(UpdatePageAction.KEY_INCREMENT to 1)
                                     )
-                            )
+                                )
+                            }
                         }
                     }
                 }

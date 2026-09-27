@@ -65,7 +65,7 @@ fun ObligationRow(
     val cardBg = when {
         isSelected -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.35f)
         obligation.isPaid -> Color(0xFFFAFAFA)
-        else -> Color.White
+        else -> MaterialTheme.colorScheme.background
     }
 
     val scope = rememberCoroutineScope()

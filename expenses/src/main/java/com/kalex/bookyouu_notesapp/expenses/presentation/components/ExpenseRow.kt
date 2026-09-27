@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.kalex.bookyouu_notesapp.core.common.CategoryIcon
 import com.kalex.bookyouu_notesapp.core.common.getCategoryColors
+import com.kalex.bookyouu_notesapp.core.theme.OnTertiary
 import com.kalex.bookyouu_notesapp.expenses.R as ExpensesR
 import com.kalex.bookyouu_notesapp.expenses.presentation.ExpenseUi
 
@@ -76,7 +77,7 @@ fun ExpenseRow(
                 .clickable { onClick() },
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
-                containerColor = Color.White
+                containerColor = MaterialTheme.colorScheme.background
             ),
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {

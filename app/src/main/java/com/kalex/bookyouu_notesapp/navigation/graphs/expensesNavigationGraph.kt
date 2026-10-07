@@ -7,6 +7,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import com.kalex.bookyouu_notesapp.camera.presentation.CameraScannerRoot
+import com.kalex.bookyouu_notesapp.camera.presentation.CameraScannerViewModel
 import com.kalex.bookyouu_notesapp.core.common.composables.ScaffoldBottomBar
 import com.kalex.bookyouu_notesapp.expenses.presentation.AddExpenseRoot
 import com.kalex.bookyouu_notesapp.expenses.presentation.ExpenseListRoot
@@ -56,10 +58,36 @@ fun NavGraphBuilder.expensesNav(rootNavController: NavHostController) {
                     defaultValue = -1L
                 }
             )
-        ) {
+        ) { backStackEntry ->
             val viewModel = koinViewModel<ExpenseViewModel>()
             AddExpenseRoot(
                 viewModel = viewModel,
+                savedStateHandle = backStackEntry.savedStateHandle,
+                onNavigateToScanReceipt = {
+                    rootNavController.navigate(Route.EXPENSE_CAMERA_SCAN)
+                },
+                onNavigateBack = {
+                    rootNavController.popBackStack()
+                }
+            )
+        }
+
+        composable(route = Route.EXPENSE_CAMERA_SCAN) {
+            val viewModel = koinViewModel<CameraScannerViewModel>()
+            CameraScannerRoot(
+                viewModel = viewModel,
+                onReceiptScanned = { scannedReceipt ->
+                    rootNavController.previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set("scanned_receipt_amount", scannedReceipt.totalAmount?.let { String.format("%.0f", it) } ?: "")
+                    rootNavController.previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set("scanned_receipt_merchant", scannedReceipt.merchantName ?: "")
+                    rootNavController.previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set("scanned_receipt_date", scannedReceipt.date?.toString() ?: "")
+                    rootNavController.popBackStack()
+                },
                 onNavigateBack = {
                     rootNavController.popBackStack()
                 }

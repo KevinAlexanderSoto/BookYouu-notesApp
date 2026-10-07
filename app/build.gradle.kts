@@ -149,6 +149,7 @@ dependencies {
     implementation(project(":journal"))
     implementation(project(":widget"))
     implementation(project(":investments"))
+    implementation(project(":camera"))
 
     //TESTING SECTION
     testImplementation(libs.junit)

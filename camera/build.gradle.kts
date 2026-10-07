@@ -1,6 +1,6 @@
+import com.android.ide.common.symbols.valueStringToInt
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
@@ -8,12 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.kalex.bookyouu_notesapp.expenses"
-    compileSdk = com.android.ide.common.symbols.valueStringToInt(libs.versions.compileSdk.get())
+    namespace = "com.kalex.bookyouu_notesapp.camera"
+    compileSdk = valueStringToInt(libs.versions.compileSdk.get())
 
     defaultConfig {
-        minSdk = com.android.ide.common.symbols.valueStringToInt(libs.versions.minSdk.get())
-
+        minSdk = valueStringToInt(libs.versions.minSdk.get())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -39,6 +38,9 @@ android {
     buildFeatures {
         compose = true
     }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -47,7 +49,6 @@ dependencies {
     implementation(libs.google.material)
 
     // COMPOSE SECTION
-    implementation(libs.androidx.navigation.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.ui)
@@ -61,11 +62,21 @@ dependencies {
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.lifecycle.runtime.compose)
 
-    // Coroutines
+    // PERMISSIONS
+    implementation(libs.accompanist.permissions)
+
+    // CAMERA SECTION
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+    implementation(libs.androidx.camera.extensions)
+
+    // ML KIT TEXT RECOGNITION (Bundled model: 100% on-device, offline, all devices)
+    implementation(libs.mlkit.text.recognition)
+
+    // COROUTINES & LIFECYCLE
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
-
-    // Coroutine Lifecycle Scopes
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
@@ -73,13 +84,13 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
 
+    // INTERNAL MODULES
     implementation(project(":core"))
-    implementation(project(":db"))
-    implementation(project(":notification"))
-    implementation(project(":camera"))
+    implementation(project(":permission"))
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockito.core)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

@@ -36,4 +36,8 @@
     <string name="pdf_amount_header">Amount</string>
     <string name="pdf_total_spent">Total Spent</string>
     <string name="pdf_total_transactions">Total Transactions</string>
+
+    <!-- Camera Receipt Scan -->
+    <string name="scan_receipt_action">Scan Receipt</string>
+    <string name="receipt_scanned_success">Receipt details scanned! Review before saving.</string>
 </resources>

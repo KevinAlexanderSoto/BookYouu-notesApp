@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="camera_scanner_title">Escanear Recibo</string>
+    <string name="camera_scanner_hint">Alinea el recibo dentro del marco</string>
+    <string name="camera_scanner_processing">Leyendo datos del recibo…</string>
+    <string name="camera_scanner_flash_on">Encender flash</string>
+    <string name="camera_scanner_flash_off">Apagar flash</string>
+    <string name="camera_scanner_pick_gallery">Elegir de la galería</string>
+    <string name="camera_scanner_capture">Tomar foto</string>
+    <string name="camera_scanner_error_ocr">No se pudieron detectar los datos del recibo. Intenta con mejor luz o ingrésalo manualmente.</string>
+    <string name="camera_scanner_error_image">No se pudo cargar la imagen.</string>
+</resources>

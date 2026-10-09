@@ -36,4 +36,8 @@
     <string name="pdf_amount_header">Monto</string>
     <string name="pdf_total_spent">Total Gastado</string>
     <string name="pdf_total_transactions">Total de Gastos</string>
+
+    <!-- Camera Receipt Scan -->
+    <string name="scan_receipt_action">Escanear recibo</string>
+    <string name="receipt_scanned_success">¡Datos del recibo escaneados! Revisa antes de guardar.</string>
 </resources>

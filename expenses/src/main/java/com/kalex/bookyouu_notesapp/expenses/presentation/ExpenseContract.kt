@@ -12,7 +12,9 @@ data class ExpenseUi(
     val description: String,
     val category: Category,
     val date: String,
-    val totalInstallments: Int? = null
+    val totalInstallments: Int? = null,
+    val currentInstallment: Int? = null,
+    val parentExpenseId: Long? = null
 )
 
 data class ExpenseState(
@@ -31,6 +33,8 @@ sealed interface ExpenseAction {
     data class OnMonthChange(val newMonth: YearMonth) : ExpenseAction
     data class OnDateChange(val newDate: LocalDate) : ExpenseAction
     data class OnDeleteExpense(val id: Long) : ExpenseAction
+    data class OnDeleteExpenseSeries(val parentId: Long) : ExpenseAction
+    data class OnDeleteFutureInstallments(val parentId: Long, val fromInstallment: Int) : ExpenseAction
     data class OnInstallmentsChange(val installments: String) : ExpenseAction
     object OnAddExpenseClick : ExpenseAction
     data class OnEditExpenseClick(val id: Long) : ExpenseAction

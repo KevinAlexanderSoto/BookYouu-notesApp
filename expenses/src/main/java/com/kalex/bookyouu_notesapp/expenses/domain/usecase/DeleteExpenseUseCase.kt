@@ -8,4 +8,12 @@ class DeleteExpenseUseCase(
     suspend operator fun invoke(id: Long) {
         repository.deleteExpense(id)
     }
+
+    suspend fun deleteExpenseSeries(parentId: Long) {
+        repository.deleteExpenseSeries(parentId)
+    }
+
+    suspend fun deleteFutureInstallments(parentId: Long, fromInstallment: Int) {
+        repository.deleteFutureInstallments(parentId, fromInstallment)
+    }
 }

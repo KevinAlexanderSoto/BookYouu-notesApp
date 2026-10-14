@@ -10,5 +10,7 @@ data class Expense(
     val category: Category,
     val date: LocalDateTime,
     val monthYear: String, // Format: "MM-YYYY"
-    val totalInstallments: Int? = null
+    val totalInstallments: Int? = null,
+    val currentInstallment: Int? = null,
+    val parentExpenseId: Long? = null
 )

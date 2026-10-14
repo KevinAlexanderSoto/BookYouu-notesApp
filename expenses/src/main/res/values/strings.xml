@@ -40,4 +40,14 @@
     <!-- Camera Receipt Scan -->
     <string name="scan_receipt_action">Scan Receipt</string>
     <string name="receipt_scanned_success">Receipt details scanned! Review before saving.</string>
+
+    <!-- Installments -->
+    <string name="installment_badge">Installment %1$d/%2$d</string>
+    <string name="installments_calculation_preview">%1$d installments of $%2$s / month</string>
+    <string name="delete_installment_title">Delete Installment</string>
+    <string name="delete_installment_message">This expense is part of an installment plan (%1$d/%2$d). What would you like to delete?</string>
+    <string name="delete_only_this">Only this month (%1$d/%2$d)</string>
+    <string name="delete_all_installments">All installments in series</string>
+    <string name="delete_future_installments">This and future installments</string>
+    <string name="cancel">Cancel</string>
 </resources>

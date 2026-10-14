@@ -145,7 +145,9 @@ class ExpensePdfGenerator(private val context: Context) : MonthlyReportPdfExport
             val categoryName = expense.category.name().lowercase().replaceFirstChar { it.uppercase() }
             canvas.drawText(categoryName, 145f, yPos + 15f, paint)
 
-            val descTruncated = if (expense.description.length > 30) expense.description.take(28) + "..." else expense.description
+            val installmentSuffix = if (expense.totalInstallments != null) " (${expense.currentInstallment ?: 1}/${expense.totalInstallments})" else ""
+            val fullDesc = "${expense.description}$installmentSuffix"
+            val descTruncated = if (fullDesc.length > 30) fullDesc.take(28) + "..." else fullDesc
             canvas.drawText(descTruncated, 255f, yPos + 15f, paint)
 
             paint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)

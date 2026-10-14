@@ -40,4 +40,14 @@
     <!-- Camera Receipt Scan -->
     <string name="scan_receipt_action">Escanear recibo</string>
     <string name="receipt_scanned_success">¡Datos del recibo escaneados! Revisa antes de guardar.</string>
+
+    <!-- Installments -->
+    <string name="installment_badge">Cuota %1$d/%2$d</string>
+    <string name="installments_calculation_preview">%1$d cuotas de $%2$s / mes</string>
+    <string name="delete_installment_title">Eliminar Gasto en Cuotas</string>
+    <string name="delete_installment_message">Este gasto forma parte de un plan en cuotas (%1$d/%2$d). ¿Qué deseas eliminar?</string>
+    <string name="delete_only_this">Solo este mes (%1$d/%2$d)</string>
+    <string name="delete_all_installments">Todas las cuotas de la serie</string>
+    <string name="delete_future_installments">Esta y las siguientes cuotas</string>
+    <string name="cancel">Cancelar</string>
 </resources>

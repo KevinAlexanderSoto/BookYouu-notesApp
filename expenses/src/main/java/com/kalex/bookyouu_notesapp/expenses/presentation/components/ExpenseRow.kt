@@ -36,11 +36,12 @@ fun ExpenseRow(
         getCategoryColors(expense.category)
     }
 
+    val isInstallment = (expense.totalInstallments ?: 0) > 1
     val dismissState = rememberSwipeToDismissBoxState(
         confirmValueChange = {
             if (it == SwipeToDismissBoxValue.EndToStart) {
                 onDelete()
-                true
+                !isInstallment
             } else false
         }
     )
@@ -135,13 +136,20 @@ fun ExpenseRow(
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        expense.totalInstallments?.let { installments ->
-                            Text(
-                                text = "• $installments ${stringResource(ExpensesR.string.installments_suffix)}",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
+                    }
+                    expense.totalInstallments?.let { installments ->
+                        Spacer(modifier = Modifier.height(2.dp))
+                        val text = if (expense.currentInstallment != null) {
+                            stringResource(ExpensesR.string.installment_badge, expense.currentInstallment, installments)
+                        } else {
+                            "$installments ${stringResource(ExpensesR.string.installments_suffix)}"
                         }
+                        Text(
+                            text = text,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.SemiBold
+                        )
                     }
                 }
 

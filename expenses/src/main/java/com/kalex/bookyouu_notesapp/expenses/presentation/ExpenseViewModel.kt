@@ -87,6 +87,16 @@ class ExpenseViewModel(
                     deleteExpenseUseCase(action.id)
                 }
             }
+            is ExpenseAction.OnDeleteExpenseSeries -> {
+                viewModelScope.launch {
+                    deleteExpenseUseCase.deleteExpenseSeries(action.parentId)
+                }
+            }
+            is ExpenseAction.OnDeleteFutureInstallments -> {
+                viewModelScope.launch {
+                    deleteExpenseUseCase.deleteFutureInstallments(action.parentId, action.fromInstallment)
+                }
+            }
             is ExpenseAction.OnInstallmentsChange -> {
                 _state.update { it.copy(installments = action.installments) }
             }
@@ -137,6 +147,7 @@ class ExpenseViewModel(
                 val monthYearStr = "${dateTime.monthValue.toString().padStart(2, '0')}-${dateTime.year}"
                 val installments = action.installments?.toIntOrNull()
                 
+                val existingExpense = action.id?.let { getExpenseByIdUseCase(it) }
                 val expense = Expense(
                     id = action.id ?: 0,
                     amount = amount,
@@ -144,7 +155,9 @@ class ExpenseViewModel(
                     category = action.category,
                     date = dateTime,
                     monthYear = monthYearStr,
-                    totalInstallments = installments
+                    totalInstallments = installments,
+                    currentInstallment = existingExpense?.currentInstallment,
+                    parentExpenseId = existingExpense?.parentExpenseId
                 )
                 addExpenseUseCase(expense)
                 _events.send(ExpenseEvent.ExpenseSaved)
@@ -194,7 +207,9 @@ class ExpenseViewModel(
             description = description,
             category = category,
             date = date.format(dateFormatter),
-            totalInstallments = totalInstallments
+            totalInstallments = totalInstallments,
+            currentInstallment = currentInstallment,
+            parentExpenseId = parentExpenseId
         )
     }
 }

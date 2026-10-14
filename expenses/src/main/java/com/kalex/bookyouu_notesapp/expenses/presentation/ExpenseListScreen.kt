@@ -14,6 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -78,6 +81,77 @@ fun ExpenseListScreen(
     paddingValues: PaddingValues,
     onAction: (ExpenseAction) -> Unit
 ) {
+    var expenseToDelete by remember { mutableStateOf<ExpenseUi?>(null) }
+
+    if (expenseToDelete != null) {
+        val targetExpense = expenseToDelete!!
+        val current = targetExpense.currentInstallment ?: 1
+        val total = targetExpense.totalInstallments ?: 1
+        val parentId = targetExpense.parentExpenseId ?: targetExpense.id
+
+        AlertDialog(
+            onDismissRequest = { expenseToDelete = null },
+            title = {
+                Text(
+                    text = stringResource(ExpensesR.string.delete_installment_title),
+                    fontWeight = FontWeight.Bold
+                )
+            },
+            text = {
+                Text(
+                    text = stringResource(
+                        ExpensesR.string.delete_installment_message,
+                        current,
+                        total
+                    )
+                )
+            },
+            confirmButton = {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Button(
+                        onClick = {
+                            onAction(ExpenseAction.OnDeleteExpense(targetExpense.id))
+                            expenseToDelete = null
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(stringResource(ExpensesR.string.delete_only_this, current, total))
+                    }
+
+                    OutlinedButton(
+                        onClick = {
+                            onAction(ExpenseAction.OnDeleteFutureInstallments(parentId, current))
+                            expenseToDelete = null
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(stringResource(ExpensesR.string.delete_future_installments))
+                    }
+
+                    OutlinedButton(
+                        onClick = {
+                            onAction(ExpenseAction.OnDeleteExpenseSeries(parentId))
+                            expenseToDelete = null
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(stringResource(ExpensesR.string.delete_all_installments))
+                    }
+
+                    TextButton(
+                        onClick = { expenseToDelete = null },
+                        modifier = Modifier.align(Alignment.End)
+                    ) {
+                        Text(stringResource(ExpensesR.string.cancel))
+                    }
+                }
+            }
+        )
+    }
+
     BaseScaffold(
         modifier = Modifier.padding(bottom = paddingValues.calculateBottomPadding() ),
         topBarTitle = stringResource(ExpensesR.string.expenses_title),
@@ -151,7 +225,13 @@ fun ExpenseListScreen(
                     items(state.expenses, key = { it.id }) { expense ->
                         ExpenseRow(
                             expense = expense,
-                            onDelete = { onAction(ExpenseAction.OnDeleteExpense(expense.id)) },
+                            onDelete = {
+                                if (expense.totalInstallments != null && expense.totalInstallments > 1) {
+                                    expenseToDelete = expense
+                                } else {
+                                    onAction(ExpenseAction.OnDeleteExpense(expense.id))
+                                }
+                            },
                             onClick = { onAction(ExpenseAction.OnEditExpenseClick(expense.id)) }
                         )
                     }

@@ -136,4 +136,62 @@ class ExpenseViewModelTest {
         assertEquals(1, viewModel.state.value.expenses.size)
         assertEquals("Coffee", viewModel.state.value.expenses.first().description)
     }
+
+    @Test
+    fun `when onSaveExpense is triggered with installments, expense is created with installments across months`() = runTest(testDispatcher) {
+        viewModel.onAction(
+            ExpenseAction.OnSaveExpense(
+                amount = "300.00",
+                description = "Monitor",
+                category = Category.SHOPPING,
+                date = java.time.LocalDate.of(2026, 10, 14),
+                installments = "3"
+            )
+        )
+        advanceUntilIdle()
+
+        // Check current month (10-2026) has installment 1/3
+        assertEquals(1, viewModel.state.value.expenses.size)
+        val firstUi = viewModel.state.value.expenses.first()
+        assertEquals(1, firstUi.currentInstallment)
+        assertEquals(3, firstUi.totalInstallments)
+        assertEquals("$ 100.00", firstUi.amount)
+
+        // Navigate to next month (11-2026)
+        viewModel.onAction(ExpenseAction.OnMonthChange(YearMonth.of(2026, 11)))
+        advanceUntilIdle()
+
+        assertEquals(1, viewModel.state.value.expenses.size)
+        val secondUi = viewModel.state.value.expenses.first()
+        assertEquals(2, secondUi.currentInstallment)
+        assertEquals(3, secondUi.totalInstallments)
+        assertEquals("$ 100.00", secondUi.amount)
+    }
+
+    @Test
+    fun `when onDeleteExpenseSeries is triggered, all installments are deleted`() = runTest(testDispatcher) {
+        viewModel.onAction(
+            ExpenseAction.OnSaveExpense(
+                amount = "200.00",
+                description = "Headphones",
+                category = Category.SHOPPING,
+                date = java.time.LocalDate.of(2026, 10, 14),
+                installments = "2"
+            )
+        )
+        advanceUntilIdle()
+
+        assertEquals(1, viewModel.state.value.expenses.size)
+        val parentId = viewModel.state.value.expenses.first().id
+
+        viewModel.onAction(ExpenseAction.OnDeleteExpenseSeries(parentId))
+        advanceUntilIdle()
+
+        assertEquals(0, viewModel.state.value.expenses.size)
+
+        // Verify next month is also cleared
+        viewModel.onAction(ExpenseAction.OnMonthChange(YearMonth.of(2026, 11)))
+        advanceUntilIdle()
+        assertEquals(0, viewModel.state.value.expenses.size)
+    }
 }

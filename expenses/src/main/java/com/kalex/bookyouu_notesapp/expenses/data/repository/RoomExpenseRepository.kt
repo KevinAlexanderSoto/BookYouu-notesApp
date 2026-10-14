@@ -17,12 +17,28 @@ class RoomExpenseRepository(
         }
     }
 
-    override suspend fun insertExpense(expense: Expense) {
-        dao.insertExpense(expense.toEntity())
+    override suspend fun insertExpense(expense: Expense): Long {
+        return dao.insertExpense(expense.toEntity())
+    }
+
+    override suspend fun insertExpenses(expenses: List<Expense>): List<Long> {
+        return dao.insertExpenses(expenses.map { it.toEntity() })
     }
 
     override suspend fun deleteExpense(id: Long) {
         dao.deleteExpense(id)
+    }
+
+    override suspend fun deleteExpenseSeries(parentId: Long) {
+        dao.deleteExpenseSeries(parentId)
+    }
+
+    override suspend fun deleteFutureInstallments(parentId: Long, fromInstallment: Int) {
+        dao.deleteFutureInstallments(parentId, fromInstallment)
+    }
+
+    override suspend fun getExpenseSeries(parentId: Long): List<Expense> {
+        return dao.getExpenseSeries(parentId).map { it.toDomain() }
     }
 
     override suspend fun getExpenseById(id: Long): Expense? {

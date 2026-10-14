@@ -286,6 +286,23 @@ fun AddExpenseScreen(
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                             singleLine = true
                         )
+                        val parsedInstallments = state.installments.toIntOrNull()
+                        val parsedAmount = amount.replace(",", "").toDoubleOrNull()
+                        if (parsedInstallments != null && parsedInstallments > 1 && parsedAmount != null && parsedAmount > 0) {
+                            val baseAmount = parsedAmount / parsedInstallments
+                            val formattedInstallment = String.format(Locale.getDefault(), "%,.2f", baseAmount)
+                            Text(
+                                text = stringResource(
+                                    ExpensesR.string.installments_calculation_preview,
+                                    parsedInstallments,
+                                    formattedInstallment
+                                ),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.primary,
+                                fontWeight = FontWeight.SemiBold,
+                                modifier = Modifier.padding(top = 4.dp, start = 4.dp)
+                            )
+                        }
                     }
 
                     Spacer(modifier = Modifier.width(8.dp))
